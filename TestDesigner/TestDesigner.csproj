@@ -83,5 +83,11 @@
   <ItemGroup>
     <None Include="Resources\nophoto.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TestLib\TestLib.csproj">
+      <Project>{a3259de6-e034-4fab-b938-ae08b485fc63}</Project>
+      <Name>TestLib</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

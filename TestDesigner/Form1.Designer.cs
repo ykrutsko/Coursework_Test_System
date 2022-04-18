@@ -1,6 +1,6 @@
 ﻿namespace TestDesigner
 {
-    partial class Form1
+    partial class MainForm
     {
         /// <summary>
         /// Required designer variable.
@@ -50,19 +50,21 @@
             this.tbTitle = new System.Windows.Forms.TextBox();
             this.tbDescription = new System.Windows.Forms.TextBox();
             this.tbInfo = new System.Windows.Forms.TextBox();
-            this.tCountOfQuestions = new System.Windows.Forms.TextBox();
+            this.tbCountOfQuestions = new System.Windows.Forms.TextBox();
             this.tbMaxPointsForTest = new System.Windows.Forms.TextBox();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDownMinPass = new System.Windows.Forms.NumericUpDown();
             this.btnAddQuestion = new System.Windows.Forms.Button();
             this.btnEditQuestion = new System.Windows.Forms.Button();
             this.btnDelQuestion = new System.Windows.Forms.Button();
             this.dataGridViewQuestions = new System.Windows.Forms.DataGridView();
             this.pictureBox = new System.Windows.Forms.PictureBox();
             this.dataGridViewAnswers = new System.Windows.Forms.DataGridView();
+            this.openFileDialogTest = new System.Windows.Forms.OpenFileDialog();
+            this.saveFileDialogTest = new System.Windows.Forms.SaveFileDialog();
             this.menuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMinPass)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewQuestions)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAnswers)).BeginInit();
@@ -75,7 +77,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(1138, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1027, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -97,24 +99,28 @@
             this.greateToolStripMenuItem.Name = "greateToolStripMenuItem";
             this.greateToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.greateToolStripMenuItem.Text = "Create";
+            this.greateToolStripMenuItem.Click += new System.EventHandler(this.greateToolStripMenuItem_Click);
             // 
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
             this.openToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.openToolStripMenuItem.Text = "Open";
+            this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             this.saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.saveToolStripMenuItem.Text = "Save";
+            this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // closeToolStripMenuItem
             // 
             this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
             this.closeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.closeToolStripMenuItem.Text = "Close";
+            this.closeToolStripMenuItem.Click += new System.EventHandler(this.closeToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
@@ -126,12 +132,13 @@
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.numericUpDown1);
+            this.groupBox1.Controls.Add(this.numericUpDownMinPass);
             this.groupBox1.Controls.Add(this.tbMaxPointsForTest);
-            this.groupBox1.Controls.Add(this.tCountOfQuestions);
+            this.groupBox1.Controls.Add(this.tbCountOfQuestions);
             this.groupBox1.Controls.Add(this.tbInfo);
             this.groupBox1.Controls.Add(this.tbDescription);
             this.groupBox1.Controls.Add(this.tbTitle);
@@ -158,7 +165,7 @@
             this.statusStrip1.Location = new System.Drawing.Point(0, 526);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 16, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(1138, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(1027, 22);
             this.statusStrip1.TabIndex = 2;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -174,7 +181,7 @@
             this.groupBox2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.groupBox2.Size = new System.Drawing.Size(799, 489);
+            this.groupBox2.Size = new System.Drawing.Size(691, 489);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Questions";
@@ -278,13 +285,13 @@
             this.tbInfo.Size = new System.Drawing.Size(198, 140);
             this.tbInfo.TabIndex = 13;
             // 
-            // tCountOfQuestions
+            // tbCountOfQuestions
             // 
-            this.tCountOfQuestions.Location = new System.Drawing.Point(147, 378);
-            this.tCountOfQuestions.Name = "tCountOfQuestions";
-            this.tCountOfQuestions.ReadOnly = true;
-            this.tCountOfQuestions.Size = new System.Drawing.Size(134, 21);
-            this.tCountOfQuestions.TabIndex = 14;
+            this.tbCountOfQuestions.Location = new System.Drawing.Point(147, 378);
+            this.tbCountOfQuestions.Name = "tbCountOfQuestions";
+            this.tbCountOfQuestions.ReadOnly = true;
+            this.tbCountOfQuestions.Size = new System.Drawing.Size(134, 21);
+            this.tbCountOfQuestions.TabIndex = 14;
             // 
             // tbMaxPointsForTest
             // 
@@ -294,16 +301,16 @@
             this.tbMaxPointsForTest.Size = new System.Drawing.Size(135, 21);
             this.tbMaxPointsForTest.TabIndex = 15;
             // 
-            // numericUpDown1
+            // numericUpDownMinPass
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(165, 432);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(117, 21);
-            this.numericUpDown1.TabIndex = 16;
+            this.numericUpDownMinPass.Location = new System.Drawing.Point(165, 432);
+            this.numericUpDownMinPass.Name = "numericUpDownMinPass";
+            this.numericUpDownMinPass.Size = new System.Drawing.Size(117, 21);
+            this.numericUpDownMinPass.TabIndex = 16;
             // 
             // btnAddQuestion
             // 
-            this.btnAddQuestion.Location = new System.Drawing.Point(360, 17);
+            this.btnAddQuestion.Location = new System.Drawing.Point(250, 20);
             this.btnAddQuestion.Name = "btnAddQuestion";
             this.btnAddQuestion.Size = new System.Drawing.Size(137, 26);
             this.btnAddQuestion.TabIndex = 0;
@@ -312,7 +319,7 @@
             // 
             // btnEditQuestion
             // 
-            this.btnEditQuestion.Location = new System.Drawing.Point(503, 17);
+            this.btnEditQuestion.Location = new System.Drawing.Point(393, 20);
             this.btnEditQuestion.Name = "btnEditQuestion";
             this.btnEditQuestion.Size = new System.Drawing.Size(137, 26);
             this.btnEditQuestion.TabIndex = 1;
@@ -321,7 +328,7 @@
             // 
             // btnDelQuestion
             // 
-            this.btnDelQuestion.Location = new System.Drawing.Point(646, 17);
+            this.btnDelQuestion.Location = new System.Drawing.Point(536, 20);
             this.btnDelQuestion.Name = "btnDelQuestion";
             this.btnDelQuestion.Size = new System.Drawing.Size(137, 26);
             this.btnDelQuestion.TabIndex = 2;
@@ -333,7 +340,8 @@
             this.dataGridViewQuestions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewQuestions.Location = new System.Drawing.Point(16, 52);
             this.dataGridViewQuestions.Name = "dataGridViewQuestions";
-            this.dataGridViewQuestions.Size = new System.Drawing.Size(765, 202);
+            this.dataGridViewQuestions.ReadOnly = true;
+            this.dataGridViewQuestions.Size = new System.Drawing.Size(657, 202);
             this.dataGridViewQuestions.TabIndex = 3;
             // 
             // pictureBox
@@ -351,14 +359,18 @@
             this.dataGridViewAnswers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewAnswers.Location = new System.Drawing.Point(227, 269);
             this.dataGridViewAnswers.Name = "dataGridViewAnswers";
-            this.dataGridViewAnswers.Size = new System.Drawing.Size(554, 196);
+            this.dataGridViewAnswers.Size = new System.Drawing.Size(446, 196);
             this.dataGridViewAnswers.TabIndex = 5;
             // 
-            // Form1
+            // openFileDialogTest
+            // 
+            this.openFileDialogTest.FileName = "openFileDialog1";
+            // 
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1138, 548);
+            this.ClientSize = new System.Drawing.Size(1027, 548);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.groupBox1);
@@ -366,15 +378,16 @@
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.Name = "Form1";
+            this.Name = "MainForm";
             this.Text = "Test constructor";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMinPass)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewQuestions)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAnswers)).EndInit();
@@ -394,9 +407,9 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.NumericUpDown numericUpDownMinPass;
         private System.Windows.Forms.TextBox tbMaxPointsForTest;
-        private System.Windows.Forms.TextBox tCountOfQuestions;
+        private System.Windows.Forms.TextBox tbCountOfQuestions;
         private System.Windows.Forms.TextBox tbInfo;
         private System.Windows.Forms.TextBox tbDescription;
         private System.Windows.Forms.TextBox tbTitle;
@@ -416,6 +429,8 @@
         private System.Windows.Forms.Button btnEditQuestion;
         private System.Windows.Forms.Button btnAddQuestion;
         private System.Windows.Forms.DataGridView dataGridViewAnswers;
+        private System.Windows.Forms.OpenFileDialog openFileDialogTest;
+        private System.Windows.Forms.SaveFileDialog saveFileDialogTest;
     }
 }
 

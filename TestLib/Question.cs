@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace TestLib
 {
     [Serializable]
-    public class Question
+    public class Question : IEquatable<Question>
     {
         public string QuestionText { get; set; }
         public int Points { get; set; }     // ваговий коефіцієнт
@@ -48,6 +48,15 @@ namespace TestLib
             {
                 return Image.FromStream(ms);
             }
+        }
+
+        public bool Equals(Question other)
+        {
+            return other is Question &&
+                this.QuestionText == other.QuestionText &&
+                this.Points == other.Points &&
+                this.ImageByteArray.SequenceEqual(other.ImageByteArray) &&
+                this.Answers.SequenceEqual(other.Answers);
         }
     }
 }

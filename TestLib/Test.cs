@@ -9,7 +9,7 @@ using System.Xml.Serialization;
 namespace TestLib
 {
     [Serializable]
-    public class Test : IComparable<Test>
+    public class Test : IComparable<Test>, IEquatable<Test>
     {
         public string Author { get; set; }
         public string Title { get; set; }
@@ -62,6 +62,17 @@ namespace TestLib
                 return this.Title.CompareTo(other.Title);
             else
                 throw new ArgumentException("Object is not a Test");
+        }
+
+        public bool Equals(Test other)
+        {
+            return other is Test &&
+                this.Author == other.Author &&
+                this.Title == other.Title &&
+                this.Description == other.Description &&
+                this.Info == other.Info &&
+                this.PassPercent == other.PassPercent &&
+                this.Questions.SequenceEqual(other.Questions);
         }
     }
 }
