@@ -18,8 +18,6 @@ namespace TestLib
         public int PassPercent { get; set; }
         public List<Question> Questions { get; set; }
 
-        public static XmlSerializer serializer = new XmlSerializer(typeof(Test));
-
         public Test()
         {
             Author = string.Empty;
@@ -39,16 +37,18 @@ namespace TestLib
             Questions = questions;
         }
 
-        public static void Serialize(string filePath, Test test)
+        public void Serialize(string filePath)
         {
+            XmlSerializer serializer = new XmlSerializer(typeof(Test));
             using (FileStream fs = new FileStream(filePath, FileMode.OpenOrCreate))
             {
-                serializer.Serialize(fs, test);
+                serializer.Serialize(fs, this);
             }
         }
 
         public static Test Deserialize(string filePath)
         {
+            XmlSerializer serializer = new XmlSerializer(typeof(Test));
             using (FileStream fs = new FileStream(filePath, FileMode.OpenOrCreate))
             {
                 return serializer.Deserialize(fs) as Test;
@@ -62,7 +62,6 @@ namespace TestLib
                 return this.Title.CompareTo(other.Title);
             else
                 throw new ArgumentException("Object is not a Test");
-
         }
     }
 }

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,7 +13,7 @@ namespace TestLib
     {
         public string QuestionText { get; set; }
         public int Points { get; set; }     // ваговий коефіцієнт
-        public byte[] Image { get; set; }
+        public byte[] ImageByteArray { get; set; }
         public List<Answer> Answers { get; set; }
 
         public Question()
@@ -21,12 +23,31 @@ namespace TestLib
             Answers = new List<Answer>();
         }
 
-        public Question(string questionText, int points, byte[] image, List<Answer> answers)
+        public Question(string questionText, int points, byte[] imageByteArray, List<Answer> answers)
         {
             QuestionText = questionText;
             Points = points;
-            Image = image;
+            ImageByteArray = imageByteArray;
             Answers = answers;
+        }
+
+        // Bitmap-to-ByteArray, ByteArray-to-Bitmap  
+        //--------------------------------------------
+        public void ImageToByteArray(Image imageIn)
+        {
+            using (var ms = new MemoryStream())
+            {
+                ImageConverter imageConverter = new ImageConverter();
+                ImageByteArray = (byte[])imageConverter.ConvertTo(imageIn, typeof(byte[]));
+            }
+        }
+
+        public Image ByteArrayToImage()
+        {
+            using (var ms = new MemoryStream(ImageByteArray))
+            {
+                return Image.FromStream(ms);
+            }
         }
     }
 }
