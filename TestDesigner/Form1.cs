@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,9 +16,8 @@ namespace TestDesigner
     {
         string currFilePath = string.Empty;
         Test currTest;
-        Test currChangedTest;
-        int currHashCode;
-        
+        bool IsTestChanged = false;
+      
 
         public MainForm()
         {
@@ -26,73 +26,59 @@ namespace TestDesigner
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            currTest = currChangedTest = new Test();
-            currHashCode = currTest.GetHashCode();
+            currTest = new Test();
             FillForm();
-            dataGridViewQuestions.Columns[0].Width = 500;
-            dataGridViewQuestions.Columns[0].HeaderText = "Question";
-            dataGridViewQuestions.Columns[1].Width = 90;
-            dataGridViewQuestions.Columns[1].HeaderText = "Point";
-            dataGridViewQuestions.Columns[2].Visible = false;
             tbAuthor.Select();
         }
 
         // Main menu
         //---------------------------------------------------------------------
-        //Create
-        private void greateToolStripMenuItem_Click(object sender, EventArgs e)
+        // New
+        private void newToolStripButton_Click(object sender, EventArgs e)
         {
-            if(currHashCode != currTest.GetHashCode())
+            if (IsTestChanged)
             {
-                var dialogResult = MessageBox.Show(
-                    "Save changes to current test?", 
-                    currFilePath.Any()? currFilePath : "New test", 
-                    MessageBoxButtons.YesNoCancel, 
-                    MessageBoxIcon.Question);
-                if (dialogResult == DialogResult.Yes)
+                if (ShowSaveMessage() == DialogResult.Yes)
                 {
-                    saveToolStripMenuItem_Click(sender, e);
+                    if (!SaveTest())
+                    {
+                        return;
+                    }
                 }
-                else if (dialogResult == DialogResult.Cancel)
+                else if (ShowSaveMessage() == DialogResult.Cancel)
                     return;
             }
-            currTest = new Test();
-            FillForm();
+            CreateTest();
         }
 
-        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        // Open
+        private void openToolStripButton_Click(object sender, EventArgs e)
         {
-
-        }
-
-        //Save
-        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if(!currFilePath.Any())
+            if (IsTestChanged)
             {
-                saveFileDialogTest.Filter = "XML files (*.xml)|*.xml";
-                saveFileDialogTest.FilterIndex = 1;
-                saveFileDialogTest.RestoreDirectory = true;
-                if (saveFileDialogTest.ShowDialog() == DialogResult.OK)
+                if (ShowSaveMessage() == DialogResult.Yes)
                 {
-                    currFilePath = saveFileDialogTest.FileName;
-                    currTest.Serialize(currFilePath);
+                    if (!SaveTest())
+                    {
+                        return;
+                    }
                 }
+                else if (ShowSaveMessage() == DialogResult.Cancel)
+                    return;
             }
-            else
-            {
-                currTest.Serialize(currFilePath);
-            }
+            OpenTest();
         }
 
-        private void closeToolStripMenuItem_Click(object sender, EventArgs e)
+        // Save
+        private void saveToolStripButton_Click(object sender, EventArgs e)
         {
-
+            SaveTest();
         }
 
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        //Exit
+        private void exitStripButton_Click_1(object sender, EventArgs e)
         {
-
+            SaveTest();
         }
         //---------------------------------------------------------------------
 
@@ -101,17 +87,89 @@ namespace TestDesigner
         //---------------------------------------------------------------------
         void FillForm()
         {
-            tbAuthor.Text = currTest.Author; 
-            tbTitle.Text = currTest.Title; 
+            tbAuthor.Text = currTest.Author;
+            tbTitle.Text = currTest.Title;
             tbDescription.Text = currTest.Description;
-            tbInfo.Text = currTest.Info;    
+            tbInfo.Text = currTest.Info;
             tbCountOfQuestions.Text = currTest.Questions.Count.ToString();
             tbMaxPointsForTest.Text = currTest.Questions.Select(x => x.Points).Sum().ToString();
             numericUpDownMinPass.Value = currTest.PassPercent;
+            dataGridViewQuestions.Columns.Clear();
             dataGridViewQuestions.DataSource = currTest.Questions;
-            //Question question = dataGridViewQuestions.SelectedRows;
+            //{
+            //    dataGridViewQuestions.Columns[0].Width = 500;
+            //    dataGridViewQuestions.Columns[0].HeaderText = "Question";
+            //    dataGridViewQuestions.Columns[1].Width = 90;
+            //    dataGridViewQuestions.Columns[1].HeaderText = "Point";
+            //    dataGridViewQuestions.Columns[2].Visible = false;
+            //}
+            //dataGridViewAnswers.DataSource = (dataGridViewQuestions.SelectedCells as Question).Answers;
+
         }
 
+        // DialogResult
+        DialogResult ShowSaveMessage()
+        {
+            var dialog = MessageBox.Show(
+                "Save changes to current test?",
+                currFilePath.Any() ? currFilePath : "New test",
+                MessageBoxButtons.YesNoCancel,
+                MessageBoxIcon.Question);
+            return dialog;
+        }
+
+        // Save Test
+        bool SaveTest()
+        {
+            if (!currFilePath.Any())
+            {
+                saveFileDialogTest.Filter = "XML files (*.xml)|*.xml";
+                saveFileDialogTest.FilterIndex = 1;
+                saveFileDialogTest.RestoreDirectory = true;
+                if (saveFileDialogTest.ShowDialog() == DialogResult.OK)
+                {
+                    currFilePath = saveFileDialogTest.FileName;
+                    File.WriteAllText(currFilePath, Serializer.Serialize<Test>(currTest));
+                    IsTestChanged = false;
+                    toolStripStatusLabel1.Text = currFilePath;
+                    return true;
+                }
+            }
+            else
+            {
+                currTest.Serialize(currFilePath);
+                IsTestChanged = false;
+                toolStripStatusLabel1.Text = currFilePath;
+                return true;
+            }
+            return false;
+        }
+
+        // Open Test
+        bool OpenTest()
+        {
+            openFileDialogTest.Filter = "XML files (*.xml)|*.xml";
+            openFileDialogTest.FilterIndex = 1;
+            openFileDialogTest.RestoreDirectory = true;
+            if (openFileDialogTest.ShowDialog() == DialogResult.OK)
+            {
+                currFilePath = openFileDialogTest.FileName;
+                currTest = Serializer.Deserialize<Test>(File.ReadAllText(currFilePath));
+                FillForm();
+                IsTestChanged = false;
+                statusStrip.Text = currFilePath;
+                return true;
+            }
+            return false;
+        }
+
+        // Create New
+        void CreateTest()
+        {
+            currTest = new Test();
+            IsTestChanged = false;
+            FillForm();
+        }
 
 
     }

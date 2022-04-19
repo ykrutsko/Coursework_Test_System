@@ -3,7 +3,7 @@
 namespace TestLib
 {
     [Serializable]
-    public class Answer :IEquatable<Answer>
+    public class Answer : IEquatable<Answer>
     {
         public string TextAnwer { get; set; }
         public bool IsRight { get; set; }

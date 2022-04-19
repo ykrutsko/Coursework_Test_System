@@ -13,7 +13,6 @@ namespace TestLib
     {
         public string QuestionText { get; set; }
         public int Points { get; set; }     // ваговий коефіцієнт
-        public byte[] ImageByteArray { get; set; }
         public List<Answer> Answers { get; set; }
 
         public Question()
@@ -23,31 +22,11 @@ namespace TestLib
             Answers = new List<Answer>();
         }
 
-        public Question(string questionText, int points, byte[] imageByteArray, List<Answer> answers)
+        public Question(string questionText, int points, List<Answer> answers)
         {
             QuestionText = questionText;
             Points = points;
-            ImageByteArray = imageByteArray;
             Answers = answers;
-        }
-
-        // Bitmap-to-ByteArray, ByteArray-to-Bitmap  
-        //--------------------------------------------
-        public void ImageToByteArray(Image imageIn)
-        {
-            using (var ms = new MemoryStream())
-            {
-                ImageConverter imageConverter = new ImageConverter();
-                ImageByteArray = (byte[])imageConverter.ConvertTo(imageIn, typeof(byte[]));
-            }
-        }
-
-        public Image ByteArrayToImage()
-        {
-            using (var ms = new MemoryStream(ImageByteArray))
-            {
-                return Image.FromStream(ms);
-            }
         }
 
         public bool Equals(Question other)
@@ -55,7 +34,6 @@ namespace TestLib
             return other is Question &&
                 this.QuestionText == other.QuestionText &&
                 this.Points == other.Points &&
-                this.ImageByteArray.SequenceEqual(other.ImageByteArray) &&
                 this.Answers.SequenceEqual(other.Answers);
         }
     }

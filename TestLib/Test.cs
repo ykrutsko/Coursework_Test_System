@@ -16,6 +16,7 @@ namespace TestLib
         public string Description { get; set; }
         public string Info { get; set; }
         public int PassPercent { get; set; }
+        public string Img { get; set; }
         public List<Question> Questions { get; set; }
 
         public Test()
@@ -24,35 +25,19 @@ namespace TestLib
             Title = string.Empty;
             Info = string.Empty;
             PassPercent = 0;
+            Img = string.Empty;
             Questions = new List<Question>();
         }
 
-        public Test(string author, string title, string description, string info, int passPercent, List<Question> questions)
+        public Test(string author, string title, string description, string info, int passPercent, string img, List<Question> questions)
         {
             Author = author;
             Title = title;
             Description = description;
             Info = info;
             PassPercent = passPercent;
+            Img = img;
             Questions = questions;
-        }
-
-        public void Serialize(string filePath)
-        {
-            XmlSerializer serializer = new XmlSerializer(typeof(Test));
-            using (FileStream fs = new FileStream(filePath, FileMode.OpenOrCreate))
-            {
-                serializer.Serialize(fs, this);
-            }
-        }
-
-        public static Test Deserialize(string filePath)
-        {
-            XmlSerializer serializer = new XmlSerializer(typeof(Test));
-            using (FileStream fs = new FileStream(filePath, FileMode.OpenOrCreate))
-            {
-                return serializer.Deserialize(fs) as Test;
-            }
         }
 
         public int CompareTo(Test other)
