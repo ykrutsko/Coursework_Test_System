@@ -6,12 +6,15 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TestLib;
 
 namespace TestDesigner
 {
+    enum NameType { FileName, TestName}
+
     public partial class MainForm : Form
     {
         string currFilePath = string.Empty;
@@ -26,9 +29,13 @@ namespace TestDesigner
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            currTest = new Test();
-            FillForm();
-            tbAuthor.Select();
+            NewTest();
+        }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (!СonfirmedActionWithDialogs())
+                e.Cancel = true;
         }
 
         // Main menu
@@ -36,37 +43,15 @@ namespace TestDesigner
         // New
         private void newToolStripButton_Click(object sender, EventArgs e)
         {
-            if (IsTestChanged)
-            {
-                if (ShowSaveMessage() == DialogResult.Yes)
-                {
-                    if (!SaveTest())
-                    {
-                        return;
-                    }
-                }
-                else if (ShowSaveMessage() == DialogResult.Cancel)
-                    return;
-            }
-            CreateTest();
+            if(СonfirmedActionWithDialogs())
+                NewTest();
         }
 
         // Open
         private void openToolStripButton_Click(object sender, EventArgs e)
         {
-            if (IsTestChanged)
-            {
-                if (ShowSaveMessage() == DialogResult.Yes)
-                {
-                    if (!SaveTest())
-                    {
-                        return;
-                    }
-                }
-                else if (ShowSaveMessage() == DialogResult.Cancel)
-                    return;
-            }
-            OpenTest();
+            if (СonfirmedActionWithDialogs())
+                OpenTest();
         }
 
         // Save
@@ -78,13 +63,47 @@ namespace TestDesigner
         //Exit
         private void exitStripButton_Click_1(object sender, EventArgs e)
         {
-            SaveTest();
+            if (СonfirmedActionWithDialogs())
+                Application.Exit();
         }
         //---------------------------------------------------------------------
 
 
         // Helpfull
         //---------------------------------------------------------------------
+        void SetCleanMainForm()
+        {
+            tbAuthor.Text = String.Empty;
+            tbTitle.Text = String.Empty;
+            tbDescription.Text = String.Empty;
+            tbInfo.Text = String.Empty;
+            pictureBox.Image = null;
+            tbCountOfQuestions.Text = "0";
+            tbMaxPointsForTest.Text = "0";
+            numericUpDownMinPass.Value = 0;
+
+            SetCleanDataGridViewQuestions();
+            SetCleaDataGridViewAnswers();
+        }
+
+        void SetCleanDataGridViewQuestions()
+        {
+            dataGridViewQuestions.Columns.Clear();
+            dataGridViewQuestions.Columns.Add("Question", "Question");
+            dataGridViewQuestions.Columns.Add("Point", "Point");
+            dataGridViewQuestions.Columns[0].Width = 500;
+            dataGridViewQuestions.Columns[1].Width = 90;
+        }
+
+        void SetCleaDataGridViewAnswers()
+        {
+            dataGridViewAnswers.Columns.Clear();
+            dataGridViewAnswers.Columns.Add("Answer", "Answer");
+            dataGridViewAnswers.Columns.Add("Right", "Is right");
+            dataGridViewAnswers.Columns[0].Width = 290;
+            dataGridViewAnswers.Columns[1].Width = 90;
+        }
+
         void FillForm()
         {
             tbAuthor.Text = currTest.Author;
@@ -93,56 +112,73 @@ namespace TestDesigner
             tbInfo.Text = currTest.Info;
             tbCountOfQuestions.Text = currTest.Questions.Count.ToString();
             tbMaxPointsForTest.Text = currTest.Questions.Select(x => x.Points).Sum().ToString();
+            if(!String.IsNullOrEmpty(currTest.Img))
+                pictureBox.Image = ImgConverter.Base64StringToBitmap(currTest.Img);
             numericUpDownMinPass.Value = currTest.PassPercent;
-            dataGridViewQuestions.Columns.Clear();
-            dataGridViewQuestions.DataSource = currTest.Questions;
-            //{
-            //    dataGridViewQuestions.Columns[0].Width = 500;
-            //    dataGridViewQuestions.Columns[0].HeaderText = "Question";
-            //    dataGridViewQuestions.Columns[1].Width = 90;
-            //    dataGridViewQuestions.Columns[1].HeaderText = "Point";
-            //    dataGridViewQuestions.Columns[2].Visible = false;
-            //}
-            //dataGridViewAnswers.DataSource = (dataGridViewQuestions.SelectedCells as Question).Answers;
-
-        }
-
-        // DialogResult
-        DialogResult ShowSaveMessage()
-        {
-            var dialog = MessageBox.Show(
-                "Save changes to current test?",
-                currFilePath.Any() ? currFilePath : "New test",
-                MessageBoxButtons.YesNoCancel,
-                MessageBoxIcon.Question);
-            return dialog;
-        }
-
-        // Save Test
-        bool SaveTest()
-        {
-            if (!currFilePath.Any())
+            if (currTest.Questions.Any())
             {
-                saveFileDialogTest.Filter = "XML files (*.xml)|*.xml";
-                saveFileDialogTest.FilterIndex = 1;
-                saveFileDialogTest.RestoreDirectory = true;
-                if (saveFileDialogTest.ShowDialog() == DialogResult.OK)
-                {
-                    currFilePath = saveFileDialogTest.FileName;
-                    File.WriteAllText(currFilePath, Serializer.Serialize<Test>(currTest));
-                    IsTestChanged = false;
-                    toolStripStatusLabel1.Text = currFilePath;
-                    return true;
-                }
+                FillDataGridViewQuestions();
+                FillDataGridViewAnswers();
             }
             else
             {
-                currTest.Serialize(currFilePath);
-                IsTestChanged = false;
-                toolStripStatusLabel1.Text = currFilePath;
-                return true;
+                SetCleanDataGridViewQuestions();
+                SetCleaDataGridViewAnswers();
             }
-            return false;
+        }
+
+        void FillDataGridViewQuestions()
+        {
+            dataGridViewQuestions.Columns.Clear();
+            dataGridViewQuestions.DataSource = null;
+            dataGridViewQuestions.DataSource = currTest.Questions;
+            dataGridViewQuestions.Columns[0].Width = 500;
+            dataGridViewQuestions.Columns[0].HeaderText = "Question";
+            dataGridViewQuestions.Columns[1].Width = 90;
+            dataGridViewQuestions.Columns[1].HeaderText = "Point";
+            dataGridViewQuestions.Columns[2].Visible = false;
+            dataGridViewQuestions.Rows[0].Selected = true;
+        }
+
+        void FillDataGridViewAnswers()
+        {
+            dataGridViewAnswers.Columns.Clear();
+            dataGridViewAnswers.DataSource = null;
+            dataGridViewAnswers.DataSource = currTest.Questions[0].Answers;
+            dataGridViewAnswers.Columns[0].Width = 290;
+            dataGridViewAnswers.Columns[0].HeaderText = "Answer";
+            dataGridViewAnswers.Columns[1].Width = 90;
+            dataGridViewAnswers.Columns[1].HeaderText = "Is right";
+            dataGridViewAnswers.Columns[2].Visible = false;
+        }
+
+        // Request to save the test
+        bool СonfirmedActionWithDialogs()
+        {
+            if (IsTestChanged)
+            {
+                var dialog = MessageBox.Show(
+                    "Save changes to current test?",
+                    currFilePath.Any() ? Path.GetFileName(currFilePath) : "Untitled",
+                    MessageBoxButtons.YesNoCancel,
+                    MessageBoxIcon.Question);
+                if (dialog == DialogResult.Cancel || dialog == DialogResult.Yes && !SaveTest())
+                    return false;
+            }
+            IsTestChanged = false;
+            return true;
+        }
+
+        // Create New
+        void NewTest()
+        {
+            currTest = new Test();
+            currFilePath = String.Empty;
+            SetCleanMainForm();
+            IsTestChanged = false;
+            WindowTitleText();
+            WindowFuterText();
+            tbTitle.Select();
         }
 
         // Open Test
@@ -151,26 +187,109 @@ namespace TestDesigner
             openFileDialogTest.Filter = "XML files (*.xml)|*.xml";
             openFileDialogTest.FilterIndex = 1;
             openFileDialogTest.RestoreDirectory = true;
-            if (openFileDialogTest.ShowDialog() == DialogResult.OK)
+
+            if (openFileDialogTest.ShowDialog() != DialogResult.OK)
+                return false;
+
+            currFilePath = openFileDialogTest.FileName;
+            try
             {
-                currFilePath = openFileDialogTest.FileName;
                 currTest = Serializer.Deserialize<Test>(File.ReadAllText(currFilePath));
-                FillForm();
-                IsTestChanged = false;
-                statusStrip.Text = currFilePath;
-                return true;
             }
-            return false;
-        }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
 
-        // Create New
-        void CreateTest()
-        {
-            currTest = new Test();
-            IsTestChanged = false;
             FillForm();
+            IsTestChanged = false;
+            WindowTitleText();
+            WindowFuterText();
+            return true;
+        }
+
+        // Save Test
+        bool SaveTest()
+        {
+            if (!tbTitle.Text.Any())
+            {
+                var tmpColor = tbTitle.BackColor;
+                tbTitle.BackColor = Color.YellowGreen;
+                tbTitle.Text = NameGenerator(NameType.TestName);
+                tbTitle.Refresh();
+                Thread.Sleep(1000);
+                tbTitle.BackColor = tmpColor;
+                tbTitle.Refresh(); 
+            }                
+
+            if (!currFilePath.Any())
+            {
+                saveFileDialogTest.Filter = "XML files (*.xml)|*.xml";
+                saveFileDialogTest.FilterIndex = 1;
+                saveFileDialogTest.RestoreDirectory = true;
+                saveFileDialogTest.FileName = NameGenerator(NameType.FileName);
+
+                if (saveFileDialogTest.ShowDialog() != DialogResult.OK)
+                    return false;
+
+                currFilePath = saveFileDialogTest.FileName;                   
+            }
+
+            if(IsTestChanged)
+            {
+                currTest.Title = tbTitle.Text;
+                currTest.Author = tbAuthor.Text;
+                currTest.Description = tbDescription.Text;
+                currTest.Info = tbInfo.Text;
+                currTest.PassPercent = (int)numericUpDownMinPass.Value;
+            }
+
+            try
+            {
+                File.WriteAllText(currFilePath, Serializer.Serialize<Test>(currTest));
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            IsTestChanged = false;
+            WindowTitleText();
+            WindowFuterText();
+            return true;
+        }
+
+        void WindowTitleText()
+        {
+            string first = IsTestChanged? "*" : string.Empty;
+            string second = currFilePath == string.Empty? "Untitled" : Path.GetFileName(currFilePath);
+            string third = " - Test constructor";
+            this.Text = new StringBuilder(first + second + third).ToString();
+        }
+
+        void WindowFuterText()
+        {
+            toolStripStatusLabel1.Text = currFilePath == string.Empty? "Current Test not saved yet..." : currFilePath;
+        }
+
+        string NameGenerator(NameType nameType)
+        {
+            if(nameType == NameType.FileName)
+                return "Test " + DateTime.Now.ToString("dd-MM-yyyy HH-mm-ss");
+            return "Test " + DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss");
+        }
+
+        private void tbTitle_TextChanged(object sender, EventArgs e)
+        {
+            IsTestChanged = true;
+            WindowTitleText();
         }
 
 
+        // Work with Questions
+        private void btnAddQuestion_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
