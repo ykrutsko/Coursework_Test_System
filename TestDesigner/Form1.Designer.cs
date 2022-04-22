@@ -30,13 +30,13 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.tbTitle = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.numericUpDownMinPass = new System.Windows.Forms.NumericUpDown();
             this.tbMaxPointsForTest = new System.Windows.Forms.TextBox();
             this.tbCountOfQuestions = new System.Windows.Forms.TextBox();
             this.tbInfo = new System.Windows.Forms.TextBox();
             this.tbDescription = new System.Windows.Forms.TextBox();
-            this.tbTitle = new System.Windows.Forms.TextBox();
             this.tbAuthor = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -55,9 +55,7 @@
             this.dataGridViewQuestions = new System.Windows.Forms.DataGridView();
             this.Question = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Point = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnDelQuestion = new System.Windows.Forms.Button();
-            this.btnAddQuestion = new System.Windows.Forms.Button();
-            this.btnEditQuestion = new System.Windows.Forms.Button();
+            this.btnModifyQuestion = new System.Windows.Forms.Button();
             this.openFileDialogTest = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialogTest = new System.Windows.Forms.SaveFileDialog();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
@@ -102,6 +100,15 @@
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Test";
+            // 
+            // tbTitle
+            // 
+            this.tbTitle.BackColor = System.Drawing.SystemColors.Window;
+            this.tbTitle.Location = new System.Drawing.Point(85, 32);
+            this.tbTitle.Name = "tbTitle";
+            this.tbTitle.Size = new System.Drawing.Size(197, 21);
+            this.tbTitle.TabIndex = 11;
+            this.tbTitle.TextChanged += new System.EventHandler(this.tbTitle_TextChanged);
             // 
             // label8
             // 
@@ -154,15 +161,6 @@
             this.tbDescription.Size = new System.Drawing.Size(198, 140);
             this.tbDescription.TabIndex = 12;
             this.tbDescription.TextChanged += new System.EventHandler(this.tbTitle_TextChanged);
-            // 
-            // tbTitle
-            // 
-            this.tbTitle.BackColor = System.Drawing.SystemColors.Window;
-            this.tbTitle.Location = new System.Drawing.Point(85, 32);
-            this.tbTitle.Name = "tbTitle";
-            this.tbTitle.Size = new System.Drawing.Size(197, 21);
-            this.tbTitle.TabIndex = 11;
-            this.tbTitle.TextChanged += new System.EventHandler(this.tbTitle_TextChanged);
             // 
             // tbAuthor
             // 
@@ -263,9 +261,7 @@
             this.groupBox2.Controls.Add(this.dataGridViewAnswers);
             this.groupBox2.Controls.Add(this.pictureBox);
             this.groupBox2.Controls.Add(this.dataGridViewQuestions);
-            this.groupBox2.Controls.Add(this.btnDelQuestion);
-            this.groupBox2.Controls.Add(this.btnAddQuestion);
-            this.groupBox2.Controls.Add(this.btnEditQuestion);
+            this.groupBox2.Controls.Add(this.btnModifyQuestion);
             this.groupBox2.Location = new System.Drawing.Point(332, 32);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.groupBox2.Name = "groupBox2";
@@ -344,33 +340,15 @@
             this.Point.ReadOnly = true;
             this.Point.Width = 90;
             // 
-            // btnDelQuestion
+            // btnModifyQuestion
             // 
-            this.btnDelQuestion.Location = new System.Drawing.Point(536, 15);
-            this.btnDelQuestion.Name = "btnDelQuestion";
-            this.btnDelQuestion.Size = new System.Drawing.Size(137, 26);
-            this.btnDelQuestion.TabIndex = 2;
-            this.btnDelQuestion.Text = "Delete question";
-            this.btnDelQuestion.UseVisualStyleBackColor = true;
-            // 
-            // btnAddQuestion
-            // 
-            this.btnAddQuestion.Location = new System.Drawing.Point(250, 15);
-            this.btnAddQuestion.Name = "btnAddQuestion";
-            this.btnAddQuestion.Size = new System.Drawing.Size(137, 26);
-            this.btnAddQuestion.TabIndex = 0;
-            this.btnAddQuestion.Text = "Add question";
-            this.btnAddQuestion.UseVisualStyleBackColor = true;
-            this.btnAddQuestion.Click += new System.EventHandler(this.btnAddQuestion_Click);
-            // 
-            // btnEditQuestion
-            // 
-            this.btnEditQuestion.Location = new System.Drawing.Point(393, 15);
-            this.btnEditQuestion.Name = "btnEditQuestion";
-            this.btnEditQuestion.Size = new System.Drawing.Size(137, 26);
-            this.btnEditQuestion.TabIndex = 1;
-            this.btnEditQuestion.Text = "Edit question";
-            this.btnEditQuestion.UseVisualStyleBackColor = true;
+            this.btnModifyQuestion.Location = new System.Drawing.Point(536, 15);
+            this.btnModifyQuestion.Name = "btnModifyQuestion";
+            this.btnModifyQuestion.Size = new System.Drawing.Size(137, 26);
+            this.btnModifyQuestion.TabIndex = 0;
+            this.btnModifyQuestion.Text = "Modify questions";
+            this.btnModifyQuestion.UseVisualStyleBackColor = true;
+            this.btnModifyQuestion.Click += new System.EventHandler(this.btnModifyQuestion_Click);
             // 
             // toolStrip1
             // 
@@ -489,9 +467,7 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.PictureBox pictureBox;
         private System.Windows.Forms.DataGridView dataGridViewQuestions;
-        private System.Windows.Forms.Button btnDelQuestion;
-        private System.Windows.Forms.Button btnEditQuestion;
-        private System.Windows.Forms.Button btnAddQuestion;
+        private System.Windows.Forms.Button btnModifyQuestion;
         private System.Windows.Forms.DataGridView dataGridViewAnswers;
         private System.Windows.Forms.OpenFileDialog openFileDialogTest;
         private System.Windows.Forms.SaveFileDialog saveFileDialogTest;

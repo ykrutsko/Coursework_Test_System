@@ -9,25 +9,37 @@ using System.Threading.Tasks;
 namespace TestLib
 {
     [Serializable]
-    public class Question : IEquatable<Question>
+    public class Question : IEquatable<Question>, ICloneable
     {
         public string QuestionText { get; set; }
         public int Points { get; set; }     // ваговий коефіцієнт
+        public string Img { get; set; }
         public List<Answer> Answers { get; set; }
 
         public Question()
         {
             QuestionText = String.Empty;
             Points = 0;
+            Img = String.Empty;
             Answers = new List<Answer>();
         }
 
-        public Question(string questionText, int points, List<Answer> answers)
+        public Question(string questionText, int points, string img)
         {
             QuestionText = questionText;
             Points = points;
+            Img = img;
+            Answers = new List<Answer>();
+        }
+
+        public Question(string questionText, int points, string img, List<Answer> answers)
+        {
+            QuestionText = questionText;
+            Points = points;
+            Img = img; 
             Answers = answers;
         }
+
 
         public bool Equals(Question other)
         {
@@ -35,6 +47,11 @@ namespace TestLib
                 this.QuestionText == other.QuestionText &&
                 this.Points == other.Points &&
                 this.Answers.SequenceEqual(other.Answers);
+        }
+
+        public object Clone()
+        {
+            return new Question(this.QuestionText, this.Points, this.Img, this.Answers.Clone<Answer>());
         }
     }
 }

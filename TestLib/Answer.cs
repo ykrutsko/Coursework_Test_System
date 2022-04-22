@@ -3,24 +3,29 @@
 namespace TestLib
 {
     [Serializable]
-    public class Answer : IEquatable<Answer>
+    public class Answer : IEquatable<Answer>, ICloneable
     {
-        public string TextAnwer { get; set; }
+        public string TextAnswer { get; set; }
         public bool IsRight { get; set; }
 
         public Answer() { }
 
-        public Answer(string textAnwer, bool isRight)
+        public Answer(string textAnswer, bool isRight)
         {
-            TextAnwer = textAnwer;
+            TextAnswer = textAnswer;
             IsRight = isRight;
         }
 
         public bool Equals(Answer other)
         {
-            return other is Answer && 
-                TextAnwer == other.TextAnwer && 
+            return other is Answer &&
+                TextAnswer == other.TextAnswer && 
                 IsRight == other.IsRight; 
+        }
+
+        public object Clone()
+        {
+            return new Answer(TextAnswer, IsRight);
         }
     }
 }

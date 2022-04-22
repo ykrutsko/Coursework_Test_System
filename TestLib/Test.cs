@@ -16,7 +16,6 @@ namespace TestLib
         public string Description { get; set; }
         public string Info { get; set; }
         public int PassPercent { get; set; }
-        public string Img { get; set; }
         public List<Question> Questions { get; set; }
 
         public Test()
@@ -25,7 +24,6 @@ namespace TestLib
             Title = string.Empty;
             Info = string.Empty;
             PassPercent = 0;
-            Img = string.Empty;
             Questions = new List<Question>();
         }
 
@@ -36,7 +34,6 @@ namespace TestLib
             Description = description;
             Info = info;
             PassPercent = passPercent;
-            Img = img;
             Questions = questions;
         }
 

@@ -112,8 +112,8 @@ namespace TestDesigner
             tbInfo.Text = currTest.Info;
             tbCountOfQuestions.Text = currTest.Questions.Count.ToString();
             tbMaxPointsForTest.Text = currTest.Questions.Select(x => x.Points).Sum().ToString();
-            if(!String.IsNullOrEmpty(currTest.Img))
-                pictureBox.Image = ImgConverter.Base64StringToBitmap(currTest.Img);
+            //if(!String.IsNullOrEmpty(currTest.Img))
+            //    pictureBox.Image = ImgConverter.Base64StringToBitmap(currTest.Img);
             numericUpDownMinPass.Value = currTest.PassPercent;
             if (currTest.Questions.Any())
             {
@@ -136,7 +136,7 @@ namespace TestDesigner
             dataGridViewQuestions.Columns[0].HeaderText = "Question";
             dataGridViewQuestions.Columns[1].Width = 90;
             dataGridViewQuestions.Columns[1].HeaderText = "Point";
-            dataGridViewQuestions.Columns[2].Visible = false;
+            //dataGridViewQuestions.Columns[2].Visible = false;
             dataGridViewQuestions.Rows[0].Selected = true;
         }
 
@@ -149,7 +149,7 @@ namespace TestDesigner
             dataGridViewAnswers.Columns[0].HeaderText = "Answer";
             dataGridViewAnswers.Columns[1].Width = 90;
             dataGridViewAnswers.Columns[1].HeaderText = "Is right";
-            dataGridViewAnswers.Columns[2].Visible = false;
+            //dataGridViewAnswers.Columns[2].Visible = false;
         }
 
         // Request to save the test
@@ -285,11 +285,18 @@ namespace TestDesigner
             WindowTitleText();
         }
 
+        private void btnModifyQuestion_Click(object sender, EventArgs e)
+        {
+            ModifyForm modifyForm = new ModifyForm(currTest.Questions);
+            if(modifyForm.ShowDialog() == DialogResult.OK)
+            {
+                currTest.Questions = modifyForm.Questions;
+                FillForm();
+            }
+        }
+
 
         // Work with Questions
-        private void btnAddQuestion_Click(object sender, EventArgs e)
-        {
 
-        }
     }
 }
