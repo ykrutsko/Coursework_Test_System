@@ -136,7 +136,7 @@ namespace TestDesigner
             dataGridViewQuestions.Columns[0].HeaderText = "Question";
             dataGridViewQuestions.Columns[1].Width = 90;
             dataGridViewQuestions.Columns[1].HeaderText = "Point";
-            //dataGridViewQuestions.Columns[2].Visible = false;
+            dataGridViewQuestions.Columns[2].Visible = false;
             dataGridViewQuestions.Rows[0].Selected = true;
         }
 
@@ -149,7 +149,6 @@ namespace TestDesigner
             dataGridViewAnswers.Columns[0].HeaderText = "Answer";
             dataGridViewAnswers.Columns[1].Width = 90;
             dataGridViewAnswers.Columns[1].HeaderText = "Is right";
-            //dataGridViewAnswers.Columns[2].Visible = false;
         }
 
         // Request to save the test

@@ -54,13 +54,11 @@
             this.numericUpDownMinPass = new System.Windows.Forms.NumericUpDown();
             this.tbMaxPointsForTest = new System.Windows.Forms.TextBox();
             this.tbCountOfQuestions = new System.Windows.Forms.TextBox();
-            this.tbInfo = new System.Windows.Forms.TextBox();
             this.tbDescription = new System.Windows.Forms.TextBox();
             this.tbAuthor = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -82,7 +80,7 @@
             this.dataGridViewAnswers.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Answer,
             this.Right});
-            this.dataGridViewAnswers.Location = new System.Drawing.Point(321, 324);
+            this.dataGridViewAnswers.Location = new System.Drawing.Point(321, 333);
             this.dataGridViewAnswers.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.dataGridViewAnswers.Name = "dataGridViewAnswers";
             this.dataGridViewAnswers.ReadOnly = true;
@@ -169,7 +167,7 @@
             // 
             // tbAnswer
             // 
-            this.tbAnswer.Location = new System.Drawing.Point(321, 526);
+            this.tbAnswer.Location = new System.Drawing.Point(321, 535);
             this.tbAnswer.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.tbAnswer.Multiline = true;
             this.tbAnswer.Name = "tbAnswer";
@@ -179,7 +177,7 @@
             // cbIsRight
             // 
             this.cbIsRight.AutoSize = true;
-            this.cbIsRight.Location = new System.Drawing.Point(664, 526);
+            this.cbIsRight.Location = new System.Drawing.Point(663, 537);
             this.cbIsRight.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.cbIsRight.Name = "cbIsRight";
             this.cbIsRight.Size = new System.Drawing.Size(62, 19);
@@ -189,7 +187,7 @@
             // 
             // btnAnswer
             // 
-            this.btnAnswer.Location = new System.Drawing.Point(664, 554);
+            this.btnAnswer.Location = new System.Drawing.Point(663, 563);
             this.btnAnswer.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnAnswer.Name = "btnAnswer";
             this.btnAnswer.Size = new System.Drawing.Size(105, 27);
@@ -200,7 +198,7 @@
             // btnOk
             // 
             this.btnOk.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnOk.Location = new System.Drawing.Point(879, 485);
+            this.btnOk.Location = new System.Drawing.Point(873, 486);
             this.btnOk.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(105, 27);
@@ -212,7 +210,7 @@
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(879, 523);
+            this.btnCancel.Location = new System.Drawing.Point(873, 525);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(105, 27);
@@ -224,7 +222,7 @@
             // 
             this.rbAdd.AutoSize = true;
             this.rbAdd.Checked = true;
-            this.rbAdd.Location = new System.Drawing.Point(24, 34);
+            this.rbAdd.Location = new System.Drawing.Point(24, 30);
             this.rbAdd.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.rbAdd.Name = "rbAdd";
             this.rbAdd.Size = new System.Drawing.Size(81, 19);
@@ -236,7 +234,7 @@
             // rbEdit
             // 
             this.rbEdit.AutoSize = true;
-            this.rbEdit.Location = new System.Drawing.Point(24, 67);
+            this.rbEdit.Location = new System.Drawing.Point(24, 63);
             this.rbEdit.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.rbEdit.Name = "rbEdit";
             this.rbEdit.Size = new System.Drawing.Size(81, 19);
@@ -247,7 +245,7 @@
             // rbDelete
             // 
             this.rbDelete.AutoSize = true;
-            this.rbDelete.Location = new System.Drawing.Point(24, 101);
+            this.rbDelete.Location = new System.Drawing.Point(24, 97);
             this.rbDelete.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.rbDelete.Name = "rbDelete";
             this.rbDelete.Size = new System.Drawing.Size(96, 19);
@@ -288,9 +286,9 @@
             this.groupBox1.Controls.Add(this.rbAdd);
             this.groupBox1.Controls.Add(this.rbEdit);
             this.groupBox1.Controls.Add(this.rbDelete);
-            this.groupBox1.Location = new System.Drawing.Point(775, 318);
+            this.groupBox1.Location = new System.Drawing.Point(780, 326);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(204, 134);
+            this.groupBox1.Size = new System.Drawing.Size(198, 134);
             this.groupBox1.TabIndex = 26;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Operating mode";
@@ -305,22 +303,20 @@
             this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Controls.Add(this.tbCountOfQuestions);
             this.groupBox2.Controls.Add(this.label2);
-            this.groupBox2.Controls.Add(this.tbInfo);
             this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Controls.Add(this.tbAuthor);
             this.groupBox2.Controls.Add(this.tbDescription);
             this.groupBox2.Controls.Add(this.label3);
-            this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Location = new System.Drawing.Point(13, 352);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(298, 229);
+            this.groupBox2.Size = new System.Drawing.Size(298, 238);
             this.groupBox2.TabIndex = 27;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Test info";
+            this.groupBox2.Text = "TEST info";
             // 
             // numericUpDownMinPass
             // 
-            this.numericUpDownMinPass.Location = new System.Drawing.Point(166, 196);
+            this.numericUpDownMinPass.Location = new System.Drawing.Point(166, 201);
             this.numericUpDownMinPass.Name = "numericUpDownMinPass";
             this.numericUpDownMinPass.ReadOnly = true;
             this.numericUpDownMinPass.Size = new System.Drawing.Size(117, 21);
@@ -328,7 +324,7 @@
             // 
             // tbMaxPointsForTest
             // 
-            this.tbMaxPointsForTest.Location = new System.Drawing.Point(149, 165);
+            this.tbMaxPointsForTest.Location = new System.Drawing.Point(149, 170);
             this.tbMaxPointsForTest.Name = "tbMaxPointsForTest";
             this.tbMaxPointsForTest.ReadOnly = true;
             this.tbMaxPointsForTest.Size = new System.Drawing.Size(135, 21);
@@ -336,31 +332,24 @@
             // 
             // tbCountOfQuestions
             // 
-            this.tbCountOfQuestions.Location = new System.Drawing.Point(149, 135);
+            this.tbCountOfQuestions.Location = new System.Drawing.Point(149, 140);
             this.tbCountOfQuestions.Name = "tbCountOfQuestions";
             this.tbCountOfQuestions.ReadOnly = true;
             this.tbCountOfQuestions.Size = new System.Drawing.Size(134, 21);
             this.tbCountOfQuestions.TabIndex = 39;
             // 
-            // tbInfo
-            // 
-            this.tbInfo.Location = new System.Drawing.Point(85, 100);
-            this.tbInfo.Name = "tbInfo";
-            this.tbInfo.ReadOnly = true;
-            this.tbInfo.Size = new System.Drawing.Size(198, 21);
-            this.tbInfo.TabIndex = 38;
-            // 
             // tbDescription
             // 
-            this.tbDescription.Location = new System.Drawing.Point(85, 73);
+            this.tbDescription.Location = new System.Drawing.Point(86, 78);
+            this.tbDescription.Multiline = true;
             this.tbDescription.Name = "tbDescription";
             this.tbDescription.ReadOnly = true;
-            this.tbDescription.Size = new System.Drawing.Size(198, 21);
+            this.tbDescription.Size = new System.Drawing.Size(197, 56);
             this.tbDescription.TabIndex = 37;
             // 
             // tbAuthor
             // 
-            this.tbAuthor.Location = new System.Drawing.Point(86, 46);
+            this.tbAuthor.Location = new System.Drawing.Point(86, 51);
             this.tbAuthor.Name = "tbAuthor";
             this.tbAuthor.ReadOnly = true;
             this.tbAuthor.Size = new System.Drawing.Size(197, 21);
@@ -369,7 +358,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(9, 198);
+            this.label7.Location = new System.Drawing.Point(9, 203);
             this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(150, 15);
@@ -379,7 +368,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(10, 168);
+            this.label6.Location = new System.Drawing.Point(10, 173);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(132, 15);
@@ -389,26 +378,17 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(10, 138);
+            this.label5.Location = new System.Drawing.Point(10, 143);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(108, 15);
             this.label5.TabIndex = 32;
             this.label5.Text = "Count of questions";
             // 
-            // label4
-            // 
-            this.label4.Location = new System.Drawing.Point(10, 103);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(69, 39);
-            this.label4.TabIndex = 31;
-            this.label4.Text = "Info for test taker";
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(9, 76);
+            this.label3.Location = new System.Drawing.Point(9, 81);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(69, 15);
@@ -418,7 +398,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(9, 22);
+            this.label2.Location = new System.Drawing.Point(9, 27);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(30, 15);
@@ -428,7 +408,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(9, 49);
+            this.label1.Location = new System.Drawing.Point(9, 54);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(42, 15);
@@ -437,7 +417,7 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(85, 19);
+            this.textBox1.Location = new System.Drawing.Point(85, 24);
             this.textBox1.Name = "textBox1";
             this.textBox1.ReadOnly = true;
             this.textBox1.Size = new System.Drawing.Size(197, 21);
@@ -447,7 +427,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(994, 599);
+            this.ClientSize = new System.Drawing.Size(994, 608);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOk);
             this.Controls.Add(this.groupBox2);
@@ -466,7 +446,7 @@
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Name = "ModifyForm";
-            this.Text = "Edit test";
+            this.Text = "TEST editor [Add mode]";
             this.Load += new System.EventHandler(this.ModifyForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAnswers)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
@@ -513,12 +493,10 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox tbCountOfQuestions;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox tbInfo;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox tbAuthor;
         private System.Windows.Forms.TextBox tbDescription;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox textBox1;
     }
 }
