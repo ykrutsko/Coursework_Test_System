@@ -33,43 +33,22 @@
             this.Answer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Right = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pictureBox = new System.Windows.Forms.PictureBox();
-            this.dataGridViewQuestions = new System.Windows.Forms.DataGridView();
-            this.Question = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Point = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tbQuestion = new System.Windows.Forms.TextBox();
-            this.btnQuestion = new System.Windows.Forms.Button();
-            this.tbAnswer = new System.Windows.Forms.TextBox();
-            this.cbIsRight = new System.Windows.Forms.CheckBox();
-            this.btnAnswer = new System.Windows.Forms.Button();
             this.btnOk = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.rbAdd = new System.Windows.Forms.RadioButton();
-            this.rbEdit = new System.Windows.Forms.RadioButton();
-            this.rbDelete = new System.Windows.Forms.RadioButton();
-            this.numericUpDownPoint = new System.Windows.Forms.NumericUpDown();
+            this.numericUpDownPoints = new System.Windows.Forms.NumericUpDown();
             this.btnClearImg = new System.Windows.Forms.Button();
-            this.btnLoadImg = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.numericUpDownMinPass = new System.Windows.Forms.NumericUpDown();
-            this.tbMaxPointsForTest = new System.Windows.Forms.TextBox();
-            this.tbCountOfQuestions = new System.Windows.Forms.TextBox();
-            this.tbDescription = new System.Windows.Forms.TextBox();
-            this.tbAuthor = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.toolStripButtonAdd = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonEdit = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonDelete = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAnswers)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewQuestions)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPoint)).BeginInit();
-            this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMinPass)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPoints)).BeginInit();
+            this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // dataGridViewAnswers
@@ -80,12 +59,15 @@
             this.dataGridViewAnswers.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Answer,
             this.Right});
-            this.dataGridViewAnswers.Location = new System.Drawing.Point(321, 333);
+            this.dataGridViewAnswers.Location = new System.Drawing.Point(321, 96);
             this.dataGridViewAnswers.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.dataGridViewAnswers.MultiSelect = false;
             this.dataGridViewAnswers.Name = "dataGridViewAnswers";
             this.dataGridViewAnswers.ReadOnly = true;
-            this.dataGridViewAnswers.Size = new System.Drawing.Size(447, 196);
+            this.dataGridViewAnswers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridViewAnswers.Size = new System.Drawing.Size(447, 249);
             this.dataGridViewAnswers.TabIndex = 5;
+            this.dataGridViewAnswers.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewAnswers_CellClick);
             // 
             // Answer
             // 
@@ -103,102 +85,36 @@
             // 
             // pictureBox
             // 
-            this.pictureBox.BackgroundImage = global::TestDesigner.Properties.Resources.nophoto;
             this.pictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.pictureBox.Image = global::TestDesigner.Properties.Resources.nophoto;
             this.pictureBox.InitialImage = ((System.Drawing.Image)(resources.GetObject("pictureBox.InitialImage")));
             this.pictureBox.Location = new System.Drawing.Point(13, 12);
             this.pictureBox.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.pictureBox.Name = "pictureBox";
             this.pictureBox.Size = new System.Drawing.Size(300, 300);
-            this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox.TabIndex = 4;
             this.pictureBox.TabStop = false;
-            // 
-            // dataGridViewQuestions
-            // 
-            this.dataGridViewQuestions.AllowUserToAddRows = false;
-            this.dataGridViewQuestions.AllowUserToDeleteRows = false;
-            this.dataGridViewQuestions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewQuestions.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Question,
-            this.Point});
-            this.dataGridViewQuestions.Location = new System.Drawing.Point(321, 12);
-            this.dataGridViewQuestions.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.dataGridViewQuestions.Name = "dataGridViewQuestions";
-            this.dataGridViewQuestions.ReadOnly = true;
-            this.dataGridViewQuestions.Size = new System.Drawing.Size(657, 239);
-            this.dataGridViewQuestions.TabIndex = 3;
-            // 
-            // Question
-            // 
-            this.Question.HeaderText = "Question";
-            this.Question.Name = "Question";
-            this.Question.ReadOnly = true;
-            this.Question.Width = 500;
-            // 
-            // Point
-            // 
-            this.Point.HeaderText = "Point";
-            this.Point.Name = "Point";
-            this.Point.ReadOnly = true;
-            this.Point.Width = 90;
+            this.pictureBox.Click += new System.EventHandler(this.pictureBox_Click);
             // 
             // tbQuestion
             // 
-            this.tbQuestion.Location = new System.Drawing.Point(321, 257);
+            this.tbQuestion.Location = new System.Drawing.Point(376, 12);
             this.tbQuestion.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.tbQuestion.Multiline = true;
             this.tbQuestion.Name = "tbQuestion";
-            this.tbQuestion.Size = new System.Drawing.Size(545, 55);
+            this.tbQuestion.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.tbQuestion.Size = new System.Drawing.Size(280, 39);
             this.tbQuestion.TabIndex = 6;
-            // 
-            // btnQuestion
-            // 
-            this.btnQuestion.Location = new System.Drawing.Point(874, 285);
-            this.btnQuestion.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.btnQuestion.Name = "btnQuestion";
-            this.btnQuestion.Size = new System.Drawing.Size(105, 27);
-            this.btnQuestion.TabIndex = 8;
-            this.btnQuestion.Text = "Add";
-            this.btnQuestion.UseVisualStyleBackColor = true;
-            this.btnQuestion.Click += new System.EventHandler(this.btnQuestion_Click);
-            // 
-            // tbAnswer
-            // 
-            this.tbAnswer.Location = new System.Drawing.Point(321, 535);
-            this.tbAnswer.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.tbAnswer.Multiline = true;
-            this.tbAnswer.Name = "tbAnswer";
-            this.tbAnswer.Size = new System.Drawing.Size(335, 55);
-            this.tbAnswer.TabIndex = 9;
-            // 
-            // cbIsRight
-            // 
-            this.cbIsRight.AutoSize = true;
-            this.cbIsRight.Location = new System.Drawing.Point(663, 537);
-            this.cbIsRight.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.cbIsRight.Name = "cbIsRight";
-            this.cbIsRight.Size = new System.Drawing.Size(62, 19);
-            this.cbIsRight.TabIndex = 10;
-            this.cbIsRight.Text = "Is right";
-            this.cbIsRight.UseVisualStyleBackColor = true;
-            // 
-            // btnAnswer
-            // 
-            this.btnAnswer.Location = new System.Drawing.Point(663, 563);
-            this.btnAnswer.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.btnAnswer.Name = "btnAnswer";
-            this.btnAnswer.Size = new System.Drawing.Size(105, 27);
-            this.btnAnswer.TabIndex = 11;
-            this.btnAnswer.Text = "Add";
-            this.btnAnswer.UseVisualStyleBackColor = true;
+            this.tbQuestion.TextChanged += new System.EventHandler(this.tbQuestion_TextChanged);
             // 
             // btnOk
             // 
             this.btnOk.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnOk.Location = new System.Drawing.Point(873, 486);
+            this.btnOk.Enabled = false;
+            this.btnOk.Location = new System.Drawing.Point(550, 366);
             this.btnOk.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(105, 27);
@@ -210,7 +126,7 @@
             // btnCancel
             // 
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(873, 525);
+            this.btnCancel.Location = new System.Drawing.Point(663, 366);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(105, 27);
@@ -218,245 +134,114 @@
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             // 
-            // rbAdd
+            // numericUpDownPoints
             // 
-            this.rbAdd.AutoSize = true;
-            this.rbAdd.Checked = true;
-            this.rbAdd.Location = new System.Drawing.Point(24, 30);
-            this.rbAdd.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.rbAdd.Name = "rbAdd";
-            this.rbAdd.Size = new System.Drawing.Size(81, 19);
-            this.rbAdd.TabIndex = 16;
-            this.rbAdd.TabStop = true;
-            this.rbAdd.Text = "Add mode";
-            this.rbAdd.UseVisualStyleBackColor = true;
-            // 
-            // rbEdit
-            // 
-            this.rbEdit.AutoSize = true;
-            this.rbEdit.Location = new System.Drawing.Point(24, 63);
-            this.rbEdit.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.rbEdit.Name = "rbEdit";
-            this.rbEdit.Size = new System.Drawing.Size(81, 19);
-            this.rbEdit.TabIndex = 17;
-            this.rbEdit.Text = "Edit mode";
-            this.rbEdit.UseVisualStyleBackColor = true;
-            // 
-            // rbDelete
-            // 
-            this.rbDelete.AutoSize = true;
-            this.rbDelete.Location = new System.Drawing.Point(24, 97);
-            this.rbDelete.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.rbDelete.Name = "rbDelete";
-            this.rbDelete.Size = new System.Drawing.Size(96, 19);
-            this.rbDelete.TabIndex = 18;
-            this.rbDelete.Text = "Delete mode";
-            this.rbDelete.UseVisualStyleBackColor = true;
-            // 
-            // numericUpDownPoint
-            // 
-            this.numericUpDownPoint.Location = new System.Drawing.Point(874, 257);
-            this.numericUpDownPoint.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.numericUpDownPoint.Name = "numericUpDownPoint";
-            this.numericUpDownPoint.Size = new System.Drawing.Size(104, 21);
-            this.numericUpDownPoint.TabIndex = 25;
+            this.numericUpDownPoints.Location = new System.Drawing.Point(664, 30);
+            this.numericUpDownPoints.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.numericUpDownPoints.Name = "numericUpDownPoints";
+            this.numericUpDownPoints.Size = new System.Drawing.Size(104, 21);
+            this.numericUpDownPoints.TabIndex = 25;
             // 
             // btnClearImg
             // 
             this.btnClearImg.Location = new System.Drawing.Point(13, 318);
             this.btnClearImg.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnClearImg.Name = "btnClearImg";
-            this.btnClearImg.Size = new System.Drawing.Size(145, 27);
+            this.btnClearImg.Size = new System.Drawing.Size(300, 27);
             this.btnClearImg.TabIndex = 12;
             this.btnClearImg.Text = "Clear image";
             this.btnClearImg.UseVisualStyleBackColor = true;
+            this.btnClearImg.Click += new System.EventHandler(this.btnClearImg_Click);
             // 
-            // btnLoadImg
+            // openFileDialog
             // 
-            this.btnLoadImg.Location = new System.Drawing.Point(168, 318);
-            this.btnLoadImg.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.btnLoadImg.Name = "btnLoadImg";
-            this.btnLoadImg.Size = new System.Drawing.Size(145, 27);
-            this.btnLoadImg.TabIndex = 13;
-            this.btnLoadImg.Text = "Load image";
-            this.btnLoadImg.UseVisualStyleBackColor = true;
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.rbAdd);
-            this.groupBox1.Controls.Add(this.rbEdit);
-            this.groupBox1.Controls.Add(this.rbDelete);
-            this.groupBox1.Location = new System.Drawing.Point(780, 326);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(198, 134);
-            this.groupBox1.TabIndex = 26;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Operating mode";
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.textBox1);
-            this.groupBox2.Controls.Add(this.numericUpDownMinPass);
-            this.groupBox2.Controls.Add(this.label7);
-            this.groupBox2.Controls.Add(this.tbMaxPointsForTest);
-            this.groupBox2.Controls.Add(this.label1);
-            this.groupBox2.Controls.Add(this.label6);
-            this.groupBox2.Controls.Add(this.tbCountOfQuestions);
-            this.groupBox2.Controls.Add(this.label2);
-            this.groupBox2.Controls.Add(this.label5);
-            this.groupBox2.Controls.Add(this.tbAuthor);
-            this.groupBox2.Controls.Add(this.tbDescription);
-            this.groupBox2.Controls.Add(this.label3);
-            this.groupBox2.Location = new System.Drawing.Point(13, 352);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(298, 238);
-            this.groupBox2.TabIndex = 27;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "TEST info";
-            // 
-            // numericUpDownMinPass
-            // 
-            this.numericUpDownMinPass.Location = new System.Drawing.Point(166, 201);
-            this.numericUpDownMinPass.Name = "numericUpDownMinPass";
-            this.numericUpDownMinPass.ReadOnly = true;
-            this.numericUpDownMinPass.Size = new System.Drawing.Size(117, 21);
-            this.numericUpDownMinPass.TabIndex = 41;
-            // 
-            // tbMaxPointsForTest
-            // 
-            this.tbMaxPointsForTest.Location = new System.Drawing.Point(149, 170);
-            this.tbMaxPointsForTest.Name = "tbMaxPointsForTest";
-            this.tbMaxPointsForTest.ReadOnly = true;
-            this.tbMaxPointsForTest.Size = new System.Drawing.Size(135, 21);
-            this.tbMaxPointsForTest.TabIndex = 40;
-            // 
-            // tbCountOfQuestions
-            // 
-            this.tbCountOfQuestions.Location = new System.Drawing.Point(149, 140);
-            this.tbCountOfQuestions.Name = "tbCountOfQuestions";
-            this.tbCountOfQuestions.ReadOnly = true;
-            this.tbCountOfQuestions.Size = new System.Drawing.Size(134, 21);
-            this.tbCountOfQuestions.TabIndex = 39;
-            // 
-            // tbDescription
-            // 
-            this.tbDescription.Location = new System.Drawing.Point(86, 78);
-            this.tbDescription.Multiline = true;
-            this.tbDescription.Name = "tbDescription";
-            this.tbDescription.ReadOnly = true;
-            this.tbDescription.Size = new System.Drawing.Size(197, 56);
-            this.tbDescription.TabIndex = 37;
-            // 
-            // tbAuthor
-            // 
-            this.tbAuthor.Location = new System.Drawing.Point(86, 51);
-            this.tbAuthor.Name = "tbAuthor";
-            this.tbAuthor.ReadOnly = true;
-            this.tbAuthor.Size = new System.Drawing.Size(197, 21);
-            this.tbAuthor.TabIndex = 35;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(9, 203);
-            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(150, 15);
-            this.label7.TabIndex = 34;
-            this.label7.Text = "Minimum passing percent";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(10, 173);
-            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(132, 15);
-            this.label6.TabIndex = 33;
-            this.label6.Text = "Maximum point for test";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(10, 143);
-            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(108, 15);
-            this.label5.TabIndex = 32;
-            this.label5.Text = "Count of questions";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(9, 81);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(69, 15);
-            this.label3.TabIndex = 30;
-            this.label3.Text = "Description";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(9, 27);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(30, 15);
-            this.label2.TabIndex = 29;
-            this.label2.Text = "Title";
+            this.openFileDialog.FileName = "openFileDialog1";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(9, 54);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(320, 12);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(42, 15);
-            this.label1.TabIndex = 28;
-            this.label1.Text = "Author";
+            this.label1.Size = new System.Drawing.Size(49, 15);
+            this.label1.TabIndex = 26;
+            this.label1.Text = "Qestion";
             // 
-            // textBox1
+            // label2
             // 
-            this.textBox1.Location = new System.Drawing.Point(85, 24);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(197, 21);
-            this.textBox1.TabIndex = 42;
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(660, 12);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(35, 15);
+            this.label2.TabIndex = 27;
+            this.label2.Text = "Point";
+            // 
+            // toolStrip1
+            // 
+            this.toolStrip1.Dock = System.Windows.Forms.DockStyle.None;
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripButtonAdd,
+            this.toolStripButtonEdit,
+            this.toolStripButtonDelete});
+            this.toolStrip1.Location = new System.Drawing.Point(321, 68);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
+            this.toolStrip1.Size = new System.Drawing.Size(81, 25);
+            this.toolStrip1.TabIndex = 29;
+            this.toolStrip1.Text = "toolStrip1";
+            // 
+            // toolStripButtonAdd
+            // 
+            this.toolStripButtonAdd.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonAdd.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonAdd.Image")));
+            this.toolStripButtonAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonAdd.Name = "toolStripButtonAdd";
+            this.toolStripButtonAdd.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonAdd.ToolTipText = "Add answer";
+            // 
+            // toolStripButtonEdit
+            // 
+            this.toolStripButtonEdit.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonEdit.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonEdit.Image")));
+            this.toolStripButtonEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonEdit.Name = "toolStripButtonEdit";
+            this.toolStripButtonEdit.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonEdit.ToolTipText = "Edit answer";
+            // 
+            // toolStripButtonDelete
+            // 
+            this.toolStripButtonDelete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonDelete.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonDelete.Image")));
+            this.toolStripButtonDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonDelete.Name = "toolStripButtonDelete";
+            this.toolStripButtonDelete.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonDelete.ToolTipText = "Delete answer";
             // 
             // ModifyForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(994, 608);
+            this.ClientSize = new System.Drawing.Size(783, 415);
+            this.Controls.Add(this.toolStrip1);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOk);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.dataGridViewQuestions);
-            this.Controls.Add(this.numericUpDownPoint);
-            this.Controls.Add(this.btnLoadImg);
+            this.Controls.Add(this.numericUpDownPoints);
             this.Controls.Add(this.tbQuestion);
             this.Controls.Add(this.btnClearImg);
-            this.Controls.Add(this.btnQuestion);
             this.Controls.Add(this.dataGridViewAnswers);
             this.Controls.Add(this.pictureBox);
-            this.Controls.Add(this.btnAnswer);
-            this.Controls.Add(this.tbAnswer);
-            this.Controls.Add(this.cbIsRight);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Name = "ModifyForm";
             this.Text = "TEST editor [Add mode]";
             this.Load += new System.EventHandler(this.ModifyForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAnswers)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewQuestions)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPoint)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMinPass)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPoints)).EndInit();
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -468,35 +253,17 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Answer;
         private new System.Windows.Forms.DataGridViewTextBoxColumn Right;
         private System.Windows.Forms.PictureBox pictureBox;
-        private System.Windows.Forms.DataGridView dataGridViewQuestions;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Question;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Point;
         private System.Windows.Forms.TextBox tbQuestion;
-        private System.Windows.Forms.Button btnQuestion;
-        private System.Windows.Forms.TextBox tbAnswer;
-        private System.Windows.Forms.CheckBox cbIsRight;
-        private System.Windows.Forms.Button btnAnswer;
         private System.Windows.Forms.Button btnOk;
         private System.Windows.Forms.Button btnCancel;
-        private System.Windows.Forms.RadioButton rbAdd;
-        private System.Windows.Forms.RadioButton rbEdit;
-        private System.Windows.Forms.RadioButton rbDelete;
-        private System.Windows.Forms.NumericUpDown numericUpDownPoint;
+        private System.Windows.Forms.NumericUpDown numericUpDownPoints;
         private System.Windows.Forms.Button btnClearImg;
-        private System.Windows.Forms.Button btnLoadImg;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.NumericUpDown numericUpDownMinPass;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox tbMaxPointsForTest;
+        private System.Windows.Forms.OpenFileDialog openFileDialog;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox tbCountOfQuestions;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox tbAuthor;
-        private System.Windows.Forms.TextBox tbDescription;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStripButton toolStripButtonAdd;
+        private System.Windows.Forms.ToolStripButton toolStripButtonEdit;
+        private System.Windows.Forms.ToolStripButton toolStripButtonDelete;
     }
 }

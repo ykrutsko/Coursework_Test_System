@@ -24,6 +24,14 @@ namespace TestLib
             Answers = new List<Answer>();
         }
 
+        public Question(Question question)
+        {
+            QuestionText = question.QuestionText;
+            Points = question.Points;
+            Img = question.Img;
+            Answers = question.Answers.Clone<Answer>();
+        }
+
         public Question(string questionText, int points, string img)
         {
             QuestionText = questionText;
@@ -40,13 +48,13 @@ namespace TestLib
             Answers = answers;
         }
 
-
         public bool Equals(Question other)
         {
             return other is Question &&
-                this.QuestionText == other.QuestionText &&
+                this.QuestionText.Equals(other.QuestionText) &&
                 this.Points == other.Points &&
-                this.Answers.SequenceEqual(other.Answers);
+                this.Img.Equals(other.Img) &&
+                this.Answers.ScrambledEquals<Answer>(other.Answers);
         }
 
         public object Clone()

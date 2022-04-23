@@ -19,8 +19,8 @@ namespace TestLib
         public bool Equals(Answer other)
         {
             return other is Answer &&
-                TextAnswer == other.TextAnswer && 
-                IsRight == other.IsRight; 
+                TextAnswer.Equals(other.TextAnswer) && 
+                IsRight.Equals(other.IsRight); 
         }
 
         public object Clone()

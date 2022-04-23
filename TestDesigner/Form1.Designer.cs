@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tbTitle = new System.Windows.Forms.TextBox();
@@ -48,6 +49,13 @@
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.toolStrip2 = new System.Windows.Forms.ToolStrip();
+            this.toolStripButtonAdd = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonAddByCopy = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButtonEdit = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButtonDelete = new System.Windows.Forms.ToolStripButton();
             this.dataGridViewAnswers = new System.Windows.Forms.DataGridView();
             this.Answer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Right = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -55,7 +63,6 @@
             this.dataGridViewQuestions = new System.Windows.Forms.DataGridView();
             this.Question = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Point = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnModifyQuestion = new System.Windows.Forms.Button();
             this.openFileDialogTest = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialogTest = new System.Windows.Forms.SaveFileDialog();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
@@ -64,14 +71,19 @@
             this.saveToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.exitStripButton = new System.Windows.Forms.ToolStripButton();
+            this.bindingSourceQuestions = new System.Windows.Forms.BindingSource(this.components);
+            this.bindingSourceAnswers = new System.Windows.Forms.BindingSource(this.components);
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMinPass)).BeginInit();
             this.statusStrip.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.toolStrip2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAnswers)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewQuestions)).BeginInit();
             this.toolStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceQuestions)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceAnswers)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -258,10 +270,10 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.toolStrip2);
             this.groupBox2.Controls.Add(this.dataGridViewAnswers);
             this.groupBox2.Controls.Add(this.pictureBox);
             this.groupBox2.Controls.Add(this.dataGridViewQuestions);
-            this.groupBox2.Controls.Add(this.btnModifyQuestion);
             this.groupBox2.Location = new System.Drawing.Point(332, 32);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.groupBox2.Name = "groupBox2";
@@ -270,6 +282,79 @@
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Questions";
+            // 
+            // toolStrip2
+            // 
+            this.toolStrip2.Dock = System.Windows.Forms.DockStyle.None;
+            this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripButtonAdd,
+            this.toolStripButtonAddByCopy,
+            this.toolStripSeparator2,
+            this.toolStripButtonEdit,
+            this.toolStripSeparator3,
+            this.toolStripButtonDelete});
+            this.toolStrip2.Location = new System.Drawing.Point(16, 21);
+            this.toolStrip2.Name = "toolStrip2";
+            this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
+            this.toolStrip2.Size = new System.Drawing.Size(116, 25);
+            this.toolStrip2.TabIndex = 30;
+            this.toolStrip2.Text = "toolStrip2";
+            // 
+            // toolStripButtonAdd
+            // 
+            this.toolStripButtonAdd.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonAdd.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonAdd.Image")));
+            this.toolStripButtonAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonAdd.Name = "toolStripButtonAdd";
+            this.toolStripButtonAdd.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonAdd.Text = "Add question";
+            this.toolStripButtonAdd.ToolTipText = "Add question";
+            this.toolStripButtonAdd.Click += new System.EventHandler(this.toolStripButtonAdd_Click);
+            // 
+            // toolStripButtonAddByCopy
+            // 
+            this.toolStripButtonAddByCopy.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonAddByCopy.Enabled = false;
+            this.toolStripButtonAddByCopy.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonAddByCopy.Image")));
+            this.toolStripButtonAddByCopy.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonAddByCopy.Name = "toolStripButtonAddByCopy";
+            this.toolStripButtonAddByCopy.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonAddByCopy.Text = "toolStripButton1";
+            this.toolStripButtonAddByCopy.ToolTipText = "Add question by copy";
+            this.toolStripButtonAddByCopy.Click += new System.EventHandler(this.toolStripButtonAddByCopy_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripButtonEdit
+            // 
+            this.toolStripButtonEdit.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonEdit.Enabled = false;
+            this.toolStripButtonEdit.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonEdit.Image")));
+            this.toolStripButtonEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonEdit.Name = "toolStripButtonEdit";
+            this.toolStripButtonEdit.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonEdit.Text = "Edit question";
+            this.toolStripButtonEdit.ToolTipText = "Edit question";
+            this.toolStripButtonEdit.Click += new System.EventHandler(this.toolStripButtonEdit_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
+            // 
+            // toolStripButtonDelete
+            // 
+            this.toolStripButtonDelete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonDelete.Enabled = false;
+            this.toolStripButtonDelete.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonDelete.Image")));
+            this.toolStripButtonDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonDelete.Name = "toolStripButtonDelete";
+            this.toolStripButtonDelete.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonDelete.Text = "Delete question";
+            this.toolStripButtonDelete.ToolTipText = "Delete question";
             // 
             // dataGridViewAnswers
             // 
@@ -280,8 +365,10 @@
             this.Answer,
             this.Right});
             this.dataGridViewAnswers.Location = new System.Drawing.Point(226, 287);
+            this.dataGridViewAnswers.MultiSelect = false;
             this.dataGridViewAnswers.Name = "dataGridViewAnswers";
             this.dataGridViewAnswers.ReadOnly = true;
+            this.dataGridViewAnswers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewAnswers.Size = new System.Drawing.Size(447, 196);
             this.dataGridViewAnswers.TabIndex = 5;
             // 
@@ -301,14 +388,13 @@
             // 
             // pictureBox
             // 
-            this.pictureBox.BackgroundImage = global::TestDesigner.Properties.Resources.nophoto;
             this.pictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox.InitialImage = ((System.Drawing.Image)(resources.GetObject("pictureBox.InitialImage")));
             this.pictureBox.Location = new System.Drawing.Point(16, 287);
             this.pictureBox.Name = "pictureBox";
             this.pictureBox.Size = new System.Drawing.Size(196, 196);
-            this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox.TabIndex = 4;
             this.pictureBox.TabStop = false;
             // 
@@ -321,10 +407,14 @@
             this.Question,
             this.Point});
             this.dataGridViewQuestions.Location = new System.Drawing.Point(16, 49);
+            this.dataGridViewQuestions.MultiSelect = false;
             this.dataGridViewQuestions.Name = "dataGridViewQuestions";
             this.dataGridViewQuestions.ReadOnly = true;
+            this.dataGridViewQuestions.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewQuestions.Size = new System.Drawing.Size(657, 225);
             this.dataGridViewQuestions.TabIndex = 3;
+            this.dataGridViewQuestions.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewQuestions_CellClick);
+            this.dataGridViewQuestions.SelectionChanged += new System.EventHandler(this.dataGridViewQuestions_SelectionChanged);
             // 
             // Question
             // 
@@ -339,16 +429,6 @@
             this.Point.Name = "Point";
             this.Point.ReadOnly = true;
             this.Point.Width = 90;
-            // 
-            // btnModifyQuestion
-            // 
-            this.btnModifyQuestion.Location = new System.Drawing.Point(536, 15);
-            this.btnModifyQuestion.Name = "btnModifyQuestion";
-            this.btnModifyQuestion.Size = new System.Drawing.Size(137, 26);
-            this.btnModifyQuestion.TabIndex = 0;
-            this.btnModifyQuestion.Text = "Modify questions";
-            this.btnModifyQuestion.UseVisualStyleBackColor = true;
-            this.btnModifyQuestion.Click += new System.EventHandler(this.btnModifyQuestion_Click);
             // 
             // toolStrip1
             // 
@@ -427,6 +507,7 @@
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.groupBox1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Name = "MainForm";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
@@ -437,11 +518,16 @@
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();
             this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            this.toolStrip2.ResumeLayout(false);
+            this.toolStrip2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAnswers)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewQuestions)).EndInit();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceQuestions)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceAnswers)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -467,7 +553,6 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.PictureBox pictureBox;
         private System.Windows.Forms.DataGridView dataGridViewQuestions;
-        private System.Windows.Forms.Button btnModifyQuestion;
         private System.Windows.Forms.DataGridView dataGridViewAnswers;
         private System.Windows.Forms.OpenFileDialog openFileDialogTest;
         private System.Windows.Forms.SaveFileDialog saveFileDialogTest;
@@ -483,6 +568,15 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Answer;
         private new System.Windows.Forms.DataGridViewTextBoxColumn Right;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.ToolStrip toolStrip2;
+        private System.Windows.Forms.ToolStripButton toolStripButtonAdd;
+        private System.Windows.Forms.ToolStripButton toolStripButtonEdit;
+        private System.Windows.Forms.ToolStripButton toolStripButtonDelete;
+        private System.Windows.Forms.ToolStripButton toolStripButtonAddByCopy;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.BindingSource bindingSourceQuestions;
+        private System.Windows.Forms.BindingSource bindingSourceAnswers;
     }
 }
 

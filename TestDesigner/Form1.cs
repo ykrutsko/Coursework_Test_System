@@ -9,26 +9,32 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TestDesigner.Properties;
 using TestLib;
 
 namespace TestDesigner
 {
     enum NameType { FileName, TestName}
-
+    public enum Mode { Add, Edit }
     public partial class MainForm : Form
     {
         string currFilePath = string.Empty;
         Test currTest;
+        Question currQuestion;
         bool IsTestChanged = false;
-      
+        Bitmap noPhotoBitmap = new Bitmap(Resources.nophoto);
+
+
 
         public MainForm()
         {
-            InitializeComponent();
+            InitializeComponent();            
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            dataGridViewQuestions.DataSource = bindingSourceQuestions.DataSource;
+            dataGridViewAnswers.DataSource = bindingSourceAnswers.DataSource;
             NewTest();
         }
 
@@ -77,26 +83,31 @@ namespace TestDesigner
             tbTitle.Text = String.Empty;
             tbDescription.Text = String.Empty;
             tbInfo.Text = String.Empty;
-            pictureBox.Image = null;
+
             tbCountOfQuestions.Text = "0";
             tbMaxPointsForTest.Text = "0";
             numericUpDownMinPass.Value = 0;
 
             SetCleanDataGridViewQuestions();
-            SetCleaDataGridViewAnswers();
+            SetCleanDataGridViewAnswers();
+
+            pictureBox.Image = noPhotoBitmap;
         }
 
         void SetCleanDataGridViewQuestions()
         {
+            //dataGridViewQuestions.DataSource = null;
             dataGridViewQuestions.Columns.Clear();
             dataGridViewQuestions.Columns.Add("Question", "Question");
             dataGridViewQuestions.Columns.Add("Point", "Point");
             dataGridViewQuestions.Columns[0].Width = 500;
             dataGridViewQuestions.Columns[1].Width = 90;
+            pictureBox.Image = SetCurrBitmap();
         }
 
-        void SetCleaDataGridViewAnswers()
+        void SetCleanDataGridViewAnswers()
         {
+            //dataGridViewAnswers.DataSource = null;
             dataGridViewAnswers.Columns.Clear();
             dataGridViewAnswers.Columns.Add("Answer", "Answer");
             dataGridViewAnswers.Columns.Add("Right", "Is right");
@@ -112,8 +123,7 @@ namespace TestDesigner
             tbInfo.Text = currTest.Info;
             tbCountOfQuestions.Text = currTest.Questions.Count.ToString();
             tbMaxPointsForTest.Text = currTest.Questions.Select(x => x.Points).Sum().ToString();
-            //if(!String.IsNullOrEmpty(currTest.Img))
-            //    pictureBox.Image = ImgConverter.Base64StringToBitmap(currTest.Img);
+            pictureBox.Image = SetCurrBitmap();
             numericUpDownMinPass.Value = currTest.PassPercent;
             if (currTest.Questions.Any())
             {
@@ -123,33 +133,47 @@ namespace TestDesigner
             else
             {
                 SetCleanDataGridViewQuestions();
-                SetCleaDataGridViewAnswers();
+                SetCleanDataGridViewAnswers();
             }
         }
 
         void FillDataGridViewQuestions()
         {
+            //bindingSourceAnswers.DataSource = null;
+            //dataGridViewQuestions.DataSource = null;
             dataGridViewQuestions.Columns.Clear();
-            dataGridViewQuestions.DataSource = null;
-            dataGridViewQuestions.DataSource = currTest.Questions;
+            //dataGridViewQuestions.DataSource = currTest.Questions;
+            bindingSourceQuestions.DataSource = currTest.Questions;
+
             dataGridViewQuestions.Columns[0].Width = 500;
             dataGridViewQuestions.Columns[0].HeaderText = "Question";
             dataGridViewQuestions.Columns[1].Width = 90;
             dataGridViewQuestions.Columns[1].HeaderText = "Point";
             dataGridViewQuestions.Columns[2].Visible = false;
-            dataGridViewQuestions.Rows[0].Selected = true;
+
+            //dataGridViewQuestions.ClearSelection();
+            currQuestion = currQuestion ?? currTest.Questions[0];
+            var equalRow = dataGridViewQuestions.Rows
+                .Cast<DataGridViewRow>()
+                .Where(x => (x.DataBoundItem as Question).Equals(currQuestion))
+                .FirstOrDefault();
+
+            dataGridViewQuestions.Rows[equalRow.Index].Selected = true;
+
         }
 
         void FillDataGridViewAnswers()
         {
             dataGridViewAnswers.Columns.Clear();
             dataGridViewAnswers.DataSource = null;
-            dataGridViewAnswers.DataSource = currTest.Questions[0].Answers;
+            dataGridViewAnswers.DataSource = currQuestion.Answers;
             dataGridViewAnswers.Columns[0].Width = 290;
             dataGridViewAnswers.Columns[0].HeaderText = "Answer";
             dataGridViewAnswers.Columns[1].Width = 90;
             dataGridViewAnswers.Columns[1].HeaderText = "Is right";
         }
+
+
 
         // Request to save the test
         bool СonfirmedActionWithDialogs()
@@ -172,6 +196,7 @@ namespace TestDesigner
         void NewTest()
         {
             currTest = new Test();
+            currQuestion = null;
             currFilePath = String.Empty;
             SetCleanMainForm();
             IsTestChanged = false;
@@ -284,18 +309,79 @@ namespace TestDesigner
             WindowTitleText();
         }
 
-        private void btnModifyQuestion_Click(object sender, EventArgs e)
+        //Modify questions
+
+        // Add
+        private void toolStripButtonAdd_Click(object sender, EventArgs e)
         {
-            ModifyForm modifyForm = new ModifyForm(currTest.Questions);
-            if(modifyForm.ShowDialog() == DialogResult.OK)
+            ModifyForm modifyForm = new ModifyForm(Mode.Add);
+            if (modifyForm.ShowDialog() == DialogResult.OK)
             {
-                currTest.Questions = modifyForm.Questions;
-                FillForm();
+                currTest.Questions.Add(currQuestion = modifyForm.CurrQuestion);
+                FillDataGridViewQuestions();
+                IsTestChanged = true;
+                WindowTitleText();
+                WindowFuterText();
+            }
+        }
+        //Edit
+        private void toolStripButtonEdit_Click(object sender, EventArgs e)
+        {
+            ModifyForm modifyForm = new ModifyForm(Mode.Edit, currQuestion.Clone() as Question);
+            if (modifyForm.ShowDialog() == DialogResult.OK)
+            {
+                currTest.Questions[currTest.Questions.IndexOf(currQuestion)] = modifyForm.CurrQuestion;
+                FillDataGridViewQuestions();
+                FillDataGridViewAnswers();
+                IsTestChanged = true;
+                WindowTitleText();
             }
         }
 
+        Bitmap SetCurrBitmap()
+        {
+            if (currQuestion != null && currQuestion.Img != String.Empty)
+                return ImgConverter.Base64StringToBitmap(currQuestion.Img);
+            return noPhotoBitmap;
+        }
 
-        // Work with Questions
+        private void toolStripButtonAddByCopy_Click(object sender, EventArgs e)
+        {
+            currQuestion = dataGridViewQuestions.CurrentRow.DataBoundItem as Question;
+            currTest.Questions.Add(new Question(currQuestion));
+            FillDataGridViewQuestions();
+            FillDataGridViewAnswers();
+            IsTestChanged = true;
+            WindowTitleText();
+        }
 
+        private void dataGridViewQuestions_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            currQuestion = dataGridViewQuestions.CurrentRow.DataBoundItem as Question;
+        }
+
+        private void dataGridViewQuestions_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dataGridViewQuestions.DataSource == null)
+                return;
+
+            currQuestion = dataGridViewQuestions.CurrentRow.DataBoundItem as Question;
+            pictureBox.Image = SetCurrBitmap();
+            FillDataGridViewAnswers();
+
+            if (dataGridViewQuestions.SelectedRows.Count == 0)
+            {
+                toolStripButtonAddByCopy.Enabled = false;
+                toolStripButtonEdit.Enabled = false;
+                toolStripButtonDelete.Enabled = false;
+                //currQuestion = null;
+            }
+            else
+            {
+                toolStripButtonAddByCopy.Enabled = true;
+                toolStripButtonEdit.Enabled = true;
+                toolStripButtonDelete.Enabled = true;
+            }
+        }
     }
 }
