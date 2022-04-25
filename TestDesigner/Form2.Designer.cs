@@ -28,10 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ModifyForm));
             this.dataGridViewAnswers = new System.Windows.Forms.DataGridView();
-            this.Answer = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Right = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pictureBox = new System.Windows.Forms.PictureBox();
             this.tbQuestion = new System.Windows.Forms.TextBox();
             this.btnOk = new System.Windows.Forms.Button();
@@ -43,13 +42,15 @@
             this.label2 = new System.Windows.Forms.Label();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.toolStripButtonAdd = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonAddByCopy = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonEdit = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonDelete = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonAddByCopy = new System.Windows.Forms.ToolStripButton();
+            this.bindingSourceAnswers = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAnswers)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPoints)).BeginInit();
             this.toolStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceAnswers)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridViewAnswers
@@ -57,9 +58,6 @@
             this.dataGridViewAnswers.AllowUserToAddRows = false;
             this.dataGridViewAnswers.AllowUserToDeleteRows = false;
             this.dataGridViewAnswers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewAnswers.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Answer,
-            this.Right});
             this.dataGridViewAnswers.Location = new System.Drawing.Point(321, 96);
             this.dataGridViewAnswers.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.dataGridViewAnswers.MultiSelect = false;
@@ -68,21 +66,7 @@
             this.dataGridViewAnswers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewAnswers.Size = new System.Drawing.Size(447, 249);
             this.dataGridViewAnswers.TabIndex = 5;
-            this.dataGridViewAnswers.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewAnswers_CellClick);
-            // 
-            // Answer
-            // 
-            this.Answer.HeaderText = "Answer";
-            this.Answer.Name = "Answer";
-            this.Answer.ReadOnly = true;
-            this.Answer.Width = 290;
-            // 
-            // Right
-            // 
-            this.Right.HeaderText = "Is right";
-            this.Right.Name = "Right";
-            this.Right.ReadOnly = true;
-            this.Right.Width = 90;
+            this.dataGridViewAnswers.SelectionChanged += new System.EventHandler(this.dataGridViewAnswers_SelectionChanged);
             // 
             // pictureBox
             // 
@@ -187,7 +171,7 @@
             this.toolStrip1.Location = new System.Drawing.Point(321, 68);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.toolStrip1.Size = new System.Drawing.Size(135, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(104, 25);
             this.toolStrip1.TabIndex = 29;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -199,11 +183,21 @@
             this.toolStripButtonAdd.Name = "toolStripButtonAdd";
             this.toolStripButtonAdd.Size = new System.Drawing.Size(23, 22);
             this.toolStripButtonAdd.ToolTipText = "Add answer";
-            this.toolStripButtonAdd.Click += new System.EventHandler(this.toolStripButtonAdd_Click);
+            // 
+            // toolStripButtonAddByCopy
+            // 
+            this.toolStripButtonAddByCopy.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonAddByCopy.Enabled = false;
+            this.toolStripButtonAddByCopy.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonAddByCopy.Image")));
+            this.toolStripButtonAddByCopy.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonAddByCopy.Name = "toolStripButtonAddByCopy";
+            this.toolStripButtonAddByCopy.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonAddByCopy.ToolTipText = "Add answer by copy";
             // 
             // toolStripButtonEdit
             // 
             this.toolStripButtonEdit.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonEdit.Enabled = false;
             this.toolStripButtonEdit.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonEdit.Image")));
             this.toolStripButtonEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonEdit.Name = "toolStripButtonEdit";
@@ -213,20 +207,12 @@
             // toolStripButtonDelete
             // 
             this.toolStripButtonDelete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonDelete.Enabled = false;
             this.toolStripButtonDelete.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonDelete.Image")));
             this.toolStripButtonDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonDelete.Name = "toolStripButtonDelete";
             this.toolStripButtonDelete.Size = new System.Drawing.Size(23, 22);
             this.toolStripButtonDelete.ToolTipText = "Delete answer";
-            // 
-            // toolStripButtonAddByCopy
-            // 
-            this.toolStripButtonAddByCopy.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonAddByCopy.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonAddByCopy.Image")));
-            this.toolStripButtonAddByCopy.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonAddByCopy.Name = "toolStripButtonAddByCopy";
-            this.toolStripButtonAddByCopy.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButtonAddByCopy.ToolTipText = "Add answer by copy";
             // 
             // ModifyForm
             // 
@@ -254,6 +240,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPoints)).EndInit();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceAnswers)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -262,8 +249,6 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dataGridViewAnswers;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Answer;
-        private new System.Windows.Forms.DataGridViewTextBoxColumn Right;
         private System.Windows.Forms.PictureBox pictureBox;
         private System.Windows.Forms.TextBox tbQuestion;
         private System.Windows.Forms.Button btnOk;
@@ -278,5 +263,6 @@
         private System.Windows.Forms.ToolStripButton toolStripButtonEdit;
         private System.Windows.Forms.ToolStripButton toolStripButtonDelete;
         private System.Windows.Forms.ToolStripButton toolStripButtonAddByCopy;
+        private System.Windows.Forms.BindingSource bindingSourceAnswers;
     }
 }

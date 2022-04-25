@@ -14,9 +14,7 @@ using TestLib;
 
 namespace TestDesigner
 {
-    enum NameType { FileName, TestName}
-    public enum Mode { Add, Edit }
-    public enum ModeFillDataGrid { OpenOrCreate, AddOrEdit}
+
     public partial class MainForm : Form
     {
         string currFilePath = string.Empty;
@@ -91,8 +89,7 @@ namespace TestDesigner
             IsFileMode = false;
 
             // DataGridView
-            FillDataGridViewQuestions(ModeFillDataGrid.OpenOrCreate);
-            //SetCleanDataGridViewQuestions();
+            FillDataGridViewQuestions(ModeFillDataGrid.New);
             SetCleanDataGridViewAnswers();
 
             //Picture
@@ -104,22 +101,6 @@ namespace TestDesigner
             tbTitle.Select();
         }
 
-        //void SetCleanDataGridViewQuestions()
-        //{
-        //    dataGridViewQuestions.SelectionChanged -= new System.EventHandler(this.dataGridViewQuestions_SelectionChanged);
-        //    bindingSourceQuestions.DataSource = null;
-        //    dataGridViewQuestions.SelectionChanged += new System.EventHandler(this.dataGridViewQuestions_SelectionChanged);
-        //    dataGridViewQuestions.Columns.Clear();
-        //    dataGridViewQuestions.Columns.Add("Question", "Question");
-        //    dataGridViewQuestions.Columns.Add("Point", "Point");
-        //    dataGridViewQuestions.Columns[0].Width = 500;
-        //    dataGridViewQuestions.Columns[1].Width = 90;
-        //    pictureBox.Image = SetCurrBitmap();
-
-        //    toolStripButtonAddByCopy.Enabled = false;
-        //    toolStripButtonEdit.Enabled = false;
-        //    toolStripButtonDelete.Enabled = false;
-        //}
 
         void SetCleanDataGridViewAnswers()
         {
@@ -146,14 +127,13 @@ namespace TestDesigner
             IsFileMode = false;
 
             // DataGridView            
-            FillDataGridViewQuestions(ModeFillDataGrid.OpenOrCreate);
+            FillDataGridViewQuestions(ModeFillDataGrid.New);
             if (currTest.Questions.Any())
             {
-                FillDataGridViewAnswers(ModeFillDataGrid.OpenOrCreate);
+                FillDataGridViewAnswers(ModeFillDataGrid.New);
             }
             else
             {
-                //SetCleanDataGridViewQuestions();
                 SetCleanDataGridViewAnswers();
             }
 
@@ -166,7 +146,7 @@ namespace TestDesigner
         {
             dataGridViewQuestions.SelectionChanged -= new System.EventHandler(this.dataGridViewQuestions_SelectionChanged);
             {
-                if(modeFillDataGrid == ModeFillDataGrid.OpenOrCreate)
+                if(modeFillDataGrid == ModeFillDataGrid.New)
                 {
                     dataGridViewQuestions.Columns.Clear();
                     bindingSourceQuestions.DataSource = currTest.Questions;
@@ -180,20 +160,27 @@ namespace TestDesigner
 
                 if(currTest.Questions.Any())
                 {
-                    int pos = currQuestion == null ? 0 : currTest.Questions.LastIndexOf(currQuestion);
+                    int pos = currQuestion == null ? 0 : currTest.Questions.IndexOf(currTest.Questions.Where(x => ReferenceEquals(x, currQuestion)).FirstOrDefault());
                     currQuestion = currTest.Questions[pos];
-                    dataGridViewQuestions.Rows[pos].Selected = true;
-                    FillDataGridViewAnswers(ModeFillDataGrid.AddOrEdit);
-                    pictureBox.Image = SetCurrBitmap();
+                    dataGridViewQuestions.Rows[pos].Selected = true;                    
+
+                    toolStripButtonAddByCopy.Enabled = true;
+                    toolStripButtonEdit.Enabled = true;
+                    toolStripButtonDelete.Enabled = true;
                 }
+                else
+                {
+                    currQuestion = null;
+
+                    toolStripButtonAddByCopy.Enabled = false;
+                    toolStripButtonEdit.Enabled = false;
+                    toolStripButtonDelete.Enabled = false;
+                }
+                pictureBox.Image = SetCurrBitmap();
+                pictureBox.Refresh();
 
             }
             dataGridViewQuestions.SelectionChanged += new System.EventHandler(this.dataGridViewQuestions_SelectionChanged);
-
-            toolStripButtonAddByCopy.Enabled = true;
-            toolStripButtonEdit.Enabled = true;
-            toolStripButtonDelete.Enabled = true;
-
 
 
             //var equalRow = dataGridViewQuestions.Rows
@@ -206,7 +193,7 @@ namespace TestDesigner
 
         void FillDataGridViewAnswers(ModeFillDataGrid modeFillDataGrid)
         {
-            if (modeFillDataGrid == ModeFillDataGrid.OpenOrCreate)
+            if (modeFillDataGrid == ModeFillDataGrid.New)
             {
                 dataGridViewAnswers.Columns.Clear();
                 bindingSourceAnswers.DataSource = currQuestion.Answers;
@@ -366,21 +353,27 @@ namespace TestDesigner
             {
                 currQuestion = modifyForm.CurrQuestion;
                 currTest.Questions.Add(currQuestion);
-                FillDataGridViewQuestions(ModeFillDataGrid.AddOrEdit);
+                FillDataGridViewQuestions(ModeFillDataGrid.Edit);
+                FillDataGridViewAnswers(ModeFillDataGrid.Edit);
                 IsTestChanged = true;
                 WindowTitleText();
             }
         }
 
-        //AddByCope
+        //AddByCopy
         private void toolStripButtonAddByCopy_Click(object sender, EventArgs e)
         {
-            currQuestion = dataGridViewQuestions.CurrentRow.DataBoundItem as Question;
-            currTest.Questions.Add(new Question(currQuestion));
-            FillDataGridViewQuestions(ModeFillDataGrid.AddOrEdit);
-            //FillDataGridViewAnswers(ModeFillDataGrid.AddOrEdit);
-            IsTestChanged = true;
-            WindowTitleText();
+            //ModifyForm modifyForm = new ModifyForm(Mode.Add, currQuestion.Clone() as Question);
+            ModifyForm modifyForm = new ModifyForm(Mode.AddByCopy, in currQuestion);
+            if (modifyForm.ShowDialog() == DialogResult.OK)
+            {
+                currQuestion = modifyForm.CurrQuestion;
+                currTest.Questions.Add(currQuestion);
+                FillDataGridViewQuestions(ModeFillDataGrid.Edit);
+                FillDataGridViewAnswers(ModeFillDataGrid.Edit);
+                IsTestChanged = true;
+                WindowTitleText();
+            }
         }
 
         //Edit
@@ -389,9 +382,10 @@ namespace TestDesigner
             ModifyForm modifyForm = new ModifyForm(Mode.Edit, currQuestion.Clone() as Question);
             if (modifyForm.ShowDialog() == DialogResult.OK)
             {
-                currTest.Questions[currTest.Questions.IndexOf(currQuestion)] = modifyForm.CurrQuestion;
-                FillDataGridViewQuestions(ModeFillDataGrid.AddOrEdit);
-                //FillDataGridViewAnswers(ModeFillDataGrid.AddOrEdit);
+                int pos = currTest.Questions.IndexOf(currTest.Questions.Where(x => ReferenceEquals(x, currQuestion)).FirstOrDefault());
+                currQuestion = currTest.Questions[pos] = modifyForm.CurrQuestion;
+                FillDataGridViewQuestions(ModeFillDataGrid.Edit);
+                FillDataGridViewAnswers(ModeFillDataGrid.Edit);
                 IsTestChanged = true;
                 WindowTitleText();
             }
@@ -402,8 +396,7 @@ namespace TestDesigner
         {
             currTest.Questions.Remove(currQuestion);
             currQuestion = null;
-            FillDataGridViewQuestions(ModeFillDataGrid.AddOrEdit);
-
+            FillDataGridViewQuestions(ModeFillDataGrid.Edit);
             IsTestChanged = true;
             WindowTitleText();
         }
@@ -421,11 +414,13 @@ namespace TestDesigner
 
         private void dataGridViewQuestions_SelectionChanged(object sender, EventArgs e)
         {
-            //if (dataGridViewQuestions.SelectedRows.Count == 0)
-            //    return;
+            if (dataGridViewQuestions.SelectedRows.Count == 0)
+                return;
+
             currQuestion = dataGridViewQuestions.CurrentRow.DataBoundItem as Question;
+
             pictureBox.Image = SetCurrBitmap();
-            FillDataGridViewAnswers(ModeFillDataGrid.AddOrEdit);
+            FillDataGridViewAnswers(ModeFillDataGrid.Edit);
         }
 
 
