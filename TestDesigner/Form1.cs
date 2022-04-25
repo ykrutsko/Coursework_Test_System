@@ -16,15 +16,15 @@ namespace TestDesigner
 {
     enum NameType { FileName, TestName}
     public enum Mode { Add, Edit }
+    public enum ModeFillDataGrid { OpenOrCreate, AddOrEdit}
     public partial class MainForm : Form
     {
         string currFilePath = string.Empty;
         Test currTest;
         Question currQuestion;
         bool IsTestChanged = false;
+        bool IsFileMode = false;
         Bitmap noPhotoBitmap = new Bitmap(Resources.nophoto);
-
-
 
         public MainForm()
         {
@@ -33,8 +33,8 @@ namespace TestDesigner
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            dataGridViewQuestions.DataSource = bindingSourceQuestions.DataSource;
-            dataGridViewAnswers.DataSource = bindingSourceAnswers.DataSource;
+            dataGridViewQuestions.DataSource = bindingSourceQuestions;
+            dataGridViewAnswers.DataSource = bindingSourceAnswers;
             NewTest();
         }
 
@@ -79,35 +79,51 @@ namespace TestDesigner
         //---------------------------------------------------------------------
         void SetCleanMainForm()
         {
+            // text boxes
+            IsFileMode = true;
             tbAuthor.Text = String.Empty;
             tbTitle.Text = String.Empty;
             tbDescription.Text = String.Empty;
             tbInfo.Text = String.Empty;
-
             tbCountOfQuestions.Text = "0";
             tbMaxPointsForTest.Text = "0";
             numericUpDownMinPass.Value = 0;
+            IsFileMode = false;
 
-            SetCleanDataGridViewQuestions();
+            // DataGridView
+            FillDataGridViewQuestions(ModeFillDataGrid.OpenOrCreate);
+            //SetCleanDataGridViewQuestions();
             SetCleanDataGridViewAnswers();
 
+            //Picture
             pictureBox.Image = noPhotoBitmap;
+
+            //Head. footer
+            WindowTitleText();
+            WindowFuterText();
+            tbTitle.Select();
         }
 
-        void SetCleanDataGridViewQuestions()
-        {
-            //dataGridViewQuestions.DataSource = null;
-            dataGridViewQuestions.Columns.Clear();
-            dataGridViewQuestions.Columns.Add("Question", "Question");
-            dataGridViewQuestions.Columns.Add("Point", "Point");
-            dataGridViewQuestions.Columns[0].Width = 500;
-            dataGridViewQuestions.Columns[1].Width = 90;
-            pictureBox.Image = SetCurrBitmap();
-        }
+        //void SetCleanDataGridViewQuestions()
+        //{
+        //    dataGridViewQuestions.SelectionChanged -= new System.EventHandler(this.dataGridViewQuestions_SelectionChanged);
+        //    bindingSourceQuestions.DataSource = null;
+        //    dataGridViewQuestions.SelectionChanged += new System.EventHandler(this.dataGridViewQuestions_SelectionChanged);
+        //    dataGridViewQuestions.Columns.Clear();
+        //    dataGridViewQuestions.Columns.Add("Question", "Question");
+        //    dataGridViewQuestions.Columns.Add("Point", "Point");
+        //    dataGridViewQuestions.Columns[0].Width = 500;
+        //    dataGridViewQuestions.Columns[1].Width = 90;
+        //    pictureBox.Image = SetCurrBitmap();
+
+        //    toolStripButtonAddByCopy.Enabled = false;
+        //    toolStripButtonEdit.Enabled = false;
+        //    toolStripButtonDelete.Enabled = false;
+        //}
 
         void SetCleanDataGridViewAnswers()
         {
-            //dataGridViewAnswers.DataSource = null;
+            bindingSourceAnswers.DataSource = null;
             dataGridViewAnswers.Columns.Clear();
             dataGridViewAnswers.Columns.Add("Answer", "Answer");
             dataGridViewAnswers.Columns.Add("Right", "Is right");
@@ -115,8 +131,10 @@ namespace TestDesigner
             dataGridViewAnswers.Columns[1].Width = 90;
         }
 
-        void FillForm()
+        void FillMainForm()
         {
+            // text boxes
+            IsFileMode = true;
             tbAuthor.Text = currTest.Author;
             tbTitle.Text = currTest.Title;
             tbDescription.Text = currTest.Description;
@@ -125,55 +143,81 @@ namespace TestDesigner
             tbMaxPointsForTest.Text = currTest.Questions.Select(x => x.Points).Sum().ToString();
             pictureBox.Image = SetCurrBitmap();
             numericUpDownMinPass.Value = currTest.PassPercent;
+            IsFileMode = false;
+
+            // DataGridView            
+            FillDataGridViewQuestions(ModeFillDataGrid.OpenOrCreate);
             if (currTest.Questions.Any())
             {
-                FillDataGridViewQuestions();
-                FillDataGridViewAnswers();
+                FillDataGridViewAnswers(ModeFillDataGrid.OpenOrCreate);
             }
             else
             {
-                SetCleanDataGridViewQuestions();
+                //SetCleanDataGridViewQuestions();
                 SetCleanDataGridViewAnswers();
             }
+
+            //Head, footer 
+            WindowTitleText();
+            WindowFuterText();
         }
 
-        void FillDataGridViewQuestions()
+        void FillDataGridViewQuestions(ModeFillDataGrid modeFillDataGrid)
         {
-            //bindingSourceAnswers.DataSource = null;
-            //dataGridViewQuestions.DataSource = null;
-            dataGridViewQuestions.Columns.Clear();
-            //dataGridViewQuestions.DataSource = currTest.Questions;
-            bindingSourceQuestions.DataSource = currTest.Questions;
+            dataGridViewQuestions.SelectionChanged -= new System.EventHandler(this.dataGridViewQuestions_SelectionChanged);
+            {
+                if(modeFillDataGrid == ModeFillDataGrid.OpenOrCreate)
+                {
+                    dataGridViewQuestions.Columns.Clear();
+                    bindingSourceQuestions.DataSource = currTest.Questions;
+                    dataGridViewQuestions.Columns[0].Width = 500;
+                    dataGridViewQuestions.Columns[0].HeaderText = "Question";
+                    dataGridViewQuestions.Columns[1].Width = 90;
+                    dataGridViewQuestions.Columns[1].HeaderText = "Point";
+                    dataGridViewQuestions.Columns[2].Visible = false;
+                }
+                bindingSourceQuestions.ResetBindings(false);
 
-            dataGridViewQuestions.Columns[0].Width = 500;
-            dataGridViewQuestions.Columns[0].HeaderText = "Question";
-            dataGridViewQuestions.Columns[1].Width = 90;
-            dataGridViewQuestions.Columns[1].HeaderText = "Point";
-            dataGridViewQuestions.Columns[2].Visible = false;
+                if(currTest.Questions.Any())
+                {
+                    int pos = currQuestion == null ? 0 : currTest.Questions.LastIndexOf(currQuestion);
+                    currQuestion = currTest.Questions[pos];
+                    dataGridViewQuestions.Rows[pos].Selected = true;
+                    FillDataGridViewAnswers(ModeFillDataGrid.AddOrEdit);
+                    pictureBox.Image = SetCurrBitmap();
+                }
 
-            //dataGridViewQuestions.ClearSelection();
-            currQuestion = currQuestion ?? currTest.Questions[0];
-            var equalRow = dataGridViewQuestions.Rows
-                .Cast<DataGridViewRow>()
-                .Where(x => (x.DataBoundItem as Question).Equals(currQuestion))
-                .FirstOrDefault();
+            }
+            dataGridViewQuestions.SelectionChanged += new System.EventHandler(this.dataGridViewQuestions_SelectionChanged);
 
-            dataGridViewQuestions.Rows[equalRow.Index].Selected = true;
+            toolStripButtonAddByCopy.Enabled = true;
+            toolStripButtonEdit.Enabled = true;
+            toolStripButtonDelete.Enabled = true;
+
+
+
+            //var equalRow = dataGridViewQuestions.Rows
+            //    .Cast<DataGridViewRow>()
+            //    .Where(x => (x.DataBoundItem as Question).Equals(currQuestion))
+            //    .FirstOrDefault();
+
 
         }
 
-        void FillDataGridViewAnswers()
+        void FillDataGridViewAnswers(ModeFillDataGrid modeFillDataGrid)
         {
-            dataGridViewAnswers.Columns.Clear();
-            dataGridViewAnswers.DataSource = null;
-            dataGridViewAnswers.DataSource = currQuestion.Answers;
-            dataGridViewAnswers.Columns[0].Width = 290;
-            dataGridViewAnswers.Columns[0].HeaderText = "Answer";
-            dataGridViewAnswers.Columns[1].Width = 90;
-            dataGridViewAnswers.Columns[1].HeaderText = "Is right";
+            if (modeFillDataGrid == ModeFillDataGrid.OpenOrCreate)
+            {
+                dataGridViewAnswers.Columns.Clear();
+                bindingSourceAnswers.DataSource = currQuestion.Answers;
+                dataGridViewAnswers.Columns[0].Width = 290;
+                dataGridViewAnswers.Columns[0].HeaderText = "Answer";
+                dataGridViewAnswers.Columns[1].Width = 90;
+                dataGridViewAnswers.Columns[1].HeaderText = "Is right";
+            }
+            bindingSourceAnswers.ResetBindings(false);
+            dataGridViewAnswers.ClearSelection();
         }
-
-
 
         // Request to save the test
         bool СonfirmedActionWithDialogs()
@@ -188,7 +232,6 @@ namespace TestDesigner
                 if (dialog == DialogResult.Cancel || dialog == DialogResult.Yes && !SaveTest())
                     return false;
             }
-            IsTestChanged = false;
             return true;
         }
 
@@ -198,11 +241,10 @@ namespace TestDesigner
             currTest = new Test();
             currQuestion = null;
             currFilePath = String.Empty;
-            SetCleanMainForm();
             IsTestChanged = false;
-            WindowTitleText();
-            WindowFuterText();
-            tbTitle.Select();
+
+            //GUI
+            SetCleanMainForm();
         }
 
         // Open Test
@@ -224,11 +266,12 @@ namespace TestDesigner
             {
                 throw ex;
             }
-
-            FillForm();
             IsTestChanged = false;
-            WindowTitleText();
-            WindowFuterText();
+            currQuestion = null;
+
+            // Gui
+            FillMainForm();
+
             return true;
         }
 
@@ -289,11 +332,12 @@ namespace TestDesigner
             string second = currFilePath == string.Empty? "Untitled" : Path.GetFileName(currFilePath);
             string third = " - Test constructor";
             this.Text = new StringBuilder(first + second + third).ToString();
+            this.Refresh();
         }
 
         void WindowFuterText()
         {
-            toolStripStatusLabel1.Text = currFilePath == string.Empty? "Current Test not saved yet..." : currFilePath;
+            toolStripStatusLabel1.Text = (currFilePath == string.Empty)? "Current Test not saved yet..." : currFilePath;
         }
 
         string NameGenerator(NameType nameType)
@@ -305,8 +349,11 @@ namespace TestDesigner
 
         private void tbTitle_TextChanged(object sender, EventArgs e)
         {
-            IsTestChanged = true;
-            WindowTitleText();
+            if(!IsFileMode)
+            {
+                IsTestChanged = true;
+                WindowTitleText();
+            }
         }
 
         //Modify questions
@@ -317,13 +364,25 @@ namespace TestDesigner
             ModifyForm modifyForm = new ModifyForm(Mode.Add);
             if (modifyForm.ShowDialog() == DialogResult.OK)
             {
-                currTest.Questions.Add(currQuestion = modifyForm.CurrQuestion);
-                FillDataGridViewQuestions();
+                currQuestion = modifyForm.CurrQuestion;
+                currTest.Questions.Add(currQuestion);
+                FillDataGridViewQuestions(ModeFillDataGrid.AddOrEdit);
                 IsTestChanged = true;
                 WindowTitleText();
-                WindowFuterText();
             }
         }
+
+        //AddByCope
+        private void toolStripButtonAddByCopy_Click(object sender, EventArgs e)
+        {
+            currQuestion = dataGridViewQuestions.CurrentRow.DataBoundItem as Question;
+            currTest.Questions.Add(new Question(currQuestion));
+            FillDataGridViewQuestions(ModeFillDataGrid.AddOrEdit);
+            //FillDataGridViewAnswers(ModeFillDataGrid.AddOrEdit);
+            IsTestChanged = true;
+            WindowTitleText();
+        }
+
         //Edit
         private void toolStripButtonEdit_Click(object sender, EventArgs e)
         {
@@ -331,12 +390,25 @@ namespace TestDesigner
             if (modifyForm.ShowDialog() == DialogResult.OK)
             {
                 currTest.Questions[currTest.Questions.IndexOf(currQuestion)] = modifyForm.CurrQuestion;
-                FillDataGridViewQuestions();
-                FillDataGridViewAnswers();
+                FillDataGridViewQuestions(ModeFillDataGrid.AddOrEdit);
+                //FillDataGridViewAnswers(ModeFillDataGrid.AddOrEdit);
                 IsTestChanged = true;
                 WindowTitleText();
             }
         }
+
+        // Delete
+        private void toolStripButtonDelete_Click(object sender, EventArgs e)
+        {
+            currTest.Questions.Remove(currQuestion);
+            currQuestion = null;
+            FillDataGridViewQuestions(ModeFillDataGrid.AddOrEdit);
+
+            IsTestChanged = true;
+            WindowTitleText();
+        }
+
+
 
         Bitmap SetCurrBitmap()
         {
@@ -345,43 +417,17 @@ namespace TestDesigner
             return noPhotoBitmap;
         }
 
-        private void toolStripButtonAddByCopy_Click(object sender, EventArgs e)
-        {
-            currQuestion = dataGridViewQuestions.CurrentRow.DataBoundItem as Question;
-            currTest.Questions.Add(new Question(currQuestion));
-            FillDataGridViewQuestions();
-            FillDataGridViewAnswers();
-            IsTestChanged = true;
-            WindowTitleText();
-        }
 
-        private void dataGridViewQuestions_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            currQuestion = dataGridViewQuestions.CurrentRow.DataBoundItem as Question;
-        }
 
         private void dataGridViewQuestions_SelectionChanged(object sender, EventArgs e)
         {
-            if (dataGridViewQuestions.DataSource == null)
-                return;
-
+            //if (dataGridViewQuestions.SelectedRows.Count == 0)
+            //    return;
             currQuestion = dataGridViewQuestions.CurrentRow.DataBoundItem as Question;
             pictureBox.Image = SetCurrBitmap();
-            FillDataGridViewAnswers();
-
-            if (dataGridViewQuestions.SelectedRows.Count == 0)
-            {
-                toolStripButtonAddByCopy.Enabled = false;
-                toolStripButtonEdit.Enabled = false;
-                toolStripButtonDelete.Enabled = false;
-                //currQuestion = null;
-            }
-            else
-            {
-                toolStripButtonAddByCopy.Enabled = true;
-                toolStripButtonEdit.Enabled = true;
-                toolStripButtonDelete.Enabled = true;
-            }
+            FillDataGridViewAnswers(ModeFillDataGrid.AddOrEdit);
         }
+
+
     }
 }

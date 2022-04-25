@@ -219,5 +219,10 @@ namespace TestDesigner
             currBitmap = null;
             pictureBox.Image = noPhotoBitmap;
         }
+
+        private void toolStripButtonAdd_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

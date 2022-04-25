@@ -45,6 +45,7 @@
             this.toolStripButtonAdd = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonEdit = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonDelete = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonAddByCopy = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAnswers)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPoints)).BeginInit();
@@ -180,12 +181,13 @@
             this.toolStrip1.Dock = System.Windows.Forms.DockStyle.None;
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripButtonAdd,
+            this.toolStripButtonAddByCopy,
             this.toolStripButtonEdit,
             this.toolStripButtonDelete});
             this.toolStrip1.Location = new System.Drawing.Point(321, 68);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.toolStrip1.Size = new System.Drawing.Size(81, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(135, 25);
             this.toolStrip1.TabIndex = 29;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -197,6 +199,7 @@
             this.toolStripButtonAdd.Name = "toolStripButtonAdd";
             this.toolStripButtonAdd.Size = new System.Drawing.Size(23, 22);
             this.toolStripButtonAdd.ToolTipText = "Add answer";
+            this.toolStripButtonAdd.Click += new System.EventHandler(this.toolStripButtonAdd_Click);
             // 
             // toolStripButtonEdit
             // 
@@ -215,6 +218,15 @@
             this.toolStripButtonDelete.Name = "toolStripButtonDelete";
             this.toolStripButtonDelete.Size = new System.Drawing.Size(23, 22);
             this.toolStripButtonDelete.ToolTipText = "Delete answer";
+            // 
+            // toolStripButtonAddByCopy
+            // 
+            this.toolStripButtonAddByCopy.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonAddByCopy.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonAddByCopy.Image")));
+            this.toolStripButtonAddByCopy.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonAddByCopy.Name = "toolStripButtonAddByCopy";
+            this.toolStripButtonAddByCopy.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonAddByCopy.ToolTipText = "Add answer by copy";
             // 
             // ModifyForm
             // 
@@ -265,5 +277,6 @@
         private System.Windows.Forms.ToolStripButton toolStripButtonAdd;
         private System.Windows.Forms.ToolStripButton toolStripButtonEdit;
         private System.Windows.Forms.ToolStripButton toolStripButtonDelete;
+        private System.Windows.Forms.ToolStripButton toolStripButtonAddByCopy;
     }
 }

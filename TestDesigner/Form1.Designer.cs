@@ -57,12 +57,8 @@
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButtonDelete = new System.Windows.Forms.ToolStripButton();
             this.dataGridViewAnswers = new System.Windows.Forms.DataGridView();
-            this.Answer = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Right = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pictureBox = new System.Windows.Forms.PictureBox();
             this.dataGridViewQuestions = new System.Windows.Forms.DataGridView();
-            this.Question = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Point = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.openFileDialogTest = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialogTest = new System.Windows.Forms.SaveFileDialog();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
@@ -296,7 +292,7 @@
             this.toolStrip2.Location = new System.Drawing.Point(16, 21);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.toolStrip2.Size = new System.Drawing.Size(116, 25);
+            this.toolStrip2.Size = new System.Drawing.Size(147, 25);
             this.toolStrip2.TabIndex = 30;
             this.toolStrip2.Text = "toolStrip2";
             // 
@@ -355,15 +351,13 @@
             this.toolStripButtonDelete.Size = new System.Drawing.Size(23, 22);
             this.toolStripButtonDelete.Text = "Delete question";
             this.toolStripButtonDelete.ToolTipText = "Delete question";
+            this.toolStripButtonDelete.Click += new System.EventHandler(this.toolStripButtonDelete_Click);
             // 
             // dataGridViewAnswers
             // 
             this.dataGridViewAnswers.AllowUserToAddRows = false;
             this.dataGridViewAnswers.AllowUserToDeleteRows = false;
             this.dataGridViewAnswers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewAnswers.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Answer,
-            this.Right});
             this.dataGridViewAnswers.Location = new System.Drawing.Point(226, 287);
             this.dataGridViewAnswers.MultiSelect = false;
             this.dataGridViewAnswers.Name = "dataGridViewAnswers";
@@ -371,20 +365,6 @@
             this.dataGridViewAnswers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewAnswers.Size = new System.Drawing.Size(447, 196);
             this.dataGridViewAnswers.TabIndex = 5;
-            // 
-            // Answer
-            // 
-            this.Answer.HeaderText = "Answer";
-            this.Answer.Name = "Answer";
-            this.Answer.ReadOnly = true;
-            this.Answer.Width = 290;
-            // 
-            // Right
-            // 
-            this.Right.HeaderText = "Is right";
-            this.Right.Name = "Right";
-            this.Right.ReadOnly = true;
-            this.Right.Width = 90;
             // 
             // pictureBox
             // 
@@ -403,9 +383,6 @@
             this.dataGridViewQuestions.AllowUserToAddRows = false;
             this.dataGridViewQuestions.AllowUserToDeleteRows = false;
             this.dataGridViewQuestions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewQuestions.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Question,
-            this.Point});
             this.dataGridViewQuestions.Location = new System.Drawing.Point(16, 49);
             this.dataGridViewQuestions.MultiSelect = false;
             this.dataGridViewQuestions.Name = "dataGridViewQuestions";
@@ -413,22 +390,7 @@
             this.dataGridViewQuestions.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewQuestions.Size = new System.Drawing.Size(657, 225);
             this.dataGridViewQuestions.TabIndex = 3;
-            this.dataGridViewQuestions.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewQuestions_CellClick);
             this.dataGridViewQuestions.SelectionChanged += new System.EventHandler(this.dataGridViewQuestions_SelectionChanged);
-            // 
-            // Question
-            // 
-            this.Question.HeaderText = "Question";
-            this.Question.Name = "Question";
-            this.Question.ReadOnly = true;
-            this.Question.Width = 500;
-            // 
-            // Point
-            // 
-            this.Point.HeaderText = "Point";
-            this.Point.Name = "Point";
-            this.Point.ReadOnly = true;
-            this.Point.Width = 90;
             // 
             // toolStrip1
             // 
@@ -556,8 +518,6 @@
         private System.Windows.Forms.DataGridView dataGridViewAnswers;
         private System.Windows.Forms.OpenFileDialog openFileDialogTest;
         private System.Windows.Forms.SaveFileDialog saveFileDialogTest;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Question;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Point;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton newToolStripButton;
         private System.Windows.Forms.ToolStripButton openToolStripButton;
@@ -565,8 +525,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton exitStripButton;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Answer;
-        private new System.Windows.Forms.DataGridViewTextBoxColumn Right;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.ToolStrip toolStrip2;
         private System.Windows.Forms.ToolStripButton toolStripButtonAdd;
