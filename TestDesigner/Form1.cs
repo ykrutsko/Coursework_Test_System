@@ -14,7 +14,6 @@ using TestLib;
 
 namespace TestDesigner
 {
-
     public partial class MainForm : Form
     {
         string currFilePath = string.Empty;
@@ -44,7 +43,7 @@ namespace TestDesigner
 
         // Main menu
         //---------------------------------------------------------------------
-        // New
+        // New Test
         private void newToolStripButton_Click(object sender, EventArgs e)
         {
             if(СonfirmedActionWithDialogs())
@@ -70,8 +69,6 @@ namespace TestDesigner
             if (СonfirmedActionWithDialogs())
                 Application.Exit();
         }
-        //---------------------------------------------------------------------
-
 
         // Helpfull
         //---------------------------------------------------------------------
@@ -100,8 +97,6 @@ namespace TestDesigner
             WindowFuterText();
             tbTitle.Select();
         }
-
-
         void SetCleanDataGridViewAnswers()
         {
             bindingSourceAnswers.DataSource = null;
@@ -120,26 +115,19 @@ namespace TestDesigner
             tbTitle.Text = currTest.Title;
             tbDescription.Text = currTest.Description;
             tbInfo.Text = currTest.Info;
-            tbCountOfQuestions.Text = currTest.Questions.Count.ToString();
-            tbMaxPointsForTest.Text = currTest.Questions.Select(x => x.Points).Sum().ToString();
             pictureBox.Image = SetCurrBitmap();
             numericUpDownMinPass.Value = currTest.PassPercent;
             IsFileMode = false;
 
             // DataGridView            
             FillDataGridViewQuestions(ModeFillDataGrid.New);
-            if (currTest.Questions.Any())
-            {
-                FillDataGridViewAnswers(ModeFillDataGrid.New);
-            }
-            else
-            {
-                SetCleanDataGridViewAnswers();
-            }
+            FillDataGridViewAnswers();
 
             //Head, footer 
             WindowTitleText();
             WindowFuterText();
+
+            tbTitle.Select();
         }
 
         void FillDataGridViewQuestions(ModeFillDataGrid modeFillDataGrid)
@@ -149,6 +137,7 @@ namespace TestDesigner
                 if(modeFillDataGrid == ModeFillDataGrid.New)
                 {
                     dataGridViewQuestions.Columns.Clear();
+                    bindingSourceQuestions.DataSource = null;
                     bindingSourceQuestions.DataSource = currTest.Questions;
                     dataGridViewQuestions.Columns[0].Width = 500;
                     dataGridViewQuestions.Columns[0].HeaderText = "Question";
@@ -158,15 +147,23 @@ namespace TestDesigner
                 }
                 bindingSourceQuestions.ResetBindings(false);
 
-                if(currTest.Questions.Any())
+                if (currTest.Questions.Any())
                 {
-                    int pos = currQuestion == null ? 0 : currTest.Questions.IndexOf(currTest.Questions.Where(x => ReferenceEquals(x, currQuestion)).FirstOrDefault());
-                    currQuestion = currTest.Questions[pos];
-                    dataGridViewQuestions.Rows[pos].Selected = true;                    
+                    int pos = 0;
+                    if(currQuestion == null)
+                    {
+                        currQuestion = currTest.Questions[pos];
+                    }
+                    else
+                    {
+                        pos = currTest.Questions.IndexOf(currQuestion);
+                    }                      
+                    dataGridViewQuestions.Rows[pos].Selected = true;
 
                     toolStripButtonAddByCopy.Enabled = true;
                     toolStripButtonEdit.Enabled = true;
                     toolStripButtonDelete.Enabled = true;
+                    UpDownEnableDisable();                    
                 }
                 else
                 {
@@ -175,33 +172,33 @@ namespace TestDesigner
                     toolStripButtonAddByCopy.Enabled = false;
                     toolStripButtonEdit.Enabled = false;
                     toolStripButtonDelete.Enabled = false;
+                    toolStripButtonUp.Enabled = false;
+                    toolStripButtonDown.Enabled = false;
+
                 }
                 pictureBox.Image = SetCurrBitmap();
                 pictureBox.Refresh();
 
             }
             dataGridViewQuestions.SelectionChanged += new System.EventHandler(this.dataGridViewQuestions_SelectionChanged);
-
-
-            //var equalRow = dataGridViewQuestions.Rows
-            //    .Cast<DataGridViewRow>()
-            //    .Where(x => (x.DataBoundItem as Question).Equals(currQuestion))
-            //    .FirstOrDefault();
-
-
+            tbCountOfQuestions.Text = currTest.Questions.Count.ToString();
+            tbMaxPointsForTest.Text = currTest.Questions.Select(x => x.Points).Sum().ToString();
         }
 
-        void FillDataGridViewAnswers(ModeFillDataGrid modeFillDataGrid)
+        void FillDataGridViewAnswers()
         {
-            if (modeFillDataGrid == ModeFillDataGrid.New)
+            if(currQuestion == null)
             {
-                dataGridViewAnswers.Columns.Clear();
-                bindingSourceAnswers.DataSource = currQuestion.Answers;
-                dataGridViewAnswers.Columns[0].Width = 290;
-                dataGridViewAnswers.Columns[0].HeaderText = "Answer";
-                dataGridViewAnswers.Columns[1].Width = 90;
-                dataGridViewAnswers.Columns[1].HeaderText = "Is right";
+                SetCleanDataGridViewAnswers();
+                return;
             }
+            dataGridViewAnswers.Columns.Clear();
+            bindingSourceAnswers.DataSource = currQuestion.Answers;
+            dataGridViewAnswers.Columns[0].Width = 290;
+            dataGridViewAnswers.Columns[0].HeaderText = "Answer";
+            dataGridViewAnswers.Columns[1].Width = 90;
+            dataGridViewAnswers.Columns[1].HeaderText = "Is right";
+
             bindingSourceAnswers.ResetBindings(false);
             dataGridViewAnswers.ClearSelection();
         }
@@ -344,64 +341,89 @@ namespace TestDesigner
         }
 
         //Modify questions
-
+        //---------------------------------------------------------------------
         // Add
         private void toolStripButtonAdd_Click(object sender, EventArgs e)
         {
-            ModifyForm modifyForm = new ModifyForm(Mode.Add);
+            QuestionForm modifyForm = new QuestionForm(Mode.Add);
             if (modifyForm.ShowDialog() == DialogResult.OK)
             {
                 currQuestion = modifyForm.CurrQuestion;
                 currTest.Questions.Add(currQuestion);
                 FillDataGridViewQuestions(ModeFillDataGrid.Edit);
-                FillDataGridViewAnswers(ModeFillDataGrid.Edit);
+                FillDataGridViewAnswers();
                 IsTestChanged = true;
                 WindowTitleText();
             }
         }
 
-        //AddByCopy
+        //AddByCopy question
         private void toolStripButtonAddByCopy_Click(object sender, EventArgs e)
         {
-            //ModifyForm modifyForm = new ModifyForm(Mode.Add, currQuestion.Clone() as Question);
-            ModifyForm modifyForm = new ModifyForm(Mode.AddByCopy, in currQuestion);
+            QuestionForm modifyForm = new QuestionForm(Mode.AddByCopy, currQuestion.Clone() as Question);
             if (modifyForm.ShowDialog() == DialogResult.OK)
             {
                 currQuestion = modifyForm.CurrQuestion;
                 currTest.Questions.Add(currQuestion);
                 FillDataGridViewQuestions(ModeFillDataGrid.Edit);
-                FillDataGridViewAnswers(ModeFillDataGrid.Edit);
+                FillDataGridViewAnswers();
                 IsTestChanged = true;
                 WindowTitleText();
             }
         }
 
-        //Edit
+        //Edit question
         private void toolStripButtonEdit_Click(object sender, EventArgs e)
         {
-            ModifyForm modifyForm = new ModifyForm(Mode.Edit, currQuestion.Clone() as Question);
+            QuestionForm modifyForm = new QuestionForm(Mode.Edit, currQuestion.Clone() as Question);
             if (modifyForm.ShowDialog() == DialogResult.OK)
             {
-                int pos = currTest.Questions.IndexOf(currTest.Questions.Where(x => ReferenceEquals(x, currQuestion)).FirstOrDefault());
+                int pos = currTest.Questions.IndexOf(currQuestion);
                 currQuestion = currTest.Questions[pos] = modifyForm.CurrQuestion;
+
                 FillDataGridViewQuestions(ModeFillDataGrid.Edit);
-                FillDataGridViewAnswers(ModeFillDataGrid.Edit);
+                FillDataGridViewAnswers();
                 IsTestChanged = true;
                 WindowTitleText();
             }
         }
 
-        // Delete
+        // Delete question
         private void toolStripButtonDelete_Click(object sender, EventArgs e)
         {
-            currTest.Questions.Remove(currQuestion);
-            currQuestion = null;
+            if (MessageBox.Show(
+                "Delete this question?",
+                "Test constructor",
+                MessageBoxButtons.OKCancel,
+                MessageBoxIcon.Question) != DialogResult.OK) return;
+
+            int pos = currTest.Questions.IndexOf(currQuestion);
+            int newPos = (pos == currTest.Questions.Count - 1) ? pos - 1 : pos;
+
+            currTest.Questions.RemoveAt(pos);
+            currQuestion = currTest.Questions.Any() ? currTest.Questions[newPos] : null;
+
             FillDataGridViewQuestions(ModeFillDataGrid.Edit);
+            FillDataGridViewAnswers();
             IsTestChanged = true;
             WindowTitleText();
         }
 
+        // Question Up
+        private void toolStripButtonUp_Click(object sender, EventArgs e)
+        {
+            int pos = currTest.Questions.IndexOf(currQuestion);
+            (currTest.Questions[pos], currTest.Questions[pos - 1]) = (currTest.Questions[pos - 1], currTest.Questions[pos]);
+            FillDataGridViewQuestions(ModeFillDataGrid.Edit);
+        }
 
+        //Question down
+        private void toolStripButtonDown_Click(object sender, EventArgs e)
+        {
+            int pos = currTest.Questions.IndexOf(currQuestion);
+            (currTest.Questions[pos], currTest.Questions[pos + 1]) = (currTest.Questions[pos + 1], currTest.Questions[pos]);
+            FillDataGridViewQuestions(ModeFillDataGrid.Edit);
+        }
 
         Bitmap SetCurrBitmap()
         {
@@ -410,19 +432,50 @@ namespace TestDesigner
             return noPhotoBitmap;
         }
 
-
-
+        // Change selected row in grid
         private void dataGridViewQuestions_SelectionChanged(object sender, EventArgs e)
         {
             if (dataGridViewQuestions.SelectedRows.Count == 0)
                 return;
-
             currQuestion = dataGridViewQuestions.CurrentRow.DataBoundItem as Question;
-
+            UpDownEnableDisable();
             pictureBox.Image = SetCurrBitmap();
-            FillDataGridViewAnswers(ModeFillDataGrid.Edit);
+            FillDataGridViewAnswers();
         }
 
+        private void dataGridViewQuestions_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if(e.RowIndex >= 0)
+                toolStripButtonEdit_Click(sender, e);
+        }
 
+        // UpDown key Enable / Disable
+        void UpDownEnableDisable()
+        {
+            if (currQuestion == null)
+                return;
+
+            int pos = currTest.Questions.IndexOf(currQuestion);
+            if (currTest.Questions.Count == 1)
+            {
+                toolStripButtonUp.Enabled = false;
+                toolStripButtonDown.Enabled = false;
+            }
+            else if (pos == 0)
+            {
+                toolStripButtonUp.Enabled = false;
+                toolStripButtonDown.Enabled = true;
+            }
+            else if (pos == currTest.Questions.Count - 1)
+            {
+                toolStripButtonUp.Enabled = true;
+                toolStripButtonDown.Enabled = false;
+            }
+            else
+            {
+                toolStripButtonUp.Enabled = true;
+                toolStripButtonDown.Enabled = true;
+            }
+        }
     }
 }

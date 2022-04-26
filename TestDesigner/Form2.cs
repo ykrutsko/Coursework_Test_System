@@ -6,69 +6,52 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using TestDesigner.Properties;
 using TestLib;
 
-
-// tmpS = dataGridView1.CurrentRow.DataBoundItem as S;
-
 namespace TestDesigner
 {
-    public partial class ModifyForm : Form
+    public partial class QuestionForm : Form
     {
         Mode mode;
         Answer currAnswer;
         Bitmap currBitmap;
         public Question CurrQuestion { get; set; }
         Bitmap noPhotoBitmap = new Bitmap(Resources.nophoto);
+        bool IsQuestionChanged = false;
+        bool IsOpenMode = false;
 
         // Add ctor
-        public ModifyForm(Mode mode)
+        public QuestionForm(Mode mode)
         {
             this.mode = mode;
             CurrQuestion = new Question();
             CurrQuestion.Answers = new List<Answer>();
             InitializeComponent();
         }
-        // Add byCopy ctor
-        public ModifyForm(Mode mode, in Question question)
-        {
-            this.mode = mode;
-            CurrQuestion = question.Clone() as Question;
-            InitializeComponent();
 
-        }
-        // Edit ctor
-        public ModifyForm(Mode mode, Question question)
+        // Edit, AddByCopy ctor
+        public QuestionForm(Mode mode, Question question)
         {
             this.mode = mode;
             CurrQuestion = question;
             InitializeComponent();
-
         }
 
         private void ModifyForm_Load(object sender, EventArgs e)
-        {
-            switch(mode)
-            {
-                case Mode.Add:
-                    Text = "Questions [Add mode]";
-                    break;
-                case Mode.AddByCopy:
-                    Text = "Questions [Add by copy mode]";
-                    break;
-                case Mode.Edit:
-                    Text = "Questions [Edit mode]";
-                    break;
-            }
-            dataGridViewAnswers.DataSource = bindingSourceAnswers;
+        {            
             FillForm();
         }
 
         void FillForm()
         {
+            if(mode == Mode.AddByCopy)
+                QuestionChanged();
+            IsOpenMode = true;
+
             tbQuestion.Text = CurrQuestion.QuestionText;
             if(CurrQuestion.Img.Any())
             {
@@ -82,33 +65,41 @@ namespace TestDesigner
             }
             numericUpDownPoints.Value = CurrQuestion.Points;
 
-            FillDataGridViewAnswers(ModeFillDataGrid.New);
+            dataGridViewAnswers.DataSource = bindingSourceAnswers;
+            dataGridViewAnswers.Columns.Clear();
+            bindingSourceAnswers.DataSource = CurrQuestion.Answers;
+            dataGridViewAnswers.Columns[0].Width = 290;
+            dataGridViewAnswers.Columns[0].HeaderText = "Answer";
+            dataGridViewAnswers.Columns[1].Width = 90;
+            dataGridViewAnswers.Columns[1].HeaderText = "Is right";
+
+            FillDataGridViewAnswers();
+            IsOpenMode = false;
         }
 
-        void FillDataGridViewAnswers(ModeFillDataGrid modeFillDataGrid)
+        void FillDataGridViewAnswers()
         {
             dataGridViewAnswers.SelectionChanged -= new System.EventHandler(this.dataGridViewAnswers_SelectionChanged);
             {
-                if (modeFillDataGrid == ModeFillDataGrid.New)
-                {
-                    dataGridViewAnswers.Columns.Clear();
-                    bindingSourceAnswers.DataSource = CurrQuestion.Answers;
-                    dataGridViewAnswers.Columns[0].Width = 290;
-                    dataGridViewAnswers.Columns[0].HeaderText = "Answer";
-                    dataGridViewAnswers.Columns[1].Width = 90;
-                    dataGridViewAnswers.Columns[1].HeaderText = "Is right";
-                }
                 bindingSourceAnswers.ResetBindings(false);
 
                 if (CurrQuestion.Answers.Any())
                 {
-                    int pos = currAnswer == null ? 0 : CurrQuestion.Answers.IndexOf(CurrQuestion.Answers.Where(x => ReferenceEquals(x, currAnswer)).FirstOrDefault());
-                    currAnswer = CurrQuestion.Answers[pos];
+                    int pos = 0;
+                    if (currAnswer == null)
+                    {
+                        currAnswer = CurrQuestion.Answers[pos];
+                    }
+                    else
+                    {
+                        pos = CurrQuestion.Answers.IndexOf(currAnswer);
+                    }
                     dataGridViewAnswers.Rows[pos].Selected = true;
 
                     toolStripButtonAddByCopy.Enabled = true;
                     toolStripButtonEdit.Enabled = true;
                     toolStripButtonDelete.Enabled = true;
+                    UpDownEnableDisable();
                 }
                 else
                 {
@@ -117,28 +108,116 @@ namespace TestDesigner
                     toolStripButtonAddByCopy.Enabled = false;
                     toolStripButtonEdit.Enabled = false;
                     toolStripButtonDelete.Enabled = false;
+                    toolStripButtonUp.Enabled = false;
+                    toolStripButtonDown.Enabled = false;
                 }
             }
             dataGridViewAnswers.SelectionChanged += new System.EventHandler(this.dataGridViewAnswers_SelectionChanged);
         }
 
-
-        private void btnOk_Click(object sender, EventArgs e)
+        // DGV Selection change
+        private void dataGridViewAnswers_SelectionChanged(object sender, EventArgs e)
         {
-            CurrQuestion.QuestionText = tbQuestion.Text;
-            CurrQuestion.Points = (int)numericUpDownPoints.Value;
-            CurrQuestion.Img = (currBitmap == null) ? String.Empty : ImgConverter.BitmapToBase64String(currBitmap);
+            if (dataGridViewAnswers.SelectedRows.Count == 0)
+                return;
+
+            currAnswer = dataGridViewAnswers.CurrentRow.DataBoundItem as Answer;
+            UpDownEnableDisable();
         }
 
+        // Add answer
+        private void toolStripButtonAdd_Click(object sender, EventArgs e)
+        {
+            AnswerForm answerForm = new AnswerForm(Mode.Add);
+            if (answerForm.ShowDialog() == DialogResult.OK)
+            {
+                currAnswer = answerForm.CurrAnswer;
+                CurrQuestion.Answers.Add(currAnswer);
+                FillDataGridViewAnswers();
+                QuestionChanged();
+            }
+        }
+
+        //Add answer by copy
+        private void toolStripButtonAddByCopy_Click(object sender, EventArgs e)
+        {
+            AnswerForm answerForm = new AnswerForm(Mode.AddByCopy, currAnswer.Clone() as Answer);
+            if (answerForm.ShowDialog() == DialogResult.OK)
+            {
+                currAnswer = answerForm.CurrAnswer;
+                CurrQuestion.Answers.Add(currAnswer);
+                FillDataGridViewAnswers();
+                QuestionChanged();
+            }
+        }
+
+        // Edit answer
+        private void toolStripButtonEdit_Click(object sender, EventArgs e)
+        {
+            AnswerForm answerForm = new AnswerForm(Mode.Edit, currAnswer.Clone() as Answer);
+            if (answerForm.ShowDialog() == DialogResult.OK)
+            {
+                int pos = CurrQuestion.Answers.IndexOf(currAnswer);
+                currAnswer = CurrQuestion.Answers[pos] = answerForm.CurrAnswer;
+                FillDataGridViewAnswers();
+                QuestionChanged();
+            }
+        }
+
+        // Cell double click is edit mode
+        private void dataGridViewAnswers_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+                toolStripButtonEdit_Click(sender, e);
+        }
+
+        // Move answer Up
+        private void toolStripButtonUp_Click(object sender, EventArgs e)
+        {
+            int pos = CurrQuestion.Answers.IndexOf(currAnswer);
+            (CurrQuestion.Answers[pos], CurrQuestion.Answers[pos - 1]) = (CurrQuestion.Answers[pos - 1], CurrQuestion.Answers[pos]);
+            FillDataGridViewAnswers();
+        }
+
+        // Move answer down
+        private void toolStripButtonDown_Click(object sender, EventArgs e)
+        {
+            int pos = CurrQuestion.Answers.IndexOf(currAnswer);
+            (CurrQuestion.Answers[pos], CurrQuestion.Answers[pos + 1]) = (CurrQuestion.Answers[pos + 1], CurrQuestion.Answers[pos]);
+            FillDataGridViewAnswers();
+        }
+
+        // Delete answer
+        private void toolStripButtonDelete_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show(
+                "Delete this answer?",
+                "Test constructor",
+                MessageBoxButtons.OKCancel,
+                MessageBoxIcon.Question) != DialogResult.OK) return;
+
+            int pos = CurrQuestion.Answers.IndexOf(currAnswer);
+            int newPos = (pos == CurrQuestion.Answers.Count - 1) ? pos - 1 : pos;
+
+            CurrQuestion.Answers.RemoveAt(pos);
+            currAnswer = CurrQuestion.Answers.Any() ? CurrQuestion.Answers[newPos] : null;
+
+            FillDataGridViewAnswers();
+            QuestionChanged();
+        }
 
         private void tbQuestion_TextChanged(object sender, EventArgs e)
         {
-            if(!tbQuestion.Text.Any())
-                btnOk.Enabled = false;
-            else
-                btnOk.Enabled = true;
+            btnOk.Enabled = !string.IsNullOrEmpty(tbQuestion.Text);
+            if(!IsOpenMode)
+                QuestionChanged();
         }
 
+        private void numericUpDownPoints_ValueChanged(object sender, EventArgs e)
+        {
+            if (!IsOpenMode)
+                QuestionChanged();
+        }
 
         // Load image
         private void pictureBox_Click(object sender, EventArgs e)
@@ -159,6 +238,7 @@ namespace TestDesigner
                     throw ex;
                 }
             }
+            QuestionChanged();
         }
 
         // Clear image
@@ -166,11 +246,123 @@ namespace TestDesigner
         {
             currBitmap = null;
             pictureBox.Image = noPhotoBitmap;
+            QuestionChanged();
         }
 
-        private void dataGridViewAnswers_SelectionChanged(object sender, EventArgs e)
+        // OK
+        private void btnOk_Click(object sender, EventArgs e)
         {
+            Save();
+        }
 
+        // Save
+        void Save()
+        {
+            CurrQuestion.QuestionText = tbQuestion.Text;
+            CurrQuestion.Points = (int)numericUpDownPoints.Value;
+            CurrQuestion.Img = (currBitmap == null) ? String.Empty : ImgConverter.BitmapToBase64String(currBitmap);
+            IsQuestionChanged = false;
+        }
+
+        // Form closing
+        private void QuestionForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (IsQuestionChanged)
+            {
+                DialogResult dialogResult = DialogResultOnClickCancel();
+                if (dialogResult == DialogResult.None)
+                    e.Cancel = true;
+                else
+                    this.DialogResult = dialogResult;
+            }
+        }
+
+        // When Cancel or close form
+        DialogResult DialogResultOnClickCancel()
+        {
+            var dialog = MessageBox.Show(
+                "Save changes to current question?",
+                "Test constructor",
+                MessageBoxButtons.YesNoCancel,
+                MessageBoxIcon.Question);
+
+            if (dialog == DialogResult.Yes)
+            {
+                if (!tbQuestion.Text.Any())
+                {
+                    var tmpColor = tbQuestion.BackColor;
+                    tbQuestion.BackColor = Color.YellowGreen;
+                    tbQuestion.Refresh();
+                    Thread.Sleep(1000);
+                    tbQuestion.BackColor = tmpColor;
+                    tbQuestion.Refresh();
+                    tbQuestion.Select();
+                    return DialogResult.None;
+                }
+                Save();
+                return DialogResult.OK;
+            }
+            if (dialog == DialogResult.Cancel)
+                return DialogResult.None;
+            return DialogResult.Cancel;
+        }
+
+        // Form title
+        void WindowTitleText()
+        {
+            string first = IsQuestionChanged ? "*" : string.Empty;
+            string last = string.Empty;
+            switch (mode)
+            {
+                case Mode.Add:
+                    last = "Question [Add mode]";
+                    break;
+                case Mode.AddByCopy:
+                    last = "Question [Add by copy mode]";
+                    break;
+                case Mode.Edit:
+                    last = "Question [Edit mode]";
+                    break;
+            }
+            this.Text = first + last;
+        }
+
+        void QuestionChanged()
+        {
+            if(!IsQuestionChanged)
+            {
+                IsQuestionChanged = true;
+                WindowTitleText();
+            }
+        }
+
+        // UpDown key Enable / Disable
+        void UpDownEnableDisable()
+        {
+            if (currAnswer == null)
+                return;
+
+            int pos = CurrQuestion.Answers.IndexOf(currAnswer);
+            if (CurrQuestion.Answers.Count == 1)
+            {
+                toolStripButtonUp.Enabled = false;
+                toolStripButtonDown.Enabled = false;
+            }
+            else if (pos == 0)
+            {
+                toolStripButtonUp.Enabled = false;
+                toolStripButtonDown.Enabled = true;
+            }
+            else if (pos == CurrQuestion.Answers.Count - 1)
+            {
+                toolStripButtonUp.Enabled = true;
+                toolStripButtonDown.Enabled = false;
+            }
+            else
+            {
+                toolStripButtonUp.Enabled = true;
+                toolStripButtonDown.Enabled = true;
+            }
         }
     }
 }

@@ -1,17 +1,24 @@
 ﻿using System;
+using System.Xml.Serialization;
 
 namespace TestLib
 {
     [Serializable]
     public class Answer : IEquatable<Answer>, ICloneable
     {
+        [XmlIgnore]
+        public Guid guid;
         public string TextAnswer { get; set; }
         public bool IsRight { get; set; }
 
-        public Answer() { }
+        public Answer()
+        { 
+            guid = Guid.NewGuid(); 
+        }
 
         public Answer(string textAnswer, bool isRight)
         {
+            guid = Guid.NewGuid();
             TextAnswer = textAnswer;
             IsRight = isRight;
         }
@@ -19,8 +26,9 @@ namespace TestLib
         public bool Equals(Answer other)
         {
             return other is Answer &&
-                TextAnswer.Equals(other.TextAnswer) && 
-                IsRight.Equals(other.IsRight); 
+                this.guid == other.guid &&
+                this.TextAnswer.Equals(other.TextAnswer) &&
+                this.IsRight.Equals(other.IsRight); 
         }
 
         public object Clone()

@@ -69,6 +69,9 @@
             this.exitStripButton = new System.Windows.Forms.ToolStripButton();
             this.bindingSourceQuestions = new System.Windows.Forms.BindingSource(this.components);
             this.bindingSourceAnswers = new System.Windows.Forms.BindingSource(this.components);
+            this.toolStripButtonUp = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonDown = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMinPass)).BeginInit();
             this.statusStrip.SuspendLayout();
@@ -288,11 +291,14 @@
             this.toolStripSeparator2,
             this.toolStripButtonEdit,
             this.toolStripSeparator3,
+            this.toolStripButtonUp,
+            this.toolStripButtonDown,
+            this.toolStripSeparator4,
             this.toolStripButtonDelete});
             this.toolStrip2.Location = new System.Drawing.Point(16, 21);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.toolStrip2.Size = new System.Drawing.Size(147, 25);
+            this.toolStrip2.Size = new System.Drawing.Size(199, 25);
             this.toolStrip2.TabIndex = 30;
             this.toolStrip2.Text = "toolStrip2";
             // 
@@ -390,6 +396,7 @@
             this.dataGridViewQuestions.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewQuestions.Size = new System.Drawing.Size(657, 225);
             this.dataGridViewQuestions.TabIndex = 3;
+            this.dataGridViewQuestions.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewQuestions_CellDoubleClick);
             this.dataGridViewQuestions.SelectionChanged += new System.EventHandler(this.dataGridViewQuestions_SelectionChanged);
             // 
             // toolStrip1
@@ -458,6 +465,34 @@
             this.exitStripButton.Size = new System.Drawing.Size(34, 24);
             this.exitStripButton.Text = "&Exit";
             this.exitStripButton.Click += new System.EventHandler(this.exitStripButton_Click_1);
+            // 
+            // toolStripButtonUp
+            // 
+            this.toolStripButtonUp.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonUp.Enabled = false;
+            this.toolStripButtonUp.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonUp.Image")));
+            this.toolStripButtonUp.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonUp.Name = "toolStripButtonUp";
+            this.toolStripButtonUp.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonUp.Text = "toolStripButton1";
+            this.toolStripButtonUp.ToolTipText = "Move question Up";
+            this.toolStripButtonUp.Click += new System.EventHandler(this.toolStripButtonUp_Click);
+            // 
+            // toolStripButtonDown
+            // 
+            this.toolStripButtonDown.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonDown.Enabled = false;
+            this.toolStripButtonDown.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonDown.Image")));
+            this.toolStripButtonDown.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonDown.Name = "toolStripButtonDown";
+            this.toolStripButtonDown.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonDown.ToolTipText = "Move question Down";
+            this.toolStripButtonDown.Click += new System.EventHandler(this.toolStripButtonDown_Click);
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
             // 
             // MainForm
             // 
@@ -535,6 +570,9 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.BindingSource bindingSourceQuestions;
         private System.Windows.Forms.BindingSource bindingSourceAnswers;
+        private System.Windows.Forms.ToolStripButton toolStripButtonUp;
+        private System.Windows.Forms.ToolStripButton toolStripButtonDown;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
     }
 }
 
