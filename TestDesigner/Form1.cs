@@ -262,6 +262,7 @@ namespace TestDesigner
         // Save Test
         bool SaveTest()
         {
+            bool isAutoTitle = false;
             if (!tbTitle.Text.Any())
             {
                 var tmpColor = tbTitle.BackColor;
@@ -270,7 +271,8 @@ namespace TestDesigner
                 tbTitle.Refresh();
                 Thread.Sleep(1000);
                 tbTitle.BackColor = tmpColor;
-                tbTitle.Refresh(); 
+                tbTitle.Refresh();
+                isAutoTitle = true;
             }                
 
             if (!currFilePath.Any())
@@ -278,7 +280,14 @@ namespace TestDesigner
                 saveFileDialogTest.Filter = "XML files (*.xml)|*.xml";
                 saveFileDialogTest.FilterIndex = 1;
                 saveFileDialogTest.RestoreDirectory = true;
-                saveFileDialogTest.FileName = NameGenerator(NameType.FileName);
+                if(isAutoTitle)
+                {
+                    saveFileDialogTest.FileName = NameGenerator(NameType.FileNameAuto);
+                }
+                else
+                {
+                    saveFileDialogTest.FileName = NameGenerator(NameType.FileNameTitle);
+                }
 
                 if (saveFileDialogTest.ShowDialog() != DialogResult.OK)
                     return false;
@@ -313,8 +322,8 @@ namespace TestDesigner
         void WindowTitleText()
         {
             string first = IsTestChanged? "*" : string.Empty;
-            string second = currFilePath == string.Empty? "Untitled" : Path.GetFileName(currFilePath);
-            string third = " - Test constructor";
+            string second = currFilePath == string.Empty? "Untitled" : Path.GetFileNameWithoutExtension(currFilePath);
+            string third = " - Test designer";
             this.Text = new StringBuilder(first + second + third).ToString();
             this.Refresh();
         }
@@ -326,9 +335,17 @@ namespace TestDesigner
 
         string NameGenerator(NameType nameType)
         {
-            if(nameType == NameType.FileName)
-                return "Test " + DateTime.Now.ToString("dd-MM-yyyy HH-mm-ss");
-            return "Test " + DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss");
+            switch(nameType)
+            {
+                case NameType.FileNameAuto:
+                    return "Test [" + DateTime.Now.ToString("dd-MM-yyyy HH-mm-ss") + "]";
+                case NameType.FileNameTitle:
+                    return tbTitle.Text + " [" + DateTime.Now.ToString("dd-MM-yyyy HH-mm-ss") + "]";
+                case NameType.TestName:
+                    return "Test [" + DateTime.Now.ToString("dd.MM.yyyy HH:mm:ss") + "]";
+                default:
+                    return string.Empty;
+            }
         }
 
         private void tbTitle_TextChanged(object sender, EventArgs e)
@@ -393,7 +410,7 @@ namespace TestDesigner
         {
             if (MessageBox.Show(
                 "Delete this question?",
-                "Test constructor",
+                "Test designer",
                 MessageBoxButtons.OKCancel,
                 MessageBoxIcon.Question) != DialogResult.OK) return;
 
@@ -430,6 +447,29 @@ namespace TestDesigner
             if (currQuestion != null && currQuestion.Img != String.Empty)
                 return ImgConverter.Base64StringToBitmap(currQuestion.Img);
             return noPhotoBitmap;
+        }
+
+        // Open bitmap in large window
+        private void pictureBox_Click(object sender, EventArgs e)
+        {
+            if (pictureBox.Image == noPhotoBitmap)
+                return;
+            PictureForm pictureForm = new PictureForm(ImgConverter.Base64StringToBitmap(currQuestion.Img));
+            pictureForm.StartPosition = FormStartPosition.CenterParent;
+            pictureForm.FormBorderStyle = FormBorderStyle.FixedSingle;
+            pictureForm.MaximizeBox = false;
+            pictureForm.MinimizeBox = false;
+            pictureForm.ShowDialog();
+
+        }
+
+        // Change cursor on picture box
+        private void pictureBox_MouseMove(object sender, MouseEventArgs e)
+        {
+            if(pictureBox.Image != noPhotoBitmap)
+                Cursor.Current = Cursors.Hand;
+            else
+                Cursor.Current = Cursors.Default;
         }
 
         // Change selected row in grid

@@ -55,6 +55,9 @@
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButtonEdit = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButtonUp = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonDown = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButtonDelete = new System.Windows.Forms.ToolStripButton();
             this.dataGridViewAnswers = new System.Windows.Forms.DataGridView();
             this.pictureBox = new System.Windows.Forms.PictureBox();
@@ -69,9 +72,6 @@
             this.exitStripButton = new System.Windows.Forms.ToolStripButton();
             this.bindingSourceQuestions = new System.Windows.Forms.BindingSource(this.components);
             this.bindingSourceAnswers = new System.Windows.Forms.BindingSource(this.components);
-            this.toolStripButtonUp = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonDown = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMinPass)).BeginInit();
             this.statusStrip.SuspendLayout();
@@ -298,7 +298,7 @@
             this.toolStrip2.Location = new System.Drawing.Point(16, 21);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.toolStrip2.Size = new System.Drawing.Size(199, 25);
+            this.toolStrip2.Size = new System.Drawing.Size(168, 25);
             this.toolStrip2.TabIndex = 30;
             this.toolStrip2.Text = "toolStrip2";
             // 
@@ -347,6 +347,34 @@
             this.toolStripSeparator3.Name = "toolStripSeparator3";
             this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
             // 
+            // toolStripButtonUp
+            // 
+            this.toolStripButtonUp.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonUp.Enabled = false;
+            this.toolStripButtonUp.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonUp.Image")));
+            this.toolStripButtonUp.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonUp.Name = "toolStripButtonUp";
+            this.toolStripButtonUp.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonUp.Text = "toolStripButton1";
+            this.toolStripButtonUp.ToolTipText = "Move question Up";
+            this.toolStripButtonUp.Click += new System.EventHandler(this.toolStripButtonUp_Click);
+            // 
+            // toolStripButtonDown
+            // 
+            this.toolStripButtonDown.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonDown.Enabled = false;
+            this.toolStripButtonDown.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonDown.Image")));
+            this.toolStripButtonDown.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonDown.Name = "toolStripButtonDown";
+            this.toolStripButtonDown.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonDown.ToolTipText = "Move question Down";
+            this.toolStripButtonDown.Click += new System.EventHandler(this.toolStripButtonDown_Click);
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
+            // 
             // toolStripButtonDelete
             // 
             this.toolStripButtonDelete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -383,6 +411,8 @@
             this.pictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox.TabIndex = 4;
             this.pictureBox.TabStop = false;
+            this.pictureBox.Click += new System.EventHandler(this.pictureBox_Click);
+            this.pictureBox.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox_MouseMove);
             // 
             // dataGridViewQuestions
             // 
@@ -465,34 +495,6 @@
             this.exitStripButton.Size = new System.Drawing.Size(34, 24);
             this.exitStripButton.Text = "&Exit";
             this.exitStripButton.Click += new System.EventHandler(this.exitStripButton_Click_1);
-            // 
-            // toolStripButtonUp
-            // 
-            this.toolStripButtonUp.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonUp.Enabled = false;
-            this.toolStripButtonUp.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonUp.Image")));
-            this.toolStripButtonUp.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonUp.Name = "toolStripButtonUp";
-            this.toolStripButtonUp.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButtonUp.Text = "toolStripButton1";
-            this.toolStripButtonUp.ToolTipText = "Move question Up";
-            this.toolStripButtonUp.Click += new System.EventHandler(this.toolStripButtonUp_Click);
-            // 
-            // toolStripButtonDown
-            // 
-            this.toolStripButtonDown.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonDown.Enabled = false;
-            this.toolStripButtonDown.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonDown.Image")));
-            this.toolStripButtonDown.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonDown.Name = "toolStripButtonDown";
-            this.toolStripButtonDown.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButtonDown.ToolTipText = "Move question Down";
-            this.toolStripButtonDown.Click += new System.EventHandler(this.toolStripButtonDown_Click);
-            // 
-            // toolStripSeparator4
-            // 
-            this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
             // 
             // MainForm
             // 

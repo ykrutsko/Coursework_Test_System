@@ -20,6 +20,7 @@ namespace TestDesigner
         {
             this.mode = mode;
             CurrAnswer = new Answer();
+            FormSettings();
             InitializeComponent();
         }
 
@@ -27,7 +28,16 @@ namespace TestDesigner
         {
             this.mode = mode;
             CurrAnswer = answer;
+            FormSettings();
             InitializeComponent();
+        }
+
+        //Form settings
+        void FormSettings()
+        {
+            this.StartPosition = FormStartPosition.CenterParent;
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
         }
 
         private void AnswerForm_Load(object sender, EventArgs e)

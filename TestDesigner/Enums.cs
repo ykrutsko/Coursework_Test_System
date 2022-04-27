@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace TestDesigner
 {
     // Auto generate FileName or TestName
-    enum NameType { FileName, TestName }
+    enum NameType { FileNameAuto, FileNameTitle, TestName }
 
     // Open helpfull forms mode
     public enum Mode { Add, AddByCopy, Edit }

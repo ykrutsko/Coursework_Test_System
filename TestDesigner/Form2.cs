@@ -30,6 +30,7 @@ namespace TestDesigner
             this.mode = mode;
             CurrQuestion = new Question();
             CurrQuestion.Answers = new List<Answer>();
+            FormSettings();
             InitializeComponent();
         }
 
@@ -38,18 +39,32 @@ namespace TestDesigner
         {
             this.mode = mode;
             CurrQuestion = question;
+            FormSettings();
             InitializeComponent();
         }
 
+        //Form settings
+        void FormSettings()
+        {
+            this.StartPosition = FormStartPosition.CenterParent;
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+        }
+
         private void ModifyForm_Load(object sender, EventArgs e)
-        {            
+        {
+            this.StartPosition = FormStartPosition.CenterParent;
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            WindowTitleText();
             FillForm();
         }
 
         void FillForm()
         {
-            if(mode == Mode.AddByCopy)
-                QuestionChanged();
+            if (mode == Mode.AddByCopy)
+                IsQuestionChanged = true;
+            WindowTitleText();
             IsOpenMode = true;
 
             tbQuestion.Text = CurrQuestion.QuestionText;
@@ -192,7 +207,7 @@ namespace TestDesigner
         {
             if (MessageBox.Show(
                 "Delete this answer?",
-                "Test constructor",
+                "Test designer",
                 MessageBoxButtons.OKCancel,
                 MessageBoxIcon.Question) != DialogResult.OK) return;
 
@@ -230,7 +245,10 @@ namespace TestDesigner
             {
                 try
                 {
-                    currBitmap = new Bitmap(openFileDialog.FileName);
+                    using (Stream fileStream = openFileDialog.OpenFile())
+                    {
+                        currBitmap = new Bitmap(Image.FromStream(fileStream));
+                    }                  
                     pictureBox.Image = currBitmap;
                 }
                 catch (Exception ex)
@@ -282,7 +300,7 @@ namespace TestDesigner
         {
             var dialog = MessageBox.Show(
                 "Save changes to current question?",
-                "Test constructor",
+                "Test designer",
                 MessageBoxButtons.YesNoCancel,
                 MessageBoxIcon.Question);
 
