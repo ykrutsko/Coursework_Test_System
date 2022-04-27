@@ -25,6 +25,9 @@ namespace TestDesigner
 
         public MainForm()
         {
+            this.StartPosition = FormStartPosition.CenterParent;
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             InitializeComponent();            
         }
 

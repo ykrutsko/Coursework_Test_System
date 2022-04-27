@@ -157,6 +157,7 @@
             // 
             // tbInfo
             // 
+            this.tbInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.tbInfo.Location = new System.Drawing.Point(83, 232);
             this.tbInfo.Multiline = true;
             this.tbInfo.Name = "tbInfo";
@@ -166,6 +167,7 @@
             // 
             // tbDescription
             // 
+            this.tbDescription.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.tbDescription.Location = new System.Drawing.Point(84, 86);
             this.tbDescription.Multiline = true;
             this.tbDescription.Name = "tbDescription";
