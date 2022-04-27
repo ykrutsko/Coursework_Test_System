@@ -191,6 +191,7 @@ namespace TestDesigner
             int pos = CurrQuestion.Answers.IndexOf(currAnswer);
             (CurrQuestion.Answers[pos], CurrQuestion.Answers[pos - 1]) = (CurrQuestion.Answers[pos - 1], CurrQuestion.Answers[pos]);
             FillDataGridViewAnswers();
+            QuestionChanged();
         }
 
         // Move answer down
@@ -199,6 +200,7 @@ namespace TestDesigner
             int pos = CurrQuestion.Answers.IndexOf(currAnswer);
             (CurrQuestion.Answers[pos], CurrQuestion.Answers[pos + 1]) = (CurrQuestion.Answers[pos + 1], CurrQuestion.Answers[pos]);
             FillDataGridViewAnswers();
+            QuestionChanged();
         }
 
         // Delete answer
@@ -324,6 +326,15 @@ namespace TestDesigner
             return DialogResult.Cancel;
         }
 
+        void QuestionChanged()
+        {
+            if (!IsQuestionChanged)
+            {
+                IsQuestionChanged = true;
+                WindowTitleText();
+            }
+        }
+
         // Form title
         void WindowTitleText()
         {
@@ -342,15 +353,6 @@ namespace TestDesigner
                     break;
             }
             this.Text = first + last;
-        }
-
-        void QuestionChanged()
-        {
-            if(!IsQuestionChanged)
-            {
-                IsQuestionChanged = true;
-                WindowTitleText();
-            }
         }
 
         // UpDown key Enable / Disable

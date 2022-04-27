@@ -435,6 +435,8 @@ namespace TestDesigner
             int pos = currTest.Questions.IndexOf(currQuestion);
             (currTest.Questions[pos], currTest.Questions[pos - 1]) = (currTest.Questions[pos - 1], currTest.Questions[pos]);
             FillDataGridViewQuestions(ModeFillDataGrid.Edit);
+            IsTestChanged = true;
+            WindowTitleText();
         }
 
         //Question down
@@ -443,6 +445,8 @@ namespace TestDesigner
             int pos = currTest.Questions.IndexOf(currQuestion);
             (currTest.Questions[pos], currTest.Questions[pos + 1]) = (currTest.Questions[pos + 1], currTest.Questions[pos]);
             FillDataGridViewQuestions(ModeFillDataGrid.Edit);
+            IsTestChanged = true;
+            WindowTitleText();
         }
 
         Bitmap SetCurrBitmap()
