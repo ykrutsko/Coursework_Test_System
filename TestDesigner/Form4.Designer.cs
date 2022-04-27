@@ -47,7 +47,7 @@
             this.ClientSize = new System.Drawing.Size(536, 541);
             this.Controls.Add(this.pictureBox);
             this.Name = "PictureForm";
-            this.Text = "[512 x 512] - Test constructor";
+            this.Text = "[512 x 512] - Test designer";
             this.Load += new System.EventHandler(this.PictureForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.ResumeLayout(false);
