@@ -56,7 +56,6 @@ namespace TestDesigner
             this.StartPosition = FormStartPosition.CenterParent;
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
-            WindowTitleText();
             FillForm();
         }
 
