@@ -28,6 +28,9 @@ namespace TestServer
 
         private void LoginForm_Load(object sender, EventArgs e)
         {
+            this.StartPosition = FormStartPosition.CenterParent;
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             tbLog.Select();
         }
     }

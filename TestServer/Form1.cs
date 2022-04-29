@@ -16,5 +16,12 @@ namespace TestServer
         {
             InitializeComponent();
         }
+
+        private void toolStripButtonUser_Click(object sender, EventArgs e)
+        {
+            UserForm userForm = new UserForm();
+            userForm.MdiParent = this;
+            userForm.Show();
+        }
     }
 }
