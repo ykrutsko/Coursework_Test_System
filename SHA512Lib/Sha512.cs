@@ -9,7 +9,7 @@ namespace SHA512Lib
 {
     public static class Sha512
     {
-        public static byte[] ToSHA512(this string str)
+        public static byte[] GetSha512(this string str)
         {
             using (SHA512 sha = new SHA512Managed())
             {

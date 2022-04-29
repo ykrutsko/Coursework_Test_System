@@ -18,11 +18,13 @@ namespace DALTestingSystemDB
         public DateTime RegisterDate { get; set; }
         public virtual ICollection<Group> Groups { get; set; }
         public virtual ICollection<Test> Tests { get; set; }
+        public virtual ICollection<PassedTest> PassedTests { get; set; }
 
         public User()
         {
             Groups = new List<Group>();
             Tests = new List<Test>();
+            PassedTests = new List<PassedTest>();
         }
 
         public override string ToString()
