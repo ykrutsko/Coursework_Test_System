@@ -19,6 +19,11 @@ namespace DALTestingSystemDB
 
         }
 
+        static TestSystemContext()
+        {
+            Database.SetInitializer<TestSystemContext>(new TestSystemContextInitializer());
+        }
+
         public DbSet<User> Users { get; set; }
         public DbSet<Group> Groups { get; set; }
         public DbSet<Test> Tests { get; set; }
