@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SHA512Lib", "SHA512Lib\SHA5
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepositoryLib", "RepositoryLib\RepositoryLib.csproj", "{FAED8D16-FBF6-4AA4-8D8D-76CDC157277B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DALTestingSystemDB", "DALTestingSystemDB\DALTestingSystemDB.csproj", "{6BCE373F-FB85-4853-AAE8-3A1C3A9F6141}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DALTestSystemDB", "DALTestSystemDB\DALTestSystemDB.csproj", "{6BCE373F-FB85-4853-AAE8-3A1C3A9F6141}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
