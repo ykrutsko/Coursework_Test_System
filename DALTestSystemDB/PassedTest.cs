@@ -10,7 +10,7 @@ namespace DALTestingSystemDB
     {
         public int Id { get; set; }
         public DateTime TakedDate { get; set; }
-        public double PercentGrade { get; set; }
+        public decimal PercentGrade { get; set; }
         public bool IsPassed { get; set; }
         public virtual User User { get; set; }
         public virtual Test Test { get; set; }

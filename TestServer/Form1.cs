@@ -33,6 +33,8 @@ namespace TestServer
             GenericUnitOfWork work = new GenericUnitOfWork(new TestSystemContext(ConfigurationManager.ConnectionStrings["conStr"].ConnectionString));
             IGenericRepository<User> repoUser = work.Repository<User>();
             IGenericRepository<Group> repoGroup = work.Repository<Group>();
+
+            var a = repoUser.GetAll();
             
         }
     }

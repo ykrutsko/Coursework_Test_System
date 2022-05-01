@@ -8,12 +8,13 @@ namespace DALTestingSystemDB
         public string AnswerText { get; set; }
         public bool IsRight { get; set; }
         public virtual Question Question { get; set; }
-        public virtual ICollection<PassedTestAnswer> PassedTestAnswers { get; set; }
+        public virtual PassedTestAnswer PassedTestAnswer { get; set; }
+        //public virtual ICollection<PassedTestAnswer> PassedTestAnswers { get; set; }
 
-        public Answer()
-        {
-            PassedTestAnswers = new List<PassedTestAnswer>();
-        }
+        //public Answer()
+        //{
+        //    PassedTestAnswers = new List<PassedTestAnswer>();
+        //}
 
         public override string ToString()
         {
