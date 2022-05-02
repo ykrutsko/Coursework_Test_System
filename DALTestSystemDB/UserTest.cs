@@ -6,19 +6,20 @@ using System.Threading.Tasks;
 
 namespace DALTestingSystemDB
 {
-    public class PassedTest
+    public class UserTest
     {
         public int Id { get; set; }
+        public bool IsTaked { get; set; }
         public DateTime TakedDate { get; set; }
-        public decimal PercentGrade { get; set; }
+        public int PointsGrade { get; set; }
         public bool IsPassed { get; set; }
         public virtual User User { get; set; }
         public virtual Test Test { get; set; }
-        public virtual ICollection<PassedTestQuestion> PassedTestQuestions { get; set; }
+        public virtual ICollection<UserAnswer> UserAnswers { get; set; }
 
-        public PassedTest()
+        public UserTest()
         {
-            PassedTestQuestions = new List<PassedTestQuestion>();
+            UserAnswers = new List<UserAnswer>();
         }
     }
 }

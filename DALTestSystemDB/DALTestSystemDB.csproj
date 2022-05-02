@@ -54,9 +54,8 @@
     <Compile Include="Answer.cs" />
     <Compile Include="Folder.cs" />
     <Compile Include="Group.cs" />
-    <Compile Include="PassedTest.cs" />
-    <Compile Include="PassedTestAnswer.cs" />
-    <Compile Include="PassedTestQuestion.cs" />
+    <Compile Include="UserTest.cs" />
+    <Compile Include="UserAnswer.cs" />
     <Compile Include="Question.cs" />
     <Compile Include="Test.cs" />
     <Compile Include="TestSystemContext.cs" />

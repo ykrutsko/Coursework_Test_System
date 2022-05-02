@@ -30,60 +30,46 @@ namespace DALTestingSystemDB
         public DbSet<Test> Tests { get; set; }
         public DbSet<Question> Questions { get; set; }
         public DbSet<Answer> Answers { get; set; }
-        public DbSet<PassedTest> PassedTests { get; set; }
-        public DbSet<PassedTestQuestion> PassedTestQuestions { get; set; }
-        public DbSet<PassedTestAnswer> PassedTestAnswers{ get; set; }
+        public DbSet<UserTest> PassedTests { get; set; }
+        public DbSet<UserAnswer> PassedTestAnswers{ get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            // many to many
-            //------------------
-            // User <-> Group
-            modelBuilder.Entity<User>().HasMany(x => x.Groups).WithMany(y => y.Users);
-
-            // User <-> Test
-            modelBuilder.Entity<User>().HasMany(x => x.Tests).WithMany(y => y.Users);
-
-            // one to many
-            //------------------
-            // Folder -> Tests
-            modelBuilder.Entity<Folder>().HasMany(x => x.Tests).WithRequired(y => y.Folder).WillCascadeOnDelete(true);
-
-            // Test -> Question
-            modelBuilder.Entity<Test>().HasMany(x => x.Questions).WithRequired(y => y.Test).WillCascadeOnDelete(true);
-
-            // Question -> Answer
-            modelBuilder.Entity<Question>().HasMany(x => x.Answers).WithRequired(y => y.Question).WillCascadeOnDelete(true);
-
-            // PassedTest -> PassedTestQuestions
-            modelBuilder.Entity<PassedTest>().HasMany(x => x.PassedTestQuestions).WithRequired(y => y.PassedTest).WillCascadeOnDelete(true);
-
-            // PassedTestQuestion -> PassedTestAnswers
-            modelBuilder.Entity<PassedTestQuestion>().HasMany(x => x.PassedTestAnswers).WithRequired(y => y.PassedTestQuestion).WillCascadeOnDelete(true);
-
-            // User -> PassedTests
-            modelBuilder.Entity<User>().HasMany(x => x.PassedTests).WithRequired(y => y.User).WillCascadeOnDelete(true);
-
-            // Test -> PassedTests
-            modelBuilder.Entity<Test>().HasMany(x => x.PassedTests).WithRequired(y => y.Test).WillCascadeOnDelete(true);
-
-            // Question -> PassedTestQuestions
-            modelBuilder.Entity<Question>().HasMany(x => x.PassedTestQuestions).WithRequired(y => y.Question).WillCascadeOnDelete(false);
-
-            // Answer -> PassedTestAnswers
-            modelBuilder.Entity<Answer>().HasMany(x => x.PassedTestAnswers).WithRequired(y => y.Answer).WillCascadeOnDelete(false);
-
-
             modelBuilder.Entity<User>().Property(x => x.Login).IsRequired();
             modelBuilder.Entity<User>().Property(x => x.Password).IsRequired();
-            //modelBuilder.Entity<User>().HasIndex(x => x.Login).IsUnique();
             modelBuilder.Entity<Group>().Property(x => x.Name).IsRequired();
             modelBuilder.Entity<Folder>().Property(x => x.Name).IsRequired();
             modelBuilder.Entity<Test>().Property(x => x.Title).IsRequired();
             modelBuilder.Entity<Question>().Property(x => x.QuestionText).IsRequired();
             modelBuilder.Entity<Answer>().Property(x => x.AnswerText).IsRequired();
-            modelBuilder.Entity<PassedTest>().Property(x => x.PercentGrade).HasPrecision(2, 2);
 
+            // many to many
+            //------------------
+            // User <-> Group
+            modelBuilder.Entity<User>().HasMany(x => x.Groups).WithMany(y => y.Users);
+
+            // one to many
+            //------------------
+            // Folder -> Test
+            modelBuilder.Entity<Folder>().HasMany(x => x.Tests).WithRequired(y => y.Folder);
+
+            // Test -> Question
+            modelBuilder.Entity<Test>().HasMany(x => x.Questions).WithRequired(y => y.Test);
+
+            // Question -> Answer
+            modelBuilder.Entity<Question>().HasMany(x => x.Answers).WithRequired(y => y.Question);
+
+            // User -> UserTest
+            modelBuilder.Entity<User>().HasMany(x => x.UserTests).WithRequired(y => y.User);
+
+            // Test -> UserTest
+            modelBuilder.Entity<Test>().HasMany(x => x.UserTests).WithRequired(y => y.Test);
+
+            // UserTest -> UserAnswer
+            modelBuilder.Entity<UserTest>().HasMany(x => x.UserAnswers).WithRequired(y => y.UserTest);
+
+            // Answer -> UserAnswer
+            modelBuilder.Entity<Answer>().HasMany(x => x.UserAnswers).WithRequired(y => y.Answer).WillCascadeOnDelete(false);
         }
     }
 }

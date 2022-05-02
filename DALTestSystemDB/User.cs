@@ -16,16 +16,16 @@ namespace DALTestingSystemDB
         public byte[] Password { get; set; }
         public string Description { get; set; }
         public bool IsAdmin { get; set; }
+        public bool IsDeletable { get; set; }
+        public bool IsArhived { get; set; }
         public DateTime RegisterDate { get; set; }
         public virtual ICollection<Group> Groups { get; set; }
-        public virtual ICollection<Test> Tests { get; set; }
-        public virtual ICollection<PassedTest> PassedTests { get; set; }
+        public virtual ICollection<UserTest> UserTests { get; set; }
 
         public User()
         {
             Groups = new List<Group>();
-            Tests = new List<Test>();
-            PassedTests = new List<PassedTest>();
+            UserTests = new List<UserTest>();
         }
 
         public override string ToString()
