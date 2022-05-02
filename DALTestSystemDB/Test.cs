@@ -20,15 +20,13 @@ namespace DALTestingSystemDB
         public virtual Folder Folder { get; set; }
         public virtual ICollection<User> Users { get; set; }
         public virtual ICollection<Question> Questions { get; set; }
-
-        //public virtual ICollection<PassedTest> PassedTests { get; set; }
-        public virtual PassedTest PassedTest { get; set; }
+        public virtual ICollection<PassedTest> PassedTests { get; set; }
 
         public Test()
         {
             Users = new List<User>();
             Questions = new List<Question>();
-            //PassedTests = new List<PassedTest>();
+            PassedTests = new List<PassedTest>();
         }
 
         public override string ToString()
