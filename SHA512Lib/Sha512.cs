@@ -9,11 +9,11 @@ namespace SHA512Lib
 {
     public static class Sha512
     {
-        public static byte[] GetSha512(this string str)
+        public static string GetSha512(this string str)
         {
             using (SHA512 sha = new SHA512Managed())
             {
-                return sha.ComputeHash(Encoding.UTF8.GetBytes(str));
+                return sha.ComputeHash(Encoding.UTF8.GetBytes(str)).ToString();
             }
         }
     }

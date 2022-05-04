@@ -28,6 +28,11 @@ namespace TestServer
         IGenericRepository<DALTestingSystemDB.Answer> repoAnswer;
         IGenericRepository<UserTest> repoUserTest;
         IGenericRepository<UserAnswer> repoUserAnswer;
+        Panel activePanel;
+
+        bool flagTestsExplorer = false;
+        bool flagUsers = false;
+
 
         public MainForm()
         {
@@ -44,7 +49,7 @@ namespace TestServer
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            var activePanel = panelInit;
+            activePanel = panelGeneral;
             work = new GenericUnitOfWork(new TestSystemContext(ConfigurationManager.ConnectionStrings["conStr"].ConnectionString));
             repoUser = work.Repository<User>();
             repoGroup = work.Repository<Group>();
@@ -58,21 +63,115 @@ namespace TestServer
 
             var a = repoUser.GetAll();
 
-            activePanel.Visible = false;
-            activePanel = panelLoadTest;
-            activePanel.Visible = true;
-
             // DataGridView Sources
             dgvLoadTestForm_Questions.DataSource = bsLoadTestForm_Questions;
             dgvLoadTestForm_Answers.DataSource = bsLoadTestForm_Answers;
-            
         }
 
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
         {
+            
+            e.Node.Tag = this.treeView1.SelectedNode.Name;
+            activePanel.Visible = false;
+            switch (e.Node.Tag)
+            {
+                case "NodeGeneral":
+                    activePanel = panelGeneral;
+                    break;
+                case "NodeUsersAndGroups":
+                    activePanel = panelUsersAndGroups;
+                    break;
+                case "NodeUsers":
+                    activePanel = panelUsers;
+                    break;
+                case "NodeGroups":
+                    activePanel = panelGroups;
+                    break;
+                case "NodeUsersAndTests":
+                    activePanel = panelUsersAndTests;
+                    break;
+                case "NodeAssignTestsToUsers":
+                    activePanel = panelAssignTestsToUsers;
+                    break;
+                case "NodeReviwPassedTests":
+                    activePanel = panelReviewPassedTests;
+                    break;
+                case "NodeTests":
+                    activePanel = panelTests;
+                    break;
+                case "NodeTestsExplorer":
+                    activePanel = panelTestsExplorer;
+                    break;
+                case "NodeLoadTest":                    
+                    activePanel = panelLoadTest;
+                    break;
+            }
+            activePanel.Dock = DockStyle.Fill;
+            activePanel.Visible = true;
+        }
+
+        #region Users
+        private async void panelUsers_VisibleChanged(object sender, EventArgs e)
+        {
+            if (panelUsers.Visible == false)
+                return;
+
+            if (!flagUsers)
+            {
+                await Task.Run(() => {
+                    bsUsersForm_Users.DataSource = repoUser.GetAll();
+                });
+
+                dgvUsersForm_Users.DataSource = bsUsersForm_Users;
+                dgvUsersForm_Users.Columns[4].Visible = false;
+                dgvUsersForm_Users.Columns[7].Visible = false;
+                dgvUsersForm_Users.Columns[8].Visible = false;
+                dgvUsersForm_Users.Columns[10].Visible = false;
+                dgvUsersForm_Users.Columns[11].Visible = false;
+
+                dgvUsersForm_Users.Columns[0].Width = 50;
+                dgvUsersForm_Users.Columns[1].Width = 145;
+                dgvUsersForm_Users.Columns[2].Width = 145;
+                dgvUsersForm_Users.Columns[3].Width = 120;
+                dgvUsersForm_Users.Columns[5].Width = 280;
+                dgvUsersForm_Users.Columns[6].Width = 80;
+                dgvUsersForm_Users.Columns[9].Width = 120;
+
+                dgvUsersForm_Users.Columns[1].HeaderText = "First name";
+                dgvUsersForm_Users.Columns[2].HeaderText = "Last name";
+                dgvUsersForm_Users.Columns[6].HeaderText = "Is admin";
+                dgvUsersForm_Users.Columns[9].HeaderText = "Register date";
+
+                dgvUsersForm_Users.ClearSelection();
+                flagUsers = true;
+            }
+        }
+
+        private void toolStripButtonAddUser_Click(object sender, EventArgs e)
+        {
 
         }
 
+
+
+        #endregion
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        #region LoadTestForm functional
         // LoadTestForm functional
         //-----------------------------------------------------------------------------
         TestLib.Test currTest;
@@ -253,8 +352,6 @@ namespace TestServer
                 {
                     MessageBox.Show(ex.Message.ToString(), "TestServer", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-
-                Thread.Sleep(5000);
             });
 
             pictureBoxWarningDone.Image = Resources.done;   
@@ -263,8 +360,167 @@ namespace TestServer
             btnLoadTestForm_Clean.Enabled = true;
         }
         //-----------------------------------------------------------------------------
+        #endregion LoadTestForm functional
 
+        #region TestsExplorerForm functional
         // LoadTestForm functional
         //-----------------------------------------------------------------------------
+        private async void panelTestsExplorer_VisibleChanged(object sender, EventArgs e)
+        {
+            if (panelTestsExplorer.Visible == false)
+                return;
+
+            if (!flagTestsExplorer)
+            {
+                await Task.Run(() => {
+                    bsTestsExplorerForm_Folder1.DataSource = repoFolder.GetAll();
+                    bsTestsExplorerForm_Folder2.DataSource = repoFolder.GetAll();
+                    bsTestsExplorerForm_Test1.DataSource = repoTest.FindAll(x => x.Folder.Id == 1);
+                    bsTestsExplorerForm_Test2.DataSource = repoTest.FindAll(x => x.Folder.Id == 1);
+                });
+
+                //Folder1
+                dgvTestsExplorerForm_Folder1.DataSource = bsTestsExplorerForm_Folder1;
+                dgvTestsExplorerForm_Folder1.Columns[0].Visible = false;
+                dgvTestsExplorerForm_Folder1.Columns[1].HeaderText = "Name";
+                dgvTestsExplorerForm_Folder1.Columns[1].Width = 190;
+
+                dgvTestsExplorerForm_Folder1.Columns[2].Width = 230;
+                dgvTestsExplorerForm_Folder1.Columns[2].HeaderText = "Description";
+
+                dgvTestsExplorerForm_Folder1.Columns[3].Visible = false;
+                dgvTestsExplorerForm_Folder1.Columns[4].Visible = false;
+                dgvTestsExplorerForm_Folder1.Columns[5].Visible = false;
+                dgvTestsExplorerForm_Folder1.CurrentCell = dgvTestsExplorerForm_Folder1.Rows[0].Cells[1];
+
+                //Folder2
+                dgvTestsExplorerForm_Folder2.DataSource = bsTestsExplorerForm_Folder2;
+                dgvTestsExplorerForm_Folder2.Columns[0].Visible = false;
+                dgvTestsExplorerForm_Folder2.Columns[1].HeaderText = "Name";
+                dgvTestsExplorerForm_Folder2.Columns[1].Width = 190;
+
+                dgvTestsExplorerForm_Folder2.Columns[2].Width = 230;
+                dgvTestsExplorerForm_Folder2.Columns[2].HeaderText = "Description";
+
+                dgvTestsExplorerForm_Folder2.Columns[3].Visible = false;
+                dgvTestsExplorerForm_Folder2.Columns[4].Visible = false;
+                dgvTestsExplorerForm_Folder2.Columns[5].Visible = false;
+                dgvTestsExplorerForm_Folder2.CurrentCell = dgvTestsExplorerForm_Folder2.Rows[0].Cells[1];
+
+                // Test 1
+                dgvTestsExplorerForm_Test1.DataSource = bsTestsExplorerForm_Test1;
+                dgvTestsExplorerForm_Test1.Columns[0].Visible = false;
+                dgvTestsExplorerForm_Test1.Columns[1].HeaderText = "Name";
+                dgvTestsExplorerForm_Test1.Columns[1].Width = 190;
+                dgvTestsExplorerForm_Test1.Columns[2].HeaderText = "Author";
+                dgvTestsExplorerForm_Test1.Columns[2].Width = 120;
+
+                dgvTestsExplorerForm_Test1.Columns[3].Visible = false;
+                dgvTestsExplorerForm_Test1.Columns[4].Visible = false;
+                dgvTestsExplorerForm_Test1.Columns[5].Visible = false;
+                dgvTestsExplorerForm_Test1.Columns[6].Visible = false;
+                dgvTestsExplorerForm_Test1.Columns[7].Visible = false;
+
+                dgvTestsExplorerForm_Test1.Columns[8].HeaderText = "Load date";
+                dgvTestsExplorerForm_Test1.Columns[8].Width = 110;
+                dgvTestsExplorerForm_Test1.Columns[9].Visible = false;
+                dgvTestsExplorerForm_Test1.Columns[10].Visible = false;
+                dgvTestsExplorerForm_Test1.Columns[11].Visible = false;
+
+
+                // Test 2
+                dgvTestsExplorerForm_Test2.DataSource = bsTestsExplorerForm_Test2;
+                dgvTestsExplorerForm_Test2.Columns[0].Visible = false;
+                dgvTestsExplorerForm_Test2.Columns[1].HeaderText = "Name";
+                dgvTestsExplorerForm_Test2.Columns[1].Width = 190;
+                dgvTestsExplorerForm_Test2.Columns[2].HeaderText = "Author";
+                dgvTestsExplorerForm_Test2.Columns[2].Width = 120;
+
+                dgvTestsExplorerForm_Test2.Columns[3].Visible = false;
+                dgvTestsExplorerForm_Test2.Columns[4].Visible = false;
+                dgvTestsExplorerForm_Test2.Columns[5].Visible = false;
+                dgvTestsExplorerForm_Test2.Columns[6].Visible = false;
+                dgvTestsExplorerForm_Test2.Columns[7].Visible = false;
+
+                dgvTestsExplorerForm_Test2.Columns[8].HeaderText = "Load date";
+                dgvTestsExplorerForm_Test2.Columns[8].Width = 110;
+                dgvTestsExplorerForm_Test2.Columns[9].Visible = false;
+                dgvTestsExplorerForm_Test2.Columns[10].Visible = false;
+                dgvTestsExplorerForm_Test2.Columns[11].Visible = false;
+
+                flagTestsExplorer = true;
+            }
+            else
+            {
+                //bsTestsExplorerForm_Folder1.ResetBindings(false);
+                //bsTestsExplorerForm_Folder2.ResetBindings(false);
+                //bsTestsExplorerForm_Test1.ResetBindings(false);
+                //bsTestsExplorerForm_Test2.ResetBindings(false);
+
+            }
+            dgvTestsExplorerForm_Test1.ClearSelection();
+            dgvTestsExplorerForm_Test2.ClearSelection();
+        }
+
+        private void dgvTestsExplorerForm_Folder1_SelectionChanged(object sender, EventArgs e)
+        {
+            Folder folder = dgvTestsExplorerForm_Folder1.CurrentRow.DataBoundItem as Folder;
+            bsTestsExplorerForm_Test1.DataSource = repoTest.FindAll(x => x.Folder.Id == folder.Id);
+            dgvTestsExplorerForm_Test1.ClearSelection();
+        }
+
+        private void dgvTestsExplorerForm_Folder2_SelectionChanged(object sender, EventArgs e)
+        {
+            Folder folder = dgvTestsExplorerForm_Folder2.CurrentRow.DataBoundItem as Folder;
+            bsTestsExplorerForm_Test2.DataSource = repoTest.FindAll(x => x.Folder.Id == folder.Id);
+            dgvTestsExplorerForm_Test2.ClearSelection();
+        }
+
+        private void dgvTestsExplorerForm_Test1_SelectionChanged(object sender, EventArgs e)
+        {
+            toolStripButtonMoveR.Enabled = dgvTestsExplorerForm_Test1.SelectedRows.Count != 0;
+            //dgvTestsExplorerForm_Folder1_SelectionChanged(sender, e);
+        }
+
+        private void dgvTestsExplorerForm_Test2_SelectionChanged(object sender, EventArgs e)
+        {
+            toolStripButtonMoveL.Enabled = dgvTestsExplorerForm_Test2.SelectedRows.Count != 0;
+        }
+
+        //Move R
+        private void toolStripButtonMoveR_Click(object sender, EventArgs e)
+        {
+            DALTestingSystemDB.Test test = dgvTestsExplorerForm_Test1.CurrentRow.DataBoundItem as DALTestingSystemDB.Test;
+            test.Folder = dgvTestsExplorerForm_Folder2.CurrentRow.DataBoundItem as Folder;
+            repoTest.Update(test);
+            bsTestsExplorerForm_Test1.ResetBindings(false);
+        }
+
+        //Move L
+        private void toolStripButtonMoveL_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        //-----------------------------------------------------------------------------
+        #endregion TestsExplorerForm functional
+
+
     }
 }
