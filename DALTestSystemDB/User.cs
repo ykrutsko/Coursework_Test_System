@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace DALTestingSystemDB
 {
@@ -33,6 +34,62 @@ namespace DALTestingSystemDB
             return FirstName + " " + LastName + " [" + Login + (IsAdmin ? ", Admin" : String.Empty) + "]";
         }
 
+        public User PartClone()
+        {
+            ICollection<Group> groupsClone = new List<Group>();
+            foreach (Group group in Groups)
+                groupsClone.Add(group);
 
+            return new User
+            {
+                FirstName = this.FirstName,
+                LastName = this.LastName,
+                Login = this.Login,
+                Description = this.Description,
+                IsAdmin = this.IsAdmin,
+                IsDeletable = true,
+                IsArhived = false,
+                Groups = groupsClone
+            };
+        }
+
+        public User FullClone()
+        {
+            ICollection<Group> groupsClone = new List<Group>();
+            foreach (Group group in Groups)
+                groupsClone.Add(group);
+
+            return new User
+            {
+                Id = this.Id,
+                FirstName = this.FirstName,
+                LastName = this.LastName,
+                Login = this.Login,
+                Password = this.Password,
+                Description = this.Description,
+                IsAdmin = this.IsAdmin,
+                IsDeletable = this.IsDeletable,
+                IsArhived = this.IsArhived,
+                RegisterDate = this.RegisterDate,
+                Groups = groupsClone,
+            };            
+        }
+
+        public void UpdateClone(User other)
+        {
+            this.FirstName = other.FirstName;
+            this.LastName = other.LastName;
+            this.Login = other.Login;
+            this.Password = other.Password;
+            this.Description = other.Description;
+            this.IsAdmin = other.IsAdmin;
+            this.IsDeletable = other.IsDeletable;
+            this.IsArhived = other.IsArhived;
+            this.RegisterDate = other.RegisterDate;
+
+            this.Groups.Clear();
+            foreach (Group group in other.Groups)
+                this.Groups.Add(group);
+        }
     }
 }

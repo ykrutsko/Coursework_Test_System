@@ -19,17 +19,7 @@ namespace TestServer
 {
     public partial class MainForm : Form
     {
-        GenericUnitOfWork work; 
-        IGenericRepository<User> repoUser;
-        IGenericRepository<Group> repoGroup;
-        IGenericRepository<Folder> repoFolder;
-        IGenericRepository<DALTestingSystemDB.Test> repoTest;
-        IGenericRepository<DALTestingSystemDB.Question> repoQuestion;
-        IGenericRepository<DALTestingSystemDB.Answer> repoAnswer;
-        IGenericRepository<UserTest> repoUserTest;
-        IGenericRepository<UserAnswer> repoUserAnswer;
         Panel activePanel;
-
         bool flagTestsExplorer = false;
         bool flagUsers = false;
 
@@ -39,29 +29,20 @@ namespace TestServer
             InitializeComponent();
         }
 
-        private void toolStripButtonUser_Click(object sender, EventArgs e)
-        {
-            UserForm userForm = new UserForm();
-            userForm.MdiParent = this;
-            userForm.Show();
-
-        }
-
         private void MainForm_Load(object sender, EventArgs e)
         {
             activePanel = panelGeneral;
-            work = new GenericUnitOfWork(new TestSystemContext(ConfigurationManager.ConnectionStrings["conStr"].ConnectionString));
-            repoUser = work.Repository<User>();
-            repoGroup = work.Repository<Group>();
-            repoFolder = work.Repository<Folder>();
-            repoTest = work.Repository<DALTestingSystemDB.Test>();
-            repoQuestion = work.Repository<DALTestingSystemDB.Question>();
-            repoAnswer = work.Repository<DALTestingSystemDB.Answer>();
-            repoUserTest = work.Repository<UserTest>();
-            repoUserAnswer = work.Repository<UserAnswer>();
+            GenericUnitOfWork work = new GenericUnitOfWork(new TestSystemContext(ConfigurationManager.ConnectionStrings["conStr"].ConnectionString));
+            Globals.repoUser = work.Repository<User>();
+            Globals.repoGroup = work.Repository<Group>();
+            Globals.repoFolder = work.Repository<Folder>();
+            Globals.repoTest = work.Repository<DALTestingSystemDB.Test>();
+            Globals.repoQuestion = work.Repository<DALTestingSystemDB.Question>();
+            Globals.repoAnswer = work.Repository<DALTestingSystemDB.Answer>();
+            Globals.repoUserTest = work.Repository<UserTest>();
+            Globals.repoUserAnswer = work.Repository<UserAnswer>();
 
-
-            var a = repoUser.GetAll();
+            var a = Globals.repoUser.GetAll();
 
             // DataGridView Sources
             dgvLoadTestForm_Questions.DataSource = bsLoadTestForm_Questions;
@@ -110,51 +91,180 @@ namespace TestServer
             activePanel.Visible = true;
         }
 
-        #region Users
+        #region UsersForm
+        enum UsersFormSelector { Active, Archived, All, ByGroup, None }
+        UsersFormSelector selector = UsersFormSelector.Active;
         private async void panelUsers_VisibleChanged(object sender, EventArgs e)
         {
             if (panelUsers.Visible == false)
                 return;
 
-            if (!flagUsers)
+            if (flagUsers)
             {
-                await Task.Run(() => {
-                    bsUsersForm_Users.DataSource = repoUser.GetAll();
+                await Task.Run(() => UsersForm_LoadUsersBySelector(selector));
+                return;
+            }
+
+            selector = UsersFormSelector.Active;
+            await Task.Run(() => UsersForm_LoadUsersBySelector(selector));
+            dgvUsersForm_Users.DataSource = bsUsersForm_Users;
+            dgvUsersForm_Users.Columns[4].Visible = false;
+            dgvUsersForm_Users.Columns[7].Visible = false;
+            dgvUsersForm_Users.Columns[8].Visible = false;
+            dgvUsersForm_Users.Columns[10].Visible = false;
+            dgvUsersForm_Users.Columns[11].Visible = false;
+
+            dgvUsersForm_Users.Columns[0].Width = 50;
+            dgvUsersForm_Users.Columns[1].Width = 145;
+            dgvUsersForm_Users.Columns[2].Width = 145;
+            dgvUsersForm_Users.Columns[3].Width = 120;
+            dgvUsersForm_Users.Columns[5].Width = 280;
+            dgvUsersForm_Users.Columns[6].Width = 80;
+            dgvUsersForm_Users.Columns[9].Width = 120;
+
+            dgvUsersForm_Users.Columns[1].HeaderText = "First name";
+            dgvUsersForm_Users.Columns[2].HeaderText = "Last name";
+            dgvUsersForm_Users.Columns[6].HeaderText = "Is admin";
+            dgvUsersForm_Users.Columns[9].HeaderText = "Register date";
+
+            dgvUsersForm_Users.ClearSelection();
+            flagUsers = true;
+        }
+
+        private async void toolStripButtonAddUser_Click(object sender, EventArgs e)
+        {
+            UsersAddEditForm userForm = new UsersAddEditForm(OpenMode.Add);
+            if(userForm.ShowDialog() == DialogResult.OK)
+            {
+                await Task.Run(() =>
+                {
+                    Globals.repoUser.Add(userForm.User);
+                    UsersForm_LoadUsersBySelector(selector);
                 });
-
-                dgvUsersForm_Users.DataSource = bsUsersForm_Users;
-                dgvUsersForm_Users.Columns[4].Visible = false;
-                dgvUsersForm_Users.Columns[7].Visible = false;
-                dgvUsersForm_Users.Columns[8].Visible = false;
-                dgvUsersForm_Users.Columns[10].Visible = false;
-                dgvUsersForm_Users.Columns[11].Visible = false;
-
-                dgvUsersForm_Users.Columns[0].Width = 50;
-                dgvUsersForm_Users.Columns[1].Width = 145;
-                dgvUsersForm_Users.Columns[2].Width = 145;
-                dgvUsersForm_Users.Columns[3].Width = 120;
-                dgvUsersForm_Users.Columns[5].Width = 280;
-                dgvUsersForm_Users.Columns[6].Width = 80;
-                dgvUsersForm_Users.Columns[9].Width = 120;
-
-                dgvUsersForm_Users.Columns[1].HeaderText = "First name";
-                dgvUsersForm_Users.Columns[2].HeaderText = "Last name";
-                dgvUsersForm_Users.Columns[6].HeaderText = "Is admin";
-                dgvUsersForm_Users.Columns[9].HeaderText = "Register date";
-
-                dgvUsersForm_Users.ClearSelection();
-                flagUsers = true;
             }
         }
 
-        private void toolStripButtonAddUser_Click(object sender, EventArgs e)
+        private async void toolStripButtonAddUserByCopy_Click(object sender, EventArgs e)
         {
-
+            UsersAddEditForm userForm = new UsersAddEditForm(OpenMode.AddByCopy, (dgvUsersForm_Users.CurrentRow.DataBoundItem as User).PartClone());
+            if (userForm.ShowDialog() == DialogResult.OK)
+            {
+                await Task.Run(() =>
+                {
+                    Globals.repoUser.Add(userForm.User);
+                    UsersForm_LoadUsersBySelector(selector);
+                });
+            }
         }
 
+        private async void toolStripButtonEditUser_Click(object sender, EventArgs e)
+        {
+            User editableUser = dgvUsersForm_Users.CurrentRow.DataBoundItem as User;
+            UsersAddEditForm userForm = new UsersAddEditForm(OpenMode.Edit, editableUser.FullClone());
+            if (userForm.ShowDialog() == DialogResult.OK)
+            {
+                await Task.Run(() => 
+                {
+                    editableUser.UpdateClone(userForm.User);
+                    Globals.repoUser.Update(editableUser);
+                    UsersForm_LoadUsersBySelector(selector);
+                });
+            }
+        }
 
+        private async void toolStripButtonDeleteUser_Click(object sender, EventArgs e)
+        {
+            var dialog = MessageBox.Show("Delete selected user?", "Test server", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+            if (dialog == DialogResult.Cancel)
+                return;
 
-        #endregion
+            await Task.Run(() => 
+            {
+                Globals.repoUser.Remove(dgvUsersForm_Users.CurrentRow.DataBoundItem as User);
+                UsersForm_LoadUsersBySelector(selector);
+            });
+        }
+
+        private void dgvUsersForm_Users_SelectionChanged(object sender, EventArgs e)
+        {
+            toolStripButtonAddUserByCopy.Enabled = toolStripButtonEditUser.Enabled = dgvUsersForm_Users.SelectedRows.Count > 0;
+            toolStripButtonDeleteUser.Enabled = dgvUsersForm_Users.SelectedRows.Count > 0
+                && (dgvUsersForm_Users.CurrentRow.DataBoundItem as User).IsDeletable;
+        }
+
+        private void dgvUsersForm_Users_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                toolStripButtonEditUser_Click(sender, e);
+            }
+        }
+
+        private async void UsersForm_RadioButtton_Click(object sender, EventArgs e)
+        {
+            RadioButton radioButton = (RadioButton)sender;
+            switch (radioButton.Name)
+            {
+                case "rbActive":
+                    selector = UsersFormSelector.Active;
+                    break;
+                case "rbArhived":
+                    selector = UsersFormSelector.Archived;
+                    break;
+                case "rbAll":
+                    selector = UsersFormSelector.All;
+                    break;
+            }
+            await Task.Run(() => UsersForm_LoadUsersBySelector(selector));
+        }
+
+        private async void rbByGroup_CheckedChanged(object sender, EventArgs e)
+        {
+            cbUsersFormGroup.Enabled = rbByGroup.Checked;
+            if (!rbByGroup.Checked)
+            {
+                cbUsersFormGroup.Items.Clear();
+                cbUsersFormGroup.ResetText();
+            }
+            else
+            {
+                selector = UsersFormSelector.None;
+                UsersForm_LoadUsersBySelector(selector);
+                await Task.Run(() => cbUsersFormGroup.Items.AddRange(Globals.repoGroup.GetAll().ToArray()));
+            }
+        }
+
+        private async void cbUsersFormGroup_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cbUsersFormGroup.SelectedIndex != -1)
+            {
+                selector = UsersFormSelector.ByGroup;
+                await Task.Run(() => UsersForm_LoadUsersBySelector(selector));
+            }
+        }
+
+        private void UsersForm_LoadUsersBySelector(UsersFormSelector selector)
+        {
+            switch (selector)
+            {
+                case UsersFormSelector.Active:
+                    bsUsersForm_Users.DataSource = Globals.repoUser.FindAll(x => !x.IsArhived);
+                    break;
+                case UsersFormSelector.Archived:
+                    bsUsersForm_Users.DataSource = Globals.repoUser.FindAll(x => x.IsArhived);
+                    break;
+                case UsersFormSelector.All:
+                    bsUsersForm_Users.DataSource = Globals.repoUser.GetAll();
+                    break;
+                case UsersFormSelector.ByGroup:
+                    bsUsersForm_Users.DataSource = Globals.repoGroup.FindById((cbUsersFormGroup.SelectedItem as Group).Id).Users;
+                    break;
+                case UsersFormSelector.None:
+                    bsUsersForm_Users.Clear();
+                    break;
+            }
+        }
+        #endregion UsersForm
 
 
 
@@ -343,10 +453,10 @@ namespace TestServer
                 test.LoadedDate = DateTime.Now;
                 test.IsArchived = false;
                 test.IsDeletable = true;
-                test.Folder = repoFolder.FindById(1);
+                test.Folder = Globals.repoFolder.FindById(1);
                 try
                 {
-                    repoTest.Add(test);
+                    Globals.repoTest.Add(test);
                 }
                 catch (DBConcurrencyException ex)
                 {
@@ -373,10 +483,10 @@ namespace TestServer
             if (!flagTestsExplorer)
             {
                 await Task.Run(() => {
-                    bsTestsExplorerForm_Folder1.DataSource = repoFolder.GetAll();
-                    bsTestsExplorerForm_Folder2.DataSource = repoFolder.GetAll();
-                    bsTestsExplorerForm_Test1.DataSource = repoTest.FindAll(x => x.Folder.Id == 1);
-                    bsTestsExplorerForm_Test2.DataSource = repoTest.FindAll(x => x.Folder.Id == 1);
+                    bsTestsExplorerForm_Folder1.DataSource = Globals.repoFolder.GetAll();
+                    bsTestsExplorerForm_Folder2.DataSource = Globals.repoFolder.GetAll();
+                    bsTestsExplorerForm_Test1.DataSource = Globals.repoTest.FindAll(x => x.Folder.Id == 1);
+                    bsTestsExplorerForm_Test2.DataSource = Globals.repoTest.FindAll(x => x.Folder.Id == 1);
                 });
 
                 //Folder1
@@ -465,14 +575,14 @@ namespace TestServer
         private void dgvTestsExplorerForm_Folder1_SelectionChanged(object sender, EventArgs e)
         {
             Folder folder = dgvTestsExplorerForm_Folder1.CurrentRow.DataBoundItem as Folder;
-            bsTestsExplorerForm_Test1.DataSource = repoTest.FindAll(x => x.Folder.Id == folder.Id);
+            bsTestsExplorerForm_Test1.DataSource = Globals.repoTest.FindAll(x => x.Folder.Id == folder.Id);
             dgvTestsExplorerForm_Test1.ClearSelection();
         }
 
         private void dgvTestsExplorerForm_Folder2_SelectionChanged(object sender, EventArgs e)
         {
             Folder folder = dgvTestsExplorerForm_Folder2.CurrentRow.DataBoundItem as Folder;
-            bsTestsExplorerForm_Test2.DataSource = repoTest.FindAll(x => x.Folder.Id == folder.Id);
+            bsTestsExplorerForm_Test2.DataSource = Globals.repoTest.FindAll(x => x.Folder.Id == folder.Id);
             dgvTestsExplorerForm_Test2.ClearSelection();
         }
 
@@ -492,7 +602,7 @@ namespace TestServer
         {
             DALTestingSystemDB.Test test = dgvTestsExplorerForm_Test1.CurrentRow.DataBoundItem as DALTestingSystemDB.Test;
             test.Folder = dgvTestsExplorerForm_Folder2.CurrentRow.DataBoundItem as Folder;
-            repoTest.Update(test);
+            Globals.repoTest.Update(test);
             bsTestsExplorerForm_Test1.ResetBindings(false);
         }
 
@@ -501,6 +611,19 @@ namespace TestServer
         {
 
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

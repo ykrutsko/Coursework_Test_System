@@ -29,24 +29,24 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("General");
-            System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("Users", 1, 1);
-            System.Windows.Forms.TreeNode treeNode15 = new System.Windows.Forms.TreeNode("Groups", 2, 2);
-            System.Windows.Forms.TreeNode treeNode16 = new System.Windows.Forms.TreeNode("Users & Groups", 0, 0, new System.Windows.Forms.TreeNode[] {
-            treeNode14,
-            treeNode15});
-            System.Windows.Forms.TreeNode treeNode17 = new System.Windows.Forms.TreeNode("Assign tests to users");
-            System.Windows.Forms.TreeNode treeNode18 = new System.Windows.Forms.TreeNode("Review passed tests");
-            System.Windows.Forms.TreeNode treeNode19 = new System.Windows.Forms.TreeNode("Users & Tests", new System.Windows.Forms.TreeNode[] {
-            treeNode17,
-            treeNode18});
-            System.Windows.Forms.TreeNode treeNode20 = new System.Windows.Forms.TreeNode("Load test");
-            System.Windows.Forms.TreeNode treeNode21 = new System.Windows.Forms.TreeNode("Tests explorer");
-            System.Windows.Forms.TreeNode treeNode22 = new System.Windows.Forms.TreeNode("Tests", new System.Windows.Forms.TreeNode[] {
-            treeNode20,
-            treeNode21});
-            System.Windows.Forms.TreeNode treeNode23 = new System.Windows.Forms.TreeNode("Reports");
-            System.Windows.Forms.TreeNode treeNode24 = new System.Windows.Forms.TreeNode("Server", 3, 3);
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("General");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Users", 1, 1);
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Groups", 2, 2);
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Users & Groups", 0, 0, new System.Windows.Forms.TreeNode[] {
+            treeNode2,
+            treeNode3});
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Assign tests to users");
+            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Review passed tests");
+            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Users & Tests", new System.Windows.Forms.TreeNode[] {
+            treeNode5,
+            treeNode6});
+            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Load test");
+            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Tests explorer");
+            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Tests", new System.Windows.Forms.TreeNode[] {
+            treeNode8,
+            treeNode9});
+            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("Reports");
+            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("Server", 3, 3);
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -62,7 +62,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.panelUsers = new System.Windows.Forms.Panel();
             this.rbByGroup = new System.Windows.Forms.RadioButton();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.cbUsersFormGroup = new System.Windows.Forms.ComboBox();
             this.rbAll = new System.Windows.Forms.RadioButton();
             this.rbArhived = new System.Windows.Forms.RadioButton();
             this.rbActive = new System.Windows.Forms.RadioButton();
@@ -212,45 +212,45 @@
             this.treeView1.ImageList = this.imageList1;
             this.treeView1.Location = new System.Drawing.Point(0, 49);
             this.treeView1.Name = "treeView1";
-            treeNode13.Name = "NodeGeneral";
-            treeNode13.Text = "General";
-            treeNode14.ImageIndex = 1;
-            treeNode14.Name = "NodeUsers";
-            treeNode14.SelectedImageIndex = 1;
-            treeNode14.Text = "Users";
-            treeNode15.ImageIndex = 2;
-            treeNode15.Name = "NodeGroups";
-            treeNode15.SelectedImageIndex = 2;
-            treeNode15.Text = "Groups";
-            treeNode16.ImageIndex = 0;
-            treeNode16.Name = "NodeUsersAndGroups";
-            treeNode16.SelectedImageIndex = 0;
-            treeNode16.Text = "Users & Groups";
-            treeNode17.Name = "NodeAssignTestsToUsers";
-            treeNode17.Text = "Assign tests to users";
-            treeNode18.Name = "NodeReviwPassedTests";
-            treeNode18.Text = "Review passed tests";
-            treeNode19.Name = "NodeUsersAndTests";
-            treeNode19.Text = "Users & Tests";
-            treeNode20.Name = "NodeLoadTest";
-            treeNode20.Text = "Load test";
-            treeNode21.Name = "NodeTestsExplorer";
-            treeNode21.Text = "Tests explorer";
-            treeNode22.Name = "NodeTests";
-            treeNode22.Text = "Tests";
-            treeNode23.Name = "NodeReports";
-            treeNode23.Text = "Reports";
-            treeNode24.ImageIndex = 3;
-            treeNode24.Name = "NodeServer";
-            treeNode24.SelectedImageIndex = 3;
-            treeNode24.Text = "Server";
+            treeNode1.Name = "NodeGeneral";
+            treeNode1.Text = "General";
+            treeNode2.ImageIndex = 1;
+            treeNode2.Name = "NodeUsers";
+            treeNode2.SelectedImageIndex = 1;
+            treeNode2.Text = "Users";
+            treeNode3.ImageIndex = 2;
+            treeNode3.Name = "NodeGroups";
+            treeNode3.SelectedImageIndex = 2;
+            treeNode3.Text = "Groups";
+            treeNode4.ImageIndex = 0;
+            treeNode4.Name = "NodeUsersAndGroups";
+            treeNode4.SelectedImageIndex = 0;
+            treeNode4.Text = "Users & Groups";
+            treeNode5.Name = "NodeAssignTestsToUsers";
+            treeNode5.Text = "Assign tests to users";
+            treeNode6.Name = "NodeReviwPassedTests";
+            treeNode6.Text = "Review passed tests";
+            treeNode7.Name = "NodeUsersAndTests";
+            treeNode7.Text = "Users & Tests";
+            treeNode8.Name = "NodeLoadTest";
+            treeNode8.Text = "Load test";
+            treeNode9.Name = "NodeTestsExplorer";
+            treeNode9.Text = "Tests explorer";
+            treeNode10.Name = "NodeTests";
+            treeNode10.Text = "Tests";
+            treeNode11.Name = "NodeReports";
+            treeNode11.Text = "Reports";
+            treeNode12.ImageIndex = 3;
+            treeNode12.Name = "NodeServer";
+            treeNode12.SelectedImageIndex = 3;
+            treeNode12.Text = "Server";
             this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode13,
-            treeNode16,
-            treeNode19,
-            treeNode22,
-            treeNode23,
-            treeNode24});
+            treeNode1,
+            treeNode4,
+            treeNode7,
+            treeNode10,
+            treeNode11,
+            treeNode12});
             this.treeView1.SelectedImageIndex = 0;
             this.treeView1.Size = new System.Drawing.Size(214, 613);
             this.treeView1.TabIndex = 4;
@@ -338,7 +338,7 @@
             // panelUsers
             // 
             this.panelUsers.Controls.Add(this.rbByGroup);
-            this.panelUsers.Controls.Add(this.comboBox1);
+            this.panelUsers.Controls.Add(this.cbUsersFormGroup);
             this.panelUsers.Controls.Add(this.rbAll);
             this.panelUsers.Controls.Add(this.rbArhived);
             this.panelUsers.Controls.Add(this.rbActive);
@@ -362,15 +362,18 @@
             this.rbByGroup.TabIndex = 36;
             this.rbByGroup.Text = "By group";
             this.rbByGroup.UseVisualStyleBackColor = true;
+            this.rbByGroup.CheckedChanged += new System.EventHandler(this.rbByGroup_CheckedChanged);
             // 
-            // comboBox1
+            // cbUsersFormGroup
             // 
-            this.comboBox1.Enabled = false;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(782, 33);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(237, 23);
-            this.comboBox1.TabIndex = 35;
+            this.cbUsersFormGroup.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbUsersFormGroup.Enabled = false;
+            this.cbUsersFormGroup.FormattingEnabled = true;
+            this.cbUsersFormGroup.Location = new System.Drawing.Point(782, 33);
+            this.cbUsersFormGroup.Name = "cbUsersFormGroup";
+            this.cbUsersFormGroup.Size = new System.Drawing.Size(237, 23);
+            this.cbUsersFormGroup.TabIndex = 35;
+            this.cbUsersFormGroup.SelectedIndexChanged += new System.EventHandler(this.cbUsersFormGroup_SelectedIndexChanged);
             // 
             // rbAll
             // 
@@ -381,6 +384,7 @@
             this.rbAll.TabIndex = 34;
             this.rbAll.Text = "All";
             this.rbAll.UseVisualStyleBackColor = true;
+            this.rbAll.Click += new System.EventHandler(this.UsersForm_RadioButtton_Click);
             // 
             // rbArhived
             // 
@@ -391,22 +395,25 @@
             this.rbArhived.TabIndex = 33;
             this.rbArhived.Text = "Only arhived";
             this.rbArhived.UseVisualStyleBackColor = true;
+            this.rbArhived.Click += new System.EventHandler(this.UsersForm_RadioButtton_Click);
             // 
             // rbActive
             // 
             this.rbActive.AutoSize = true;
             this.rbActive.Checked = true;
-            this.rbActive.Location = new System.Drawing.Point(453, 33);
+            this.rbActive.Location = new System.Drawing.Point(455, 33);
             this.rbActive.Name = "rbActive";
-            this.rbActive.Size = new System.Drawing.Size(83, 19);
+            this.rbActive.Size = new System.Drawing.Size(85, 19);
             this.rbActive.TabIndex = 32;
             this.rbActive.TabStop = true;
-            this.rbActive.Text = "Only active";
+            this.rbActive.Text = "Only actual";
             this.rbActive.UseVisualStyleBackColor = true;
+            this.rbActive.Click += new System.EventHandler(this.UsersForm_RadioButtton_Click);
             // 
             // toolStrip5
             // 
             this.toolStrip5.Dock = System.Windows.Forms.DockStyle.None;
+            this.toolStrip5.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip5.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripButtonAddUser,
             this.toolStripButtonAddUserByCopy,
@@ -417,7 +424,7 @@
             this.toolStrip5.Location = new System.Drawing.Point(19, 40);
             this.toolStrip5.Name = "toolStrip5";
             this.toolStrip5.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.toolStrip5.Size = new System.Drawing.Size(155, 27);
+            this.toolStrip5.Size = new System.Drawing.Size(115, 27);
             this.toolStrip5.TabIndex = 31;
             this.toolStrip5.Text = "toolStrip5";
             // 
@@ -442,6 +449,7 @@
             this.toolStripButtonAddUserByCopy.Padding = new System.Windows.Forms.Padding(2);
             this.toolStripButtonAddUserByCopy.Size = new System.Drawing.Size(24, 24);
             this.toolStripButtonAddUserByCopy.ToolTipText = "Add user by copy";
+            this.toolStripButtonAddUserByCopy.Click += new System.EventHandler(this.toolStripButtonAddUserByCopy_Click);
             // 
             // toolStripSeparator1
             // 
@@ -459,6 +467,7 @@
             this.toolStripButtonEditUser.Padding = new System.Windows.Forms.Padding(2);
             this.toolStripButtonEditUser.Size = new System.Drawing.Size(24, 24);
             this.toolStripButtonEditUser.ToolTipText = "Edit user";
+            this.toolStripButtonEditUser.Click += new System.EventHandler(this.toolStripButtonEditUser_Click);
             // 
             // toolStripSeparator4
             // 
@@ -476,6 +485,7 @@
             this.toolStripButtonDeleteUser.Padding = new System.Windows.Forms.Padding(2);
             this.toolStripButtonDeleteUser.Size = new System.Drawing.Size(24, 24);
             this.toolStripButtonDeleteUser.ToolTipText = "Delete user";
+            this.toolStripButtonDeleteUser.Click += new System.EventHandler(this.toolStripButtonDeleteUser_Click);
             // 
             // label17
             // 
@@ -497,8 +507,11 @@
             this.dgvUsersForm_Users.Location = new System.Drawing.Point(19, 68);
             this.dgvUsersForm_Users.Name = "dgvUsersForm_Users";
             this.dgvUsersForm_Users.ReadOnly = true;
+            this.dgvUsersForm_Users.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvUsersForm_Users.Size = new System.Drawing.Size(1000, 523);
             this.dgvUsersForm_Users.TabIndex = 0;
+            this.dgvUsersForm_Users.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvUsersForm_Users_CellDoubleClick);
+            this.dgvUsersForm_Users.SelectionChanged += new System.EventHandler(this.dgvUsersForm_Users_SelectionChanged);
             // 
             // panelGroups
             // 
@@ -1354,7 +1367,7 @@
         private System.Windows.Forms.BindingSource bsTestsExplorerForm_Test2;
         private System.Windows.Forms.ToolStripButton toolStripButtonMoveL;
         private System.Windows.Forms.RadioButton rbByGroup;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cbUsersFormGroup;
         private System.Windows.Forms.RadioButton rbAll;
         private System.Windows.Forms.RadioButton rbArhived;
         private System.Windows.Forms.RadioButton rbActive;

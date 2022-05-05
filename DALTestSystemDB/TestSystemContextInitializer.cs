@@ -14,13 +14,23 @@ namespace DALTestingSystemDB
         {
             User user = new User() { 
                 Login = "Admin", 
-                Password = ("admin").GetSha512(), 
+                Password = ("admin").GetSha512(),
+                Description = "SUPER administrator",
                 IsAdmin = true, 
+                IsArhived = false,
+                IsDeletable = false,
                 RegisterDate = DateTime.Now };
 
             Group group = new Group() { 
-                Name = "Administrators", 
+                Name = "Administrators",
+                Description = "Default administrators group",
                 IsAdminGroup = true };
+
+            Group group1 = new Group()
+            {
+                Name = "Teachers",
+                IsAdminGroup = false
+            };
 
             Folder LOAD = new Folder()
             {
@@ -40,6 +50,7 @@ namespace DALTestingSystemDB
 
             context.Users.Add(user);
             context.Groups.Add(group);
+            context.Groups.Add(group1);
             group.Users.Add(user);
 
             context.Folders.Add(LOAD);
