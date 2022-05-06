@@ -29,20 +29,20 @@ namespace TestServer
             InitializeComponent();
         }
 
-        private void MainForm_Load(object sender, EventArgs e)
+        private async void MainForm_Load(object sender, EventArgs e)
         {
             activePanel = panelGeneral;
-            GenericUnitOfWork work = new GenericUnitOfWork(new TestSystemContext(ConfigurationManager.ConnectionStrings["conStr"].ConnectionString));
-            Globals.repoUser = work.Repository<User>();
-            Globals.repoGroup = work.Repository<Group>();
-            Globals.repoFolder = work.Repository<Folder>();
-            Globals.repoTest = work.Repository<DALTestingSystemDB.Test>();
-            Globals.repoQuestion = work.Repository<DALTestingSystemDB.Question>();
-            Globals.repoAnswer = work.Repository<DALTestingSystemDB.Answer>();
-            Globals.repoUserTest = work.Repository<UserTest>();
-            Globals.repoUserAnswer = work.Repository<UserAnswer>();
+            await Task.Run(() => 
+            {
+                Globals.repoGroup = Globals.work.Repository<Group>();
+                Globals.repoFolder = Globals.work.Repository<Folder>();
+                Globals.repoTest = Globals.work.Repository<DALTestingSystemDB.Test>();
+                Globals.repoQuestion = Globals.work.Repository<DALTestingSystemDB.Question>();
+                Globals.repoAnswer = Globals.work.Repository<DALTestingSystemDB.Answer>();
+                Globals.repoUserTest = Globals.work.Repository<UserTest>();
+                Globals.repoUserAnswer = Globals.work.Repository<UserAnswer>();
 
-            var a = Globals.repoUser.GetAll();
+            });
 
             // DataGridView Sources
             dgvLoadTestForm_Questions.DataSource = bsLoadTestForm_Questions;
@@ -230,7 +230,8 @@ namespace TestServer
             {
                 selector = UsersFormSelector.None;
                 UsersForm_LoadUsersBySelector(selector);
-                await Task.Run(() => cbUsersFormGroup.Items.AddRange(Globals.repoGroup.GetAll().ToArray()));
+                Group[] tmp;
+                cbUsersFormGroup.Items.AddRange(await Task.Run(() => tmp = Globals.repoGroup.GetAll().ToArray()));
             }
         }
 

@@ -13,7 +13,7 @@ namespace SHA512Lib
         {
             using (SHA512 sha = new SHA512Managed())
             {
-                return sha.ComputeHash(Encoding.UTF8.GetBytes(str)).ToString();
+                return Convert.ToBase64String(sha.ComputeHash(Encoding.UTF8.GetBytes(str)));
             }
         }
     }

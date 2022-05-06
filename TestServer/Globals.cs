@@ -10,6 +10,7 @@ namespace TestServer
 {
     public static class Globals
     {
+        public static GenericUnitOfWork work;
         public static IGenericRepository<User> repoUser;
         public static IGenericRepository<Group> repoGroup;
         public static IGenericRepository<Folder> repoFolder;
