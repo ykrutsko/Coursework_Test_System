@@ -40,6 +40,10 @@ namespace DALTestingSystemDB
             foreach (Group group in Groups)
                 groupsClone.Add(group);
 
+            ICollection<UserTest> userTestsClone = new List<UserTest>();
+            foreach (UserTest userTest in userTestsClone)
+                userTestsClone.Add(userTest);
+
             return new User
             {
                 FirstName = this.FirstName,
@@ -49,7 +53,8 @@ namespace DALTestingSystemDB
                 IsAdmin = this.IsAdmin,
                 IsDeletable = true,
                 IsArhived = false,
-                Groups = groupsClone
+                Groups = groupsClone,
+                UserTests = userTestsClone
             };
         }
 
