@@ -22,6 +22,7 @@ namespace TestServer
         Panel activePanel;
         bool flagTestsExplorer = false;
         bool flagUsers = false;
+        bool flagGroups = false;
 
 
         public MainForm()
@@ -267,7 +268,70 @@ namespace TestServer
         }
         #endregion UsersForm
 
+        #region GroupsForm
+        Group GroupsForm_currGroup;
+        User GroupsForm_currUser;
+        private async void panelGroups_VisibleChanged(object sender, EventArgs e)
+        {
+            if (panelGroups.Visible == false)
+                return;
+            // Second time
+            if (flagGroups)
+            {
+                bsGroupsForm_Groups.DataSource = await Task.Run(() => Globals.repoGroup.GetAll());
+                return;
+            }
+            // Groups
+            dgvGroupsForm_Groups.Columns.Clear();
+            bsGroupsForm_Groups.DataSource = await Task.Run(() => Globals.repoGroup.GetAll());
+            dgvGroupsForm_Groups.DataSource = bsGroupsForm_Groups;
+            dgvGroupsForm_Groups.Columns[4].Visible = false;
+            dgvGroupsForm_Groups.Columns[5].Visible = false;
+            dgvGroupsForm_Groups.Columns[0].Width = 50;
+            dgvGroupsForm_Groups.Columns[1].Width = 140;
+            dgvGroupsForm_Groups.Columns[2].Width = 190;
+            dgvGroupsForm_Groups.Columns[3].Width = 90;
+            dgvGroupsForm_Groups.Columns[3].HeaderText = "Admin group";
 
+            //Users
+            dgvGroupsForm_Users.Columns.Clear();
+            bsGroupsForm_Users.DataSource = await Task.Run(() => Globals.repoGroup.FindById(GroupsForm_currGroup.Id).Users);
+            dgvGroupsForm_Users.DataSource = bsGroupsForm_Users;
+            for (int i = 4; i <= 11; i++)
+                dgvGroupsForm_Users.Columns[i].Visible = false;
+            dgvGroupsForm_Users.Columns[0].Width = 50;
+            dgvGroupsForm_Users.Columns[1].Width = 120;
+            dgvGroupsForm_Users.Columns[2].Width = 120;
+            dgvGroupsForm_Users.Columns[3].Width = 100;
+
+            flagGroups = true;
+        }
+
+        private async void dgvGroupsForm_Groups_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dgvGroupsForm_Groups.SelectedRows.Count == 0)
+            {
+                GroupsForm_currGroup = null;
+                return;
+            }
+            GroupsForm_currGroup = dgvGroupsForm_Groups.CurrentRow.DataBoundItem as Group;
+            bsGroupsForm_Users.DataSource = await Task.Run(() => Globals.repoGroup.FindById(GroupsForm_currGroup.Id).Users);
+        }
+
+        private void dgvGroupsForm_Users_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dgvGroupsForm_Users.SelectedRows.Count == 0)
+            {
+                GroupsForm_currUser = null;
+                return;
+            }
+            GroupsForm_currUser = dgvGroupsForm_Users.CurrentRow.DataBoundItem as User;
+        }
+
+
+
+
+        #endregion Groups
 
 
 
@@ -612,6 +676,9 @@ namespace TestServer
         {
 
         }
+
+
+
 
 
 

@@ -29,24 +29,24 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("General");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Users", 1, 1);
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Groups", 2, 2);
-            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Users & Groups", 0, 0, new System.Windows.Forms.TreeNode[] {
-            treeNode2,
-            treeNode3});
-            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Assign tests to users");
-            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Review passed tests");
-            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Users & Tests", new System.Windows.Forms.TreeNode[] {
-            treeNode5,
-            treeNode6});
-            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Load test");
-            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Tests explorer");
-            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Tests", new System.Windows.Forms.TreeNode[] {
-            treeNode8,
-            treeNode9});
-            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("Reports");
-            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("Server", 3, 3);
+            System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("General");
+            System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("Users", 1, 1);
+            System.Windows.Forms.TreeNode treeNode15 = new System.Windows.Forms.TreeNode("Groups", 2, 2);
+            System.Windows.Forms.TreeNode treeNode16 = new System.Windows.Forms.TreeNode("Users & Groups", 0, 0, new System.Windows.Forms.TreeNode[] {
+            treeNode14,
+            treeNode15});
+            System.Windows.Forms.TreeNode treeNode17 = new System.Windows.Forms.TreeNode("Assign tests to users");
+            System.Windows.Forms.TreeNode treeNode18 = new System.Windows.Forms.TreeNode("Review passed tests");
+            System.Windows.Forms.TreeNode treeNode19 = new System.Windows.Forms.TreeNode("Users & Tests", new System.Windows.Forms.TreeNode[] {
+            treeNode17,
+            treeNode18});
+            System.Windows.Forms.TreeNode treeNode20 = new System.Windows.Forms.TreeNode("Load test");
+            System.Windows.Forms.TreeNode treeNode21 = new System.Windows.Forms.TreeNode("Tests explorer");
+            System.Windows.Forms.TreeNode treeNode22 = new System.Windows.Forms.TreeNode("Tests", new System.Windows.Forms.TreeNode[] {
+            treeNode20,
+            treeNode21});
+            System.Windows.Forms.TreeNode treeNode23 = new System.Windows.Forms.TreeNode("Reports");
+            System.Windows.Forms.TreeNode treeNode24 = new System.Windows.Forms.TreeNode("Server", 3, 3);
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -76,6 +76,27 @@
             this.label17 = new System.Windows.Forms.Label();
             this.dgvUsersForm_Users = new System.Windows.Forms.DataGridView();
             this.panelGroups = new System.Windows.Forms.Panel();
+            this.label26 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label25 = new System.Windows.Forms.Label();
+            this.label24 = new System.Windows.Forms.Label();
+            this.toolStrip7 = new System.Windows.Forms.ToolStrip();
+            this.toolStripButtonAddUserToGroup = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButtonRemoveUserFromGroup = new System.Windows.Forms.ToolStripButton();
+            this.dgvGroupsForm_Users = new System.Windows.Forms.DataGridView();
+            this.toolStrip6 = new System.Windows.Forms.ToolStrip();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
+            this.dgvGroupsForm_Groups = new System.Windows.Forms.DataGridView();
+            this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.GroupName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Description = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IsAdminGroup = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label18 = new System.Windows.Forms.Label();
             this.panelUsersAndTests = new System.Windows.Forms.Panel();
             this.label19 = new System.Windows.Forms.Label();
@@ -145,12 +166,23 @@
             this.bsTestsExplorerForm_Folder2 = new System.Windows.Forms.BindingSource(this.components);
             this.bsTestsExplorerForm_Test2 = new System.Windows.Forms.BindingSource(this.components);
             this.bsUsersForm_Users = new System.Windows.Forms.BindingSource(this.components);
+            this.bsGroupsForm_Groups = new System.Windows.Forms.BindingSource(this.components);
+            this.bsGoupsForm_Users = new System.Windows.Forms.BindingSource(this.components);
+            this.bsGroupsForm_Users = new System.Windows.Forms.BindingSource(this.components);
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelGeneral.SuspendLayout();
             this.panelUsersAndGroups.SuspendLayout();
             this.panelUsers.SuspendLayout();
             this.toolStrip5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsersForm_Users)).BeginInit();
             this.panelGroups.SuspendLayout();
+            this.toolStrip7.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvGroupsForm_Users)).BeginInit();
+            this.toolStrip6.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvGroupsForm_Groups)).BeginInit();
             this.panelUsersAndTests.SuspendLayout();
             this.panelAssignTestsToUsers.SuspendLayout();
             this.panelReviewPassedTests.SuspendLayout();
@@ -178,6 +210,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.bsTestsExplorerForm_Folder2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsTestsExplorerForm_Test2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsUsersForm_Users)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsGroupsForm_Groups)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsGoupsForm_Users)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsGroupsForm_Users)).BeginInit();
             this.SuspendLayout();
             // 
             // statusStrip1
@@ -212,45 +247,45 @@
             this.treeView1.ImageList = this.imageList1;
             this.treeView1.Location = new System.Drawing.Point(0, 49);
             this.treeView1.Name = "treeView1";
-            treeNode1.Name = "NodeGeneral";
-            treeNode1.Text = "General";
-            treeNode2.ImageIndex = 1;
-            treeNode2.Name = "NodeUsers";
-            treeNode2.SelectedImageIndex = 1;
-            treeNode2.Text = "Users";
-            treeNode3.ImageIndex = 2;
-            treeNode3.Name = "NodeGroups";
-            treeNode3.SelectedImageIndex = 2;
-            treeNode3.Text = "Groups";
-            treeNode4.ImageIndex = 0;
-            treeNode4.Name = "NodeUsersAndGroups";
-            treeNode4.SelectedImageIndex = 0;
-            treeNode4.Text = "Users & Groups";
-            treeNode5.Name = "NodeAssignTestsToUsers";
-            treeNode5.Text = "Assign tests to users";
-            treeNode6.Name = "NodeReviwPassedTests";
-            treeNode6.Text = "Review passed tests";
-            treeNode7.Name = "NodeUsersAndTests";
-            treeNode7.Text = "Users & Tests";
-            treeNode8.Name = "NodeLoadTest";
-            treeNode8.Text = "Load test";
-            treeNode9.Name = "NodeTestsExplorer";
-            treeNode9.Text = "Tests explorer";
-            treeNode10.Name = "NodeTests";
-            treeNode10.Text = "Tests";
-            treeNode11.Name = "NodeReports";
-            treeNode11.Text = "Reports";
-            treeNode12.ImageIndex = 3;
-            treeNode12.Name = "NodeServer";
-            treeNode12.SelectedImageIndex = 3;
-            treeNode12.Text = "Server";
+            treeNode13.Name = "NodeGeneral";
+            treeNode13.Text = "General";
+            treeNode14.ImageIndex = 1;
+            treeNode14.Name = "NodeUsers";
+            treeNode14.SelectedImageIndex = 1;
+            treeNode14.Text = "Users";
+            treeNode15.ImageIndex = 2;
+            treeNode15.Name = "NodeGroups";
+            treeNode15.SelectedImageIndex = 2;
+            treeNode15.Text = "Groups";
+            treeNode16.ImageIndex = 0;
+            treeNode16.Name = "NodeUsersAndGroups";
+            treeNode16.SelectedImageIndex = 0;
+            treeNode16.Text = "Users & Groups";
+            treeNode17.Name = "NodeAssignTestsToUsers";
+            treeNode17.Text = "Assign tests to users";
+            treeNode18.Name = "NodeReviwPassedTests";
+            treeNode18.Text = "Review passed tests";
+            treeNode19.Name = "NodeUsersAndTests";
+            treeNode19.Text = "Users & Tests";
+            treeNode20.Name = "NodeLoadTest";
+            treeNode20.Text = "Load test";
+            treeNode21.Name = "NodeTestsExplorer";
+            treeNode21.Text = "Tests explorer";
+            treeNode22.Name = "NodeTests";
+            treeNode22.Text = "Tests";
+            treeNode23.Name = "NodeReports";
+            treeNode23.Text = "Reports";
+            treeNode24.ImageIndex = 3;
+            treeNode24.Name = "NodeServer";
+            treeNode24.SelectedImageIndex = 3;
+            treeNode24.Text = "Server";
             this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode1,
-            treeNode4,
-            treeNode7,
-            treeNode10,
-            treeNode11,
-            treeNode12});
+            treeNode13,
+            treeNode16,
+            treeNode19,
+            treeNode22,
+            treeNode23,
+            treeNode24});
             this.treeView1.SelectedImageIndex = 0;
             this.treeView1.Size = new System.Drawing.Size(214, 613);
             this.treeView1.TabIndex = 4;
@@ -345,10 +380,9 @@
             this.panelUsers.Controls.Add(this.toolStrip5);
             this.panelUsers.Controls.Add(this.label17);
             this.panelUsers.Controls.Add(this.dgvUsersForm_Users);
-            this.panelUsers.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelUsers.Location = new System.Drawing.Point(217, 49);
+            this.panelUsers.Location = new System.Drawing.Point(492, 197);
             this.panelUsers.Name = "panelUsers";
-            this.panelUsers.Size = new System.Drawing.Size(1044, 613);
+            this.panelUsers.Size = new System.Drawing.Size(200, 97);
             this.panelUsers.TabIndex = 11;
             this.panelUsers.Visible = false;
             this.panelUsers.VisibleChanged += new System.EventHandler(this.panelUsers_VisibleChanged);
@@ -515,12 +549,235 @@
             // 
             // panelGroups
             // 
+            this.panelGroups.Controls.Add(this.label26);
+            this.panelGroups.Controls.Add(this.textBox1);
+            this.panelGroups.Controls.Add(this.label25);
+            this.panelGroups.Controls.Add(this.label24);
+            this.panelGroups.Controls.Add(this.toolStrip7);
+            this.panelGroups.Controls.Add(this.dgvGroupsForm_Users);
+            this.panelGroups.Controls.Add(this.toolStrip6);
+            this.panelGroups.Controls.Add(this.dgvGroupsForm_Groups);
             this.panelGroups.Controls.Add(this.label18);
-            this.panelGroups.Location = new System.Drawing.Point(732, 194);
+            this.panelGroups.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelGroups.Location = new System.Drawing.Point(217, 49);
             this.panelGroups.Name = "panelGroups";
-            this.panelGroups.Size = new System.Drawing.Size(200, 100);
+            this.panelGroups.Size = new System.Drawing.Size(1044, 613);
             this.panelGroups.TabIndex = 12;
             this.panelGroups.Visible = false;
+            this.panelGroups.VisibleChanged += new System.EventHandler(this.panelGroups_VisibleChanged);
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Location = new System.Drawing.Point(16, 576);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(116, 15);
+            this.label26.TabIndex = 39;
+            this.label26.Text = "Find group by name";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(138, 573);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(411, 21);
+            this.textBox1.TabIndex = 38;
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(883, 50);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(136, 15);
+            this.label25.TabIndex = 37;
+            this.label25.Text = "Users in selected group";
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(502, 50);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(47, 15);
+            this.label24.TabIndex = 36;
+            this.label24.Text = "Groups";
+            // 
+            // toolStrip7
+            // 
+            this.toolStrip7.Dock = System.Windows.Forms.DockStyle.None;
+            this.toolStrip7.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolStrip7.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripButtonAddUserToGroup,
+            this.toolStripSeparator9,
+            this.toolStripButtonRemoveUserFromGroup});
+            this.toolStrip7.Location = new System.Drawing.Point(569, 38);
+            this.toolStrip7.Name = "toolStrip7";
+            this.toolStrip7.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
+            this.toolStrip7.Size = new System.Drawing.Size(59, 27);
+            this.toolStrip7.TabIndex = 35;
+            this.toolStrip7.Text = "toolStrip7";
+            // 
+            // toolStripButtonAddUserToGroup
+            // 
+            this.toolStripButtonAddUserToGroup.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonAddUserToGroup.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonAddUserToGroup.Image")));
+            this.toolStripButtonAddUserToGroup.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonAddUserToGroup.Name = "toolStripButtonAddUserToGroup";
+            this.toolStripButtonAddUserToGroup.Padding = new System.Windows.Forms.Padding(2);
+            this.toolStripButtonAddUserToGroup.Size = new System.Drawing.Size(24, 24);
+            this.toolStripButtonAddUserToGroup.ToolTipText = "Add user to selected group";
+            // 
+            // toolStripSeparator9
+            // 
+            this.toolStripSeparator9.Margin = new System.Windows.Forms.Padding(0, 0, 2, 0);
+            this.toolStripSeparator9.Name = "toolStripSeparator9";
+            this.toolStripSeparator9.Size = new System.Drawing.Size(6, 27);
+            // 
+            // toolStripButtonRemoveUserFromGroup
+            // 
+            this.toolStripButtonRemoveUserFromGroup.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonRemoveUserFromGroup.Enabled = false;
+            this.toolStripButtonRemoveUserFromGroup.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonRemoveUserFromGroup.Image")));
+            this.toolStripButtonRemoveUserFromGroup.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonRemoveUserFromGroup.Name = "toolStripButtonRemoveUserFromGroup";
+            this.toolStripButtonRemoveUserFromGroup.Padding = new System.Windows.Forms.Padding(2);
+            this.toolStripButtonRemoveUserFromGroup.Size = new System.Drawing.Size(24, 24);
+            this.toolStripButtonRemoveUserFromGroup.ToolTipText = "Remove user from selected group";
+            // 
+            // dgvGroupsForm_Users
+            // 
+            this.dgvGroupsForm_Users.AllowUserToAddRows = false;
+            this.dgvGroupsForm_Users.AllowUserToDeleteRows = false;
+            this.dgvGroupsForm_Users.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvGroupsForm_Users.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column1,
+            this.Column2,
+            this.Column3,
+            this.Column4});
+            this.dgvGroupsForm_Users.Location = new System.Drawing.Point(569, 68);
+            this.dgvGroupsForm_Users.Name = "dgvGroupsForm_Users";
+            this.dgvGroupsForm_Users.ReadOnly = true;
+            this.dgvGroupsForm_Users.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvGroupsForm_Users.Size = new System.Drawing.Size(450, 523);
+            this.dgvGroupsForm_Users.TabIndex = 34;
+            this.dgvGroupsForm_Users.SelectionChanged += new System.EventHandler(this.dgvGroupsForm_Users_SelectionChanged);
+            // 
+            // toolStrip6
+            // 
+            this.toolStrip6.Dock = System.Windows.Forms.DockStyle.None;
+            this.toolStrip6.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolStrip6.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripButton1,
+            this.toolStripButton2,
+            this.toolStripSeparator6,
+            this.toolStripButton4,
+            this.toolStripSeparator7,
+            this.toolStripButton5});
+            this.toolStrip6.Location = new System.Drawing.Point(19, 38);
+            this.toolStrip6.Name = "toolStrip6";
+            this.toolStrip6.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
+            this.toolStrip6.Size = new System.Drawing.Size(115, 27);
+            this.toolStrip6.TabIndex = 33;
+            this.toolStrip6.Text = "toolStrip6";
+            // 
+            // toolStripButton1
+            // 
+            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Padding = new System.Windows.Forms.Padding(2);
+            this.toolStripButton1.Size = new System.Drawing.Size(24, 24);
+            this.toolStripButton1.ToolTipText = "Add user";
+            // 
+            // toolStripButton2
+            // 
+            this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton2.Enabled = false;
+            this.toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton2.Image")));
+            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton2.Name = "toolStripButton2";
+            this.toolStripButton2.Padding = new System.Windows.Forms.Padding(2);
+            this.toolStripButton2.Size = new System.Drawing.Size(24, 24);
+            this.toolStripButton2.ToolTipText = "Add user by copy";
+            // 
+            // toolStripSeparator6
+            // 
+            this.toolStripSeparator6.Margin = new System.Windows.Forms.Padding(0, 0, 2, 0);
+            this.toolStripSeparator6.Name = "toolStripSeparator6";
+            this.toolStripSeparator6.Size = new System.Drawing.Size(6, 27);
+            // 
+            // toolStripButton4
+            // 
+            this.toolStripButton4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton4.Enabled = false;
+            this.toolStripButton4.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton4.Image")));
+            this.toolStripButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton4.Name = "toolStripButton4";
+            this.toolStripButton4.Padding = new System.Windows.Forms.Padding(2);
+            this.toolStripButton4.Size = new System.Drawing.Size(24, 24);
+            this.toolStripButton4.ToolTipText = "Edit user";
+            // 
+            // toolStripSeparator7
+            // 
+            this.toolStripSeparator7.Margin = new System.Windows.Forms.Padding(0, 0, 2, 0);
+            this.toolStripSeparator7.Name = "toolStripSeparator7";
+            this.toolStripSeparator7.Size = new System.Drawing.Size(6, 27);
+            // 
+            // toolStripButton5
+            // 
+            this.toolStripButton5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton5.Enabled = false;
+            this.toolStripButton5.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton5.Image")));
+            this.toolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton5.Name = "toolStripButton5";
+            this.toolStripButton5.Padding = new System.Windows.Forms.Padding(2);
+            this.toolStripButton5.Size = new System.Drawing.Size(24, 24);
+            this.toolStripButton5.ToolTipText = "Delete user";
+            // 
+            // dgvGroupsForm_Groups
+            // 
+            this.dgvGroupsForm_Groups.AllowUserToAddRows = false;
+            this.dgvGroupsForm_Groups.AllowUserToDeleteRows = false;
+            this.dgvGroupsForm_Groups.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvGroupsForm_Groups.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Id,
+            this.GroupName,
+            this.Description,
+            this.IsAdminGroup});
+            this.dgvGroupsForm_Groups.Location = new System.Drawing.Point(19, 68);
+            this.dgvGroupsForm_Groups.Name = "dgvGroupsForm_Groups";
+            this.dgvGroupsForm_Groups.ReadOnly = true;
+            this.dgvGroupsForm_Groups.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvGroupsForm_Groups.Size = new System.Drawing.Size(530, 499);
+            this.dgvGroupsForm_Groups.TabIndex = 32;
+            this.dgvGroupsForm_Groups.SelectionChanged += new System.EventHandler(this.dgvGroupsForm_Groups_SelectionChanged);
+            // 
+            // Id
+            // 
+            this.Id.HeaderText = "Id";
+            this.Id.Name = "Id";
+            this.Id.ReadOnly = true;
+            this.Id.Width = 50;
+            // 
+            // GroupName
+            // 
+            this.GroupName.HeaderText = "GroupName";
+            this.GroupName.Name = "GroupName";
+            this.GroupName.ReadOnly = true;
+            this.GroupName.Width = 140;
+            // 
+            // Description
+            // 
+            this.Description.HeaderText = "Description";
+            this.Description.Name = "Description";
+            this.Description.ReadOnly = true;
+            this.Description.Width = 190;
+            // 
+            // IsAdminGroup
+            // 
+            this.IsAdminGroup.HeaderText = "Admin group";
+            this.IsAdminGroup.Name = "IsAdminGroup";
+            this.IsAdminGroup.ReadOnly = true;
+            this.IsAdminGroup.Width = 90;
             // 
             // label18
             // 
@@ -1201,14 +1458,41 @@
             this.label11.TabIndex = 3;
             this.label11.Text = "Author";
             // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "Id";
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            this.Column1.Width = 50;
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "Login";
+            this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
+            // 
+            // Column3
+            // 
+            this.Column3.HeaderText = "First name";
+            this.Column3.Name = "Column3";
+            this.Column3.ReadOnly = true;
+            this.Column3.Width = 120;
+            // 
+            // Column4
+            // 
+            this.Column4.HeaderText = "Last name";
+            this.Column4.Name = "Column4";
+            this.Column4.ReadOnly = true;
+            this.Column4.Width = 120;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1261, 684);
+            this.Controls.Add(this.panelGroups);
             this.Controls.Add(this.panelUsers);
             this.Controls.Add(this.panelTestsExplorer);
-            this.Controls.Add(this.panelGroups);
             this.Controls.Add(this.panelLoadTest);
             this.Controls.Add(this.panelTests);
             this.Controls.Add(this.panelUsersAndGroups);
@@ -1238,6 +1522,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsersForm_Users)).EndInit();
             this.panelGroups.ResumeLayout(false);
             this.panelGroups.PerformLayout();
+            this.toolStrip7.ResumeLayout(false);
+            this.toolStrip7.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvGroupsForm_Users)).EndInit();
+            this.toolStrip6.ResumeLayout(false);
+            this.toolStrip6.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvGroupsForm_Groups)).EndInit();
             this.panelUsersAndTests.ResumeLayout(false);
             this.panelUsersAndTests.PerformLayout();
             this.panelAssignTestsToUsers.ResumeLayout(false);
@@ -1275,6 +1565,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.bsTestsExplorerForm_Folder2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsTestsExplorerForm_Test2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsUsersForm_Users)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsGroupsForm_Groups)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsGoupsForm_Users)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsGroupsForm_Users)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1379,6 +1672,34 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripButton toolStripButtonDeleteUser;
         private System.Windows.Forms.BindingSource bsUsersForm_Users;
+        private System.Windows.Forms.ToolStrip toolStrip6;
+        private System.Windows.Forms.ToolStripButton toolStripButton1;
+        private System.Windows.Forms.ToolStripButton toolStripButton2;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
+        private System.Windows.Forms.ToolStripButton toolStripButton4;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
+        private System.Windows.Forms.ToolStripButton toolStripButton5;
+        private System.Windows.Forms.DataGridView dgvGroupsForm_Groups;
+        private System.Windows.Forms.DataGridView dgvGroupsForm_Users;
+        private System.Windows.Forms.ToolStrip toolStrip7;
+        private System.Windows.Forms.ToolStripButton toolStripButtonAddUserToGroup;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
+        private System.Windows.Forms.ToolStripButton toolStripButtonRemoveUserFromGroup;
+        private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.BindingSource bsGroupsForm_Groups;
+        private System.Windows.Forms.BindingSource bsGoupsForm_Users;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Id;
+        private System.Windows.Forms.DataGridViewTextBoxColumn GroupName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Description;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IsAdminGroup;
+        private System.Windows.Forms.BindingSource bsGroupsForm_Users;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
     }
 }
 
