@@ -61,7 +61,7 @@ namespace TestServer
                     if (User.Id == 1)
                     {
                         cbIsAdmin.Visible = false;
-                        lbSuperAdmin.Location = new Point(78, 264);
+                        lbSuperAdmin.Location = new Point(91, 271);
                         lbSuperAdmin.Visible = true;
                     }
                     else
@@ -83,8 +83,8 @@ namespace TestServer
             dataGridView.Columns[4].Visible = false;
             dataGridView.Columns[5].Visible = false;
             dataGridView.Columns[0].Width = 50;
-            dataGridView.Columns[1].Width = 140;
-            dataGridView.Columns[3].Width = 100;
+            dataGridView.Columns[1].Width = 190;
+            dataGridView.Columns[3].Width = 110;
             dataGridView.Columns[3].HeaderText = "Administrators";
             dataGridView.ClearSelection();
             WindowTitleText();
@@ -94,7 +94,10 @@ namespace TestServer
         private void btnOk_Click(object sender, EventArgs e)
         {
             User.Login = tbLogin.Text;
-            User.Password = tbPass.Text.GetSha512();
+            if(openMode != OpenMode.Edit || openMode == OpenMode.Edit && cbChangePass.Checked)
+            {
+                User.Password = tbPass.Text.GetSha512();
+            }
             User.FirstName = tbFN.Text;
             User.LastName = tbLN.Text;
             User.Description = tbDescription.Text;
@@ -124,13 +127,13 @@ namespace TestServer
             switch (openMode)
             {
                 case OpenMode.Add:
-                    this.Text = "User [Add mode]";
+                    this.Text = "New user [Add mode]";
                     break;
                 case OpenMode.AddByCopy:
-                    this.Text = "User [Add by copy mode]";
+                    this.Text = "New user [Add by copy mode]";
                     break;
                 case OpenMode.Edit:
-                    this.Text = "User [Edit mode]";
+                    this.Text = $"{User} [Edit mode]";
                     break;
             }
         }
@@ -141,9 +144,9 @@ namespace TestServer
                 && !(User.Id == 1 && (dataGridView.CurrentRow.DataBoundItem as DALTestingSystemDB.Group).Id == 1);
         }
 
-        private void toolStripButtonAddUserToGroup_Click(object sender, EventArgs e)
+        private async void toolStripButtonAddUserToGroup_Click(object sender, EventArgs e)
         {
-            var newGroupsForUser = Globals.repoGroup.GetAll().Except(User.Groups).ToList();
+            var newGroupsForUser = await Task.Run(() => Globals.repoGroup.GetAll().Except(User.Groups).ToList());
             if (!newGroupsForUser.Any())
             {
                 MessageBox.Show("No new groups for user!", "Test server", MessageBoxButtons.OK, MessageBoxIcon.Information);

@@ -22,9 +22,9 @@ namespace TestServer
         Panel activePanel;
         bool flagTestsExplorer = false;
         bool flagUsers = false;
-        bool flagGroups = false;
+        bool firstTimeGroups = true;
 
-
+        #region Main
         public MainForm()
         {
             InitializeComponent();
@@ -91,9 +91,9 @@ namespace TestServer
             activePanel.Dock = DockStyle.Fill;
             activePanel.Visible = true;
         }
+        #endregion Main
 
         #region UsersForm
-        enum UsersFormSelector { Active, Archived, All, ByGroup, None }
         UsersFormSelector selector = UsersFormSelector.Active;
         private async void panelUsers_VisibleChanged(object sender, EventArgs e)
         {
@@ -108,6 +108,7 @@ namespace TestServer
 
             selector = UsersFormSelector.Active;
             await Task.Run(() => UsersForm_LoadUsersBySelector(selector));
+            UsersForm_LoadUsersBySelector(selector);
             dgvUsersForm_Users.DataSource = bsUsersForm_Users;
             dgvUsersForm_Users.Columns[4].Visible = false;
             dgvUsersForm_Users.Columns[7].Visible = false;
@@ -127,8 +128,6 @@ namespace TestServer
             dgvUsersForm_Users.Columns[2].HeaderText = "Last name";
             dgvUsersForm_Users.Columns[6].HeaderText = "Is admin";
             dgvUsersForm_Users.Columns[9].HeaderText = "Register date";
-
-            dgvUsersForm_Users.ClearSelection();
             flagUsers = true;
         }
 
@@ -137,11 +136,11 @@ namespace TestServer
             UsersAddEditForm userForm = new UsersAddEditForm(OpenMode.Add);
             if(userForm.ShowDialog() == DialogResult.OK)
             {
-                await Task.Run(() =>
+                await Task.Run(() => 
                 {
                     Globals.repoUser.Add(userForm.User);
                     UsersForm_LoadUsersBySelector(selector);
-                });
+                }); 
             }
         }
 
@@ -150,11 +149,11 @@ namespace TestServer
             UsersAddEditForm userForm = new UsersAddEditForm(OpenMode.AddByCopy, (dgvUsersForm_Users.CurrentRow.DataBoundItem as User).PartClone());
             if (userForm.ShowDialog() == DialogResult.OK)
             {
-                await Task.Run(() =>
+                await Task.Run(() => 
                 {
                     Globals.repoUser.Add(userForm.User);
                     UsersForm_LoadUsersBySelector(selector);
-                });
+                });                 
             }
         }
 
@@ -164,9 +163,9 @@ namespace TestServer
             UsersAddEditForm userForm = new UsersAddEditForm(OpenMode.Edit, editableUser.FullClone());
             if (userForm.ShowDialog() == DialogResult.OK)
             {
+                editableUser.UpdateClone(userForm.User);
                 await Task.Run(() => 
                 {
-                    editableUser.UpdateClone(userForm.User);
                     Globals.repoUser.Update(editableUser);
                     UsersForm_LoadUsersBySelector(selector);
                 });
@@ -230,9 +229,8 @@ namespace TestServer
             else
             {
                 selector = UsersFormSelector.None;
-                UsersForm_LoadUsersBySelector(selector);
-                Group[] tmp;
-                cbUsersFormGroup.Items.AddRange(await Task.Run(() => tmp = Globals.repoGroup.GetAll().ToArray()));
+                await Task.Run(() => UsersForm_LoadUsersBySelector(selector));
+                cbUsersFormGroup.Items.AddRange(await Task.Run(() => Globals.repoGroup.GetAll().ToArray()));
             }
         }
 
@@ -250,19 +248,19 @@ namespace TestServer
             switch (selector)
             {
                 case UsersFormSelector.Active:
-                    bsUsersForm_Users.DataSource = Globals.repoUser.FindAll(x => !x.IsArhived);
+                    this.Invoke(new Action(() => bsUsersForm_Users.DataSource = Globals.repoUser.FindAll(x => !x.IsArhived)));
                     break;
                 case UsersFormSelector.Archived:
-                    bsUsersForm_Users.DataSource = Globals.repoUser.FindAll(x => x.IsArhived);
+                    this.Invoke(new Action(() => bsUsersForm_Users.DataSource = Globals.repoUser.FindAll(x => x.IsArhived)));
                     break;
                 case UsersFormSelector.All:
-                    bsUsersForm_Users.DataSource = Globals.repoUser.GetAll();
+                    this.Invoke(new Action(() => bsUsersForm_Users.DataSource = Globals.repoUser.GetAll()));
                     break;
                 case UsersFormSelector.ByGroup:
-                    bsUsersForm_Users.DataSource = Globals.repoGroup.FindById((cbUsersFormGroup.SelectedItem as Group).Id).Users;
+                    this.Invoke(new Action(() => bsUsersForm_Users.DataSource = Globals.repoGroup.FindById((cbUsersFormGroup.SelectedItem as Group).Id).Users));
                     break;
                 case UsersFormSelector.None:
-                    bsUsersForm_Users.Clear();
+                    this.Invoke(new Action(() => bsUsersForm_Users.Clear()));
                     break;
             }
         }
@@ -271,80 +269,178 @@ namespace TestServer
         #region GroupsForm
         Group GroupsForm_currGroup;
         User GroupsForm_currUser;
+
         private async void panelGroups_VisibleChanged(object sender, EventArgs e)
         {
-            if (panelGroups.Visible == false)
+            if (panelGroups.Visible == false) return;
+
+            this.dgvGroupsForm_Groups.SelectionChanged -= new System.EventHandler(this.dgvGroupsForm_Groups_SelectionChanged);
+            if (firstTimeGroups)
+            {                
+                // Groups
+                dgvGroupsForm_Groups.Columns.Clear();
+                bsGroupsForm_Groups.DataSource = await Task.Run(() => Globals.repoGroup.GetAll());
+                dgvGroupsForm_Groups.DataSource = bsGroupsForm_Groups;
+                dgvGroupsForm_Groups.Columns[4].Visible = false;
+                dgvGroupsForm_Groups.Columns[5].Visible = false;
+                dgvGroupsForm_Groups.Columns[0].Width = 50;
+                dgvGroupsForm_Groups.Columns[1].Width = 140;
+                dgvGroupsForm_Groups.Columns[2].Width = 190;
+                dgvGroupsForm_Groups.Columns[3].Width = 90;
+                dgvGroupsForm_Groups.Columns[3].HeaderText = "Admin group";
+                GroupsForm_currGroup = dgvGroupsForm_Groups.CurrentRow.DataBoundItem as Group;
+                GroupsForm_GroupsMenuEnDis();
+
+                //Users
+                dgvGroupsForm_Users.Columns.Clear();
+                bsGroupsForm_Users.DataSource = await Task.Run(() => Globals.repoGroup.FindById(GroupsForm_currGroup.Id).Users);
+                dgvGroupsForm_Users.DataSource = bsGroupsForm_Users;
+                for (int i = 4; i <= 11; i++)
+                    dgvGroupsForm_Users.Columns[i].Visible = false;
+                dgvGroupsForm_Users.Columns[0].Width = 50;
+                dgvGroupsForm_Users.Columns[1].Width = 120;
+                dgvGroupsForm_Users.Columns[2].Width = 120;
+                dgvGroupsForm_Users.Columns[3].Width = 100;
+                GroupsForm_currUser = dgvGroupsForm_Users.CurrentRow.DataBoundItem as User;
+                GroupsForm_UsersMenuEnDis();
+                firstTimeGroups = false;                
+            }
+            else
+            {
+                dgvGroupsForm_Groups_WhenRowGetSelect();
+            }
+            this.dgvGroupsForm_Groups.SelectionChanged += new System.EventHandler(this.dgvGroupsForm_Groups_SelectionChanged);
+        }
+
+        private async void dgvGroupsForm_Groups_WhenRowGetSelect()
+        {
+            GroupsForm_currGroup = dgvGroupsForm_Groups.CurrentRow.DataBoundItem as DALTestingSystemDB.Group;
+            GroupsForm_GroupsMenuEnDis();
+            bsGroupsForm_Users.DataSource = await Task.Run(() => Globals.repoGroup.FindById(GroupsForm_currGroup.Id).Users);
+            bsGroupsForm_Users.ResetBindings(false);
+            GroupsForm_UsersMenuEnDis();
+        }
+
+        private void dgvGroupsForm_Groups_SelectionChanged(object sender, EventArgs e)
+        {
+            dgvGroupsForm_Groups_WhenRowGetSelect();
+        }
+
+        private void GroupsForm_GroupsMenuEnDis()
+        {
+            if(dgvGroupsForm_Groups.SelectedCells.Count > 0)
+            {
+                toolStripButtonAddGroupByCopy.Enabled = true;
+                toolStripButtonEditGroup.Enabled = true;
+                if((dgvGroupsForm_Groups.CurrentRow.DataBoundItem as DALTestingSystemDB.Group).IsDeletable)
+                    toolStripButtonDeleteGroup.Enabled = true;
+                else
+                    toolStripButtonDeleteGroup.Enabled = false;
+            }
+            else
+            {
+                toolStripButtonAddGroupByCopy.Enabled = false;
+                toolStripButtonEditGroup.Enabled = false;
+                toolStripButtonDeleteGroup.Enabled = false;
+            }
+        }
+
+        private void GroupsForm_UsersMenuEnDis()
+        {
+
+        }
+
+        private async void toolStripButtonAddGroup_Click(object sender, EventArgs e)
+        {
+            GroupsAddEditForm groupForm = new GroupsAddEditForm(OpenMode.Add);
+            if (groupForm.ShowDialog() == DialogResult.OK)
+            {
+                DALTestingSystemDB.Group newGroup = groupForm.Group;
+                await Task.Run(() => Globals.repoGroup.Add(newGroup));
+
+                this.dgvGroupsForm_Groups.SelectionChanged -= new System.EventHandler(this.dgvGroupsForm_Groups_SelectionChanged);
+                {
+                    bsGroupsForm_Groups.DataSource = await Task.Run(() => Globals.repoGroup.GetAll());
+                    DataGridViewRow row = GetRow_Group(dgvGroupsForm_Groups, newGroup);
+                    dgvGroupsForm_Groups.CurrentCell = dgvGroupsForm_Groups.Rows[row.Index].Cells[0];
+                    dgvGroupsForm_Groups_WhenRowGetSelect();
+                }
+                this.dgvGroupsForm_Groups.SelectionChanged += new System.EventHandler(this.dgvGroupsForm_Groups_SelectionChanged);
+            }
+        }
+
+        private async void toolStripButtonAddGroupByCopy_Click(object sender, EventArgs e)
+        {
+            GroupsAddEditForm groupForm = new GroupsAddEditForm(OpenMode.AddByCopy, (dgvGroupsForm_Groups.CurrentRow.DataBoundItem as DALTestingSystemDB.Group).PartClone());
+            if (groupForm.ShowDialog() == DialogResult.OK)
+            {
+                DALTestingSystemDB.Group newGroup = groupForm.Group;
+                await Task.Run(() => Globals.repoGroup.Add(newGroup));
+
+                this.dgvGroupsForm_Groups.SelectionChanged -= new System.EventHandler(this.dgvGroupsForm_Groups_SelectionChanged);
+                {
+                    bsGroupsForm_Groups.DataSource = await Task.Run(() => Globals.repoGroup.GetAll());
+                    DataGridViewRow row = GetRow_Group(dgvGroupsForm_Groups, newGroup);
+                    dgvGroupsForm_Groups.CurrentCell = dgvGroupsForm_Groups.Rows[row.Index].Cells[0];
+                    dgvGroupsForm_Groups_WhenRowGetSelect();
+                }
+                this.dgvGroupsForm_Groups.SelectionChanged += new System.EventHandler(this.dgvGroupsForm_Groups_SelectionChanged);
+            }
+        }
+
+        private async void toolStripButtonEditGroup_Click(object sender, EventArgs e)
+        {
+            DALTestingSystemDB.Group editableGroup = dgvGroupsForm_Groups.CurrentRow.DataBoundItem as DALTestingSystemDB.Group;
+            GroupsAddEditForm groupForm = new GroupsAddEditForm(OpenMode.Edit, editableGroup.FullClone());
+            if(groupForm.ShowDialog() == DialogResult.OK)
+            {
+                editableGroup.UpdateClone(groupForm.Group);
+                await Task.Run(() => Globals.repoGroup.Update(editableGroup));                
+
+                this.dgvGroupsForm_Groups.SelectionChanged -= new System.EventHandler(this.dgvGroupsForm_Groups_SelectionChanged);
+                {
+                    bsGroupsForm_Groups.ResetBindings(false);
+                    DataGridViewRow row = GetRow_Group(dgvGroupsForm_Groups, editableGroup);
+                    dgvGroupsForm_Groups.CurrentCell = dgvGroupsForm_Groups.Rows[row.Index].Cells[0];
+                    dgvGroupsForm_Groups_WhenRowGetSelect();
+                }
+                this.dgvGroupsForm_Groups.SelectionChanged += new System.EventHandler(this.dgvGroupsForm_Groups_SelectionChanged);
+            }
+        }
+
+        private void dgvGroupsForm_Groups_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                toolStripButtonEditGroup_Click(sender, e);
+            }
+        }
+
+        private async void toolStripButtonDeleteGroup_Click(object sender, EventArgs e)
+        {
+            var dialog = MessageBox.Show("Delete selected group?", "Test server", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+            if (dialog == DialogResult.Cancel)
                 return;
-            // Second time
-            if (flagGroups)
+
+            DALTestingSystemDB.Group deletableGroup = dgvGroupsForm_Groups.CurrentRow.DataBoundItem as DALTestingSystemDB.Group;
+            DataGridViewRow row = GetRow_Group(dgvGroupsForm_Groups, deletableGroup);
+            int newPos = (row.Index == dgvGroupsForm_Groups.RowCount - 1) ? newPos = row.Index - 1 : newPos = row.Index;
+            await Task.Run(() => Globals.repoGroup.Remove(deletableGroup));
+
+            this.dgvGroupsForm_Groups.SelectionChanged -= new System.EventHandler(this.dgvGroupsForm_Groups_SelectionChanged);
             {
                 bsGroupsForm_Groups.DataSource = await Task.Run(() => Globals.repoGroup.GetAll());
-                return;
+                dgvGroupsForm_Groups.CurrentCell = dgvGroupsForm_Groups.Rows[newPos].Cells[0];
+                dgvGroupsForm_Groups_WhenRowGetSelect();
             }
-            // Groups
-            dgvGroupsForm_Groups.Columns.Clear();
-            bsGroupsForm_Groups.DataSource = await Task.Run(() => Globals.repoGroup.GetAll());
-            dgvGroupsForm_Groups.DataSource = bsGroupsForm_Groups;
-            dgvGroupsForm_Groups.Columns[4].Visible = false;
-            dgvGroupsForm_Groups.Columns[5].Visible = false;
-            dgvGroupsForm_Groups.Columns[0].Width = 50;
-            dgvGroupsForm_Groups.Columns[1].Width = 140;
-            dgvGroupsForm_Groups.Columns[2].Width = 190;
-            dgvGroupsForm_Groups.Columns[3].Width = 90;
-            dgvGroupsForm_Groups.Columns[3].HeaderText = "Admin group";
-
-            //Users
-            dgvGroupsForm_Users.Columns.Clear();
-            bsGroupsForm_Users.DataSource = await Task.Run(() => Globals.repoGroup.FindById(GroupsForm_currGroup.Id).Users);
-            dgvGroupsForm_Users.DataSource = bsGroupsForm_Users;
-            for (int i = 4; i <= 11; i++)
-                dgvGroupsForm_Users.Columns[i].Visible = false;
-            dgvGroupsForm_Users.Columns[0].Width = 50;
-            dgvGroupsForm_Users.Columns[1].Width = 120;
-            dgvGroupsForm_Users.Columns[2].Width = 120;
-            dgvGroupsForm_Users.Columns[3].Width = 100;
-
-            flagGroups = true;
+            this.dgvGroupsForm_Groups.SelectionChanged += new System.EventHandler(this.dgvGroupsForm_Groups_SelectionChanged);
         }
 
-        private async void dgvGroupsForm_Groups_SelectionChanged(object sender, EventArgs e)
-        {
-            if (dgvGroupsForm_Groups.SelectedRows.Count == 0)
-            {
-                GroupsForm_currGroup = null;
-                return;
-            }
-            GroupsForm_currGroup = dgvGroupsForm_Groups.CurrentRow.DataBoundItem as Group;
-            bsGroupsForm_Users.DataSource = await Task.Run(() => Globals.repoGroup.FindById(GroupsForm_currGroup.Id).Users);
-        }
-
-        private void dgvGroupsForm_Users_SelectionChanged(object sender, EventArgs e)
-        {
-            if (dgvGroupsForm_Users.SelectedRows.Count == 0)
-            {
-                GroupsForm_currUser = null;
-                return;
-            }
-            GroupsForm_currUser = dgvGroupsForm_Users.CurrentRow.DataBoundItem as User;
-        }
 
 
 
 
         #endregion Groups
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         #region LoadTestForm functional
         // LoadTestForm functional
@@ -709,8 +805,33 @@ namespace TestServer
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
         //-----------------------------------------------------------------------------
         #endregion TestsExplorerForm functional
+
+
+
+
+        // Helpfull
+        //---------------------------------
+        private DataGridViewRow GetRow_Group(DataGridView dgv, DALTestingSystemDB.Group group)
+        {
+            return dgv.Rows
+                    .Cast<DataGridViewRow>()
+                    .Where(r => r.Cells["Id"].Value.Equals(group.Id))
+                    .First();
+        }
 
 
     }

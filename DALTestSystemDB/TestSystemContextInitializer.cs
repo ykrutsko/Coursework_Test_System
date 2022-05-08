@@ -24,12 +24,15 @@ namespace DALTestingSystemDB
             Group group = new Group() { 
                 Name = "Administrators",
                 Description = "Default administrators group",
-                IsAdminGroup = true };
+                IsAdminGroup = true,
+                IsDeletable = false};
 
             Group group1 = new Group()
             {
                 Name = "Teachers",
-                IsAdminGroup = false
+                Description = "Math teachers",
+                IsAdminGroup = true,
+                IsDeletable = true
             };
 
             Folder LOAD = new Folder()

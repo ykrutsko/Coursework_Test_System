@@ -75,6 +75,12 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Form_NewUserForGroup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_NewUserForGroup.Designer.cs">
+      <DependentUpon>Form_NewUserForGroup.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form_AddEditGroups.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -106,9 +112,12 @@
       <DependentUpon>Form_AddEditUsers.cs</DependentUpon>
     </Compile>
     <Compile Include="Globals.cs" />
-    <Compile Include="OpenMode.cs" />
+    <Compile Include="Enums.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Form_AddEditGroups.resx">
+      <DependentUpon>Form_AddEditGroups.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form_Main.resx">
       <DependentUpon>Form_Main.cs</DependentUpon>
     </EmbeddedResource>
@@ -120,6 +129,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form_NewGroupForUser.resx">
       <DependentUpon>Form_NewGroupForUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_NewUserForGroup.resx">
+      <DependentUpon>Form_NewUserForGroup.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -31,7 +31,7 @@ namespace DALTestingSystemDB
 
         public override string ToString()
         {
-            return FirstName + " " + LastName + " [" + Login + (IsAdmin ? ", Admin" : String.Empty) + "]";
+            return FirstName + " " + LastName + " (" + Login + ")";
         }
 
         public User PartClone()

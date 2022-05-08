@@ -85,13 +85,17 @@
             this.toolStripSeparator9 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButtonRemoveUserFromGroup = new System.Windows.Forms.ToolStripButton();
             this.dgvGroupsForm_Users = new System.Windows.Forms.DataGridView();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolStrip6 = new System.Windows.Forms.ToolStrip();
-            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonAddGroup = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonAddGroupByCopy = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripButton4 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonEditGroup = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonDeleteGroup = new System.Windows.Forms.ToolStripButton();
             this.dgvGroupsForm_Groups = new System.Windows.Forms.DataGridView();
             this.Id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.GroupName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -169,10 +173,6 @@
             this.bsGroupsForm_Groups = new System.Windows.Forms.BindingSource(this.components);
             this.bsGoupsForm_Users = new System.Windows.Forms.BindingSource(this.components);
             this.bsGroupsForm_Users = new System.Windows.Forms.BindingSource(this.components);
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelGeneral.SuspendLayout();
             this.panelUsersAndGroups.SuspendLayout();
             this.panelUsers.SuspendLayout();
@@ -614,6 +614,7 @@
             this.toolStrip7.Size = new System.Drawing.Size(59, 27);
             this.toolStrip7.TabIndex = 35;
             this.toolStrip7.Text = "toolStrip7";
+            this.toolStrip7.Visible = false;
             // 
             // toolStripButtonAddUserToGroup
             // 
@@ -653,24 +654,51 @@
             this.Column3,
             this.Column4});
             this.dgvGroupsForm_Users.Location = new System.Drawing.Point(569, 68);
+            this.dgvGroupsForm_Users.MultiSelect = false;
             this.dgvGroupsForm_Users.Name = "dgvGroupsForm_Users";
             this.dgvGroupsForm_Users.ReadOnly = true;
             this.dgvGroupsForm_Users.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvGroupsForm_Users.Size = new System.Drawing.Size(450, 523);
             this.dgvGroupsForm_Users.TabIndex = 34;
-            this.dgvGroupsForm_Users.SelectionChanged += new System.EventHandler(this.dgvGroupsForm_Users_SelectionChanged);
+            // 
+            // Column1
+            // 
+            this.Column1.HeaderText = "Id";
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            this.Column1.Width = 50;
+            // 
+            // Column2
+            // 
+            this.Column2.HeaderText = "Login";
+            this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
+            // 
+            // Column3
+            // 
+            this.Column3.HeaderText = "First name";
+            this.Column3.Name = "Column3";
+            this.Column3.ReadOnly = true;
+            this.Column3.Width = 120;
+            // 
+            // Column4
+            // 
+            this.Column4.HeaderText = "Last name";
+            this.Column4.Name = "Column4";
+            this.Column4.ReadOnly = true;
+            this.Column4.Width = 120;
             // 
             // toolStrip6
             // 
             this.toolStrip6.Dock = System.Windows.Forms.DockStyle.None;
             this.toolStrip6.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip6.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripButton1,
-            this.toolStripButton2,
+            this.toolStripButtonAddGroup,
+            this.toolStripButtonAddGroupByCopy,
             this.toolStripSeparator6,
-            this.toolStripButton4,
+            this.toolStripButtonEditGroup,
             this.toolStripSeparator7,
-            this.toolStripButton5});
+            this.toolStripButtonDeleteGroup});
             this.toolStrip6.Location = new System.Drawing.Point(19, 38);
             this.toolStrip6.Name = "toolStrip6";
             this.toolStrip6.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
@@ -678,26 +706,28 @@
             this.toolStrip6.TabIndex = 33;
             this.toolStrip6.Text = "toolStrip6";
             // 
-            // toolStripButton1
+            // toolStripButtonAddGroup
             // 
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Padding = new System.Windows.Forms.Padding(2);
-            this.toolStripButton1.Size = new System.Drawing.Size(24, 24);
-            this.toolStripButton1.ToolTipText = "Add user";
+            this.toolStripButtonAddGroup.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonAddGroup.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonAddGroup.Image")));
+            this.toolStripButtonAddGroup.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonAddGroup.Name = "toolStripButtonAddGroup";
+            this.toolStripButtonAddGroup.Padding = new System.Windows.Forms.Padding(2);
+            this.toolStripButtonAddGroup.Size = new System.Drawing.Size(24, 24);
+            this.toolStripButtonAddGroup.ToolTipText = "Add group";
+            this.toolStripButtonAddGroup.Click += new System.EventHandler(this.toolStripButtonAddGroup_Click);
             // 
-            // toolStripButton2
+            // toolStripButtonAddGroupByCopy
             // 
-            this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton2.Enabled = false;
-            this.toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton2.Image")));
-            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton2.Name = "toolStripButton2";
-            this.toolStripButton2.Padding = new System.Windows.Forms.Padding(2);
-            this.toolStripButton2.Size = new System.Drawing.Size(24, 24);
-            this.toolStripButton2.ToolTipText = "Add user by copy";
+            this.toolStripButtonAddGroupByCopy.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonAddGroupByCopy.Enabled = false;
+            this.toolStripButtonAddGroupByCopy.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonAddGroupByCopy.Image")));
+            this.toolStripButtonAddGroupByCopy.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonAddGroupByCopy.Name = "toolStripButtonAddGroupByCopy";
+            this.toolStripButtonAddGroupByCopy.Padding = new System.Windows.Forms.Padding(2);
+            this.toolStripButtonAddGroupByCopy.Size = new System.Drawing.Size(24, 24);
+            this.toolStripButtonAddGroupByCopy.ToolTipText = "Add group by copy";
+            this.toolStripButtonAddGroupByCopy.Click += new System.EventHandler(this.toolStripButtonAddGroupByCopy_Click);
             // 
             // toolStripSeparator6
             // 
@@ -705,16 +735,17 @@
             this.toolStripSeparator6.Name = "toolStripSeparator6";
             this.toolStripSeparator6.Size = new System.Drawing.Size(6, 27);
             // 
-            // toolStripButton4
+            // toolStripButtonEditGroup
             // 
-            this.toolStripButton4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton4.Enabled = false;
-            this.toolStripButton4.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton4.Image")));
-            this.toolStripButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton4.Name = "toolStripButton4";
-            this.toolStripButton4.Padding = new System.Windows.Forms.Padding(2);
-            this.toolStripButton4.Size = new System.Drawing.Size(24, 24);
-            this.toolStripButton4.ToolTipText = "Edit user";
+            this.toolStripButtonEditGroup.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonEditGroup.Enabled = false;
+            this.toolStripButtonEditGroup.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonEditGroup.Image")));
+            this.toolStripButtonEditGroup.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonEditGroup.Name = "toolStripButtonEditGroup";
+            this.toolStripButtonEditGroup.Padding = new System.Windows.Forms.Padding(2);
+            this.toolStripButtonEditGroup.Size = new System.Drawing.Size(24, 24);
+            this.toolStripButtonEditGroup.ToolTipText = "Edit group";
+            this.toolStripButtonEditGroup.Click += new System.EventHandler(this.toolStripButtonEditGroup_Click);
             // 
             // toolStripSeparator7
             // 
@@ -722,16 +753,17 @@
             this.toolStripSeparator7.Name = "toolStripSeparator7";
             this.toolStripSeparator7.Size = new System.Drawing.Size(6, 27);
             // 
-            // toolStripButton5
+            // toolStripButtonDeleteGroup
             // 
-            this.toolStripButton5.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton5.Enabled = false;
-            this.toolStripButton5.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton5.Image")));
-            this.toolStripButton5.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton5.Name = "toolStripButton5";
-            this.toolStripButton5.Padding = new System.Windows.Forms.Padding(2);
-            this.toolStripButton5.Size = new System.Drawing.Size(24, 24);
-            this.toolStripButton5.ToolTipText = "Delete user";
+            this.toolStripButtonDeleteGroup.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonDeleteGroup.Enabled = false;
+            this.toolStripButtonDeleteGroup.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonDeleteGroup.Image")));
+            this.toolStripButtonDeleteGroup.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonDeleteGroup.Name = "toolStripButtonDeleteGroup";
+            this.toolStripButtonDeleteGroup.Padding = new System.Windows.Forms.Padding(2);
+            this.toolStripButtonDeleteGroup.Size = new System.Drawing.Size(24, 24);
+            this.toolStripButtonDeleteGroup.ToolTipText = "Delete group";
+            this.toolStripButtonDeleteGroup.Click += new System.EventHandler(this.toolStripButtonDeleteGroup_Click);
             // 
             // dgvGroupsForm_Groups
             // 
@@ -744,11 +776,13 @@
             this.Description,
             this.IsAdminGroup});
             this.dgvGroupsForm_Groups.Location = new System.Drawing.Point(19, 68);
+            this.dgvGroupsForm_Groups.MultiSelect = false;
             this.dgvGroupsForm_Groups.Name = "dgvGroupsForm_Groups";
             this.dgvGroupsForm_Groups.ReadOnly = true;
             this.dgvGroupsForm_Groups.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvGroupsForm_Groups.Size = new System.Drawing.Size(530, 499);
             this.dgvGroupsForm_Groups.TabIndex = 32;
+            this.dgvGroupsForm_Groups.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvGroupsForm_Groups_CellDoubleClick);
             this.dgvGroupsForm_Groups.SelectionChanged += new System.EventHandler(this.dgvGroupsForm_Groups_SelectionChanged);
             // 
             // Id
@@ -1458,33 +1492,6 @@
             this.label11.TabIndex = 3;
             this.label11.Text = "Author";
             // 
-            // Column1
-            // 
-            this.Column1.HeaderText = "Id";
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            this.Column1.Width = 50;
-            // 
-            // Column2
-            // 
-            this.Column2.HeaderText = "Login";
-            this.Column2.Name = "Column2";
-            this.Column2.ReadOnly = true;
-            // 
-            // Column3
-            // 
-            this.Column3.HeaderText = "First name";
-            this.Column3.Name = "Column3";
-            this.Column3.ReadOnly = true;
-            this.Column3.Width = 120;
-            // 
-            // Column4
-            // 
-            this.Column4.HeaderText = "Last name";
-            this.Column4.Name = "Column4";
-            this.Column4.ReadOnly = true;
-            this.Column4.Width = 120;
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -1673,12 +1680,12 @@
         private System.Windows.Forms.ToolStripButton toolStripButtonDeleteUser;
         private System.Windows.Forms.BindingSource bsUsersForm_Users;
         private System.Windows.Forms.ToolStrip toolStrip6;
-        private System.Windows.Forms.ToolStripButton toolStripButton1;
-        private System.Windows.Forms.ToolStripButton toolStripButton2;
+        private System.Windows.Forms.ToolStripButton toolStripButtonAddGroup;
+        private System.Windows.Forms.ToolStripButton toolStripButtonAddGroupByCopy;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
-        private System.Windows.Forms.ToolStripButton toolStripButton4;
+        private System.Windows.Forms.ToolStripButton toolStripButtonEditGroup;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator7;
-        private System.Windows.Forms.ToolStripButton toolStripButton5;
+        private System.Windows.Forms.ToolStripButton toolStripButtonDeleteGroup;
         private System.Windows.Forms.DataGridView dgvGroupsForm_Groups;
         private System.Windows.Forms.DataGridView dgvGroupsForm_Users;
         private System.Windows.Forms.ToolStrip toolStrip7;

@@ -71,9 +71,5 @@ namespace TestServer
             btnOK.Enabled = true;
         }
 
-        private void timer_Tick(object sender, EventArgs e)
-        {
-
-        }
     }
 }
