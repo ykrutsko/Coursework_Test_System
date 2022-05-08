@@ -30,7 +30,6 @@ namespace TestServer
             dataGridView.Columns[2].Width = 190;
             dataGridView.Columns[3].Width = 100;
             dataGridView.Columns[4].Visible = false;
-            dataGridView.Columns[5].Visible = false;
             dataGridView.Columns[3].HeaderText = "Administrators";
             dataGridView.ClearSelection();
         }

@@ -57,7 +57,7 @@ namespace TestServer
             dataGridView.Columns.Clear();
             bindingSource.DataSource = Group.Users;
             dataGridView.DataSource = bindingSource;
-            for (int i = 4; i <= 11; i++)
+            for (int i = 4; i <= 10; i++)
                 dataGridView.Columns[i].Visible = false;
             dataGridView.Columns[0].Width = 50;
             dataGridView.Columns[1].Width = 100;
@@ -140,15 +140,6 @@ namespace TestServer
                 {
                     Group.Users.ElementAt(i).IsAdmin = true;
                 }
-
-            if (Group.Users.Any())
-            {
-                Group.IsDeletable = false;
-            }
-            else
-            {
-                Group.IsDeletable = true;
-            }
         }
     }
 }

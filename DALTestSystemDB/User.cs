@@ -17,7 +17,6 @@ namespace DALTestingSystemDB
         public string Password { get; set; }
         public string Description { get; set; }
         public bool IsAdmin { get; set; }
-        public bool IsDeletable { get; set; }
         public bool IsArhived { get; set; }
         public DateTime RegisterDate { get; set; }
         public virtual ICollection<Group> Groups { get; set; }
@@ -51,7 +50,6 @@ namespace DALTestingSystemDB
                 Login = this.Login,
                 Description = this.Description,
                 IsAdmin = this.IsAdmin,
-                IsDeletable = true,
                 IsArhived = false,
                 Groups = groupsClone,
                 UserTests = userTestsClone
@@ -73,7 +71,6 @@ namespace DALTestingSystemDB
                 Password = this.Password,
                 Description = this.Description,
                 IsAdmin = this.IsAdmin,
-                IsDeletable = this.IsDeletable,
                 IsArhived = this.IsArhived,
                 RegisterDate = this.RegisterDate,
                 Groups = groupsClone,
@@ -88,7 +85,6 @@ namespace DALTestingSystemDB
             this.Password = other.Password;
             this.Description = other.Description;
             this.IsAdmin = other.IsAdmin;
-            this.IsDeletable = other.IsDeletable;
             this.IsArhived = other.IsArhived;
             this.RegisterDate = other.RegisterDate;
 

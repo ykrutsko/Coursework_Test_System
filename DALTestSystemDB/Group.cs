@@ -9,7 +9,6 @@ namespace DALTestingSystemDB
         public string Name { get; set; }
         public string Description { get; set; }
         public bool IsAdminGroup { get; set; }
-        public bool IsDeletable { get; set; }
         public virtual ICollection<User> Users { get; set; }
 
         public Group()
@@ -33,7 +32,6 @@ namespace DALTestingSystemDB
                 Name = this.Name,
                 Description = this.Description,
                 IsAdminGroup = false,
-                IsDeletable = true,
                 Users = usersClone
             };
         }
@@ -50,7 +48,6 @@ namespace DALTestingSystemDB
                 Name = this.Name,
                 Description = this.Description,
                 IsAdminGroup = this.IsAdminGroup,
-                IsDeletable = this.IsDeletable,
                 Users = usersClone
             };
         }
@@ -60,8 +57,6 @@ namespace DALTestingSystemDB
             this.Name = other.Name;
             this.Description = other.Description;
             this.IsAdminGroup = other.IsAdminGroup;
-            this.IsDeletable = other.IsDeletable;
-
             this.Users.Clear();
             foreach (User user in other.Users)
                 this.Users.Add(user);

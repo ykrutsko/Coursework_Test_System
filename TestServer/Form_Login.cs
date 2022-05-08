@@ -29,6 +29,23 @@ namespace TestServer
             tbPass.Text = "admin";
         }
 
+        private async void LoginForm_Load(object sender, EventArgs e)
+        {
+            this.StartPosition = FormStartPosition.CenterParent;
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
+            tbLog.Select();
+
+            await Task.Run(() =>
+            {
+                Globals.work = new GenericUnitOfWork(new TestSystemContext(ConfigurationManager.ConnectionStrings["conStr"].ConnectionString));
+                Globals.repoUser = Globals.work.Repository<User>();
+                users = Globals.repoUser.FindAll(x => x.IsAdmin).ToList();
+            });
+            pictureBox.Image = Resources.isconnect;
+            btnOK.Enabled = true;
+        }
+
         private void btnOK_Click(object sender, EventArgs e)
         {
             Login = tbLog.Text.ToLower();
@@ -53,23 +70,5 @@ namespace TestServer
 
             this.DialogResult = DialogResult.OK;
         }
-
-        private async void LoginForm_Load(object sender, EventArgs e)
-        {
-            this.StartPosition = FormStartPosition.CenterParent;
-            this.FormBorderStyle = FormBorderStyle.FixedSingle;
-            this.MaximizeBox = false;
-            tbLog.Select();
-
-            await Task.Run(() =>
-            {
-                Globals.work = new GenericUnitOfWork(new TestSystemContext(ConfigurationManager.ConnectionStrings["conStr"].ConnectionString));
-                Globals.repoUser = Globals.work.Repository<User>();
-                users = Globals.repoUser.FindAll(x => x.IsAdmin).ToList();
-            });
-            pictureBox.Image = Resources.isconnect;
-            btnOK.Enabled = true;
-        }
-
     }
 }

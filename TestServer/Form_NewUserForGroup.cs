@@ -25,7 +25,7 @@ namespace TestServer
         {
             bindingSource.DataSource = Users;
             dataGridView.DataSource = bindingSource;
-            for (int i = 4; i <= 11; i++)
+            for (int i = 4; i <= 10; i++)
             {
                 if (i == 6)
                     continue;

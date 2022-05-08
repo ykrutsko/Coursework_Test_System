@@ -18,21 +18,18 @@ namespace DALTestingSystemDB
                 Description = "SUPER administrator",
                 IsAdmin = true, 
                 IsArhived = false,
-                IsDeletable = false,
                 RegisterDate = DateTime.Now };
 
             Group group = new Group() { 
                 Name = "Administrators",
                 Description = "Default administrators group",
-                IsAdminGroup = true,
-                IsDeletable = false};
+                IsAdminGroup = true };
 
             Group group1 = new Group()
             {
                 Name = "Teachers",
                 Description = "Math teachers",
-                IsAdminGroup = true,
-                IsDeletable = true
+                IsAdminGroup = true
             };
 
             Folder LOAD = new Folder()

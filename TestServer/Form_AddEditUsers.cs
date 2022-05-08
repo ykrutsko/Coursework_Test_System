@@ -81,7 +81,6 @@ namespace TestServer
             dataGridView.DataSource = bindingSource;
             dataGridView.Columns[2].Visible = false;
             dataGridView.Columns[4].Visible = false;
-            dataGridView.Columns[5].Visible = false;
             dataGridView.Columns[0].Width = 50;
             dataGridView.Columns[1].Width = 190;
             dataGridView.Columns[3].Width = 110;
@@ -114,7 +113,6 @@ namespace TestServer
             if (openMode != OpenMode.Edit)
             {
                 User.IsArhived = false;
-                User.IsDeletable = true;
             }
             else
             {

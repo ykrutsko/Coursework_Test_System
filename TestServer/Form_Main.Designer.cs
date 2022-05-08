@@ -29,24 +29,24 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("General");
-            System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("Users", 1, 1);
-            System.Windows.Forms.TreeNode treeNode15 = new System.Windows.Forms.TreeNode("Groups", 2, 2);
-            System.Windows.Forms.TreeNode treeNode16 = new System.Windows.Forms.TreeNode("Users & Groups", 0, 0, new System.Windows.Forms.TreeNode[] {
-            treeNode14,
-            treeNode15});
-            System.Windows.Forms.TreeNode treeNode17 = new System.Windows.Forms.TreeNode("Assign tests to users");
-            System.Windows.Forms.TreeNode treeNode18 = new System.Windows.Forms.TreeNode("Review passed tests");
-            System.Windows.Forms.TreeNode treeNode19 = new System.Windows.Forms.TreeNode("Users & Tests", new System.Windows.Forms.TreeNode[] {
-            treeNode17,
-            treeNode18});
-            System.Windows.Forms.TreeNode treeNode20 = new System.Windows.Forms.TreeNode("Load test");
-            System.Windows.Forms.TreeNode treeNode21 = new System.Windows.Forms.TreeNode("Tests explorer");
-            System.Windows.Forms.TreeNode treeNode22 = new System.Windows.Forms.TreeNode("Tests", new System.Windows.Forms.TreeNode[] {
-            treeNode20,
-            treeNode21});
-            System.Windows.Forms.TreeNode treeNode23 = new System.Windows.Forms.TreeNode("Reports");
-            System.Windows.Forms.TreeNode treeNode24 = new System.Windows.Forms.TreeNode("Server", 3, 3);
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("General");
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Users", 1, 1);
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Groups", 2, 2);
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Users & Groups", 0, 0, new System.Windows.Forms.TreeNode[] {
+            treeNode2,
+            treeNode3});
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Assign tests to users");
+            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Review passed tests");
+            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Users & Tests", new System.Windows.Forms.TreeNode[] {
+            treeNode5,
+            treeNode6});
+            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Load test");
+            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Tests explorer");
+            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Tests", new System.Windows.Forms.TreeNode[] {
+            treeNode8,
+            treeNode9});
+            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("Reports");
+            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("Server", 3, 3);
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -247,45 +247,45 @@
             this.treeView1.ImageList = this.imageList1;
             this.treeView1.Location = new System.Drawing.Point(0, 49);
             this.treeView1.Name = "treeView1";
-            treeNode13.Name = "NodeGeneral";
-            treeNode13.Text = "General";
-            treeNode14.ImageIndex = 1;
-            treeNode14.Name = "NodeUsers";
-            treeNode14.SelectedImageIndex = 1;
-            treeNode14.Text = "Users";
-            treeNode15.ImageIndex = 2;
-            treeNode15.Name = "NodeGroups";
-            treeNode15.SelectedImageIndex = 2;
-            treeNode15.Text = "Groups";
-            treeNode16.ImageIndex = 0;
-            treeNode16.Name = "NodeUsersAndGroups";
-            treeNode16.SelectedImageIndex = 0;
-            treeNode16.Text = "Users & Groups";
-            treeNode17.Name = "NodeAssignTestsToUsers";
-            treeNode17.Text = "Assign tests to users";
-            treeNode18.Name = "NodeReviwPassedTests";
-            treeNode18.Text = "Review passed tests";
-            treeNode19.Name = "NodeUsersAndTests";
-            treeNode19.Text = "Users & Tests";
-            treeNode20.Name = "NodeLoadTest";
-            treeNode20.Text = "Load test";
-            treeNode21.Name = "NodeTestsExplorer";
-            treeNode21.Text = "Tests explorer";
-            treeNode22.Name = "NodeTests";
-            treeNode22.Text = "Tests";
-            treeNode23.Name = "NodeReports";
-            treeNode23.Text = "Reports";
-            treeNode24.ImageIndex = 3;
-            treeNode24.Name = "NodeServer";
-            treeNode24.SelectedImageIndex = 3;
-            treeNode24.Text = "Server";
+            treeNode1.Name = "NodeGeneral";
+            treeNode1.Text = "General";
+            treeNode2.ImageIndex = 1;
+            treeNode2.Name = "NodeUsers";
+            treeNode2.SelectedImageIndex = 1;
+            treeNode2.Text = "Users";
+            treeNode3.ImageIndex = 2;
+            treeNode3.Name = "NodeGroups";
+            treeNode3.SelectedImageIndex = 2;
+            treeNode3.Text = "Groups";
+            treeNode4.ImageIndex = 0;
+            treeNode4.Name = "NodeUsersAndGroups";
+            treeNode4.SelectedImageIndex = 0;
+            treeNode4.Text = "Users & Groups";
+            treeNode5.Name = "NodeAssignTestsToUsers";
+            treeNode5.Text = "Assign tests to users";
+            treeNode6.Name = "NodeReviwPassedTests";
+            treeNode6.Text = "Review passed tests";
+            treeNode7.Name = "NodeUsersAndTests";
+            treeNode7.Text = "Users & Tests";
+            treeNode8.Name = "NodeLoadTest";
+            treeNode8.Text = "Load test";
+            treeNode9.Name = "NodeTestsExplorer";
+            treeNode9.Text = "Tests explorer";
+            treeNode10.Name = "NodeTests";
+            treeNode10.Text = "Tests";
+            treeNode11.Name = "NodeReports";
+            treeNode11.Text = "Reports";
+            treeNode12.ImageIndex = 3;
+            treeNode12.Name = "NodeServer";
+            treeNode12.SelectedImageIndex = 3;
+            treeNode12.Text = "Server";
             this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode13,
-            treeNode16,
-            treeNode19,
-            treeNode22,
-            treeNode23,
-            treeNode24});
+            treeNode1,
+            treeNode4,
+            treeNode7,
+            treeNode10,
+            treeNode11,
+            treeNode12});
             this.treeView1.SelectedImageIndex = 0;
             this.treeView1.Size = new System.Drawing.Size(214, 613);
             this.treeView1.TabIndex = 4;
@@ -380,9 +380,10 @@
             this.panelUsers.Controls.Add(this.toolStrip5);
             this.panelUsers.Controls.Add(this.label17);
             this.panelUsers.Controls.Add(this.dgvUsersForm_Users);
-            this.panelUsers.Location = new System.Drawing.Point(492, 197);
+            this.panelUsers.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelUsers.Location = new System.Drawing.Point(217, 49);
             this.panelUsers.Name = "panelUsers";
-            this.panelUsers.Size = new System.Drawing.Size(200, 97);
+            this.panelUsers.Size = new System.Drawing.Size(1044, 613);
             this.panelUsers.TabIndex = 11;
             this.panelUsers.Visible = false;
             this.panelUsers.VisibleChanged += new System.EventHandler(this.panelUsers_VisibleChanged);
@@ -458,7 +459,7 @@
             this.toolStrip5.Location = new System.Drawing.Point(19, 40);
             this.toolStrip5.Name = "toolStrip5";
             this.toolStrip5.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.toolStrip5.Size = new System.Drawing.Size(115, 27);
+            this.toolStrip5.Size = new System.Drawing.Size(146, 27);
             this.toolStrip5.TabIndex = 31;
             this.toolStrip5.Text = "toolStrip5";
             // 
@@ -558,10 +559,9 @@
             this.panelGroups.Controls.Add(this.toolStrip6);
             this.panelGroups.Controls.Add(this.dgvGroupsForm_Groups);
             this.panelGroups.Controls.Add(this.label18);
-            this.panelGroups.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelGroups.Location = new System.Drawing.Point(217, 49);
+            this.panelGroups.Location = new System.Drawing.Point(732, 197);
             this.panelGroups.Name = "panelGroups";
-            this.panelGroups.Size = new System.Drawing.Size(1044, 613);
+            this.panelGroups.Size = new System.Drawing.Size(200, 97);
             this.panelGroups.TabIndex = 12;
             this.panelGroups.Visible = false;
             this.panelGroups.VisibleChanged += new System.EventHandler(this.panelGroups_VisibleChanged);
@@ -1497,8 +1497,8 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1261, 684);
-            this.Controls.Add(this.panelGroups);
             this.Controls.Add(this.panelUsers);
+            this.Controls.Add(this.panelGroups);
             this.Controls.Add(this.panelTestsExplorer);
             this.Controls.Add(this.panelLoadTest);
             this.Controls.Add(this.panelTests);
