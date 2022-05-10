@@ -13,11 +13,9 @@ namespace DALTestingSystemDB
         public string Author { get; set; }
         public string Description { get; set; }
         public string Info { get; set; }
-        public int PassPercent { get; set; }
+        public int? PassPercent { get; set; }
         public bool IsArchived { get; set; }
-        public bool IsDeletable { get; set; }
         public DateTime LoadedDate { get; set; }
-        public virtual Folder Folder { get; set; }
         public virtual ICollection<UserTest> UserTests { get; set; }
         public virtual ICollection<Question> Questions { get; set; }
 

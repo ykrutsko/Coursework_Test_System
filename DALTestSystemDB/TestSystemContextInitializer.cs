@@ -32,29 +32,10 @@ namespace DALTestingSystemDB
                 IsAdminGroup = true
             };
 
-            Folder LOAD = new Folder()
-            {
-                Name = "LOAD",
-                Description = "Loaded tests from files are here",
-                IsDeletable = false,
-                IsEditable = false
-            };
-
-            Folder ARCHIVE = new Folder()
-            {
-                Name = "ARCHIVE",
-                Description = "Obsolete tests can be here",
-                IsDeletable = false,
-                IsEditable = false
-            };
-
             context.Users.Add(user);
             context.Groups.Add(group);
             context.Groups.Add(group1);
             group.Users.Add(user);
-
-            context.Folders.Add(LOAD);
-            context.Folders.Add(ARCHIVE);
 
             context.SaveChanges();
         }

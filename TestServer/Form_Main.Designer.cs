@@ -29,27 +29,28 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("General");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Users", 1, 1);
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Groups", 2, 2);
-            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Users & Groups", 0, 0, new System.Windows.Forms.TreeNode[] {
-            treeNode2,
-            treeNode3});
-            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Assign tests to users");
-            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Review passed tests");
-            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Users & Tests", new System.Windows.Forms.TreeNode[] {
-            treeNode5,
-            treeNode6});
-            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Load test");
-            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Tests explorer");
-            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Tests", new System.Windows.Forms.TreeNode[] {
-            treeNode8,
-            treeNode9});
-            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("Reports");
-            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("Server", 3, 3);
+            System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("General");
+            System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("Users", 1, 1);
+            System.Windows.Forms.TreeNode treeNode15 = new System.Windows.Forms.TreeNode("Groups", 2, 2);
+            System.Windows.Forms.TreeNode treeNode16 = new System.Windows.Forms.TreeNode("Users & Groups", 0, 0, new System.Windows.Forms.TreeNode[] {
+            treeNode14,
+            treeNode15});
+            System.Windows.Forms.TreeNode treeNode17 = new System.Windows.Forms.TreeNode("Assign tests to users");
+            System.Windows.Forms.TreeNode treeNode18 = new System.Windows.Forms.TreeNode("Review passed tests");
+            System.Windows.Forms.TreeNode treeNode19 = new System.Windows.Forms.TreeNode("Users & Tests", new System.Windows.Forms.TreeNode[] {
+            treeNode17,
+            treeNode18});
+            System.Windows.Forms.TreeNode treeNode20 = new System.Windows.Forms.TreeNode("Load test");
+            System.Windows.Forms.TreeNode treeNode21 = new System.Windows.Forms.TreeNode("Tests explorer");
+            System.Windows.Forms.TreeNode treeNode22 = new System.Windows.Forms.TreeNode("Tests", new System.Windows.Forms.TreeNode[] {
+            treeNode20,
+            treeNode21});
+            System.Windows.Forms.TreeNode treeNode23 = new System.Windows.Forms.TreeNode("Reports");
+            System.Windows.Forms.TreeNode treeNode24 = new System.Windows.Forms.TreeNode("Server", 3, 3);
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.originalSizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
@@ -105,6 +106,39 @@
             this.panelUsersAndTests = new System.Windows.Forms.Panel();
             this.label19 = new System.Windows.Forms.Label();
             this.panelAssignTestsToUsers = new System.Windows.Forms.Panel();
+            this.label30 = new System.Windows.Forms.Label();
+            this.tbAssignTestsForm_FindGroupByName = new System.Windows.Forms.TextBox();
+            this.rbAssignTestsForm_FindUserByLastName = new System.Windows.Forms.RadioButton();
+            this.rbAssignTestsForm_FindUserByLogin = new System.Windows.Forms.RadioButton();
+            this.tbAssignTestsForm_FindUserByLastName = new System.Windows.Forms.TextBox();
+            this.tbAssignTestsForm_FindUserByLogin = new System.Windows.Forms.TextBox();
+            this.label27 = new System.Windows.Forms.Label();
+            this.toolStrip9 = new System.Windows.Forms.ToolStrip();
+            this.toolStripButtonAssignNewTestForGroup = new System.Windows.Forms.ToolStripButton();
+            this.dgvAssignTestsForm_Tests = new System.Windows.Forms.DataGridView();
+            this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label28 = new System.Windows.Forms.Label();
+            this.label29 = new System.Windows.Forms.Label();
+            this.dgvAssignTestsForm_Users = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.toolStrip8 = new System.Windows.Forms.ToolStrip();
+            this.toolStripButtonAssignNewTestForUser = new System.Windows.Forms.ToolStripButton();
+            this.toolStripButtonAssignNewTestByCopyForUser = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButtonRemoveAssignedTestForUser = new System.Windows.Forms.ToolStripButton();
+            this.dgvAssignTestsForm_Groups = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label20 = new System.Windows.Forms.Label();
             this.panelReviewPassedTests = new System.Windows.Forms.Panel();
             this.label21 = new System.Windows.Forms.Label();
@@ -173,6 +207,10 @@
             this.bsGroupsForm_Groups = new System.Windows.Forms.BindingSource(this.components);
             this.bsGoupsForm_Users = new System.Windows.Forms.BindingSource(this.components);
             this.bsGroupsForm_Users = new System.Windows.Forms.BindingSource(this.components);
+            this.bsAssignTestsForm_Users = new System.Windows.Forms.BindingSource(this.components);
+            this.bsAssignTestsForm_Groups = new System.Windows.Forms.BindingSource(this.components);
+            this.bsAssignTestsForm_Tests = new System.Windows.Forms.BindingSource(this.components);
+            this.menuStrip1.SuspendLayout();
             this.panelGeneral.SuspendLayout();
             this.panelUsersAndGroups.SuspendLayout();
             this.panelUsers.SuspendLayout();
@@ -185,6 +223,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvGroupsForm_Groups)).BeginInit();
             this.panelUsersAndTests.SuspendLayout();
             this.panelAssignTestsToUsers.SuspendLayout();
+            this.toolStrip9.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvAssignTestsForm_Tests)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvAssignTestsForm_Users)).BeginInit();
+            this.toolStrip8.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvAssignTestsForm_Groups)).BeginInit();
             this.panelReviewPassedTests.SuspendLayout();
             this.panelTests.SuspendLayout();
             this.panelTestsExplorer.SuspendLayout();
@@ -213,6 +256,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.bsGroupsForm_Groups)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsGoupsForm_Users)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsGroupsForm_Users)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsAssignTestsForm_Users)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsAssignTestsForm_Groups)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsAssignTestsForm_Tests)).BeginInit();
             this.SuspendLayout();
             // 
             // statusStrip1
@@ -226,11 +272,20 @@
             // 
             // menuStrip1
             // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.originalSizeToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1261, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
+            // 
+            // originalSizeToolStripMenuItem
+            // 
+            this.originalSizeToolStripMenuItem.Name = "originalSizeToolStripMenuItem";
+            this.originalSizeToolStripMenuItem.Size = new System.Drawing.Size(83, 20);
+            this.originalSizeToolStripMenuItem.Text = "Original size";
+            this.originalSizeToolStripMenuItem.Click += new System.EventHandler(this.originalSizeToolStripMenuItem_Click);
             // 
             // toolStrip1
             // 
@@ -247,45 +302,45 @@
             this.treeView1.ImageList = this.imageList1;
             this.treeView1.Location = new System.Drawing.Point(0, 49);
             this.treeView1.Name = "treeView1";
-            treeNode1.Name = "NodeGeneral";
-            treeNode1.Text = "General";
-            treeNode2.ImageIndex = 1;
-            treeNode2.Name = "NodeUsers";
-            treeNode2.SelectedImageIndex = 1;
-            treeNode2.Text = "Users";
-            treeNode3.ImageIndex = 2;
-            treeNode3.Name = "NodeGroups";
-            treeNode3.SelectedImageIndex = 2;
-            treeNode3.Text = "Groups";
-            treeNode4.ImageIndex = 0;
-            treeNode4.Name = "NodeUsersAndGroups";
-            treeNode4.SelectedImageIndex = 0;
-            treeNode4.Text = "Users & Groups";
-            treeNode5.Name = "NodeAssignTestsToUsers";
-            treeNode5.Text = "Assign tests to users";
-            treeNode6.Name = "NodeReviwPassedTests";
-            treeNode6.Text = "Review passed tests";
-            treeNode7.Name = "NodeUsersAndTests";
-            treeNode7.Text = "Users & Tests";
-            treeNode8.Name = "NodeLoadTest";
-            treeNode8.Text = "Load test";
-            treeNode9.Name = "NodeTestsExplorer";
-            treeNode9.Text = "Tests explorer";
-            treeNode10.Name = "NodeTests";
-            treeNode10.Text = "Tests";
-            treeNode11.Name = "NodeReports";
-            treeNode11.Text = "Reports";
-            treeNode12.ImageIndex = 3;
-            treeNode12.Name = "NodeServer";
-            treeNode12.SelectedImageIndex = 3;
-            treeNode12.Text = "Server";
+            treeNode13.Name = "NodeGeneral";
+            treeNode13.Text = "General";
+            treeNode14.ImageIndex = 1;
+            treeNode14.Name = "NodeUsers";
+            treeNode14.SelectedImageIndex = 1;
+            treeNode14.Text = "Users";
+            treeNode15.ImageIndex = 2;
+            treeNode15.Name = "NodeGroups";
+            treeNode15.SelectedImageIndex = 2;
+            treeNode15.Text = "Groups";
+            treeNode16.ImageIndex = 0;
+            treeNode16.Name = "NodeUsersAndGroups";
+            treeNode16.SelectedImageIndex = 0;
+            treeNode16.Text = "Users & Groups";
+            treeNode17.Name = "NodeAssignTestsToUsers";
+            treeNode17.Text = "Assign tests to users";
+            treeNode18.Name = "NodeReviwPassedTests";
+            treeNode18.Text = "Review passed tests";
+            treeNode19.Name = "NodeUsersAndTests";
+            treeNode19.Text = "Users & Tests";
+            treeNode20.Name = "NodeLoadTest";
+            treeNode20.Text = "Load test";
+            treeNode21.Name = "NodeTestsExplorer";
+            treeNode21.Text = "Tests explorer";
+            treeNode22.Name = "NodeTests";
+            treeNode22.Text = "Tests";
+            treeNode23.Name = "NodeReports";
+            treeNode23.Text = "Reports";
+            treeNode24.ImageIndex = 3;
+            treeNode24.Name = "NodeServer";
+            treeNode24.SelectedImageIndex = 3;
+            treeNode24.Text = "Server";
             this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode1,
-            treeNode4,
-            treeNode7,
-            treeNode10,
-            treeNode11,
-            treeNode12});
+            treeNode13,
+            treeNode16,
+            treeNode19,
+            treeNode22,
+            treeNode23,
+            treeNode24});
             this.treeView1.SelectedImageIndex = 0;
             this.treeView1.Size = new System.Drawing.Size(214, 613);
             this.treeView1.TabIndex = 4;
@@ -380,10 +435,9 @@
             this.panelUsers.Controls.Add(this.toolStrip5);
             this.panelUsers.Controls.Add(this.label17);
             this.panelUsers.Controls.Add(this.dgvUsersForm_Users);
-            this.panelUsers.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelUsers.Location = new System.Drawing.Point(217, 49);
+            this.panelUsers.Location = new System.Drawing.Point(492, 194);
             this.panelUsers.Name = "panelUsers";
-            this.panelUsers.Size = new System.Drawing.Size(1044, 613);
+            this.panelUsers.Size = new System.Drawing.Size(200, 100);
             this.panelUsers.TabIndex = 11;
             this.panelUsers.Visible = false;
             this.panelUsers.VisibleChanged += new System.EventHandler(this.panelUsers_VisibleChanged);
@@ -459,7 +513,7 @@
             this.toolStrip5.Location = new System.Drawing.Point(19, 40);
             this.toolStrip5.Name = "toolStrip5";
             this.toolStrip5.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.toolStrip5.Size = new System.Drawing.Size(146, 27);
+            this.toolStrip5.Size = new System.Drawing.Size(115, 27);
             this.toolStrip5.TabIndex = 31;
             this.toolStrip5.Text = "toolStrip5";
             // 
@@ -540,6 +594,7 @@
             this.dgvUsersForm_Users.AllowUserToDeleteRows = false;
             this.dgvUsersForm_Users.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvUsersForm_Users.Location = new System.Drawing.Point(19, 68);
+            this.dgvUsersForm_Users.MultiSelect = false;
             this.dgvUsersForm_Users.Name = "dgvUsersForm_Users";
             this.dgvUsersForm_Users.ReadOnly = true;
             this.dgvUsersForm_Users.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -559,9 +614,9 @@
             this.panelGroups.Controls.Add(this.toolStrip6);
             this.panelGroups.Controls.Add(this.dgvGroupsForm_Groups);
             this.panelGroups.Controls.Add(this.label18);
-            this.panelGroups.Location = new System.Drawing.Point(732, 197);
+            this.panelGroups.Location = new System.Drawing.Point(732, 194);
             this.panelGroups.Name = "panelGroups";
-            this.panelGroups.Size = new System.Drawing.Size(200, 97);
+            this.panelGroups.Size = new System.Drawing.Size(200, 100);
             this.panelGroups.TabIndex = 12;
             this.panelGroups.Visible = false;
             this.panelGroups.VisibleChanged += new System.EventHandler(this.panelGroups_VisibleChanged);
@@ -569,7 +624,7 @@
             // label26
             // 
             this.label26.AutoSize = true;
-            this.label26.Location = new System.Drawing.Point(16, 576);
+            this.label26.Location = new System.Drawing.Point(16, 573);
             this.label26.Name = "label26";
             this.label26.Size = new System.Drawing.Size(116, 15);
             this.label26.TabIndex = 39;
@@ -577,7 +632,7 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(138, 573);
+            this.textBox1.Location = new System.Drawing.Point(138, 570);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(411, 21);
             this.textBox1.TabIndex = 38;
@@ -780,7 +835,7 @@
             this.dgvGroupsForm_Groups.Name = "dgvGroupsForm_Groups";
             this.dgvGroupsForm_Groups.ReadOnly = true;
             this.dgvGroupsForm_Groups.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvGroupsForm_Groups.Size = new System.Drawing.Size(530, 499);
+            this.dgvGroupsForm_Groups.Size = new System.Drawing.Size(530, 496);
             this.dgvGroupsForm_Groups.TabIndex = 32;
             this.dgvGroupsForm_Groups.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvGroupsForm_Groups_CellDoubleClick);
             this.dgvGroupsForm_Groups.SelectionChanged += new System.EventHandler(this.dgvGroupsForm_Groups_SelectionChanged);
@@ -848,12 +903,345 @@
             // 
             // panelAssignTestsToUsers
             // 
+            this.panelAssignTestsToUsers.Controls.Add(this.label30);
+            this.panelAssignTestsToUsers.Controls.Add(this.tbAssignTestsForm_FindGroupByName);
+            this.panelAssignTestsToUsers.Controls.Add(this.rbAssignTestsForm_FindUserByLastName);
+            this.panelAssignTestsToUsers.Controls.Add(this.rbAssignTestsForm_FindUserByLogin);
+            this.panelAssignTestsToUsers.Controls.Add(this.tbAssignTestsForm_FindUserByLastName);
+            this.panelAssignTestsToUsers.Controls.Add(this.tbAssignTestsForm_FindUserByLogin);
+            this.panelAssignTestsToUsers.Controls.Add(this.label27);
+            this.panelAssignTestsToUsers.Controls.Add(this.toolStrip9);
+            this.panelAssignTestsToUsers.Controls.Add(this.dgvAssignTestsForm_Tests);
+            this.panelAssignTestsToUsers.Controls.Add(this.label28);
+            this.panelAssignTestsToUsers.Controls.Add(this.label29);
+            this.panelAssignTestsToUsers.Controls.Add(this.dgvAssignTestsForm_Users);
+            this.panelAssignTestsToUsers.Controls.Add(this.toolStrip8);
+            this.panelAssignTestsToUsers.Controls.Add(this.dgvAssignTestsForm_Groups);
             this.panelAssignTestsToUsers.Controls.Add(this.label20);
-            this.panelAssignTestsToUsers.Location = new System.Drawing.Point(492, 327);
+            this.panelAssignTestsToUsers.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelAssignTestsToUsers.Location = new System.Drawing.Point(217, 49);
             this.panelAssignTestsToUsers.Name = "panelAssignTestsToUsers";
-            this.panelAssignTestsToUsers.Size = new System.Drawing.Size(200, 100);
+            this.panelAssignTestsToUsers.Size = new System.Drawing.Size(1044, 613);
             this.panelAssignTestsToUsers.TabIndex = 14;
             this.panelAssignTestsToUsers.Visible = false;
+            this.panelAssignTestsToUsers.VisibleChanged += new System.EventHandler(this.panelAssignTestsToUsers_VisibleChanged);
+            // 
+            // label30
+            // 
+            this.label30.AutoSize = true;
+            this.label30.Location = new System.Drawing.Point(566, 323);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(116, 15);
+            this.label30.TabIndex = 55;
+            this.label30.Text = "Find group by name";
+            // 
+            // tbAssignTestsForm_FindGroupByName
+            // 
+            this.tbAssignTestsForm_FindGroupByName.Location = new System.Drawing.Point(688, 320);
+            this.tbAssignTestsForm_FindGroupByName.Name = "tbAssignTestsForm_FindGroupByName";
+            this.tbAssignTestsForm_FindGroupByName.Size = new System.Drawing.Size(150, 21);
+            this.tbAssignTestsForm_FindGroupByName.TabIndex = 54;
+            // 
+            // rbAssignTestsForm_FindUserByLastName
+            // 
+            this.rbAssignTestsForm_FindUserByLastName.AutoSize = true;
+            this.rbAssignTestsForm_FindUserByLastName.Checked = true;
+            this.rbAssignTestsForm_FindUserByLastName.Location = new System.Drawing.Point(19, 322);
+            this.rbAssignTestsForm_FindUserByLastName.Name = "rbAssignTestsForm_FindUserByLastName";
+            this.rbAssignTestsForm_FindUserByLastName.Size = new System.Drawing.Size(121, 19);
+            this.rbAssignTestsForm_FindUserByLastName.TabIndex = 53;
+            this.rbAssignTestsForm_FindUserByLastName.TabStop = true;
+            this.rbAssignTestsForm_FindUserByLastName.Text = "Find by last name";
+            this.rbAssignTestsForm_FindUserByLastName.UseVisualStyleBackColor = true;
+            // 
+            // rbAssignTestsForm_FindUserByLogin
+            // 
+            this.rbAssignTestsForm_FindUserByLogin.AutoSize = true;
+            this.rbAssignTestsForm_FindUserByLogin.Location = new System.Drawing.Point(302, 321);
+            this.rbAssignTestsForm_FindUserByLogin.Name = "rbAssignTestsForm_FindUserByLogin";
+            this.rbAssignTestsForm_FindUserByLogin.Size = new System.Drawing.Size(94, 19);
+            this.rbAssignTestsForm_FindUserByLogin.TabIndex = 52;
+            this.rbAssignTestsForm_FindUserByLogin.Text = "Find by login";
+            this.rbAssignTestsForm_FindUserByLogin.UseVisualStyleBackColor = true;
+            // 
+            // tbAssignTestsForm_FindUserByLastName
+            // 
+            this.tbAssignTestsForm_FindUserByLastName.Location = new System.Drawing.Point(146, 321);
+            this.tbAssignTestsForm_FindUserByLastName.Name = "tbAssignTestsForm_FindUserByLastName";
+            this.tbAssignTestsForm_FindUserByLastName.Size = new System.Drawing.Size(147, 21);
+            this.tbAssignTestsForm_FindUserByLastName.TabIndex = 51;
+            // 
+            // tbAssignTestsForm_FindUserByLogin
+            // 
+            this.tbAssignTestsForm_FindUserByLogin.Enabled = false;
+            this.tbAssignTestsForm_FindUserByLogin.Location = new System.Drawing.Point(402, 320);
+            this.tbAssignTestsForm_FindUserByLogin.Name = "tbAssignTestsForm_FindUserByLogin";
+            this.tbAssignTestsForm_FindUserByLogin.Size = new System.Drawing.Size(147, 21);
+            this.tbAssignTestsForm_FindUserByLogin.TabIndex = 50;
+            // 
+            // label27
+            // 
+            this.label27.AutoSize = true;
+            this.label27.Location = new System.Drawing.Point(16, 354);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(160, 15);
+            this.label27.TabIndex = 49;
+            this.label27.Text = "Assign tests to selected user";
+            // 
+            // toolStrip9
+            // 
+            this.toolStrip9.Dock = System.Windows.Forms.DockStyle.None;
+            this.toolStrip9.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolStrip9.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripButtonAssignNewTestForGroup});
+            this.toolStrip9.Location = new System.Drawing.Point(992, 39);
+            this.toolStrip9.Name = "toolStrip9";
+            this.toolStrip9.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
+            this.toolStrip9.Size = new System.Drawing.Size(27, 27);
+            this.toolStrip9.TabIndex = 48;
+            this.toolStrip9.Text = "toolStrip9";
+            // 
+            // toolStripButtonAssignNewTestForGroup
+            // 
+            this.toolStripButtonAssignNewTestForGroup.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonAssignNewTestForGroup.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonAssignNewTestForGroup.Image")));
+            this.toolStripButtonAssignNewTestForGroup.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonAssignNewTestForGroup.Name = "toolStripButtonAssignNewTestForGroup";
+            this.toolStripButtonAssignNewTestForGroup.Padding = new System.Windows.Forms.Padding(2);
+            this.toolStripButtonAssignNewTestForGroup.Size = new System.Drawing.Size(24, 24);
+            this.toolStripButtonAssignNewTestForGroup.ToolTipText = "Assign new test for group";
+            // 
+            // dgvAssignTestsForm_Tests
+            // 
+            this.dgvAssignTestsForm_Tests.AllowUserToAddRows = false;
+            this.dgvAssignTestsForm_Tests.AllowUserToDeleteRows = false;
+            this.dgvAssignTestsForm_Tests.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvAssignTestsForm_Tests.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column6,
+            this.Column7,
+            this.Column8,
+            this.Column9,
+            this.Column10,
+            this.Column11});
+            this.dgvAssignTestsForm_Tests.Location = new System.Drawing.Point(19, 372);
+            this.dgvAssignTestsForm_Tests.MultiSelect = false;
+            this.dgvAssignTestsForm_Tests.Name = "dgvAssignTestsForm_Tests";
+            this.dgvAssignTestsForm_Tests.ReadOnly = true;
+            this.dgvAssignTestsForm_Tests.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvAssignTestsForm_Tests.Size = new System.Drawing.Size(1000, 220);
+            this.dgvAssignTestsForm_Tests.TabIndex = 47;
+            this.dgvAssignTestsForm_Tests.SelectionChanged += new System.EventHandler(this.dgvAssignTestsForm_Tests_SelectionChanged);
+            // 
+            // Column6
+            // 
+            this.Column6.HeaderText = "Id";
+            this.Column6.Name = "Column6";
+            this.Column6.ReadOnly = true;
+            this.Column6.Width = 50;
+            // 
+            // Column7
+            // 
+            this.Column7.HeaderText = "Title";
+            this.Column7.Name = "Column7";
+            this.Column7.ReadOnly = true;
+            this.Column7.Width = 260;
+            // 
+            // Column8
+            // 
+            this.Column8.HeaderText = "Author";
+            this.Column8.Name = "Column8";
+            this.Column8.ReadOnly = true;
+            this.Column8.Width = 170;
+            // 
+            // Column9
+            // 
+            this.Column9.HeaderText = "Desription";
+            this.Column9.Name = "Column9";
+            this.Column9.ReadOnly = true;
+            this.Column9.Width = 260;
+            // 
+            // Column10
+            // 
+            this.Column10.HeaderText = "Arhived";
+            this.Column10.Name = "Column10";
+            this.Column10.ReadOnly = true;
+            this.Column10.Width = 80;
+            // 
+            // Column11
+            // 
+            this.Column11.HeaderText = "Loaded date";
+            this.Column11.Name = "Column11";
+            this.Column11.ReadOnly = true;
+            this.Column11.Width = 120;
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Location = new System.Drawing.Point(16, 53);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(39, 15);
+            this.label28.TabIndex = 44;
+            this.label28.Text = "Users";
+            // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.Location = new System.Drawing.Point(566, 53);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(47, 15);
+            this.label29.TabIndex = 43;
+            this.label29.Text = "Groups";
+            // 
+            // dgvAssignTestsForm_Users
+            // 
+            this.dgvAssignTestsForm_Users.AllowUserToAddRows = false;
+            this.dgvAssignTestsForm_Users.AllowUserToDeleteRows = false;
+            this.dgvAssignTestsForm_Users.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvAssignTestsForm_Users.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn1,
+            this.dataGridViewTextBoxColumn3,
+            this.dataGridViewTextBoxColumn4,
+            this.dataGridViewTextBoxColumn2,
+            this.Column5});
+            this.dgvAssignTestsForm_Users.Location = new System.Drawing.Point(19, 69);
+            this.dgvAssignTestsForm_Users.MultiSelect = false;
+            this.dgvAssignTestsForm_Users.Name = "dgvAssignTestsForm_Users";
+            this.dgvAssignTestsForm_Users.ReadOnly = true;
+            this.dgvAssignTestsForm_Users.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvAssignTestsForm_Users.Size = new System.Drawing.Size(530, 245);
+            this.dgvAssignTestsForm_Users.TabIndex = 42;
+            this.dgvAssignTestsForm_Users.SelectionChanged += new System.EventHandler(this.dgvAssignTestsForm_Users_SelectionChanged);
+            // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.HeaderText = "Id";
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.dataGridViewTextBoxColumn1.Width = 50;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.HeaderText = "First name";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.ReadOnly = true;
+            this.dataGridViewTextBoxColumn3.Width = 120;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.HeaderText = "Last name";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.ReadOnly = true;
+            this.dataGridViewTextBoxColumn4.Width = 120;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.HeaderText = "Login";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            // 
+            // Column5
+            // 
+            this.Column5.HeaderText = "Is admin";
+            this.Column5.Name = "Column5";
+            this.Column5.ReadOnly = true;
+            this.Column5.Width = 80;
+            // 
+            // toolStrip8
+            // 
+            this.toolStrip8.Dock = System.Windows.Forms.DockStyle.None;
+            this.toolStrip8.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolStrip8.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripButtonAssignNewTestForUser,
+            this.toolStripButtonAssignNewTestByCopyForUser,
+            this.toolStripSeparator10,
+            this.toolStripButtonRemoveAssignedTestForUser});
+            this.toolStrip8.Location = new System.Drawing.Point(936, 342);
+            this.toolStrip8.Name = "toolStrip8";
+            this.toolStrip8.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
+            this.toolStrip8.Size = new System.Drawing.Size(114, 27);
+            this.toolStrip8.TabIndex = 41;
+            this.toolStrip8.Text = "toolStrip8";
+            // 
+            // toolStripButtonAssignNewTestForUser
+            // 
+            this.toolStripButtonAssignNewTestForUser.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonAssignNewTestForUser.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonAssignNewTestForUser.Image")));
+            this.toolStripButtonAssignNewTestForUser.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonAssignNewTestForUser.Name = "toolStripButtonAssignNewTestForUser";
+            this.toolStripButtonAssignNewTestForUser.Padding = new System.Windows.Forms.Padding(2);
+            this.toolStripButtonAssignNewTestForUser.Size = new System.Drawing.Size(24, 24);
+            this.toolStripButtonAssignNewTestForUser.ToolTipText = "Assign new test for user";
+            this.toolStripButtonAssignNewTestForUser.Click += new System.EventHandler(this.toolStripButtonAssignNewTestForUser_Click);
+            // 
+            // toolStripButtonAssignNewTestByCopyForUser
+            // 
+            this.toolStripButtonAssignNewTestByCopyForUser.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonAssignNewTestByCopyForUser.Enabled = false;
+            this.toolStripButtonAssignNewTestByCopyForUser.Image = global::TestServer.Properties.Resources.add_by_copy;
+            this.toolStripButtonAssignNewTestByCopyForUser.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonAssignNewTestByCopyForUser.Name = "toolStripButtonAssignNewTestByCopyForUser";
+            this.toolStripButtonAssignNewTestByCopyForUser.Padding = new System.Windows.Forms.Padding(2);
+            this.toolStripButtonAssignNewTestByCopyForUser.Size = new System.Drawing.Size(24, 24);
+            this.toolStripButtonAssignNewTestByCopyForUser.Text = "toolStripButton1";
+            this.toolStripButtonAssignNewTestByCopyForUser.ToolTipText = "Assign new test for User by copy";
+            this.toolStripButtonAssignNewTestByCopyForUser.Click += new System.EventHandler(this.toolStripButtonAssignNewTestByCopyForUser_Click);
+            // 
+            // toolStripSeparator10
+            // 
+            this.toolStripSeparator10.Margin = new System.Windows.Forms.Padding(0, 0, 2, 0);
+            this.toolStripSeparator10.Name = "toolStripSeparator10";
+            this.toolStripSeparator10.Size = new System.Drawing.Size(6, 27);
+            // 
+            // toolStripButtonRemoveAssignedTestForUser
+            // 
+            this.toolStripButtonRemoveAssignedTestForUser.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonRemoveAssignedTestForUser.Enabled = false;
+            this.toolStripButtonRemoveAssignedTestForUser.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonRemoveAssignedTestForUser.Image")));
+            this.toolStripButtonRemoveAssignedTestForUser.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonRemoveAssignedTestForUser.Name = "toolStripButtonRemoveAssignedTestForUser";
+            this.toolStripButtonRemoveAssignedTestForUser.Padding = new System.Windows.Forms.Padding(2);
+            this.toolStripButtonRemoveAssignedTestForUser.Size = new System.Drawing.Size(24, 24);
+            this.toolStripButtonRemoveAssignedTestForUser.ToolTipText = "Remove assigned test for user";
+            this.toolStripButtonRemoveAssignedTestForUser.Click += new System.EventHandler(this.toolStripButtonRemoveAssignedTestForUser_Click);
+            // 
+            // dgvAssignTestsForm_Groups
+            // 
+            this.dgvAssignTestsForm_Groups.AllowUserToAddRows = false;
+            this.dgvAssignTestsForm_Groups.AllowUserToDeleteRows = false;
+            this.dgvAssignTestsForm_Groups.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvAssignTestsForm_Groups.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewTextBoxColumn5,
+            this.dataGridViewTextBoxColumn6,
+            this.dataGridViewTextBoxColumn7});
+            this.dgvAssignTestsForm_Groups.Location = new System.Drawing.Point(569, 69);
+            this.dgvAssignTestsForm_Groups.MultiSelect = false;
+            this.dgvAssignTestsForm_Groups.Name = "dgvAssignTestsForm_Groups";
+            this.dgvAssignTestsForm_Groups.ReadOnly = true;
+            this.dgvAssignTestsForm_Groups.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvAssignTestsForm_Groups.Size = new System.Drawing.Size(450, 245);
+            this.dgvAssignTestsForm_Groups.TabIndex = 40;
+            this.dgvAssignTestsForm_Groups.SelectionChanged += new System.EventHandler(this.dgvAssignTestsForm_Groups_SelectionChanged);
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            this.dataGridViewTextBoxColumn5.HeaderText = "Id";
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            this.dataGridViewTextBoxColumn5.ReadOnly = true;
+            this.dataGridViewTextBoxColumn5.Width = 50;
+            // 
+            // dataGridViewTextBoxColumn6
+            // 
+            this.dataGridViewTextBoxColumn6.HeaderText = "GroupName";
+            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            this.dataGridViewTextBoxColumn6.ReadOnly = true;
+            this.dataGridViewTextBoxColumn6.Width = 140;
+            // 
+            // dataGridViewTextBoxColumn7
+            // 
+            this.dataGridViewTextBoxColumn7.HeaderText = "Description";
+            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            this.dataGridViewTextBoxColumn7.ReadOnly = true;
+            this.dataGridViewTextBoxColumn7.Width = 200;
             // 
             // label20
             // 
@@ -1497,14 +1885,14 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1261, 684);
-            this.Controls.Add(this.panelUsers);
+            this.Controls.Add(this.panelAssignTestsToUsers);
             this.Controls.Add(this.panelGroups);
+            this.Controls.Add(this.panelUsers);
             this.Controls.Add(this.panelTestsExplorer);
             this.Controls.Add(this.panelLoadTest);
             this.Controls.Add(this.panelTests);
             this.Controls.Add(this.panelUsersAndGroups);
             this.Controls.Add(this.panelReviewPassedTests);
-            this.Controls.Add(this.panelAssignTestsToUsers);
             this.Controls.Add(this.panelUsersAndTests);
             this.Controls.Add(this.panelGeneral);
             this.Controls.Add(this.splitter1);
@@ -1518,6 +1906,8 @@
             this.Name = "MainForm";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.MainForm_Load);
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.panelGeneral.ResumeLayout(false);
             this.panelGeneral.PerformLayout();
             this.panelUsersAndGroups.ResumeLayout(false);
@@ -1539,6 +1929,13 @@
             this.panelUsersAndTests.PerformLayout();
             this.panelAssignTestsToUsers.ResumeLayout(false);
             this.panelAssignTestsToUsers.PerformLayout();
+            this.toolStrip9.ResumeLayout(false);
+            this.toolStrip9.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvAssignTestsForm_Tests)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvAssignTestsForm_Users)).EndInit();
+            this.toolStrip8.ResumeLayout(false);
+            this.toolStrip8.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvAssignTestsForm_Groups)).EndInit();
             this.panelReviewPassedTests.ResumeLayout(false);
             this.panelReviewPassedTests.PerformLayout();
             this.panelTests.ResumeLayout(false);
@@ -1575,6 +1972,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.bsGroupsForm_Groups)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsGoupsForm_Users)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsGroupsForm_Users)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsAssignTestsForm_Users)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsAssignTestsForm_Groups)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsAssignTestsForm_Tests)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1707,6 +2107,43 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
+        private System.Windows.Forms.ToolStripMenuItem originalSizeToolStripMenuItem;
+        private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.Label label29;
+        private System.Windows.Forms.DataGridView dgvAssignTestsForm_Users;
+        private System.Windows.Forms.ToolStrip toolStrip8;
+        private System.Windows.Forms.ToolStripButton toolStripButtonAssignNewTestForUser;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
+        private System.Windows.Forms.ToolStripButton toolStripButtonRemoveAssignedTestForUser;
+        private System.Windows.Forms.DataGridView dgvAssignTestsForm_Groups;
+        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.ToolStrip toolStrip9;
+        private System.Windows.Forms.ToolStripButton toolStripButtonAssignNewTestForGroup;
+        private System.Windows.Forms.DataGridView dgvAssignTestsForm_Tests;
+        private System.Windows.Forms.Label label30;
+        private System.Windows.Forms.TextBox tbAssignTestsForm_FindGroupByName;
+        private System.Windows.Forms.RadioButton rbAssignTestsForm_FindUserByLastName;
+        private System.Windows.Forms.RadioButton rbAssignTestsForm_FindUserByLogin;
+        private System.Windows.Forms.TextBox tbAssignTestsForm_FindUserByLastName;
+        private System.Windows.Forms.TextBox tbAssignTestsForm_FindUserByLogin;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn7;
+        private System.Windows.Forms.BindingSource bsAssignTestsForm_Users;
+        private System.Windows.Forms.BindingSource bsAssignTestsForm_Groups;
+        private System.Windows.Forms.BindingSource bsAssignTestsForm_Tests;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column9;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column10;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column11;
+        private System.Windows.Forms.ToolStripButton toolStripButtonAssignNewTestByCopyForUser;
     }
 }
 

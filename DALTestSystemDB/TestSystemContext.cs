@@ -26,7 +26,6 @@ namespace DALTestingSystemDB
 
         public DbSet<User> Users { get; set; }
         public DbSet<Group> Groups { get; set; }
-        public DbSet<Folder> Folders { get; set; }
         public DbSet<Test> Tests { get; set; }
         public DbSet<Question> Questions { get; set; }
         public DbSet<Answer> Answers { get; set; }
@@ -38,7 +37,6 @@ namespace DALTestingSystemDB
             modelBuilder.Entity<User>().Property(x => x.Login).IsRequired();
             modelBuilder.Entity<User>().Property(x => x.Password).IsRequired();
             modelBuilder.Entity<Group>().Property(x => x.Name).IsRequired();
-            modelBuilder.Entity<Folder>().Property(x => x.Name).IsRequired();
             modelBuilder.Entity<Test>().Property(x => x.Title).IsRequired();
             modelBuilder.Entity<Question>().Property(x => x.QuestionText).IsRequired();
             modelBuilder.Entity<Answer>().Property(x => x.AnswerText).IsRequired();
@@ -50,9 +48,6 @@ namespace DALTestingSystemDB
 
             // one to many
             //------------------
-            // Folder -> Test
-            modelBuilder.Entity<Folder>().HasMany(x => x.Tests).WithRequired(y => y.Folder);
-
             // Test -> Question
             modelBuilder.Entity<Test>().HasMany(x => x.Questions).WithRequired(y => y.Test);
 

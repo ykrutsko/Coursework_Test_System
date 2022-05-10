@@ -94,30 +94,24 @@ namespace TestServer
         {
             User.Login = tbLogin.Text;
             if(openMode != OpenMode.Edit || openMode == OpenMode.Edit && cbChangePass.Checked)
-            {
                 User.Password = tbPass.Text.GetSha512();
-            }
+
             User.FirstName = tbFN.Text;
             User.LastName = tbLN.Text;
             User.Description = tbDescription.Text;
-            User.RegisterDate = DateTime.Now;
+                
             if (User.Groups.Where(x => x.Id == 1).Any())
-            {
                 User.IsAdmin = true;
-            }
             else
-            {
                 User.IsAdmin = cbIsAdmin.Checked;
-            }
 
             if (openMode != OpenMode.Edit)
             {
                 User.IsArhived = false;
+                User.RegisterDate = DateTime.Now;
             }
             else
-            {
                 User.IsArhived = cbIsArchive.Checked;
-            }
         }
 
         void WindowTitleText()

@@ -13,7 +13,6 @@ namespace TestServer
         public static GenericUnitOfWork work;
         public static IGenericRepository<User> repoUser;
         public static IGenericRepository<Group> repoGroup;
-        public static IGenericRepository<Folder> repoFolder;
         public static IGenericRepository<DALTestingSystemDB.Test> repoTest;
         public static IGenericRepository<DALTestingSystemDB.Question> repoQuestion;
         public static IGenericRepository<DALTestingSystemDB.Answer> repoAnswer;
