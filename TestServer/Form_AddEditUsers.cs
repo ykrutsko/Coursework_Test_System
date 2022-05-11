@@ -149,6 +149,7 @@ namespace TestServer
             {
                 User.Groups.Add(newGroupForUserForm.Group);
                 bindingSource.ResetBindings(false);
+                bindingSource.MoveLast();
             }
         }
 
