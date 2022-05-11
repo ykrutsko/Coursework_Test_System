@@ -370,17 +370,9 @@ namespace TestServer
 
         private void dgvGroupsForm_Groups_WhenRowGetSelect()
         {
-            if(dgvGroupsForm_Groups.Rows.Count == 0 || dgvGroupsForm_Groups.SelectedRows.Count == 0)
-            {
-                GroupsForm_currGroup = null;
-                bsGroupsForm_Users.DataSource = new List<User>();
-            }
-            else
-            {
-                GroupsForm_currGroup = dgvGroupsForm_Groups.CurrentRow.DataBoundItem as DALTestingSystemDB.Group;
-                bsGroupsForm_Users.DataSource = GroupsForm_currGroup.Users;
-                bsGroupsForm_Users.ResetBindings(false);
-            }
+            GroupsForm_currGroup = dgvGroupsForm_Groups.CurrentRow.DataBoundItem as DALTestingSystemDB.Group;
+            bsGroupsForm_Users.DataSource = GroupsForm_currGroup.Users;
+            bsGroupsForm_Users.ResetBindings(false);
             GroupsForm_GroupsMenuEnDis();
         }
 
@@ -399,21 +391,12 @@ namespace TestServer
 
         private void GroupsForm_GroupsMenuEnDis()
         {
-            if(dgvGroupsForm_Groups.SelectedCells.Count > 0)
-            {
-                toolStripButtonAddGroupByCopy.Enabled = true;
-                toolStripButtonEditGroup.Enabled = true;
-                if((dgvGroupsForm_Groups.CurrentRow.DataBoundItem as DALTestingSystemDB.Group).Id == 1)
-                    toolStripButtonDeleteGroup.Enabled = false;
-                else
-                    toolStripButtonDeleteGroup.Enabled = true;
-            }
-            else
-            {
-                toolStripButtonAddGroupByCopy.Enabled = false;
-                toolStripButtonEditGroup.Enabled = false;
+            toolStripButtonAddGroupByCopy.Enabled = true;
+            toolStripButtonEditGroup.Enabled = true;
+            if ((dgvGroupsForm_Groups.CurrentRow.DataBoundItem as DALTestingSystemDB.Group).Id == 1)
                 toolStripButtonDeleteGroup.Enabled = false;
-            }
+            else
+                toolStripButtonDeleteGroup.Enabled = true;
         }
 
         private async void toolStripButtonAddGroup_Click(object sender, EventArgs e)
@@ -431,7 +414,7 @@ namespace TestServer
                     dgvGroupsForm_Groups.CurrentCell = dgvGroupsForm_Groups.Rows[row.Index].Cells[0];
                     dgvGroupsForm_Groups_WhenRowGetSelect();
                 }
-                this.dgvGroupsForm_Groups.SelectionChanged += new System.EventHandler(this.dgvGroupsForm_Groups_SelectionChanged);
+                this.dgvGroupsForm_Groups.SelectionChanged += new System.EventHandler(this.dgvGroupsForm_Groups_SelectionChanged);                
             }
         }
 
@@ -502,12 +485,22 @@ namespace TestServer
             this.dgvGroupsForm_Groups.SelectionChanged += new System.EventHandler(this.dgvGroupsForm_Groups_SelectionChanged);
         }
 
-        private async void tbGroups_FindByName_TextChanged(object sender, EventArgs e)
+        private void tbGroups_FindByName_TextChanged(object sender, EventArgs e)
         {
-            bsGroupsForm_Groups.DataSource = tbGroups_FindByName.Text.Any() ?
-                await Task.Run(() => Globals.repoGroup.FindAll(x => x.Name.ToLower().Contains(tbGroups_FindByName.Text.ToLower())))
-                : await Task.Run(() => Globals.repoGroup.GetAll());
-
+            if (!tbGroups_FindByName.Text.Any()) return;
+            DataGridViewRow row = dgvGroupsForm_Groups.Rows
+                .Cast<DataGridViewRow>()
+                .Where(r => r.Cells["Name"].Value.ToString().ToLower().StartsWith(tbGroups_FindByName.Text.ToLower()))
+                .FirstOrDefault();
+            if(row != null)
+            {
+                this.dgvGroupsForm_Groups.SelectionChanged -= new System.EventHandler(this.dgvGroupsForm_Groups_SelectionChanged);
+                {
+                    dgvGroupsForm_Groups.CurrentCell = dgvGroupsForm_Groups.Rows[row.Index].Cells[0];
+                    dgvGroupsForm_Groups_WhenRowGetSelect();
+                }
+                this.dgvGroupsForm_Groups.SelectionChanged += new System.EventHandler(this.dgvGroupsForm_Groups_SelectionChanged);
+            }
         }
 
         //----------------------------------------------------------------------------
