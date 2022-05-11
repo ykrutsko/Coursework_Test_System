@@ -30,18 +30,19 @@ namespace TestServer
             dataGridView.Columns[2].Width = 190;
             dataGridView.Columns[3].Width = 100;
             dataGridView.Columns[4].Visible = false;
-            dataGridView.Columns[3].HeaderText = "Administrators";
-            dataGridView.ClearSelection();
-        }
-
-        private void dataGridView_SelectionChanged(object sender, EventArgs e)
-        {
-            btnOK.Enabled = dataGridView.SelectedRows.Count > 0;
+            dataGridView.Columns[3].HeaderText = "Admin group";
+            textBox1.Select();
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            bindingSource.DataSource = textBox1.Text.Any()? Groups.Where(x => x.Name.ToLower().Contains(textBox1.Text.ToLower())).ToList() : Groups;
+            if (!textBox1.Text.Any()) return;
+            DataGridViewRow row = dataGridView.Rows
+                .Cast<DataGridViewRow>()
+                .Where(r => r.Cells["Name"].Value.ToString().ToLower().StartsWith(textBox1.Text.ToLower()))
+                .FirstOrDefault();
+            if (row != null)
+                dataGridView.CurrentCell = dataGridView.Rows[row.Index].Cells[0];
         }
 
         private void btnOK_Click(object sender, EventArgs e)

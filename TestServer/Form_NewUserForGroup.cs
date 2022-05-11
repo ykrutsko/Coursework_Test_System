@@ -15,7 +15,6 @@ namespace TestServer
     {
         public User User { get; set; }
         public List<User> Users { get; set; }
-
         public NewUserForGroupForm(List<User> users)
         {
             Users = users;
@@ -38,25 +37,23 @@ namespace TestServer
             dataGridView.Columns[6].Width = 80;
             dataGridView.Columns[1].HeaderText = "First name";
             dataGridView.Columns[2].HeaderText = "Last name";
-            dataGridView.Columns[6].HeaderText = "Is admin";
-            dataGridView.ClearSelection();
+            dataGridView.Columns[6].HeaderText = "Admin";
+            textBox.Select();
         }
-
-        private void dataGridView_SelectionChanged(object sender, EventArgs e)
-        {
-            btnOK.Enabled = dataGridView.SelectedRows.Count > 0;
-        }
-
         private void btnOK_Click(object sender, EventArgs e)
         {
             User = dataGridView.CurrentRow.DataBoundItem as User;
         }
-
         private void textBox_TextChanged(object sender, EventArgs e)
         {
-            bindingSource.DataSource = textBox.Text.Any() ? Users.Where(x => x.Login.ToLower().Contains(textBox.Text.ToLower())).ToList() : Users;
+            if (!textBox.Text.Any()) return;
+            DataGridViewRow row = dataGridView.Rows
+                .Cast<DataGridViewRow>()
+                .Where(r => r.Cells["Login"].Value.ToString().ToLower().StartsWith(textBox.Text.ToLower()))
+                .FirstOrDefault();
+            if (row != null)
+                dataGridView.CurrentCell = dataGridView.Rows[row.Index].Cells[0];
         }
-
         private void dataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
@@ -65,7 +62,5 @@ namespace TestServer
                 this.DialogResult = DialogResult.OK;
             }
         }
-
-
     }
 }

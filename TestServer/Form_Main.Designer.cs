@@ -29,24 +29,24 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("General");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Users", 1, 1);
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Groups", 2, 2);
-            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Users & Groups", 0, 0, new System.Windows.Forms.TreeNode[] {
-            treeNode2,
-            treeNode3});
-            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Assign tests to users");
-            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Review passed tests");
-            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Users & Tests", new System.Windows.Forms.TreeNode[] {
-            treeNode5,
-            treeNode6});
-            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Load test");
-            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Tests explorer");
-            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Tests", new System.Windows.Forms.TreeNode[] {
-            treeNode8,
-            treeNode9});
-            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("Reports");
-            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("Server", 3, 3);
+            System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("General");
+            System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("Users", 1, 1);
+            System.Windows.Forms.TreeNode treeNode15 = new System.Windows.Forms.TreeNode("Groups", 2, 2);
+            System.Windows.Forms.TreeNode treeNode16 = new System.Windows.Forms.TreeNode("Users & Groups", 0, 0, new System.Windows.Forms.TreeNode[] {
+            treeNode14,
+            treeNode15});
+            System.Windows.Forms.TreeNode treeNode17 = new System.Windows.Forms.TreeNode("Assign tests to users");
+            System.Windows.Forms.TreeNode treeNode18 = new System.Windows.Forms.TreeNode("Review passed tests");
+            System.Windows.Forms.TreeNode treeNode19 = new System.Windows.Forms.TreeNode("Users & Tests", new System.Windows.Forms.TreeNode[] {
+            treeNode17,
+            treeNode18});
+            System.Windows.Forms.TreeNode treeNode20 = new System.Windows.Forms.TreeNode("Load test");
+            System.Windows.Forms.TreeNode treeNode21 = new System.Windows.Forms.TreeNode("Tests explorer");
+            System.Windows.Forms.TreeNode treeNode22 = new System.Windows.Forms.TreeNode("Tests", new System.Windows.Forms.TreeNode[] {
+            treeNode20,
+            treeNode21});
+            System.Windows.Forms.TreeNode treeNode23 = new System.Windows.Forms.TreeNode("Reports");
+            System.Windows.Forms.TreeNode treeNode24 = new System.Windows.Forms.TreeNode("Server", 3, 3);
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -106,6 +106,8 @@
             this.panelUsersAndTests = new System.Windows.Forms.Panel();
             this.label19 = new System.Windows.Forms.Label();
             this.panelAssignTestsToUsers = new System.Windows.Forms.Panel();
+            this.label32 = new System.Windows.Forms.Label();
+            this.label31 = new System.Windows.Forms.Label();
             this.label30 = new System.Windows.Forms.Label();
             this.tbAssignTestsForm_FindGroupByName = new System.Windows.Forms.TextBox();
             this.tbAssignTestsForm_FindUserByLastName = new System.Windows.Forms.TextBox();
@@ -207,8 +209,10 @@
             this.bsAssignTestsForm_Groups = new System.Windows.Forms.BindingSource(this.components);
             this.bsAssignTestsForm_Tests = new System.Windows.Forms.BindingSource(this.components);
             this.bsGroupsForm_Users = new System.Windows.Forms.BindingSource(this.components);
-            this.label31 = new System.Windows.Forms.Label();
-            this.label32 = new System.Windows.Forms.Label();
+            this.label33 = new System.Windows.Forms.Label();
+            this.label34 = new System.Windows.Forms.Label();
+            this.tbUsersForm_FindByLastName = new System.Windows.Forms.TextBox();
+            this.tbUsersForm_FindByLogin = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             this.panelGeneral.SuspendLayout();
             this.panelUsersAndGroups.SuspendLayout();
@@ -300,45 +304,45 @@
             this.treeView1.ImageList = this.imageList1;
             this.treeView1.Location = new System.Drawing.Point(0, 49);
             this.treeView1.Name = "treeView1";
-            treeNode1.Name = "NodeGeneral";
-            treeNode1.Text = "General";
-            treeNode2.ImageIndex = 1;
-            treeNode2.Name = "NodeUsers";
-            treeNode2.SelectedImageIndex = 1;
-            treeNode2.Text = "Users";
-            treeNode3.ImageIndex = 2;
-            treeNode3.Name = "NodeGroups";
-            treeNode3.SelectedImageIndex = 2;
-            treeNode3.Text = "Groups";
-            treeNode4.ImageIndex = 0;
-            treeNode4.Name = "NodeUsersAndGroups";
-            treeNode4.SelectedImageIndex = 0;
-            treeNode4.Text = "Users & Groups";
-            treeNode5.Name = "NodeAssignTestsToUsers";
-            treeNode5.Text = "Assign tests to users";
-            treeNode6.Name = "NodeReviwPassedTests";
-            treeNode6.Text = "Review passed tests";
-            treeNode7.Name = "NodeUsersAndTests";
-            treeNode7.Text = "Users & Tests";
-            treeNode8.Name = "NodeLoadTest";
-            treeNode8.Text = "Load test";
-            treeNode9.Name = "NodeTestsExplorer";
-            treeNode9.Text = "Tests explorer";
-            treeNode10.Name = "NodeTests";
-            treeNode10.Text = "Tests";
-            treeNode11.Name = "NodeReports";
-            treeNode11.Text = "Reports";
-            treeNode12.ImageIndex = 3;
-            treeNode12.Name = "NodeServer";
-            treeNode12.SelectedImageIndex = 3;
-            treeNode12.Text = "Server";
+            treeNode13.Name = "NodeGeneral";
+            treeNode13.Text = "General";
+            treeNode14.ImageIndex = 1;
+            treeNode14.Name = "NodeUsers";
+            treeNode14.SelectedImageIndex = 1;
+            treeNode14.Text = "Users";
+            treeNode15.ImageIndex = 2;
+            treeNode15.Name = "NodeGroups";
+            treeNode15.SelectedImageIndex = 2;
+            treeNode15.Text = "Groups";
+            treeNode16.ImageIndex = 0;
+            treeNode16.Name = "NodeUsersAndGroups";
+            treeNode16.SelectedImageIndex = 0;
+            treeNode16.Text = "Users & Groups";
+            treeNode17.Name = "NodeAssignTestsToUsers";
+            treeNode17.Text = "Assign tests to users";
+            treeNode18.Name = "NodeReviwPassedTests";
+            treeNode18.Text = "Review passed tests";
+            treeNode19.Name = "NodeUsersAndTests";
+            treeNode19.Text = "Users & Tests";
+            treeNode20.Name = "NodeLoadTest";
+            treeNode20.Text = "Load test";
+            treeNode21.Name = "NodeTestsExplorer";
+            treeNode21.Text = "Tests explorer";
+            treeNode22.Name = "NodeTests";
+            treeNode22.Text = "Tests";
+            treeNode23.Name = "NodeReports";
+            treeNode23.Text = "Reports";
+            treeNode24.ImageIndex = 3;
+            treeNode24.Name = "NodeServer";
+            treeNode24.SelectedImageIndex = 3;
+            treeNode24.Text = "Server";
             this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode1,
-            treeNode4,
-            treeNode7,
-            treeNode10,
-            treeNode11,
-            treeNode12});
+            treeNode13,
+            treeNode16,
+            treeNode19,
+            treeNode22,
+            treeNode23,
+            treeNode24});
             this.treeView1.SelectedImageIndex = 0;
             this.treeView1.Size = new System.Drawing.Size(214, 613);
             this.treeView1.TabIndex = 4;
@@ -425,6 +429,10 @@
             // 
             // panelUsers
             // 
+            this.panelUsers.Controls.Add(this.label33);
+            this.panelUsers.Controls.Add(this.label34);
+            this.panelUsers.Controls.Add(this.tbUsersForm_FindByLastName);
+            this.panelUsers.Controls.Add(this.tbUsersForm_FindByLogin);
             this.panelUsers.Controls.Add(this.rbByGroup);
             this.panelUsers.Controls.Add(this.cbUsersFormGroup);
             this.panelUsers.Controls.Add(this.rbAll);
@@ -596,7 +604,7 @@
             this.dgvUsersForm_Users.Name = "dgvUsersForm_Users";
             this.dgvUsersForm_Users.ReadOnly = true;
             this.dgvUsersForm_Users.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvUsersForm_Users.Size = new System.Drawing.Size(1000, 523);
+            this.dgvUsersForm_Users.Size = new System.Drawing.Size(1000, 496);
             this.dgvUsersForm_Users.TabIndex = 0;
             this.dgvUsersForm_Users.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvUsersForm_Users_CellDoubleClick);
             this.dgvUsersForm_Users.SelectionChanged += new System.EventHandler(this.dgvUsersForm_Users_SelectionChanged);
@@ -925,6 +933,24 @@
             this.panelAssignTestsToUsers.Visible = false;
             this.panelAssignTestsToUsers.VisibleChanged += new System.EventHandler(this.panelAssignTestsToUsers_VisibleChanged);
             // 
+            // label32
+            // 
+            this.label32.AutoSize = true;
+            this.label32.Location = new System.Drawing.Point(313, 323);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(80, 15);
+            this.label32.TabIndex = 57;
+            this.label32.Text = "Find by Login";
+            // 
+            // label31
+            // 
+            this.label31.AutoSize = true;
+            this.label31.Location = new System.Drawing.Point(18, 323);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(107, 15);
+            this.label31.TabIndex = 56;
+            this.label31.Text = "Find by Last name";
+            // 
             // label30
             // 
             this.label30.AutoSize = true;
@@ -976,7 +1002,7 @@
             this.toolStrip9.Location = new System.Drawing.Point(992, 39);
             this.toolStrip9.Name = "toolStrip9";
             this.toolStrip9.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.toolStrip9.Size = new System.Drawing.Size(27, 27);
+            this.toolStrip9.Size = new System.Drawing.Size(58, 27);
             this.toolStrip9.TabIndex = 48;
             this.toolStrip9.Text = "toolStrip9";
             // 
@@ -1860,23 +1886,39 @@
             this.label11.TabIndex = 3;
             this.label11.Text = "Author";
             // 
-            // label31
+            // label33
             // 
-            this.label31.AutoSize = true;
-            this.label31.Location = new System.Drawing.Point(18, 323);
-            this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(107, 15);
-            this.label31.TabIndex = 56;
-            this.label31.Text = "Find by Last name";
+            this.label33.AutoSize = true;
+            this.label33.Location = new System.Drawing.Point(313, 573);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(80, 15);
+            this.label33.TabIndex = 61;
+            this.label33.Text = "Find by Login";
             // 
-            // label32
+            // label34
             // 
-            this.label32.AutoSize = true;
-            this.label32.Location = new System.Drawing.Point(313, 323);
-            this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(80, 15);
-            this.label32.TabIndex = 57;
-            this.label32.Text = "Find by Login";
+            this.label34.AutoSize = true;
+            this.label34.Location = new System.Drawing.Point(16, 573);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(107, 15);
+            this.label34.TabIndex = 60;
+            this.label34.Text = "Find by Last name";
+            // 
+            // tbUsersForm_FindByLastName
+            // 
+            this.tbUsersForm_FindByLastName.Location = new System.Drawing.Point(129, 570);
+            this.tbUsersForm_FindByLastName.Name = "tbUsersForm_FindByLastName";
+            this.tbUsersForm_FindByLastName.Size = new System.Drawing.Size(150, 21);
+            this.tbUsersForm_FindByLastName.TabIndex = 59;
+            this.tbUsersForm_FindByLastName.TextChanged += new System.EventHandler(this.tbUsersForm_FindByLastName_TextChanged);
+            // 
+            // tbUsersForm_FindByLogin
+            // 
+            this.tbUsersForm_FindByLogin.Location = new System.Drawing.Point(399, 570);
+            this.tbUsersForm_FindByLogin.Name = "tbUsersForm_FindByLogin";
+            this.tbUsersForm_FindByLogin.Size = new System.Drawing.Size(150, 21);
+            this.tbUsersForm_FindByLogin.TabIndex = 58;
+            this.tbUsersForm_FindByLogin.TextChanged += new System.EventHandler(this.tbUsersForm_FindByLogin_TextChanged);
             // 
             // MainForm
             // 
@@ -2140,6 +2182,10 @@
         private System.Windows.Forms.BindingSource bsGroupsForm_Users;
         private System.Windows.Forms.Label label32;
         private System.Windows.Forms.Label label31;
+        private System.Windows.Forms.Label label33;
+        private System.Windows.Forms.Label label34;
+        private System.Windows.Forms.TextBox tbUsersForm_FindByLastName;
+        private System.Windows.Forms.TextBox tbUsersForm_FindByLogin;
     }
 }
 

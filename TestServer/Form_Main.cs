@@ -121,13 +121,15 @@ namespace TestServer
 
                 dgvUsersForm_Users.Columns[1].HeaderText = "First name";
                 dgvUsersForm_Users.Columns[2].HeaderText = "Last name";
-                dgvUsersForm_Users.Columns[6].HeaderText = "Is admin";
+                dgvUsersForm_Users.Columns[6].HeaderText = "Admin";
                 dgvUsersForm_Users.Columns[8].HeaderText = "Register date";
                 firstTimeUsers = false;
             }
             else
             {
                 await Task.Run(() => UsersForm_LoadUsersBySelector(selector));
+                tbUsersForm_FindByLastName.Text = string.Empty;
+                tbUsersForm_FindByLogin.Text = string.Empty;
             }
         }
 
@@ -318,6 +320,42 @@ namespace TestServer
                 case UsersFormSelector.None:
                     this.Invoke(new Action(() => bsUsersForm_Users.Clear()));
                     break;
+            }
+        }
+
+        private void tbUsersForm_FindByLastName_TextChanged(object sender, EventArgs e)
+        {
+            if (!tbUsersForm_FindByLastName.Text.Any()) return;
+            DataGridViewRow row = dgvUsersForm_Users.Rows
+                .Cast<DataGridViewRow>()
+                .Where(r => r.Cells["LastName"].Value.ToString().ToLower().StartsWith(tbUsersForm_FindByLastName.Text.ToLower()))
+                .FirstOrDefault();
+            if (row != null)
+            {
+                this.dgvUsersForm_Users.SelectionChanged -= new System.EventHandler(this.dgvUsersForm_Users_SelectionChanged);
+                {
+                    dgvUsersForm_Users.CurrentCell = dgvUsersForm_Users.Rows[row.Index].Cells[0];
+                    dgvUsersForm_Users_WhenRowGetSelect();
+                }
+                this.dgvUsersForm_Users.SelectionChanged += new System.EventHandler(this.dgvUsersForm_Users_SelectionChanged);
+            }
+        }
+
+        private void tbUsersForm_FindByLogin_TextChanged(object sender, EventArgs e)
+        {
+            if (!tbUsersForm_FindByLogin.Text.Any()) return;
+            DataGridViewRow row = dgvUsersForm_Users.Rows
+                .Cast<DataGridViewRow>()
+                .Where(r => r.Cells["Login"].Value.ToString().ToLower().StartsWith(tbUsersForm_FindByLogin.Text.ToLower()))
+                .FirstOrDefault();
+            if (row != null)
+            {
+                this.dgvUsersForm_Users.SelectionChanged -= new System.EventHandler(this.dgvUsersForm_Users_SelectionChanged);
+                {
+                    dgvUsersForm_Users.CurrentCell = dgvUsersForm_Users.Rows[row.Index].Cells[0];
+                    dgvUsersForm_Users_WhenRowGetSelect();
+                }
+                this.dgvUsersForm_Users.SelectionChanged += new System.EventHandler(this.dgvUsersForm_Users_SelectionChanged);
             }
         }
         //----------------------------------------------------------------------------
@@ -533,7 +571,7 @@ namespace TestServer
                 dgvAssignTestsForm_Users.Columns[6].Width = 80;
                 dgvAssignTestsForm_Users.Columns[1].HeaderText = "First name";
                 dgvAssignTestsForm_Users.Columns[2].HeaderText = "Last name";
-                dgvAssignTestsForm_Users.Columns[6].HeaderText = "Is admin";
+                dgvAssignTestsForm_Users.Columns[6].HeaderText = "Admin";
                 AssignTestsForm_currUser = dgvAssignTestsForm_Users.CurrentRow.DataBoundItem as User;
 
                 // Groups
@@ -1191,6 +1229,8 @@ namespace TestServer
         {
             this.Size = new Size(1277, 723);
         }
+
+
 
         //dgvGroupsForm_Groups.Columns[0].Width = (int)(dgvGroupsForm_Groups.Width * 0.1);
         // last - dgvGrd.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;

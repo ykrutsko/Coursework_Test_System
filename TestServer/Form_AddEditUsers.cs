@@ -84,7 +84,7 @@ namespace TestServer
             dataGridView.Columns[0].Width = 50;
             dataGridView.Columns[1].Width = 190;
             dataGridView.Columns[3].Width = 110;
-            dataGridView.Columns[3].HeaderText = "Administrators";
+            dataGridView.Columns[3].HeaderText = "Admin group";
             dataGridView.ClearSelection();
             WindowTitleText();
             tbLogin.Select();
