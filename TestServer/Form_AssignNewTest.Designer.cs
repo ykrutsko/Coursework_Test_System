@@ -31,17 +31,17 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AssignNewTestForm));
             this.dataGridView = new System.Windows.Forms.DataGridView();
-            this.label = new System.Windows.Forms.Label();
-            this.textBox = new System.Windows.Forms.TextBox();
-            this.btnOk = new System.Windows.Forms.Button();
-            this.btnCancel = new System.Windows.Forms.Button();
-            this.bindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label = new System.Windows.Forms.Label();
+            this.textBox = new System.Windows.Forms.TextBox();
+            this.btnOk = new System.Windows.Forms.Button();
+            this.btnCancel = new System.Windows.Forms.Button();
+            this.bindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource)).BeginInit();
             this.SuspendLayout();
@@ -66,46 +66,6 @@
             this.dataGridView.Size = new System.Drawing.Size(1000, 260);
             this.dataGridView.TabIndex = 48;
             this.dataGridView.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView_CellDoubleClick);
-            this.dataGridView.SelectionChanged += new System.EventHandler(this.dataGridView_SelectionChanged);
-            // 
-            // label
-            // 
-            this.label.AutoSize = true;
-            this.label.Location = new System.Drawing.Point(12, 281);
-            this.label.Name = "label";
-            this.label.Size = new System.Drawing.Size(68, 15);
-            this.label.TabIndex = 49;
-            this.label.Text = "Find by title";
-            // 
-            // textBox
-            // 
-            this.textBox.Location = new System.Drawing.Point(86, 278);
-            this.textBox.Name = "textBox";
-            this.textBox.Size = new System.Drawing.Size(289, 21);
-            this.textBox.TabIndex = 50;
-            this.textBox.TextChanged += new System.EventHandler(this.textBox_TextChanged);
-            // 
-            // btnOk
-            // 
-            this.btnOk.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.btnOk.Enabled = false;
-            this.btnOk.Location = new System.Drawing.Point(695, 292);
-            this.btnOk.Name = "btnOk";
-            this.btnOk.Size = new System.Drawing.Size(90, 27);
-            this.btnOk.TabIndex = 51;
-            this.btnOk.Text = "OK";
-            this.btnOk.UseVisualStyleBackColor = true;
-            this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
-            // 
-            // btnCancel
-            // 
-            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnCancel.Location = new System.Drawing.Point(791, 292);
-            this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(90, 27);
-            this.btnCancel.TabIndex = 52;
-            this.btnCancel.Text = "Cancel";
-            this.btnCancel.UseVisualStyleBackColor = true;
             // 
             // Column6
             // 
@@ -148,6 +108,44 @@
             this.Column11.Name = "Column11";
             this.Column11.ReadOnly = true;
             this.Column11.Width = 120;
+            // 
+            // label
+            // 
+            this.label.AutoSize = true;
+            this.label.Location = new System.Drawing.Point(12, 281);
+            this.label.Name = "label";
+            this.label.Size = new System.Drawing.Size(68, 15);
+            this.label.TabIndex = 49;
+            this.label.Text = "Find by title";
+            // 
+            // textBox
+            // 
+            this.textBox.Location = new System.Drawing.Point(86, 278);
+            this.textBox.Name = "textBox";
+            this.textBox.Size = new System.Drawing.Size(289, 21);
+            this.textBox.TabIndex = 50;
+            this.textBox.TextChanged += new System.EventHandler(this.textBox_TextChanged);
+            // 
+            // btnOk
+            // 
+            this.btnOk.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.btnOk.Location = new System.Drawing.Point(695, 292);
+            this.btnOk.Name = "btnOk";
+            this.btnOk.Size = new System.Drawing.Size(90, 27);
+            this.btnOk.TabIndex = 51;
+            this.btnOk.Text = "OK";
+            this.btnOk.UseVisualStyleBackColor = true;
+            this.btnOk.Click += new System.EventHandler(this.btnOk_Click);
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnCancel.Location = new System.Drawing.Point(791, 292);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(90, 27);
+            this.btnCancel.TabIndex = 52;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.UseVisualStyleBackColor = true;
             // 
             // AssignNewTestForm
             // 
