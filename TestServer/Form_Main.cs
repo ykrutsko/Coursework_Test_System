@@ -105,7 +105,6 @@ namespace TestServer
             {
                 selector = UsersFormSelector.Active;
                 await Task.Run(() => UsersForm_LoadUsersBySelector(selector));
-                UsersForm_LoadUsersBySelector(selector);
                 dgvUsersForm_Users.DataSource = bsUsersForm_Users;
                 dgvUsersForm_Users.Columns[4].Visible = false;
                 dgvUsersForm_Users.Columns[7].Visible = false;
@@ -326,8 +325,7 @@ namespace TestServer
 
         #region GroupsForm
         //----------------------------------------------------------------------------
-        Group GroupsForm_currGroup;
-        User GroupsForm_currUser;
+        DALTestingSystemDB.Group GroupsForm_currGroup;
         private async void panelGroups_VisibleChanged(object sender, EventArgs e)
         {
             if (panelGroups.Visible == false) return;
@@ -341,18 +339,16 @@ namespace TestServer
                 dgvGroupsForm_Groups.DataSource = bsGroupsForm_Groups;
                 dgvGroupsForm_Groups.Columns[4].Visible = false;
                 dgvGroupsForm_Groups.Columns[0].Width = 50;
-                //dgvGroupsForm_Groups.Columns[0].Width = (int)(dgvGroupsForm_Groups.Width * 0.1);
                 dgvGroupsForm_Groups.Columns[1].Width = 140;
                 dgvGroupsForm_Groups.Columns[2].Width = 190;
                 dgvGroupsForm_Groups.Columns[3].Width = 90;
                 dgvGroupsForm_Groups.Columns[3].HeaderText = "Admin group";
                 GroupsForm_currGroup = dgvGroupsForm_Groups.CurrentRow.DataBoundItem as Group;
                 GroupsForm_GroupsMenuEnDis();
-                // last - dgvGrd.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
                 //Users
                 dgvGroupsForm_Users.Columns.Clear();
-                bsGroupsForm_Users.DataSource = await Task.Run(() => Globals.repoGroup.FindById(GroupsForm_currGroup.Id).Users);
+                bsGroupsForm_Users.DataSource = GroupsForm_currGroup.Users;
                 dgvGroupsForm_Users.DataSource = bsGroupsForm_Users;
                 for (int i = 4; i <= 10; i++)
                     dgvGroupsForm_Users.Columns[i].Visible = false;
@@ -362,22 +358,35 @@ namespace TestServer
                 dgvGroupsForm_Users.Columns[3].Width = 100;
                 dgvGroupsForm_Users.Columns[1].HeaderText = "First name";
                 dgvGroupsForm_Users.Columns[2].HeaderText = "Last name";
-                GroupsForm_currUser = dgvGroupsForm_Users.CurrentRow.DataBoundItem as User;
                 firstTimeGroups = false;                
             }
             else
             {
+                bsGroupsForm_Groups.ResetBindings(false);
                 dgvGroupsForm_Groups_WhenRowGetSelect();
             }
             this.dgvGroupsForm_Groups.SelectionChanged += new System.EventHandler(this.dgvGroupsForm_Groups_SelectionChanged);
         }
 
-        private async void dgvGroupsForm_Groups_WhenRowGetSelect()
+        private void dgvGroupsForm_Groups_WhenRowGetSelect()
         {
-            GroupsForm_currGroup = dgvGroupsForm_Groups.CurrentRow.DataBoundItem as DALTestingSystemDB.Group;
+            if(dgvGroupsForm_Groups.Rows.Count == 0 || dgvGroupsForm_Groups.SelectedRows.Count == 0)
+            {
+                GroupsForm_currGroup = null;
+                bsGroupsForm_Users.DataSource = new List<User>();
+            }
+            else
+            {
+                GroupsForm_currGroup = dgvGroupsForm_Groups.CurrentRow.DataBoundItem as DALTestingSystemDB.Group;
+                bsGroupsForm_Users.DataSource = GroupsForm_currGroup.Users;
+                bsGroupsForm_Users.ResetBindings(false);
+            }
             GroupsForm_GroupsMenuEnDis();
-            bsGroupsForm_Users.DataSource = await Task.Run(() => Globals.repoGroup.FindById(GroupsForm_currGroup.Id).Users);
-            bsGroupsForm_Users.ResetBindings(false);
+        }
+
+        private void dgvGroupsForm_Groups_SelectionChanged(object sender, EventArgs e)
+        {
+            dgvGroupsForm_Groups_WhenRowGetSelect();
         }
 
         private DataGridViewRow GetRow_Group(DataGridView dgv, DALTestingSystemDB.Group group)
@@ -386,11 +395,6 @@ namespace TestServer
                     .Cast<DataGridViewRow>()
                     .Where(r => r.Cells["Id"].Value.Equals(group.Id))
                     .FirstOrDefault();
-        }
-
-        private void dgvGroupsForm_Groups_SelectionChanged(object sender, EventArgs e)
-        {
-            dgvGroupsForm_Groups_WhenRowGetSelect();
         }
 
         private void GroupsForm_GroupsMenuEnDis()
@@ -497,6 +501,15 @@ namespace TestServer
             }
             this.dgvGroupsForm_Groups.SelectionChanged += new System.EventHandler(this.dgvGroupsForm_Groups_SelectionChanged);
         }
+
+        private async void tbGroups_FindByName_TextChanged(object sender, EventArgs e)
+        {
+            bsGroupsForm_Groups.DataSource = tbGroups_FindByName.Text.Any() ?
+                await Task.Run(() => Globals.repoGroup.FindAll(x => x.Name.ToLower().Contains(tbGroups_FindByName.Text.ToLower())))
+                : await Task.Run(() => Globals.repoGroup.GetAll());
+
+        }
+
         //----------------------------------------------------------------------------
         #endregion Groups
 
@@ -586,7 +599,6 @@ namespace TestServer
                 toolStripButtonAssignNewTestForUser.Enabled = true;
                 AssignTestsForm_currUser = dgvAssignTestsForm_Users.CurrentRow.DataBoundItem as User;
                 bsAssignTestsForm_Tests.DataSource = await Task.Run(() => Globals.repoUser.FindById(AssignTestsForm_currUser.Id).UserTests.Where(y => !y.IsTaked).Select(z => z.Test).ToList());
-                dgvAssignTestsForm_Tests.DataSource = bsAssignTestsForm_Tests;
             }
         }
 
@@ -1164,6 +1176,9 @@ namespace TestServer
         {
             this.Size = new Size(1277, 723);
         }
+
+        //dgvGroupsForm_Groups.Columns[0].Width = (int)(dgvGroupsForm_Groups.Width * 0.1);
+        // last - dgvGrd.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 
 
     }

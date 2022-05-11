@@ -52,11 +52,9 @@ namespace TestServer
             User = dataGridView.CurrentRow.DataBoundItem as User;
         }
 
-        private async void textBox_TextChanged(object sender, EventArgs e)
+        private void textBox_TextChanged(object sender, EventArgs e)
         {
-            bindingSource.DataSource = textBox.Text.Any() ? 
-                await Task.Run(() => Globals.repoUser.FindAll(x => x.Login.Contains(textBox.Text))) 
-                : await Task.Run(() => Globals.repoUser.GetAll());
+            bindingSource.DataSource = textBox.Text.Any() ? Users.Where(x => x.Login.ToLower().Contains(textBox.Text.ToLower())).ToList() : Users;
         }
 
         private void dataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)

@@ -38,6 +38,7 @@ namespace TestServer
             dataGridView.Columns[6].HeaderText = "Archived";
             dataGridView.Columns[7].HeaderText = "Loaded date";
             dataGridView.ClearSelection();
+            textBox.Select();
         }
 
         private void btnOk_Click(object sender, EventArgs e)
@@ -62,7 +63,7 @@ namespace TestServer
         private async void textBox_TextChanged(object sender, EventArgs e)
         {
             bindingSource.DataSource = textBox.Text.Any() ?
-                await Task.Run(() => Globals.repoTest.FindAll(x => x.Title.Contains(textBox.Text))) 
+                await Task.Run(() => Globals.repoTest.FindAll(x => x.Title.Contains(@textBox.Text))) 
                 : await Task.Run(() => Globals.repoTest.GetAll());
         }
     }

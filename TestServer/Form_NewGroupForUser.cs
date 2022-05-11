@@ -41,7 +41,7 @@ namespace TestServer
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            bindingSource.DataSource = textBox1.Text.Any()? Globals.repoGroup.FindAll(x => x.Name.Contains(textBox1.Text)) : Globals.repoGroup.GetAll();
+            bindingSource.DataSource = textBox1.Text.Any()? Groups.Where(x => x.Name.ToLower().Contains(textBox1.Text.ToLower())).ToList() : Groups;
         }
 
         private void btnOK_Click(object sender, EventArgs e)
