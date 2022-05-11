@@ -507,7 +507,6 @@ namespace TestServer
         DALTestingSystemDB.Test AssignTestsForm_currTest;
         private async void panelAssignTestsToUsers_VisibleChanged(object sender, EventArgs e)
         {
-
             if (panelAssignTestsToUsers.Visible == false) return;
 
             this.dgvAssignTestsForm_Users.SelectionChanged -= new System.EventHandler(this.dgvAssignTestsForm_Users_SelectionChanged);
@@ -577,9 +576,14 @@ namespace TestServer
         private async void dgvAssignTestsForm_Users_WhenRowGetSelect()
         {
             if (dgvAssignTestsForm_Users.Rows.Count == 0 || dgvAssignTestsForm_Users.SelectedRows.Count == 0)
+            {
+                toolStripButtonAssignNewTestForUser.Enabled = false;
                 bsAssignTestsForm_Tests.Clear();
+                AssignTestsForm_currUser = null;
+            }
             else
             {
+                toolStripButtonAssignNewTestForUser.Enabled = true;
                 AssignTestsForm_currUser = dgvAssignTestsForm_Users.CurrentRow.DataBoundItem as User;
                 bsAssignTestsForm_Tests.DataSource = await Task.Run(() => Globals.repoUser.FindById(AssignTestsForm_currUser.Id).UserTests.Where(y => !y.IsTaked).Select(z => z.Test).ToList());
                 dgvAssignTestsForm_Tests.DataSource = bsAssignTestsForm_Tests;
@@ -589,7 +593,10 @@ namespace TestServer
         private void dgvAssignTestsForm_Groups_WhenRowGetSelect()
         {
             if (dgvAssignTestsForm_Groups.Rows.Count == 0 || dgvAssignTestsForm_Groups.SelectedRows.Count == 0)
+            {
                 toolStripButtonAssignNewTestForGroup.Enabled = false;
+                AssignTestsForm_currGroup = null;
+            }
             else
             {
                 toolStripButtonAssignNewTestForGroup.Enabled = true;
@@ -600,10 +607,17 @@ namespace TestServer
         private void dgvAssignTestsForm_Tests_WhenRowGetSelect()
         {
             if (dgvAssignTestsForm_Tests.Rows.Count == 0 || dgvAssignTestsForm_Tests.SelectedRows.Count == 0)
-                toolStripButtonAssignNewTestByCopyForUser.Enabled = toolStripButtonRemoveAssignedTestForUser.Enabled = false;
+            {
+                toolStripButtonAssignNewTestByCopyForUser.Enabled 
+                    = toolStripButtonRemoveAssignedTestForUser.Enabled 
+                    = false;
+                AssignTestsForm_currTest = null;
+            }
             else
             {
-                toolStripButtonAssignNewTestByCopyForUser.Enabled = toolStripButtonRemoveAssignedTestForUser.Enabled = true;
+                toolStripButtonAssignNewTestByCopyForUser.Enabled
+                    = toolStripButtonRemoveAssignedTestForUser.Enabled
+                    = true;
                 AssignTestsForm_currTest = dgvAssignTestsForm_Tests.CurrentRow.DataBoundItem as DALTestingSystemDB.Test;
             }
         }
@@ -621,6 +635,42 @@ namespace TestServer
         private void dgvAssignTestsForm_Tests_SelectionChanged(object sender, EventArgs e)
         {
             dgvAssignTestsForm_Tests_WhenRowGetSelect();
+        }
+
+        private async void toolStripButtonAssignNewTestForGroup_Click(object sender, EventArgs e)
+        {
+            AssignNewTestForm assignNewTestForm = new AssignNewTestForm(OpenMode.Group);
+            if (!await Task.Run(() => Globals.repoTest.GetAll().Any()))
+            {
+                MessageBox.Show("There are no Tests in database!", "Test server", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            if (assignNewTestForm.ShowDialog() == DialogResult.OK)
+            {
+                DALTestingSystemDB.Test newTest = assignNewTestForm.Test;
+                foreach (User user in AssignTestsForm_currGroup.Users)
+                {
+                    UserTest newUserTest = new UserTest()
+                    {
+                        IsTaked = false,
+                        TakedDate = null,
+                        User = user,
+                        Test = newTest,
+                    };
+                    await Task.Run(() => Globals.repoUserTest.Add(newUserTest));
+                }
+
+                if (AssignTestsForm_currUser != null)
+                {
+                    this.dgvAssignTestsForm_Tests.SelectionChanged -= new System.EventHandler(this.dgvAssignTestsForm_Tests_SelectionChanged);
+                    {
+                        bsAssignTestsForm_Tests.DataSource = await Task.Run(() => Globals.repoUser.FindById(AssignTestsForm_currUser.Id).UserTests.Where(y => !y.IsTaked).Select(z => z.Test).ToList());
+                        bsAssignTestsForm_Tests.MoveLast();
+                        dgvAssignTestsForm_Tests_WhenRowGetSelect();
+                    }
+                    this.dgvAssignTestsForm_Tests.SelectionChanged += new System.EventHandler(this.dgvAssignTestsForm_Tests_SelectionChanged);
+                }
+            }
         }
 
         private async void toolStripButtonAssignNewTestForUser_Click(object sender, EventArgs e)
@@ -641,6 +691,7 @@ namespace TestServer
                     Test = newTest,
                 };
                 await Task.Run(() => Globals.repoUserTest.Add(newUserTest));
+
                 this.dgvAssignTestsForm_Tests.SelectionChanged -= new System.EventHandler(this.dgvAssignTestsForm_Tests_SelectionChanged);
                 {
                     bsAssignTestsForm_Tests.DataSource = await Task.Run(() => Globals.repoUser.FindById(AssignTestsForm_currUser.Id).UserTests.Where(y => !y.IsTaked).Select(z => z.Test).ToList());
@@ -663,8 +714,12 @@ namespace TestServer
             await Task.Run(() => Globals.repoUserTest.Add(newUserTest));
             this.dgvAssignTestsForm_Tests.SelectionChanged -= new System.EventHandler(this.dgvAssignTestsForm_Tests_SelectionChanged);
             {
-                bsAssignTestsForm_Tests.DataSource = await Task.Run(() => Globals.repoUser.FindById(AssignTestsForm_currUser.Id).UserTests.Where(y => !y.IsTaked).Select(z => z.Test).ToList());
-                bsAssignTestsForm_Tests.MoveLast();
+                var userTestslist = await Task.Run(() => Globals.repoUser.FindById(AssignTestsForm_currUser.Id).UserTests.Where(y => !y.IsTaked).Select(z => z.Test).ToList());
+                if(userTestslist.Any())
+                {
+                    bsAssignTestsForm_Tests.DataSource = userTestslist;
+                    bsAssignTestsForm_Tests.MoveLast();
+                }
                 dgvAssignTestsForm_Tests_WhenRowGetSelect();
             }
             this.dgvAssignTestsForm_Tests.SelectionChanged += new System.EventHandler(this.dgvAssignTestsForm_Tests_SelectionChanged);
@@ -672,7 +727,11 @@ namespace TestServer
 
         private async void toolStripButtonRemoveAssignedTestForUser_Click(object sender, EventArgs e)
         {
-            UserTest deletableUserTest = Globals.repoUserTest.FindAll(x => x.User.Id == AssignTestsForm_currUser.Id && x.Test.Id == AssignTestsForm_currTest.Id && !x.IsTaked).Last();
+            UserTest deletableUserTest = Globals.repoUserTest.FindAll(
+                x => x.User.Id == AssignTestsForm_currUser.Id 
+                && x.Test.Id == AssignTestsForm_currTest.Id 
+                && !x.IsTaked)
+                .Last();
 
             await Task.Run(() => Globals.repoUserTest.Remove(deletableUserTest));
             this.dgvAssignTestsForm_Tests.SelectionChanged -= new System.EventHandler(this.dgvAssignTestsForm_Tests_SelectionChanged);
@@ -683,12 +742,38 @@ namespace TestServer
             this.dgvAssignTestsForm_Tests.SelectionChanged += new System.EventHandler(this.dgvAssignTestsForm_Tests_SelectionChanged);
         }
 
+        private void rbAssignTestsForm_FindUserByLastName_CheckedChanged(object sender, EventArgs e)
+        {
+            tbAssignTestsForm_FindUserByLastName.Enabled = rbAssignTestsForm_FindUserByLastName.Checked;
+            tbAssignTestsForm_FindUserByLogin.Text = String.Empty;
+        }
 
+        private void rbAssignTestsForm_FindUserByLogin_CheckedChanged(object sender, EventArgs e)
+        {
+            tbAssignTestsForm_FindUserByLogin.Enabled = rbAssignTestsForm_FindUserByLogin.Checked;
+            tbAssignTestsForm_FindUserByLastName.Text = String.Empty;
+        }
 
+        private async void tbAssignTestsForm_FindUserByLastName_TextChanged(object sender, EventArgs e)
+        {
+            bsAssignTestsForm_Users.DataSource = tbAssignTestsForm_FindUserByLastName.Text.Any() ?
+                await Task.Run(() => Globals.repoUser.FindAll(x => x.LastName.ToLower().Contains(tbAssignTestsForm_FindUserByLastName.Text.ToLower())))
+                : await Task.Run(() => Globals.repoUser.GetAll());
+        }
 
+        private async void tbAssignTestsForm_FindUserByLogin_TextChanged(object sender, EventArgs e)
+        {
+            bsAssignTestsForm_Users.DataSource = tbAssignTestsForm_FindUserByLogin.Text.Any() ?
+                await Task.Run(() => Globals.repoUser.FindAll(x => x.Login.ToLower().Contains(tbAssignTestsForm_FindUserByLogin.Text.ToLower())))
+                : await Task.Run(() => Globals.repoUser.GetAll());
+        }
 
-
-
+        private async void tbAssignTestsForm_FindGroupByName_TextChanged(object sender, EventArgs e)
+        {
+            bsAssignTestsForm_Groups.DataSource = tbAssignTestsForm_FindGroupByName.Text.Any() ?
+                await Task.Run(() => Globals.repoGroup.FindAll(x => x.Name.ToLower().Contains(tbAssignTestsForm_FindGroupByName.Text.ToLower())))
+                : await Task.Run(() => Globals.repoGroup.GetAll());
+        }
         //----------------------------------------------------------------------------
         #endregion AssignTests
 

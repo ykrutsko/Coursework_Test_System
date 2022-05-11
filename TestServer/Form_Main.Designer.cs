@@ -941,6 +941,7 @@
             this.tbAssignTestsForm_FindGroupByName.Name = "tbAssignTestsForm_FindGroupByName";
             this.tbAssignTestsForm_FindGroupByName.Size = new System.Drawing.Size(150, 21);
             this.tbAssignTestsForm_FindGroupByName.TabIndex = 54;
+            this.tbAssignTestsForm_FindGroupByName.TextChanged += new System.EventHandler(this.tbAssignTestsForm_FindGroupByName_TextChanged);
             // 
             // rbAssignTestsForm_FindUserByLastName
             // 
@@ -953,6 +954,7 @@
             this.rbAssignTestsForm_FindUserByLastName.TabStop = true;
             this.rbAssignTestsForm_FindUserByLastName.Text = "Find by last name";
             this.rbAssignTestsForm_FindUserByLastName.UseVisualStyleBackColor = true;
+            this.rbAssignTestsForm_FindUserByLastName.CheckedChanged += new System.EventHandler(this.rbAssignTestsForm_FindUserByLastName_CheckedChanged);
             // 
             // rbAssignTestsForm_FindUserByLogin
             // 
@@ -963,6 +965,7 @@
             this.rbAssignTestsForm_FindUserByLogin.TabIndex = 52;
             this.rbAssignTestsForm_FindUserByLogin.Text = "Find by login";
             this.rbAssignTestsForm_FindUserByLogin.UseVisualStyleBackColor = true;
+            this.rbAssignTestsForm_FindUserByLogin.CheckedChanged += new System.EventHandler(this.rbAssignTestsForm_FindUserByLogin_CheckedChanged);
             // 
             // tbAssignTestsForm_FindUserByLastName
             // 
@@ -970,6 +973,7 @@
             this.tbAssignTestsForm_FindUserByLastName.Name = "tbAssignTestsForm_FindUserByLastName";
             this.tbAssignTestsForm_FindUserByLastName.Size = new System.Drawing.Size(147, 21);
             this.tbAssignTestsForm_FindUserByLastName.TabIndex = 51;
+            this.tbAssignTestsForm_FindUserByLastName.TextChanged += new System.EventHandler(this.tbAssignTestsForm_FindUserByLastName_TextChanged);
             // 
             // tbAssignTestsForm_FindUserByLogin
             // 
@@ -978,6 +982,7 @@
             this.tbAssignTestsForm_FindUserByLogin.Name = "tbAssignTestsForm_FindUserByLogin";
             this.tbAssignTestsForm_FindUserByLogin.Size = new System.Drawing.Size(147, 21);
             this.tbAssignTestsForm_FindUserByLogin.TabIndex = 50;
+            this.tbAssignTestsForm_FindUserByLogin.TextChanged += new System.EventHandler(this.tbAssignTestsForm_FindUserByLogin_TextChanged);
             // 
             // label27
             // 
@@ -997,7 +1002,7 @@
             this.toolStrip9.Location = new System.Drawing.Point(992, 39);
             this.toolStrip9.Name = "toolStrip9";
             this.toolStrip9.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.toolStrip9.Size = new System.Drawing.Size(27, 27);
+            this.toolStrip9.Size = new System.Drawing.Size(58, 27);
             this.toolStrip9.TabIndex = 48;
             this.toolStrip9.Text = "toolStrip9";
             // 
@@ -1010,6 +1015,7 @@
             this.toolStripButtonAssignNewTestForGroup.Padding = new System.Windows.Forms.Padding(2);
             this.toolStripButtonAssignNewTestForGroup.Size = new System.Drawing.Size(24, 24);
             this.toolStripButtonAssignNewTestForGroup.ToolTipText = "Assign new test for group";
+            this.toolStripButtonAssignNewTestForGroup.Click += new System.EventHandler(this.toolStripButtonAssignNewTestForGroup_Click);
             // 
             // dgvAssignTestsForm_Tests
             // 
@@ -1158,7 +1164,7 @@
             this.toolStrip8.Location = new System.Drawing.Point(936, 342);
             this.toolStrip8.Name = "toolStrip8";
             this.toolStrip8.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.toolStrip8.Size = new System.Drawing.Size(114, 27);
+            this.toolStrip8.Size = new System.Drawing.Size(83, 27);
             this.toolStrip8.TabIndex = 41;
             this.toolStrip8.Text = "toolStrip8";
             // 
