@@ -20,10 +20,10 @@ namespace TestServer
     public partial class MainForm : Form
     {
         Panel activePanel;
-        bool flagTestsExplorer = false;
         bool firstTimeUsers = true;
         bool firstTimeGroups = true;
         bool firstTimeAssignTests = true;
+        bool firstTimeTestsExplorer = true;
 
         #region Main
         public MainForm()
@@ -95,7 +95,7 @@ namespace TestServer
 
         #region UsersForm
         //----------------------------------------------------------------------------
-        UsersFormSelector selector = UsersFormSelector.Active;
+        FormSelector UsersForm_selector = FormSelector.Active;
         private async void panelUsers_VisibleChanged(object sender, EventArgs e)
         {
             if (panelUsers.Visible == false)
@@ -103,8 +103,8 @@ namespace TestServer
 
             if (firstTimeUsers)
             {
-                selector = UsersFormSelector.Active;
-                await Task.Run(() => UsersForm_LoadUsersBySelector(selector));
+                UsersForm_selector = FormSelector.Active;
+                await Task.Run(() => UsersForm_LoadUsersBySelector(UsersForm_selector));
                 dgvUsersForm_Users.DataSource = bsUsersForm_Users;
                 dgvUsersForm_Users.Columns[4].Visible = false;
                 dgvUsersForm_Users.Columns[7].Visible = false;
@@ -127,7 +127,7 @@ namespace TestServer
             }
             else
             {
-                await Task.Run(() => UsersForm_LoadUsersBySelector(selector));
+                await Task.Run(() => UsersForm_LoadUsersBySelector(UsersForm_selector));
                 tbUsersForm_FindByLastName.Text = string.Empty;
                 tbUsersForm_FindByLogin.Text = string.Empty;
             }
@@ -170,7 +170,7 @@ namespace TestServer
 
                 this.dgvUsersForm_Users.SelectionChanged -= new System.EventHandler(this.dgvUsersForm_Users_SelectionChanged);
                 {
-                    await Task.Run(() => UsersForm_LoadUsersBySelector(selector));
+                    await Task.Run(() => UsersForm_LoadUsersBySelector(UsersForm_selector));
                     if (dgvUsersForm_Users.Rows.Count != 0)
                     {
                         DataGridViewRow row = GetRow_User(dgvUsersForm_Users, newUser);
@@ -195,7 +195,7 @@ namespace TestServer
 
                 this.dgvUsersForm_Users.SelectionChanged -= new System.EventHandler(this.dgvUsersForm_Users_SelectionChanged);
                 {
-                    await Task.Run(() => UsersForm_LoadUsersBySelector(selector));
+                    await Task.Run(() => UsersForm_LoadUsersBySelector(UsersForm_selector));
                     if (dgvUsersForm_Users.Rows.Count != 0)
                     {
                         DataGridViewRow row = GetRow_User(dgvUsersForm_Users, newUser);
@@ -222,7 +222,7 @@ namespace TestServer
 
                 this.dgvUsersForm_Users.SelectionChanged -= new System.EventHandler(this.dgvUsersForm_Users_SelectionChanged);
                 {
-                    await Task.Run(() => UsersForm_LoadUsersBySelector(selector));
+                    await Task.Run(() => UsersForm_LoadUsersBySelector(UsersForm_selector));
                     if (dgvUsersForm_Users.Rows.Count != 0)
                     {
                         DataGridViewRow row = GetRow_User(dgvUsersForm_Users, editableUser);
@@ -246,7 +246,7 @@ namespace TestServer
             await Task.Run(() => 
             {
                 Globals.repoUser.Remove(dgvUsersForm_Users.CurrentRow.DataBoundItem as User);
-                UsersForm_LoadUsersBySelector(selector);
+                UsersForm_LoadUsersBySelector(UsersForm_selector);
             });
         }
 
@@ -261,19 +261,20 @@ namespace TestServer
         private async void UsersForm_RadioButtton_Click(object sender, EventArgs e)
         {
             RadioButton radioButton = (RadioButton)sender;
+            if (!radioButton.Checked) return;
             switch (radioButton.Name)
             {
                 case "rbActive":
-                    selector = UsersFormSelector.Active;
+                    UsersForm_selector = FormSelector.Active;
                     break;
                 case "rbArhived":
-                    selector = UsersFormSelector.Archived;
+                    UsersForm_selector = FormSelector.Archived;
                     break;
                 case "rbAll":
-                    selector = UsersFormSelector.All;
+                    UsersForm_selector = FormSelector.All;
                     break;
             }
-            await Task.Run(() => UsersForm_LoadUsersBySelector(selector));
+            await Task.Run(() => UsersForm_LoadUsersBySelector(UsersForm_selector));
         }
 
         private async void rbByGroup_CheckedChanged(object sender, EventArgs e)
@@ -286,8 +287,8 @@ namespace TestServer
             }
             else
             {
-                selector = UsersFormSelector.None;
-                await Task.Run(() => UsersForm_LoadUsersBySelector(selector));
+                UsersForm_selector = FormSelector.None;
+                await Task.Run(() => UsersForm_LoadUsersBySelector(UsersForm_selector));
                 cbUsersFormGroup.Items.AddRange(await Task.Run(() => Globals.repoGroup.GetAll().ToArray()));
             }
         }
@@ -296,28 +297,28 @@ namespace TestServer
         {
             if (cbUsersFormGroup.SelectedIndex != -1)
             {
-                selector = UsersFormSelector.ByGroup;
-                await Task.Run(() => UsersForm_LoadUsersBySelector(selector));
+                UsersForm_selector = FormSelector.ByGroup;
+                await Task.Run(() => UsersForm_LoadUsersBySelector(UsersForm_selector));
             }
         }
 
-        private void UsersForm_LoadUsersBySelector(UsersFormSelector selector)
+        private void UsersForm_LoadUsersBySelector(FormSelector selector)
         {
             switch (selector)
             {
-                case UsersFormSelector.Active:
+                case FormSelector.Active:
                     this.Invoke(new Action(() => bsUsersForm_Users.DataSource = Globals.repoUser.FindAll(x => !x.IsArhived)));
                     break;
-                case UsersFormSelector.Archived:
+                case FormSelector.Archived:
                     this.Invoke(new Action(() => bsUsersForm_Users.DataSource = Globals.repoUser.FindAll(x => x.IsArhived)));
                     break;
-                case UsersFormSelector.All:
+                case FormSelector.All:
                     this.Invoke(new Action(() => bsUsersForm_Users.DataSource = Globals.repoUser.GetAll()));
                     break;
-                case UsersFormSelector.ByGroup:
+                case FormSelector.ByGroup:
                     this.Invoke(new Action(() => bsUsersForm_Users.DataSource = Globals.repoGroup.FindById((cbUsersFormGroup.SelectedItem as Group).Id).Users));
                     break;
-                case UsersFormSelector.None:
+                case FormSelector.None:
                     this.Invoke(new Action(() => bsUsersForm_Users.Clear()));
                     break;
             }
@@ -1031,23 +1032,163 @@ namespace TestServer
         //-----------------------------------------------------------------------------
         #endregion LoadTestForm functional
 
-        #region TestsExplorerForm functional
+        #region TestsExplorerForm 
         // LoadTestForm functional
         //-----------------------------------------------------------------------------
-       
+        DALTestingSystemDB.Test TestsExplorer_currTest;
+        FormSelector TestsExplorerForm_selector = FormSelector.Active;
+        private async void panelTestsExplorer_VisibleChanged(object sender, EventArgs e)
+        {
+            if (panelTestsExplorer.Visible == false) return;
 
+            this.dgvTestsExplorerForm_Tests.SelectionChanged -= new System.EventHandler(this.dgvTestsExplorerForm_Tests_SelectionChanged);
+            if (firstTimeTestsExplorer)
+            {
+                dgvTestsExplorerForm_Tests.Columns.Clear();
+                await Task.Run(() => TestsExplorerForm_LoadTestsBySelector(TestsExplorerForm_selector));
+                dgvTestsExplorerForm_Tests.DataSource = bsTestsExplorerForm_Tests;
+                for (int i = 4; i <= 9; i++)
+                    if (i != 6 && i != 7)
+                        dgvTestsExplorerForm_Tests.Columns[i].Visible = false;
+                dgvTestsExplorerForm_Tests.Columns[0].Width = 50;
+                dgvTestsExplorerForm_Tests.Columns[1].Width = 260;
+                dgvTestsExplorerForm_Tests.Columns[2].Width = 170;
+                dgvTestsExplorerForm_Tests.Columns[3].Width = 260;
+                dgvTestsExplorerForm_Tests.Columns[6].Width = 80;
+                dgvTestsExplorerForm_Tests.Columns[7].Width = 120;
+                dgvTestsExplorerForm_Tests.Columns[6].HeaderText = "Archived";
+                dgvTestsExplorerForm_Tests.Columns[7].HeaderText = "Loaded date";
+                firstTimeTestsExplorer = false;
+            }
+            else
+            {
+                await Task.Run(() => TestsExplorerForm_LoadTestsBySelector(TestsExplorerForm_selector));
+                tbTestsExplorerForm_FindById.Text = tbTestsExplorerForm_FindByTitle.Text = tbTestsExplorerForm_FindByAuthor.Text = string.Empty;
+            }
+            dgvTestsExplorerForm_Tests_WhenRowGetSelect();
+            this.dgvTestsExplorerForm_Tests.SelectionChanged += new System.EventHandler(this.dgvTestsExplorerForm_Tests_SelectionChanged);
+            tbTestsExplorerForm_FindById.Select();
+        }
 
+        private void dgvTestsExplorerForm_Tests_WhenRowGetSelect()
+        {
+            if (dgvTestsExplorerForm_Tests.Rows.Count == 0 || dgvTestsExplorerForm_Tests.SelectedRows.Count == 0)
+            {
+                toolStripButtonTestLookup.Enabled = toolStripButtonTestDelete.Enabled = false;
+            }
+            else
+            {
+                toolStripButtonTestLookup.Enabled = true;
+                TestsExplorer_currTest = dgvTestsExplorerForm_Tests.CurrentRow.DataBoundItem as DALTestingSystemDB.Test;
+                toolStripButtonTestDelete.Enabled = !TestsExplorer_currTest.UserTests.Any();
+            }
+        }
 
+        private void dgvTestsExplorerForm_Tests_SelectionChanged(object sender, EventArgs e)
+        {
+            dgvTestsExplorerForm_Tests_WhenRowGetSelect();
+        }
 
+        private DataGridViewRow GetRow_Test(DataGridView dgv, DALTestingSystemDB.Test test)
+        {
+            return dgv.Rows
+                    .Cast<DataGridViewRow>()
+                    .Where(r => r.Cells["Id"].Value.Equals(test.Id))
+                    .FirstOrDefault();
+        }
 
+        private async void TestsExplorerForm_RadioButtton_Click(object sender, EventArgs e)
+        {
+            RadioButton radioButton = (RadioButton)sender;
+            if (!radioButton.Checked) return;
+            switch (radioButton.Name)
+            {
+                case "rbTestsExplorerForm_Actual":
+                    TestsExplorerForm_selector = FormSelector.Active;
+                    break;
+                case "rbTestsExplorerForm_Archived":
+                    TestsExplorerForm_selector = FormSelector.Archived;
+                    break;
+                case "rbTestsExplorerForm_All":
+                    TestsExplorerForm_selector = FormSelector.All;
+                    break;
+            }
+            await Task.Run(() => TestsExplorerForm_LoadTestsBySelector(TestsExplorerForm_selector));
+        }
 
+        private void TestsExplorerForm_LoadTestsBySelector(FormSelector selector)
+        {
+            switch (selector)
+            {
+                case FormSelector.Active:
+                    this.Invoke(new Action(() => bsTestsExplorerForm_Tests.DataSource = Globals.repoTest.FindAll(x => !x.IsArchived)));
+                    break;
+                case FormSelector.Archived:
+                    this.Invoke(new Action(() => bsTestsExplorerForm_Tests.DataSource = Globals.repoTest.FindAll(x => x.IsArchived)));
+                    break;
+                case FormSelector.All:
+                    this.Invoke(new Action(() => bsTestsExplorerForm_Tests.DataSource = Globals.repoTest.GetAll()));
+                    break;
+            }
+        }
 
+        private void toolStripButtonAddTest_Click(object sender, EventArgs e)
+        {
+            treeView1.SelectedNode = treeView1.Nodes.Find("NodeLoadTest", true)[0];
+            treeView1.Focus();
+        }
 
+        private void toolStripButtonTestLookup_Click(object sender, EventArgs e)
+        {
 
+        }
 
+        private async void toolStripButtonTestDelete_Click(object sender, EventArgs e)
+        {
+            var dialog = MessageBox.Show("Delete selected test?", "Test server", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+            if (dialog == DialogResult.Cancel)
+                return;
 
+            await Task.Run(() =>
+            {
+                Globals.repoTest.Remove(TestsExplorer_currTest);
+                TestsExplorerForm_LoadTestsBySelector(TestsExplorerForm_selector);
+            });
+        }
 
+        private void tbTestsExplorerForm_Find_TextChanged(object sender, EventArgs e)
+        {
+            TextBox tb = (TextBox)sender;
+            if (!tb.Text.Any()) return;
+            string columnName = string.Empty;
+            switch(tb.Name)
+            {
+                case "tbTestsExplorerForm_FindById":
+                    columnName = "Id";
+                    break;
+                case "tbTestsExplorerForm_FindByTitle":
+                    columnName = "Title";
+                    break;
+                case "tbTestsExplorerForm_FindByAuthor":
+                    columnName = "Author";
+                    break;
+            }
 
+            DataGridViewRow row = dgvTestsExplorerForm_Tests.Rows
+                .Cast<DataGridViewRow>()
+                .Where(r => r.Cells[columnName].Value.ToString().ToLower().StartsWith(tb.Text.ToLower()))
+                .FirstOrDefault();
+
+            if (row != null)
+            {
+                this.dgvTestsExplorerForm_Tests.SelectionChanged -= new System.EventHandler(this.dgvTestsExplorerForm_Tests_SelectionChanged);
+                {
+                    dgvTestsExplorerForm_Tests.CurrentCell = dgvTestsExplorerForm_Tests.Rows[row.Index].Cells[0];
+                    dgvTestsExplorerForm_Tests_WhenRowGetSelect();
+                }
+                this.dgvTestsExplorerForm_Tests.SelectionChanged += new System.EventHandler(this.dgvTestsExplorerForm_Tests_SelectionChanged);
+            }
+        }
 
 
 
@@ -1073,14 +1214,7 @@ namespace TestServer
 
 
         //-----------------------------------------------------------------------------
-        #endregion TestsExplorerForm functional
-
-
-
-
-
-
-
+        #endregion TestsExplorerForm
 
 
 
@@ -1088,6 +1222,21 @@ namespace TestServer
         {
             this.Size = new Size(1277, 723);
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
