@@ -29,24 +29,24 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("General", 4, 4);
-            System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("Users", 1, 1);
-            System.Windows.Forms.TreeNode treeNode15 = new System.Windows.Forms.TreeNode("Groups", 2, 2);
-            System.Windows.Forms.TreeNode treeNode16 = new System.Windows.Forms.TreeNode("Users & Groups", 0, 0, new System.Windows.Forms.TreeNode[] {
-            treeNode14,
-            treeNode15});
-            System.Windows.Forms.TreeNode treeNode17 = new System.Windows.Forms.TreeNode("Assign tests to users", 10, 10);
-            System.Windows.Forms.TreeNode treeNode18 = new System.Windows.Forms.TreeNode("Review passed tests", 6, 6);
-            System.Windows.Forms.TreeNode treeNode19 = new System.Windows.Forms.TreeNode("Users & Tests", 5, 5, new System.Windows.Forms.TreeNode[] {
-            treeNode17,
-            treeNode18});
-            System.Windows.Forms.TreeNode treeNode20 = new System.Windows.Forms.TreeNode("Tests explorer", 7, 7);
-            System.Windows.Forms.TreeNode treeNode21 = new System.Windows.Forms.TreeNode("Load test", 8, 8);
-            System.Windows.Forms.TreeNode treeNode22 = new System.Windows.Forms.TreeNode("Tests", 9, 9, new System.Windows.Forms.TreeNode[] {
-            treeNode20,
-            treeNode21});
-            System.Windows.Forms.TreeNode treeNode23 = new System.Windows.Forms.TreeNode("Reports");
-            System.Windows.Forms.TreeNode treeNode24 = new System.Windows.Forms.TreeNode("Server", 3, 3);
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("General", 4, 4);
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Users", 1, 1);
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Groups", 2, 2);
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Users & Groups", 0, 0, new System.Windows.Forms.TreeNode[] {
+            treeNode2,
+            treeNode3});
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Assign tests to users", 10, 10);
+            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Review passed tests", 6, 6);
+            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Users & Tests", 5, 5, new System.Windows.Forms.TreeNode[] {
+            treeNode5,
+            treeNode6});
+            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Tests explorer", 7, 7);
+            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Load test", 8, 8);
+            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Tests", 9, 9, new System.Windows.Forms.TreeNode[] {
+            treeNode8,
+            treeNode9});
+            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("Reports");
+            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("Server", 3, 3);
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -167,6 +167,7 @@
             this.rbTestsExplorerForm_Actual = new System.Windows.Forms.RadioButton();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.toolStripButtonAddTest = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButtonTestLookup = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButtonTestDelete = new System.Windows.Forms.ToolStripButton();
@@ -187,8 +188,6 @@
             this.label8 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dgvLoadTestForm_Answers = new System.Windows.Forms.DataGridView();
-            this.Answer = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Right = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pictureBox = new System.Windows.Forms.PictureBox();
             this.dgvLoadTestForm_Questions = new System.Windows.Forms.DataGridView();
             this.Questions = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -218,6 +217,8 @@
             this.bsAssignTestsForm_Groups = new System.Windows.Forms.BindingSource(this.components);
             this.bsAssignTestsForm_Tests = new System.Windows.Forms.BindingSource(this.components);
             this.bsGroupsForm_Users = new System.Windows.Forms.BindingSource(this.components);
+            this.Answer = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IsRight = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip1.SuspendLayout();
             this.panelGeneral.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -311,59 +312,59 @@
             this.treeView1.ImageList = this.imageList1;
             this.treeView1.Location = new System.Drawing.Point(0, 49);
             this.treeView1.Name = "treeView1";
-            treeNode13.ImageIndex = 4;
-            treeNode13.Name = "NodeGeneral";
-            treeNode13.SelectedImageIndex = 4;
-            treeNode13.Text = "General";
-            treeNode14.ImageIndex = 1;
-            treeNode14.Name = "NodeUsers";
-            treeNode14.SelectedImageIndex = 1;
-            treeNode14.Text = "Users";
-            treeNode15.ImageIndex = 2;
-            treeNode15.Name = "NodeGroups";
-            treeNode15.SelectedImageIndex = 2;
-            treeNode15.Text = "Groups";
-            treeNode16.ImageIndex = 0;
-            treeNode16.Name = "NodeUsersAndGroups";
-            treeNode16.SelectedImageIndex = 0;
-            treeNode16.Text = "Users & Groups";
-            treeNode17.ImageIndex = 10;
-            treeNode17.Name = "NodeAssignTestsToUsers";
-            treeNode17.SelectedImageIndex = 10;
-            treeNode17.Text = "Assign tests to users";
-            treeNode18.ImageIndex = 6;
-            treeNode18.Name = "NodeReviwPassedTests";
-            treeNode18.SelectedImageIndex = 6;
-            treeNode18.Text = "Review passed tests";
-            treeNode19.ImageIndex = 5;
-            treeNode19.Name = "NodeUsersAndTests";
-            treeNode19.SelectedImageIndex = 5;
-            treeNode19.Text = "Users & Tests";
-            treeNode20.ImageIndex = 7;
-            treeNode20.Name = "NodeTestsExplorer";
-            treeNode20.SelectedImageIndex = 7;
-            treeNode20.Text = "Tests explorer";
-            treeNode21.ImageIndex = 8;
-            treeNode21.Name = "NodeLoadTest";
-            treeNode21.SelectedImageIndex = 8;
-            treeNode21.Text = "Load test";
-            treeNode22.ImageIndex = 9;
-            treeNode22.Name = "NodeTests";
-            treeNode22.SelectedImageIndex = 9;
-            treeNode22.Text = "Tests";
-            treeNode23.Name = "NodeReports";
-            treeNode23.Text = "Reports";
-            treeNode24.ImageIndex = 3;
-            treeNode24.Name = "NodeServer";
-            treeNode24.SelectedImageIndex = 3;
-            treeNode24.Text = "Server";
+            treeNode1.ImageIndex = 4;
+            treeNode1.Name = "NodeGeneral";
+            treeNode1.SelectedImageIndex = 4;
+            treeNode1.Text = "General";
+            treeNode2.ImageIndex = 1;
+            treeNode2.Name = "NodeUsers";
+            treeNode2.SelectedImageIndex = 1;
+            treeNode2.Text = "Users";
+            treeNode3.ImageIndex = 2;
+            treeNode3.Name = "NodeGroups";
+            treeNode3.SelectedImageIndex = 2;
+            treeNode3.Text = "Groups";
+            treeNode4.ImageIndex = 0;
+            treeNode4.Name = "NodeUsersAndGroups";
+            treeNode4.SelectedImageIndex = 0;
+            treeNode4.Text = "Users & Groups";
+            treeNode5.ImageIndex = 10;
+            treeNode5.Name = "NodeAssignTestsToUsers";
+            treeNode5.SelectedImageIndex = 10;
+            treeNode5.Text = "Assign tests to users";
+            treeNode6.ImageIndex = 6;
+            treeNode6.Name = "NodeReviwPassedTests";
+            treeNode6.SelectedImageIndex = 6;
+            treeNode6.Text = "Review passed tests";
+            treeNode7.ImageIndex = 5;
+            treeNode7.Name = "NodeUsersAndTests";
+            treeNode7.SelectedImageIndex = 5;
+            treeNode7.Text = "Users & Tests";
+            treeNode8.ImageIndex = 7;
+            treeNode8.Name = "NodeTestsExplorer";
+            treeNode8.SelectedImageIndex = 7;
+            treeNode8.Text = "Tests explorer";
+            treeNode9.ImageIndex = 8;
+            treeNode9.Name = "NodeLoadTest";
+            treeNode9.SelectedImageIndex = 8;
+            treeNode9.Text = "Load test";
+            treeNode10.ImageIndex = 9;
+            treeNode10.Name = "NodeTests";
+            treeNode10.SelectedImageIndex = 9;
+            treeNode10.Text = "Tests";
+            treeNode11.Name = "NodeReports";
+            treeNode11.Text = "Reports";
+            treeNode12.ImageIndex = 3;
+            treeNode12.Name = "NodeServer";
+            treeNode12.SelectedImageIndex = 3;
+            treeNode12.Text = "Server";
             this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode13,
-            treeNode16,
-            treeNode19,
-            treeNode22,
-            treeNode23,
-            treeNode24});
+            treeNode1,
+            treeNode4,
+            treeNode7,
+            treeNode10,
+            treeNode11,
+            treeNode12});
             this.treeView1.SelectedImageIndex = 0;
             this.treeView1.Size = new System.Drawing.Size(214, 613);
             this.treeView1.TabIndex = 4;
@@ -1519,7 +1520,7 @@
             // rbTestsExplorerForm_All
             // 
             this.rbTestsExplorerForm_All.AutoSize = true;
-            this.rbTestsExplorerForm_All.Location = new System.Drawing.Point(981, 38);
+            this.rbTestsExplorerForm_All.Location = new System.Drawing.Point(981, 33);
             this.rbTestsExplorerForm_All.Name = "rbTestsExplorerForm_All";
             this.rbTestsExplorerForm_All.Size = new System.Drawing.Size(38, 19);
             this.rbTestsExplorerForm_All.TabIndex = 66;
@@ -1530,7 +1531,7 @@
             // rbTestsExplorerForm_Archived
             // 
             this.rbTestsExplorerForm_Archived.AutoSize = true;
-            this.rbTestsExplorerForm_Archived.Location = new System.Drawing.Point(877, 38);
+            this.rbTestsExplorerForm_Archived.Location = new System.Drawing.Point(877, 33);
             this.rbTestsExplorerForm_Archived.Name = "rbTestsExplorerForm_Archived";
             this.rbTestsExplorerForm_Archived.Size = new System.Drawing.Size(98, 19);
             this.rbTestsExplorerForm_Archived.TabIndex = 65;
@@ -1542,7 +1543,7 @@
             // 
             this.rbTestsExplorerForm_Actual.AutoSize = true;
             this.rbTestsExplorerForm_Actual.Checked = true;
-            this.rbTestsExplorerForm_Actual.Location = new System.Drawing.Point(786, 37);
+            this.rbTestsExplorerForm_Actual.Location = new System.Drawing.Point(786, 33);
             this.rbTestsExplorerForm_Actual.Name = "rbTestsExplorerForm_Actual";
             this.rbTestsExplorerForm_Actual.Size = new System.Drawing.Size(85, 19);
             this.rbTestsExplorerForm_Actual.TabIndex = 64;
@@ -1557,13 +1558,14 @@
             this.toolStrip2.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripButtonAddTest,
+            this.toolStripSeparator3,
             this.toolStripButtonTestLookup,
             this.toolStripSeparator2,
             this.toolStripButtonTestDelete});
-            this.toolStrip2.Location = new System.Drawing.Point(19, 38);
+            this.toolStrip2.Location = new System.Drawing.Point(19, 37);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.toolStrip2.Size = new System.Drawing.Size(83, 27);
+            this.toolStrip2.Size = new System.Drawing.Size(89, 27);
             this.toolStrip2.TabIndex = 63;
             this.toolStrip2.Text = "toolStrip2";
             // 
@@ -1577,6 +1579,11 @@
             this.toolStripButtonAddTest.Size = new System.Drawing.Size(24, 24);
             this.toolStripButtonAddTest.ToolTipText = "Add new test";
             this.toolStripButtonAddTest.Click += new System.EventHandler(this.toolStripButtonAddTest_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 27);
             // 
             // toolStripButtonTestLookup
             // 
@@ -1627,6 +1634,7 @@
             this.dgvTestsExplorerForm_Tests.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvTestsExplorerForm_Tests.Size = new System.Drawing.Size(1000, 496);
             this.dgvTestsExplorerForm_Tests.TabIndex = 62;
+            this.dgvTestsExplorerForm_Tests.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvTestsExplorerForm_Tests_CellDoubleClick);
             this.dgvTestsExplorerForm_Tests.SelectionChanged += new System.EventHandler(this.dgvTestsExplorerForm_Tests_SelectionChanged);
             // 
             // Column12
@@ -1674,7 +1682,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label12.Location = new System.Drawing.Point(46, 5);
             this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label12.Name = "label12";
@@ -1692,9 +1700,10 @@
             this.panelLoadTest.Controls.Add(this.label8);
             this.panelLoadTest.Controls.Add(this.groupBox2);
             this.panelLoadTest.Controls.Add(this.groupBox1);
-            this.panelLoadTest.Location = new System.Drawing.Point(495, 458);
+            this.panelLoadTest.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelLoadTest.Location = new System.Drawing.Point(217, 49);
             this.panelLoadTest.Name = "panelLoadTest";
-            this.panelLoadTest.Size = new System.Drawing.Size(197, 100);
+            this.panelLoadTest.Size = new System.Drawing.Size(1044, 613);
             this.panelLoadTest.TabIndex = 17;
             this.panelLoadTest.Visible = false;
             // 
@@ -1772,7 +1781,7 @@
             this.groupBox2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.groupBox2.Size = new System.Drawing.Size(691, 500);
+            this.groupBox2.Size = new System.Drawing.Size(694, 500);
             this.groupBox2.TabIndex = 4;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Questions";
@@ -1784,30 +1793,14 @@
             this.dgvLoadTestForm_Answers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvLoadTestForm_Answers.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Answer,
-            this.Right});
+            this.IsRight});
             this.dgvLoadTestForm_Answers.Location = new System.Drawing.Point(226, 287);
             this.dgvLoadTestForm_Answers.MultiSelect = false;
             this.dgvLoadTestForm_Answers.Name = "dgvLoadTestForm_Answers";
             this.dgvLoadTestForm_Answers.ReadOnly = true;
             this.dgvLoadTestForm_Answers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvLoadTestForm_Answers.Size = new System.Drawing.Size(447, 196);
+            this.dgvLoadTestForm_Answers.Size = new System.Drawing.Size(450, 196);
             this.dgvLoadTestForm_Answers.TabIndex = 5;
-            // 
-            // Answer
-            // 
-            this.Answer.HeaderText = "Answer";
-            this.Answer.Name = "Answer";
-            this.Answer.ReadOnly = true;
-            this.Answer.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Answer.Width = 290;
-            // 
-            // Right
-            // 
-            this.Right.HeaderText = "Is right";
-            this.Right.Name = "Right";
-            this.Right.ReadOnly = true;
-            this.Right.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Right.Width = 90;
             // 
             // pictureBox
             // 
@@ -1835,7 +1828,7 @@
             this.dgvLoadTestForm_Questions.Name = "dgvLoadTestForm_Questions";
             this.dgvLoadTestForm_Questions.ReadOnly = true;
             this.dgvLoadTestForm_Questions.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvLoadTestForm_Questions.Size = new System.Drawing.Size(657, 242);
+            this.dgvLoadTestForm_Questions.Size = new System.Drawing.Size(660, 242);
             this.dgvLoadTestForm_Questions.TabIndex = 3;
             this.dgvLoadTestForm_Questions.SelectionChanged += new System.EventHandler(this.dgvLoadTestForm_Questions_SelectionChanged);
             // 
@@ -1846,7 +1839,7 @@
             this.Questions.Name = "Questions";
             this.Questions.ReadOnly = true;
             this.Questions.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Questions.Width = 500;
+            this.Questions.Width = 510;
             // 
             // Point
             // 
@@ -2013,6 +2006,22 @@
             this.label11.TabIndex = 3;
             this.label11.Text = "Author";
             // 
+            // Answer
+            // 
+            this.Answer.HeaderText = "Answer";
+            this.Answer.Name = "Answer";
+            this.Answer.ReadOnly = true;
+            this.Answer.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Answer.Width = 300;
+            // 
+            // IsRight
+            // 
+            this.IsRight.HeaderText = "Is right";
+            this.IsRight.Name = "IsRight";
+            this.IsRight.ReadOnly = true;
+            this.IsRight.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.IsRight.Width = 90;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -2159,10 +2168,6 @@
         private System.Windows.Forms.OpenFileDialog openXmlFileDialog;
         private System.Windows.Forms.BindingSource bsLoadTestForm_Answers;
         private System.Windows.Forms.Button btnLoadTestForm_Clean;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Questions;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Point;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Answer;
-        private new System.Windows.Forms.DataGridViewTextBoxColumn Right;
         private System.Windows.Forms.PictureBox pictureBoxWarningDone;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.BindingSource bsTestsExplorerForm_Tests;
@@ -2284,6 +2289,11 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column15;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column16;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column17;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Questions;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Point;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Answer;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IsRight;
     }
 }
 

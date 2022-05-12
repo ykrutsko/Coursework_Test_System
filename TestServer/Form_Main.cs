@@ -874,7 +874,7 @@ namespace TestServer
             dgvLoadTestForm_Questions.Columns.Clear();
             dgvLoadTestForm_Questions.Columns.Add("Question", "Question");
             dgvLoadTestForm_Questions.Columns.Add("Point", "Point");
-            dgvLoadTestForm_Questions.Columns[0].Width = 500;
+            dgvLoadTestForm_Questions.Columns[0].Width = 510;
             dgvLoadTestForm_Questions.Columns[1].Width = 90;
         }
         void LoadTestForm_CleanDGVAnswers()
@@ -883,7 +883,7 @@ namespace TestServer
             dgvLoadTestForm_Answers.Columns.Clear();
             dgvLoadTestForm_Answers.Columns.Add("Answer", "Answer");
             dgvLoadTestForm_Answers.Columns.Add("Right", "Is right");
-            dgvLoadTestForm_Answers.Columns[0].Width = 290;
+            dgvLoadTestForm_Answers.Columns[0].Width = 300;
             dgvLoadTestForm_Answers.Columns[1].Width = 90;
         }
         void LoadTestForm_FillForm()
@@ -909,7 +909,7 @@ namespace TestServer
                 bsLoadTestForm_Questions.DataSource = currTest.Questions;
                 bsLoadTestForm_Questions.ResetBindings(false);
 
-                dgvLoadTestForm_Questions.Columns[0].Width = 500;
+                dgvLoadTestForm_Questions.Columns[0].Width = 510;
                 dgvLoadTestForm_Questions.Columns[0].HeaderText = "Question";
                 dgvLoadTestForm_Questions.Columns[1].Width = 90;
                 dgvLoadTestForm_Questions.Columns[1].HeaderText = "Point";
@@ -930,7 +930,7 @@ namespace TestServer
             bsLoadTestForm_Answers.DataSource = currQuestion.Answers;
             bsLoadTestForm_Answers.ResetBindings(false);
 
-            dgvLoadTestForm_Answers.Columns[0].Width = 290;
+            dgvLoadTestForm_Answers.Columns[0].Width = 300;
             dgvLoadTestForm_Answers.Columns[0].HeaderText = "Answer";
             dgvLoadTestForm_Answers.Columns[1].Width = 90;
             dgvLoadTestForm_Answers.Columns[1].HeaderText = "Is right";
@@ -1138,9 +1138,29 @@ namespace TestServer
             treeView1.Focus();
         }
 
-        private void toolStripButtonTestLookup_Click(object sender, EventArgs e)
+        private async void toolStripButtonTestLookup_Click(object sender, EventArgs e)
         {
-
+            TestLookupForm testLookupForm = new TestLookupForm(ref TestsExplorer_currTest);
+            if(testLookupForm.ShowDialog() == DialogResult.OK)
+            {
+                await Task.Run(() => Globals.repoTest.Update(TestsExplorer_currTest));
+                this.dgvTestsExplorerForm_Tests.SelectionChanged -= new System.EventHandler(this.dgvTestsExplorerForm_Tests_SelectionChanged);
+                {
+                    await Task.Run(() => TestsExplorerForm_LoadTestsBySelector(TestsExplorerForm_selector));
+                    DataGridViewRow row = GetRow_Test(dgvTestsExplorerForm_Tests, TestsExplorer_currTest);
+                    if(row != null)
+                        dgvTestsExplorerForm_Tests.CurrentCell = dgvTestsExplorerForm_Tests.Rows[row.Index].Cells[0];                   
+                }
+                dgvTestsExplorerForm_Tests_WhenRowGetSelect();
+                this.dgvTestsExplorerForm_Tests.SelectionChanged += new System.EventHandler(this.dgvTestsExplorerForm_Tests_SelectionChanged);
+            }            
+        }
+        private void dgvTestsExplorerForm_Tests_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                toolStripButtonTestLookup_Click(sender, e);
+            }
         }
 
         private async void toolStripButtonTestDelete_Click(object sender, EventArgs e)
@@ -1188,6 +1208,12 @@ namespace TestServer
                 }
                 this.dgvTestsExplorerForm_Tests.SelectionChanged += new System.EventHandler(this.dgvTestsExplorerForm_Tests_SelectionChanged);
             }
+
+
+
+
+
+
         }
 
 
@@ -1222,6 +1248,8 @@ namespace TestServer
         {
             this.Size = new Size(1277, 723);
         }
+
+
 
 
 
