@@ -76,7 +76,7 @@ namespace TestServer
                 case "NodeAssignTestsToUsers":
                     activePanel = panelAssignTestsToUsers;
                     break;
-                case "NodeReviwPassedTests":
+                case "NodeReviewPassedTests":
                     activePanel = panelReviewPassedTests;
                     break;
                 case "NodeTests":
@@ -88,10 +88,60 @@ namespace TestServer
                 case "NodeLoadTest":                    
                     activePanel = panelLoadTest;
                     break;
+                case "NodeServer":
+                    activePanel = panelServer;
+                    break;
             }
             activePanel.Dock = DockStyle.Fill;
             activePanel.Visible = true;
         }
+
+        private void toolStripButtonMainForm_Click(object sender, EventArgs e)
+        {
+            ToolStripButton tsb = sender as ToolStripButton;
+            string nodeName = string.Empty;
+            switch(tsb.Name)
+            {
+                case "toolStripButtonGeneral":
+                    nodeName = "NodeGeneral";
+                    break;
+                case "toolStripButtonUsersAndGroups":
+                    nodeName = "NodeUsersAndGroups";
+                    break;
+                case "toolStripButtonUsers":
+                    nodeName = "NodeUsers";
+                    break;
+                case "toolStripButtonGroups":
+                    nodeName = "NodeGroups";
+                    break;
+                case "toolStripButtonUsersAndTests":
+                    nodeName = "NodeUsersAndTests";
+                    break;
+                case "toolStripButtonAssignTestsToUsers":
+                    nodeName = "NodeAssignTestsToUsers";
+                    break;
+                case "toolStripButtonReviewPassedTests":
+                    nodeName = "NodeReviewPassedTests";
+                    break;
+                case "toolStripButtonTests":
+                    nodeName = "NodeTests";
+                    break;
+                case "toolStripButtonTestsExplorer":
+                    nodeName = "NodeTestsExplorer";
+                    break;
+                case "toolStripButtonLoadTest":
+                    nodeName = "NodeLoadTest";
+                    break;
+                case "toolStripButtonServer":
+                    nodeName = "NodeServer";
+                    break;
+            }
+            treeView1.SelectedNode = treeView1.Nodes.Find(nodeName, true)[0];
+            treeView1.Focus();
+        }
+
+
+
         #endregion Main
 
         #region UsersForm
@@ -1214,12 +1264,6 @@ namespace TestServer
                 }
                 this.dgvTestsExplorerForm_Tests.SelectionChanged += new System.EventHandler(this.dgvTestsExplorerForm_Tests_SelectionChanged);
             }
-
-
-
-
-
-
         }
 
 
@@ -1254,6 +1298,8 @@ namespace TestServer
         {
             this.Size = new Size(1277, 723);
         }
+
+
 
 
 
