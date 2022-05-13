@@ -29,23 +29,23 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("General", 4, 4);
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Users", 1, 1);
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Groups", 2, 2);
-            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Users & Groups", 0, 0, new System.Windows.Forms.TreeNode[] {
-            treeNode2,
-            treeNode3});
-            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Assign tests to users", 10, 10);
-            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Review passed tests", 6, 6);
-            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Users & Tests", 5, 5, new System.Windows.Forms.TreeNode[] {
-            treeNode5,
-            treeNode6});
-            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Tests explorer", 7, 7);
-            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Load test", 8, 8);
-            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Tests", 9, 9, new System.Windows.Forms.TreeNode[] {
-            treeNode8,
-            treeNode9});
-            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("Server", 11, 11);
+            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("General", 4, 4);
+            System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("Users", 1, 1);
+            System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("Groups", 2, 2);
+            System.Windows.Forms.TreeNode treeNode15 = new System.Windows.Forms.TreeNode("Users & Groups", 0, 0, new System.Windows.Forms.TreeNode[] {
+            treeNode13,
+            treeNode14});
+            System.Windows.Forms.TreeNode treeNode16 = new System.Windows.Forms.TreeNode("Assign tests to users", 10, 10);
+            System.Windows.Forms.TreeNode treeNode17 = new System.Windows.Forms.TreeNode("Review passed tests", 6, 6);
+            System.Windows.Forms.TreeNode treeNode18 = new System.Windows.Forms.TreeNode("Users & Tests", 5, 5, new System.Windows.Forms.TreeNode[] {
+            treeNode16,
+            treeNode17});
+            System.Windows.Forms.TreeNode treeNode19 = new System.Windows.Forms.TreeNode("Tests explorer", 7, 7);
+            System.Windows.Forms.TreeNode treeNode20 = new System.Windows.Forms.TreeNode("Load test", 8, 8);
+            System.Windows.Forms.TreeNode treeNode21 = new System.Windows.Forms.TreeNode("Tests", 9, 9, new System.Windows.Forms.TreeNode[] {
+            treeNode19,
+            treeNode20});
+            System.Windows.Forms.TreeNode treeNode22 = new System.Windows.Forms.TreeNode("Server", 11, 11);
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -512,56 +512,56 @@
             this.treeView1.ImageList = this.imageList1;
             this.treeView1.Location = new System.Drawing.Point(0, 55);
             this.treeView1.Name = "treeView1";
-            treeNode1.ImageIndex = 4;
-            treeNode1.Name = "NodeGeneral";
-            treeNode1.SelectedImageIndex = 4;
-            treeNode1.Text = "General";
-            treeNode2.ImageIndex = 1;
-            treeNode2.Name = "NodeUsers";
-            treeNode2.SelectedImageIndex = 1;
-            treeNode2.Text = "Users";
-            treeNode3.ImageIndex = 2;
-            treeNode3.Name = "NodeGroups";
-            treeNode3.SelectedImageIndex = 2;
-            treeNode3.Text = "Groups";
-            treeNode4.ImageIndex = 0;
-            treeNode4.Name = "NodeUsersAndGroups";
-            treeNode4.SelectedImageIndex = 0;
-            treeNode4.Text = "Users & Groups";
-            treeNode5.ImageIndex = 10;
-            treeNode5.Name = "NodeAssignTestsToUsers";
-            treeNode5.SelectedImageIndex = 10;
-            treeNode5.Text = "Assign tests to users";
-            treeNode6.ImageIndex = 6;
-            treeNode6.Name = "NodeReviewPassedTests";
-            treeNode6.SelectedImageIndex = 6;
-            treeNode6.Text = "Review passed tests";
-            treeNode7.ImageIndex = 5;
-            treeNode7.Name = "NodeUsersAndTests";
-            treeNode7.SelectedImageIndex = 5;
-            treeNode7.Text = "Users & Tests";
-            treeNode8.ImageIndex = 7;
-            treeNode8.Name = "NodeTestsExplorer";
-            treeNode8.SelectedImageIndex = 7;
-            treeNode8.Text = "Tests explorer";
-            treeNode9.ImageIndex = 8;
-            treeNode9.Name = "NodeLoadTest";
-            treeNode9.SelectedImageIndex = 8;
-            treeNode9.Text = "Load test";
-            treeNode10.ImageIndex = 9;
-            treeNode10.Name = "NodeTests";
-            treeNode10.SelectedImageIndex = 9;
-            treeNode10.Text = "Tests";
-            treeNode11.ImageIndex = 11;
-            treeNode11.Name = "NodeServer";
-            treeNode11.SelectedImageIndex = 11;
-            treeNode11.Text = "Server";
+            treeNode12.ImageIndex = 4;
+            treeNode12.Name = "NodeGeneral";
+            treeNode12.SelectedImageIndex = 4;
+            treeNode12.Text = "General";
+            treeNode13.ImageIndex = 1;
+            treeNode13.Name = "NodeUsers";
+            treeNode13.SelectedImageIndex = 1;
+            treeNode13.Text = "Users";
+            treeNode14.ImageIndex = 2;
+            treeNode14.Name = "NodeGroups";
+            treeNode14.SelectedImageIndex = 2;
+            treeNode14.Text = "Groups";
+            treeNode15.ImageIndex = 0;
+            treeNode15.Name = "NodeUsersAndGroups";
+            treeNode15.SelectedImageIndex = 0;
+            treeNode15.Text = "Users & Groups";
+            treeNode16.ImageIndex = 10;
+            treeNode16.Name = "NodeAssignTestsToUsers";
+            treeNode16.SelectedImageIndex = 10;
+            treeNode16.Text = "Assign tests to users";
+            treeNode17.ImageIndex = 6;
+            treeNode17.Name = "NodeReviewPassedTests";
+            treeNode17.SelectedImageIndex = 6;
+            treeNode17.Text = "Review passed tests";
+            treeNode18.ImageIndex = 5;
+            treeNode18.Name = "NodeUsersAndTests";
+            treeNode18.SelectedImageIndex = 5;
+            treeNode18.Text = "Users & Tests";
+            treeNode19.ImageIndex = 7;
+            treeNode19.Name = "NodeTestsExplorer";
+            treeNode19.SelectedImageIndex = 7;
+            treeNode19.Text = "Tests explorer";
+            treeNode20.ImageIndex = 8;
+            treeNode20.Name = "NodeLoadTest";
+            treeNode20.SelectedImageIndex = 8;
+            treeNode20.Text = "Load test";
+            treeNode21.ImageIndex = 9;
+            treeNode21.Name = "NodeTests";
+            treeNode21.SelectedImageIndex = 9;
+            treeNode21.Text = "Tests";
+            treeNode22.ImageIndex = 11;
+            treeNode22.Name = "NodeServer";
+            treeNode22.SelectedImageIndex = 11;
+            treeNode22.Text = "Server";
             this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode1,
-            treeNode4,
-            treeNode7,
-            treeNode10,
-            treeNode11});
+            treeNode12,
+            treeNode15,
+            treeNode18,
+            treeNode21,
+            treeNode22});
             this.treeView1.SelectedImageIndex = 0;
             this.treeView1.Size = new System.Drawing.Size(214, 607);
             this.treeView1.TabIndex = 4;
@@ -1248,9 +1248,10 @@
             this.panelAssignTestsToUsers.Controls.Add(this.toolStrip8);
             this.panelAssignTestsToUsers.Controls.Add(this.dgvAssignTestsForm_Groups);
             this.panelAssignTestsToUsers.Controls.Add(this.label20);
-            this.panelAssignTestsToUsers.Location = new System.Drawing.Point(492, 327);
+            this.panelAssignTestsToUsers.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelAssignTestsToUsers.Location = new System.Drawing.Point(217, 55);
             this.panelAssignTestsToUsers.Name = "panelAssignTestsToUsers";
-            this.panelAssignTestsToUsers.Size = new System.Drawing.Size(200, 100);
+            this.panelAssignTestsToUsers.Size = new System.Drawing.Size(1044, 607);
             this.panelAssignTestsToUsers.TabIndex = 14;
             this.panelAssignTestsToUsers.Visible = false;
             this.panelAssignTestsToUsers.VisibleChanged += new System.EventHandler(this.panelAssignTestsToUsers_VisibleChanged);
@@ -1346,7 +1347,7 @@
             this.toolStripButtonAssignNewTestForGroup.Name = "toolStripButtonAssignNewTestForGroup";
             this.toolStripButtonAssignNewTestForGroup.Padding = new System.Windows.Forms.Padding(2);
             this.toolStripButtonAssignNewTestForGroup.Size = new System.Drawing.Size(24, 24);
-            this.toolStripButtonAssignNewTestForGroup.ToolTipText = "Assign new test for group";
+            this.toolStripButtonAssignNewTestForGroup.ToolTipText = "Assign new test to Group";
             this.toolStripButtonAssignNewTestForGroup.Click += new System.EventHandler(this.toolStripButtonAssignNewTestForGroup_Click);
             // 
             // dgvAssignTestsForm_Tests
@@ -1496,7 +1497,7 @@
             this.toolStrip8.Location = new System.Drawing.Point(936, 342);
             this.toolStrip8.Name = "toolStrip8";
             this.toolStrip8.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.toolStrip8.Size = new System.Drawing.Size(83, 27);
+            this.toolStrip8.Size = new System.Drawing.Size(114, 27);
             this.toolStrip8.TabIndex = 41;
             this.toolStrip8.Text = "toolStrip8";
             // 
@@ -1508,7 +1509,7 @@
             this.toolStripButtonAssignNewTestForUser.Name = "toolStripButtonAssignNewTestForUser";
             this.toolStripButtonAssignNewTestForUser.Padding = new System.Windows.Forms.Padding(2);
             this.toolStripButtonAssignNewTestForUser.Size = new System.Drawing.Size(24, 24);
-            this.toolStripButtonAssignNewTestForUser.ToolTipText = "Assign new test for user";
+            this.toolStripButtonAssignNewTestForUser.ToolTipText = "Assign new test to User";
             this.toolStripButtonAssignNewTestForUser.Click += new System.EventHandler(this.toolStripButtonAssignNewTestForUser_Click);
             // 
             // toolStripButtonAssignNewTestByCopyForUser
@@ -1521,7 +1522,7 @@
             this.toolStripButtonAssignNewTestByCopyForUser.Padding = new System.Windows.Forms.Padding(2);
             this.toolStripButtonAssignNewTestByCopyForUser.Size = new System.Drawing.Size(24, 24);
             this.toolStripButtonAssignNewTestByCopyForUser.Text = "toolStripButton1";
-            this.toolStripButtonAssignNewTestByCopyForUser.ToolTipText = "Assign new test for User by copy";
+            this.toolStripButtonAssignNewTestByCopyForUser.ToolTipText = "Assign new test to User by copy";
             this.toolStripButtonAssignNewTestByCopyForUser.Click += new System.EventHandler(this.toolStripButtonAssignNewTestByCopyForUser_Click);
             // 
             // toolStripSeparator10
@@ -1539,7 +1540,7 @@
             this.toolStripButtonRemoveAssignedTestForUser.Name = "toolStripButtonRemoveAssignedTestForUser";
             this.toolStripButtonRemoveAssignedTestForUser.Padding = new System.Windows.Forms.Padding(2);
             this.toolStripButtonRemoveAssignedTestForUser.Size = new System.Drawing.Size(24, 24);
-            this.toolStripButtonRemoveAssignedTestForUser.ToolTipText = "Remove assigned test for user";
+            this.toolStripButtonRemoveAssignedTestForUser.ToolTipText = "Remove assigned test to User";
             this.toolStripButtonRemoveAssignedTestForUser.Click += new System.EventHandler(this.toolStripButtonRemoveAssignedTestForUser_Click);
             // 
             // dgvAssignTestsForm_Groups
@@ -2279,12 +2280,12 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1261, 684);
+            this.Controls.Add(this.panelAssignTestsToUsers);
             this.Controls.Add(this.panelServer);
             this.Controls.Add(this.panelTestsExplorer);
             this.Controls.Add(this.panelLoadTest);
             this.Controls.Add(this.panelTests);
             this.Controls.Add(this.panelReviewPassedTests);
-            this.Controls.Add(this.panelAssignTestsToUsers);
             this.Controls.Add(this.panelUsersAndTests);
             this.Controls.Add(this.panelGroups);
             this.Controls.Add(this.panelUsersAndGroups);
