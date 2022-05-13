@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepositoryLib", "Repository
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DALTestSystemDB", "DALTestSystemDB\DALTestSystemDB.csproj", "{6BCE373F-FB85-4853-AAE8-3A1C3A9F6141}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextBoxHintLib", "TextBoxHintLib\TextBoxHintLib.csproj", "{1AAE46F2-7401-413E-B445-51D22D1C3EBC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{6BCE373F-FB85-4853-AAE8-3A1C3A9F6141}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6BCE373F-FB85-4853-AAE8-3A1C3A9F6141}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6BCE373F-FB85-4853-AAE8-3A1C3A9F6141}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1AAE46F2-7401-413E-B445-51D22D1C3EBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1AAE46F2-7401-413E-B445-51D22D1C3EBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1AAE46F2-7401-413E-B445-51D22D1C3EBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1AAE46F2-7401-413E-B445-51D22D1C3EBC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

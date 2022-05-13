@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using TestLib;
 using TestServer.Properties;
+using TextBoxHintLib;
 
 namespace TestServer
 {
@@ -1058,6 +1059,11 @@ namespace TestServer
                 dgvTestsExplorerForm_Tests.Columns[7].Width = 120;
                 dgvTestsExplorerForm_Tests.Columns[6].HeaderText = "Archived";
                 dgvTestsExplorerForm_Tests.Columns[7].HeaderText = "Loaded date";
+
+                tbTestsExplorerForm_FindById.InitHint("Id...");
+                tbTestsExplorerForm_FindByTitle.InitHint("Title...");
+                tbTestsExplorerForm_FindByAuthor.InitHint("Author...");
+
                 firstTimeTestsExplorer = false;
             }
             else
@@ -1067,7 +1073,7 @@ namespace TestServer
             }
             dgvTestsExplorerForm_Tests_WhenRowGetSelect();
             this.dgvTestsExplorerForm_Tests.SelectionChanged += new System.EventHandler(this.dgvTestsExplorerForm_Tests_SelectionChanged);
-            tbTestsExplorerForm_FindById.Select();
+
         }
 
         private void dgvTestsExplorerForm_Tests_WhenRowGetSelect()

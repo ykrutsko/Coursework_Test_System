@@ -204,6 +204,10 @@
       <Project>{a3259de6-e034-4fab-b938-ae08b485fc63}</Project>
       <Name>TestLib</Name>
     </ProjectReference>
+    <ProjectReference Include="..\TextBoxHintLib\TextBoxHintLib.csproj">
+      <Project>{1aae46f2-7401-413e-b445-51d22d1c3ebc}</Project>
+      <Name>TextBoxHintLib</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\done.png" />

@@ -188,6 +188,8 @@
             this.label8 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dgvLoadTestForm_Answers = new System.Windows.Forms.DataGridView();
+            this.Answer = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IsRight = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.pictureBox = new System.Windows.Forms.PictureBox();
             this.dgvLoadTestForm_Questions = new System.Windows.Forms.DataGridView();
             this.Questions = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -217,8 +219,6 @@
             this.bsAssignTestsForm_Groups = new System.Windows.Forms.BindingSource(this.components);
             this.bsAssignTestsForm_Tests = new System.Windows.Forms.BindingSource(this.components);
             this.bsGroupsForm_Users = new System.Windows.Forms.BindingSource(this.components);
-            this.Answer = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.IsRight = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip1.SuspendLayout();
             this.panelGeneral.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -1466,9 +1466,10 @@
             this.panelTestsExplorer.Controls.Add(this.toolStrip2);
             this.panelTestsExplorer.Controls.Add(this.dgvTestsExplorerForm_Tests);
             this.panelTestsExplorer.Controls.Add(this.label12);
-            this.panelTestsExplorer.Location = new System.Drawing.Point(732, 458);
+            this.panelTestsExplorer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelTestsExplorer.Location = new System.Drawing.Point(217, 49);
             this.panelTestsExplorer.Name = "panelTestsExplorer";
-            this.panelTestsExplorer.Size = new System.Drawing.Size(200, 100);
+            this.panelTestsExplorer.Size = new System.Drawing.Size(1044, 613);
             this.panelTestsExplorer.TabIndex = 18;
             this.panelTestsExplorer.Visible = false;
             this.panelTestsExplorer.VisibleChanged += new System.EventHandler(this.panelTestsExplorer_VisibleChanged);
@@ -1700,10 +1701,9 @@
             this.panelLoadTest.Controls.Add(this.label8);
             this.panelLoadTest.Controls.Add(this.groupBox2);
             this.panelLoadTest.Controls.Add(this.groupBox1);
-            this.panelLoadTest.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelLoadTest.Location = new System.Drawing.Point(217, 49);
+            this.panelLoadTest.Location = new System.Drawing.Point(492, 458);
             this.panelLoadTest.Name = "panelLoadTest";
-            this.panelLoadTest.Size = new System.Drawing.Size(1044, 613);
+            this.panelLoadTest.Size = new System.Drawing.Size(200, 100);
             this.panelLoadTest.TabIndex = 17;
             this.panelLoadTest.Visible = false;
             // 
@@ -1801,6 +1801,22 @@
             this.dgvLoadTestForm_Answers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvLoadTestForm_Answers.Size = new System.Drawing.Size(450, 196);
             this.dgvLoadTestForm_Answers.TabIndex = 5;
+            // 
+            // Answer
+            // 
+            this.Answer.HeaderText = "Answer";
+            this.Answer.Name = "Answer";
+            this.Answer.ReadOnly = true;
+            this.Answer.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.Answer.Width = 300;
+            // 
+            // IsRight
+            // 
+            this.IsRight.HeaderText = "Is right";
+            this.IsRight.Name = "IsRight";
+            this.IsRight.ReadOnly = true;
+            this.IsRight.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.IsRight.Width = 90;
             // 
             // pictureBox
             // 
@@ -2006,35 +2022,19 @@
             this.label11.TabIndex = 3;
             this.label11.Text = "Author";
             // 
-            // Answer
-            // 
-            this.Answer.HeaderText = "Answer";
-            this.Answer.Name = "Answer";
-            this.Answer.ReadOnly = true;
-            this.Answer.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.Answer.Width = 300;
-            // 
-            // IsRight
-            // 
-            this.IsRight.HeaderText = "Is right";
-            this.IsRight.Name = "IsRight";
-            this.IsRight.ReadOnly = true;
-            this.IsRight.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            this.IsRight.Width = 90;
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1261, 684);
-            this.Controls.Add(this.panelLoadTest);
             this.Controls.Add(this.panelTestsExplorer);
+            this.Controls.Add(this.panelUsers);
+            this.Controls.Add(this.panelLoadTest);
             this.Controls.Add(this.panelAssignTestsToUsers);
             this.Controls.Add(this.panelTests);
             this.Controls.Add(this.panelReviewPassedTests);
             this.Controls.Add(this.panelUsersAndTests);
             this.Controls.Add(this.panelGroups);
-            this.Controls.Add(this.panelUsers);
             this.Controls.Add(this.panelUsersAndGroups);
             this.Controls.Add(this.panelGeneral);
             this.Controls.Add(this.splitter1);
