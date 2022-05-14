@@ -27,7 +27,7 @@ namespace DALTestingSystemDB
 
         public override string ToString()
         {
-            return Title + " [" + Author + "]";
+            return "[" + Id + "] " + Title + " (" + Author + ")";
         }
     }
 }

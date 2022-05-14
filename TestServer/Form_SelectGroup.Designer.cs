@@ -1,6 +1,6 @@
 ﻿namespace TestServer
 {
-    partial class NewGroupForUserForm
+    partial class SelectGroupForm
     {
         /// <summary>
         /// Required designer variable.
@@ -96,7 +96,7 @@
             this.label1.TabIndex = 4;
             this.label1.Text = "Find by name:";
             // 
-            // NewGroupForUserForm
+            // SelectGroupForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -110,9 +110,9 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.MaximizeBox = false;
-            this.Name = "NewGroupForUserForm";
+            this.Name = "SelectGroupForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "New groups for user";
+            this.Text = "Select group";
             this.Load += new System.EventHandler(this.NewGroupForUserForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource)).EndInit();

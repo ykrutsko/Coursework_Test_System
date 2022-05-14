@@ -12,17 +12,25 @@ using System.Windows.Forms;
 
 namespace TestServer
 {
-    public partial class NewGroupForUserForm : Form
+    public partial class SelectGroupForm : Form
     {
+        OpenMode openMode;
         public DALTestingSystemDB.Group Group { get; set; }
         public List<DALTestingSystemDB.Group> Groups { get; set; }
-        public NewGroupForUserForm(List<DALTestingSystemDB.Group> groups)
+        public SelectGroupForm(List<DALTestingSystemDB.Group> groups, OpenMode mode)
         {
             Groups = groups;
+            openMode = mode;
             InitializeComponent();
         }
         private void NewGroupForUserForm_Load(object sender, EventArgs e)
         {
+            switch(openMode)
+            {
+                case OpenMode.NewGroupForUser:
+                    this.Text = "Select new groups for user";
+                    break;
+            }
             bindingSource.DataSource = Groups;
             dataGridView.DataSource = bindingSource;
             dataGridView.Columns[0].Width = 50;

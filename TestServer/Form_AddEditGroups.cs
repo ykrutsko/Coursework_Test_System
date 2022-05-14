@@ -63,6 +63,8 @@ namespace TestServer
             dataGridView.Columns[1].Width = 100;
             dataGridView.Columns[2].Width = 100;
             dataGridView.Columns[3].Width = 100;
+            dataGridView.Columns[1].HeaderText = "First name";
+            dataGridView.Columns[2].HeaderText = "Last name";
 
             WindowTitleText();
             tbName.Select();
@@ -82,7 +84,7 @@ namespace TestServer
                 MessageBox.Show("No new users for group!", "Test server", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
-            NewUserForGroupForm newGroupForUserForm = new NewUserForGroupForm(newUsersForGroup);
+            SelectUserForm newGroupForUserForm = new SelectUserForm(newUsersForGroup, OpenMode.NewUserForGroup);
             if (newGroupForUserForm.ShowDialog() == DialogResult.OK)
             {
                 Group.Users.Add(newGroupForUserForm.User);

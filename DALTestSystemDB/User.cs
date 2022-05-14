@@ -30,7 +30,7 @@ namespace DALTestingSystemDB
 
         public override string ToString()
         {
-            return FirstName + " " + LastName + " (" + Login + ")";
+            return "[" + Id + "] " + FirstName + " " + LastName + " (" + Login + ")";
         }
 
         public User PartClone()

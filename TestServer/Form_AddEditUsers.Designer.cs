@@ -75,7 +75,7 @@
             this.toolStripButtonAddUserToGroup,
             this.toolStripSeparator4,
             this.toolStripButtonDeleteUserFromGroup});
-            this.toolStrip5.Location = new System.Drawing.Point(338, 9);
+            this.toolStrip5.Location = new System.Drawing.Point(338, 11);
             this.toolStrip5.Name = "toolStrip5";
             this.toolStrip5.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
             this.toolStrip5.Size = new System.Drawing.Size(59, 27);

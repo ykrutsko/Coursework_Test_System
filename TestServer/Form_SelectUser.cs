@@ -8,20 +8,32 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TextBoxHintLib;
 
 namespace TestServer
 {
-    public partial class NewUserForGroupForm : Form
+    public partial class SelectUserForm : Form
     {
+        OpenMode openMode;
         public User User { get; set; }
         public List<User> Users { get; set; }
-        public NewUserForGroupForm(List<User> users)
+        public SelectUserForm(List<User> users, OpenMode mode)
         {
+            openMode = mode;
             Users = users;
             InitializeComponent();
         }
-        private void NewUserForGroup_Load(object sender, EventArgs e)
+        private void SelectUserForm_Load(object sender, EventArgs e)
         {
+            switch (openMode)
+            {
+                case OpenMode.NewUserForGroup:
+                    this.Text = "Select new user for group";
+                    break;
+                case OpenMode.SelectUser:
+                    this.Text = "Select taked tests user";
+                    break;
+            }
             bindingSource.DataSource = Users;
             dataGridView.DataSource = bindingSource;
             for (int i = 4; i <= 10; i++)
@@ -38,22 +50,46 @@ namespace TestServer
             dataGridView.Columns[1].HeaderText = "First name";
             dataGridView.Columns[2].HeaderText = "Last name";
             dataGridView.Columns[6].HeaderText = "Admin";
-            textBox.Select();
+            textBoxId.InitHint("Id...");
+            textBoxFirstName.InitHint("First name...");
+            textBoxLastName.InitHint("Last name...");
+            textBoxLogin.InitHint("Login...");
         }
         private void btnOK_Click(object sender, EventArgs e)
         {
             User = dataGridView.CurrentRow.DataBoundItem as User;
         }
+
         private void textBox_TextChanged(object sender, EventArgs e)
         {
-            if (!textBox.Text.Any()) return;
+            TextBox tb = (TextBox)sender;
+            if (!tb.Text.Any()) return;
+            string columnName = string.Empty;
+            switch (tb.Name)
+            {
+                case "textBoxId":
+                    columnName = "Id";
+                    break;
+                case "textBoxFirstName":
+                    columnName = "FirstName";
+                    break;
+                case "textBoxLastName":
+                    columnName = "LastName";
+                    break;
+                case "textBoxLogin":
+                    columnName = "Login";
+                    break;
+            }
+
             DataGridViewRow row = dataGridView.Rows
                 .Cast<DataGridViewRow>()
-                .Where(r => r.Cells["Login"].Value.ToString().ToLower().StartsWith(textBox.Text.ToLower()))
+                .Where(r => r.Cells[columnName].Value.ToString().ToLower().StartsWith(tb.Text.ToLower()))
                 .FirstOrDefault();
+
             if (row != null)
                 dataGridView.CurrentCell = dataGridView.Rows[row.Index].Cells[0];
         }
+
         private void dataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)

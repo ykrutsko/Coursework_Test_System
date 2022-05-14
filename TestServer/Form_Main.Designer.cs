@@ -29,23 +29,23 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("General", 4, 4);
-            System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("Users", 1, 1);
-            System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("Groups", 2, 2);
-            System.Windows.Forms.TreeNode treeNode15 = new System.Windows.Forms.TreeNode("Users & Groups", 0, 0, new System.Windows.Forms.TreeNode[] {
-            treeNode13,
-            treeNode14});
-            System.Windows.Forms.TreeNode treeNode16 = new System.Windows.Forms.TreeNode("Assign tests to users", 10, 10);
-            System.Windows.Forms.TreeNode treeNode17 = new System.Windows.Forms.TreeNode("Review passed tests", 6, 6);
-            System.Windows.Forms.TreeNode treeNode18 = new System.Windows.Forms.TreeNode("Users & Tests", 5, 5, new System.Windows.Forms.TreeNode[] {
-            treeNode16,
-            treeNode17});
-            System.Windows.Forms.TreeNode treeNode19 = new System.Windows.Forms.TreeNode("Tests explorer", 7, 7);
-            System.Windows.Forms.TreeNode treeNode20 = new System.Windows.Forms.TreeNode("Load test", 8, 8);
-            System.Windows.Forms.TreeNode treeNode21 = new System.Windows.Forms.TreeNode("Tests", 9, 9, new System.Windows.Forms.TreeNode[] {
-            treeNode19,
-            treeNode20});
-            System.Windows.Forms.TreeNode treeNode22 = new System.Windows.Forms.TreeNode("Server", 11, 11);
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("General", 4, 4);
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Users", 1, 1);
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Groups", 2, 2);
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Users & Groups", 0, 0, new System.Windows.Forms.TreeNode[] {
+            treeNode2,
+            treeNode3});
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Assign tests to users", 10, 10);
+            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Review test results", 6, 6);
+            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Users & Tests", 5, 5, new System.Windows.Forms.TreeNode[] {
+            treeNode5,
+            treeNode6});
+            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Tests explorer", 7, 7);
+            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Load test", 8, 8);
+            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Tests", 9, 9, new System.Windows.Forms.TreeNode[] {
+            treeNode8,
+            treeNode9});
+            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("Server", 11, 11);
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -65,6 +65,7 @@
             this.toolStripButtonTestsExplorer = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonLoadTest = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButtonServer = new System.Windows.Forms.ToolStripButton();
             this.toolStripComboBox1 = new System.Windows.Forms.ToolStripComboBox();
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
@@ -164,7 +165,24 @@
             this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label20 = new System.Windows.Forms.Label();
-            this.panelReviewPassedTests = new System.Windows.Forms.Panel();
+            this.panelReviewTestResults = new System.Windows.Forms.Panel();
+            this.toolStrip3 = new System.Windows.Forms.ToolStrip();
+            this.toolStripButtonLookupTest = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator13 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButtonRefresh = new System.Windows.Forms.ToolStripButton();
+            this.dgvReviewForm_UserTests = new System.Windows.Forms.DataGridView();
+            this.Column18 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column19 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column20 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column21 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column22 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column23 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnReviewForm_SelectTest = new System.Windows.Forms.Button();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.btnReviewForm_SelectUser = new System.Windows.Forms.Button();
+            this.tbReviewForm_Test = new System.Windows.Forms.TextBox();
+            this.tbReviewForm_User = new System.Windows.Forms.TextBox();
             this.pictureBox7 = new System.Windows.Forms.PictureBox();
             this.label21 = new System.Windows.Forms.Label();
             this.panelTests = new System.Windows.Forms.Panel();
@@ -224,6 +242,9 @@
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.openXmlFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.panelServer = new System.Windows.Forms.Panel();
+            this.pictureBox11 = new System.Windows.Forms.PictureBox();
+            this.label14 = new System.Windows.Forms.Label();
             this.bsLoadTestForm_Questions = new System.Windows.Forms.BindingSource(this.components);
             this.bsLoadTestForm_Answers = new System.Windows.Forms.BindingSource(this.components);
             this.bsTestsExplorerForm_Tests = new System.Windows.Forms.BindingSource(this.components);
@@ -233,10 +254,9 @@
             this.bsAssignTestsForm_Groups = new System.Windows.Forms.BindingSource(this.components);
             this.bsAssignTestsForm_Tests = new System.Windows.Forms.BindingSource(this.components);
             this.bsGroupsForm_Users = new System.Windows.Forms.BindingSource(this.components);
-            this.toolStripButtonServer = new System.Windows.Forms.ToolStripButton();
-            this.panelServer = new System.Windows.Forms.Panel();
-            this.pictureBox11 = new System.Windows.Forms.PictureBox();
-            this.label14 = new System.Windows.Forms.Label();
+            this.bsReviewForm_Questions = new System.Windows.Forms.BindingSource(this.components);
+            this.bsReviewForm_Answers = new System.Windows.Forms.BindingSource(this.components);
+            this.bsReviewForm_UserTests = new System.Windows.Forms.BindingSource(this.components);
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.panelGeneral.SuspendLayout();
@@ -262,7 +282,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvAssignTestsForm_Users)).BeginInit();
             this.toolStrip8.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAssignTestsForm_Groups)).BeginInit();
-            this.panelReviewPassedTests.SuspendLayout();
+            this.panelReviewTestResults.SuspendLayout();
+            this.toolStrip3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvReviewForm_UserTests)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
             this.panelTests.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
@@ -279,6 +301,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvLoadTestForm_Questions)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMinPass)).BeginInit();
+            this.panelServer.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsLoadTestForm_Questions)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsLoadTestForm_Answers)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsTestsExplorerForm_Tests)).BeginInit();
@@ -288,8 +312,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.bsAssignTestsForm_Groups)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsAssignTestsForm_Tests)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsGroupsForm_Users)).BeginInit();
-            this.panelServer.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsReviewForm_Questions)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsReviewForm_Answers)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsReviewForm_UserTests)).BeginInit();
             this.SuspendLayout();
             // 
             // statusStrip1
@@ -499,6 +524,18 @@
             this.toolStripSeparator12.Name = "toolStripSeparator12";
             this.toolStripSeparator12.Size = new System.Drawing.Size(6, 23);
             // 
+            // toolStripButtonServer
+            // 
+            this.toolStripButtonServer.AutoSize = false;
+            this.toolStripButtonServer.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonServer.Image = global::TestServer.Properties.Resources.monitor;
+            this.toolStripButtonServer.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonServer.Margin = new System.Windows.Forms.Padding(1);
+            this.toolStripButtonServer.Name = "toolStripButtonServer";
+            this.toolStripButtonServer.Size = new System.Drawing.Size(23, 24);
+            this.toolStripButtonServer.ToolTipText = "Server";
+            this.toolStripButtonServer.Click += new System.EventHandler(this.toolStripButtonMainForm_Click);
+            // 
             // toolStripComboBox1
             // 
             this.toolStripComboBox1.Margin = new System.Windows.Forms.Padding(2);
@@ -512,56 +549,57 @@
             this.treeView1.ImageList = this.imageList1;
             this.treeView1.Location = new System.Drawing.Point(0, 55);
             this.treeView1.Name = "treeView1";
-            treeNode12.ImageIndex = 4;
-            treeNode12.Name = "NodeGeneral";
-            treeNode12.SelectedImageIndex = 4;
-            treeNode12.Text = "General";
-            treeNode13.ImageIndex = 1;
-            treeNode13.Name = "NodeUsers";
-            treeNode13.SelectedImageIndex = 1;
-            treeNode13.Text = "Users";
-            treeNode14.ImageIndex = 2;
-            treeNode14.Name = "NodeGroups";
-            treeNode14.SelectedImageIndex = 2;
-            treeNode14.Text = "Groups";
-            treeNode15.ImageIndex = 0;
-            treeNode15.Name = "NodeUsersAndGroups";
-            treeNode15.SelectedImageIndex = 0;
-            treeNode15.Text = "Users & Groups";
-            treeNode16.ImageIndex = 10;
-            treeNode16.Name = "NodeAssignTestsToUsers";
-            treeNode16.SelectedImageIndex = 10;
-            treeNode16.Text = "Assign tests to users";
-            treeNode17.ImageIndex = 6;
-            treeNode17.Name = "NodeReviewPassedTests";
-            treeNode17.SelectedImageIndex = 6;
-            treeNode17.Text = "Review passed tests";
-            treeNode18.ImageIndex = 5;
-            treeNode18.Name = "NodeUsersAndTests";
-            treeNode18.SelectedImageIndex = 5;
-            treeNode18.Text = "Users & Tests";
-            treeNode19.ImageIndex = 7;
-            treeNode19.Name = "NodeTestsExplorer";
-            treeNode19.SelectedImageIndex = 7;
-            treeNode19.Text = "Tests explorer";
-            treeNode20.ImageIndex = 8;
-            treeNode20.Name = "NodeLoadTest";
-            treeNode20.SelectedImageIndex = 8;
-            treeNode20.Text = "Load test";
-            treeNode21.ImageIndex = 9;
-            treeNode21.Name = "NodeTests";
-            treeNode21.SelectedImageIndex = 9;
-            treeNode21.Text = "Tests";
-            treeNode22.ImageIndex = 11;
-            treeNode22.Name = "NodeServer";
-            treeNode22.SelectedImageIndex = 11;
-            treeNode22.Text = "Server";
+            treeNode1.Checked = true;
+            treeNode1.ImageIndex = 4;
+            treeNode1.Name = "NodeGeneral";
+            treeNode1.SelectedImageIndex = 4;
+            treeNode1.Text = "General";
+            treeNode2.ImageIndex = 1;
+            treeNode2.Name = "NodeUsers";
+            treeNode2.SelectedImageIndex = 1;
+            treeNode2.Text = "Users";
+            treeNode3.ImageIndex = 2;
+            treeNode3.Name = "NodeGroups";
+            treeNode3.SelectedImageIndex = 2;
+            treeNode3.Text = "Groups";
+            treeNode4.ImageIndex = 0;
+            treeNode4.Name = "NodeUsersAndGroups";
+            treeNode4.SelectedImageIndex = 0;
+            treeNode4.Text = "Users & Groups";
+            treeNode5.ImageIndex = 10;
+            treeNode5.Name = "NodeAssignTestsToUsers";
+            treeNode5.SelectedImageIndex = 10;
+            treeNode5.Text = "Assign tests to users";
+            treeNode6.ImageIndex = 6;
+            treeNode6.Name = "NodeReviewTestResults";
+            treeNode6.SelectedImageIndex = 6;
+            treeNode6.Text = "Review test results";
+            treeNode7.ImageIndex = 5;
+            treeNode7.Name = "NodeUsersAndTests";
+            treeNode7.SelectedImageIndex = 5;
+            treeNode7.Text = "Users & Tests";
+            treeNode8.ImageIndex = 7;
+            treeNode8.Name = "NodeTestsExplorer";
+            treeNode8.SelectedImageIndex = 7;
+            treeNode8.Text = "Tests explorer";
+            treeNode9.ImageIndex = 8;
+            treeNode9.Name = "NodeLoadTest";
+            treeNode9.SelectedImageIndex = 8;
+            treeNode9.Text = "Load test";
+            treeNode10.ImageIndex = 9;
+            treeNode10.Name = "NodeTests";
+            treeNode10.SelectedImageIndex = 9;
+            treeNode10.Text = "Tests";
+            treeNode11.ImageIndex = 11;
+            treeNode11.Name = "NodeServer";
+            treeNode11.SelectedImageIndex = 11;
+            treeNode11.Text = "Server";
             this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode12,
-            treeNode15,
-            treeNode18,
-            treeNode21,
-            treeNode22});
+            treeNode1,
+            treeNode4,
+            treeNode7,
+            treeNode10,
+            treeNode11});
             this.treeView1.SelectedImageIndex = 0;
             this.treeView1.Size = new System.Drawing.Size(214, 607);
             this.treeView1.TabIndex = 4;
@@ -1070,7 +1108,7 @@
             this.toolStripButtonEditGroup,
             this.toolStripSeparator7,
             this.toolStripButtonDeleteGroup});
-            this.toolStrip6.Location = new System.Drawing.Point(19, 38);
+            this.toolStrip6.Location = new System.Drawing.Point(19, 40);
             this.toolStrip6.Name = "toolStrip6";
             this.toolStrip6.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
             this.toolStrip6.Size = new System.Drawing.Size(115, 27);
@@ -1248,10 +1286,9 @@
             this.panelAssignTestsToUsers.Controls.Add(this.toolStrip8);
             this.panelAssignTestsToUsers.Controls.Add(this.dgvAssignTestsForm_Groups);
             this.panelAssignTestsToUsers.Controls.Add(this.label20);
-            this.panelAssignTestsToUsers.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelAssignTestsToUsers.Location = new System.Drawing.Point(217, 55);
+            this.panelAssignTestsToUsers.Location = new System.Drawing.Point(492, 327);
             this.panelAssignTestsToUsers.Name = "panelAssignTestsToUsers";
-            this.panelAssignTestsToUsers.Size = new System.Drawing.Size(1044, 607);
+            this.panelAssignTestsToUsers.Size = new System.Drawing.Size(200, 100);
             this.panelAssignTestsToUsers.TabIndex = 14;
             this.panelAssignTestsToUsers.Visible = false;
             this.panelAssignTestsToUsers.VisibleChanged += new System.EventHandler(this.panelAssignTestsToUsers_VisibleChanged);
@@ -1269,7 +1306,7 @@
             // label32
             // 
             this.label32.AutoSize = true;
-            this.label32.Location = new System.Drawing.Point(313, 323);
+            this.label32.Location = new System.Drawing.Point(313, 322);
             this.label32.Name = "label32";
             this.label32.Size = new System.Drawing.Size(80, 15);
             this.label32.TabIndex = 57;
@@ -1278,7 +1315,7 @@
             // label31
             // 
             this.label31.AutoSize = true;
-            this.label31.Location = new System.Drawing.Point(18, 323);
+            this.label31.Location = new System.Drawing.Point(18, 322);
             this.label31.Name = "label31";
             this.label31.Size = new System.Drawing.Size(107, 15);
             this.label31.TabIndex = 56;
@@ -1287,7 +1324,7 @@
             // label30
             // 
             this.label30.AutoSize = true;
-            this.label30.Location = new System.Drawing.Point(566, 323);
+            this.label30.Location = new System.Drawing.Point(566, 322);
             this.label30.Name = "label30";
             this.label30.Size = new System.Drawing.Size(118, 15);
             this.label30.TabIndex = 55;
@@ -1295,7 +1332,7 @@
             // 
             // tbAssignTestsForm_FindGroupByName
             // 
-            this.tbAssignTestsForm_FindGroupByName.Location = new System.Drawing.Point(688, 320);
+            this.tbAssignTestsForm_FindGroupByName.Location = new System.Drawing.Point(690, 319);
             this.tbAssignTestsForm_FindGroupByName.Name = "tbAssignTestsForm_FindGroupByName";
             this.tbAssignTestsForm_FindGroupByName.Size = new System.Drawing.Size(150, 21);
             this.tbAssignTestsForm_FindGroupByName.TabIndex = 54;
@@ -1303,7 +1340,7 @@
             // 
             // tbAssignTestsForm_FindUserByLastName
             // 
-            this.tbAssignTestsForm_FindUserByLastName.Location = new System.Drawing.Point(129, 320);
+            this.tbAssignTestsForm_FindUserByLastName.Location = new System.Drawing.Point(131, 319);
             this.tbAssignTestsForm_FindUserByLastName.Name = "tbAssignTestsForm_FindUserByLastName";
             this.tbAssignTestsForm_FindUserByLastName.Size = new System.Drawing.Size(150, 21);
             this.tbAssignTestsForm_FindUserByLastName.TabIndex = 51;
@@ -1311,7 +1348,7 @@
             // 
             // tbAssignTestsForm_FindUserByLogin
             // 
-            this.tbAssignTestsForm_FindUserByLogin.Location = new System.Drawing.Point(399, 320);
+            this.tbAssignTestsForm_FindUserByLogin.Location = new System.Drawing.Point(399, 319);
             this.tbAssignTestsForm_FindUserByLogin.Name = "tbAssignTestsForm_FindUserByLogin";
             this.tbAssignTestsForm_FindUserByLogin.Size = new System.Drawing.Size(150, 21);
             this.tbAssignTestsForm_FindUserByLogin.TabIndex = 50;
@@ -1332,7 +1369,7 @@
             this.toolStrip9.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip9.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripButtonAssignNewTestForGroup});
-            this.toolStrip9.Location = new System.Drawing.Point(992, 39);
+            this.toolStrip9.Location = new System.Drawing.Point(992, 40);
             this.toolStrip9.Name = "toolStrip9";
             this.toolStrip9.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
             this.toolStrip9.Size = new System.Drawing.Size(27, 27);
@@ -1416,7 +1453,7 @@
             // label28
             // 
             this.label28.AutoSize = true;
-            this.label28.Location = new System.Drawing.Point(16, 53);
+            this.label28.Location = new System.Drawing.Point(18, 50);
             this.label28.Name = "label28";
             this.label28.Size = new System.Drawing.Size(39, 15);
             this.label28.TabIndex = 44;
@@ -1425,7 +1462,7 @@
             // label29
             // 
             this.label29.AutoSize = true;
-            this.label29.Location = new System.Drawing.Point(566, 53);
+            this.label29.Location = new System.Drawing.Point(566, 50);
             this.label29.Name = "label29";
             this.label29.Size = new System.Drawing.Size(47, 15);
             this.label29.TabIndex = 43;
@@ -1442,7 +1479,7 @@
             this.dataGridViewTextBoxColumn4,
             this.dataGridViewTextBoxColumn2,
             this.Column5});
-            this.dgvAssignTestsForm_Users.Location = new System.Drawing.Point(19, 69);
+            this.dgvAssignTestsForm_Users.Location = new System.Drawing.Point(19, 68);
             this.dgvAssignTestsForm_Users.MultiSelect = false;
             this.dgvAssignTestsForm_Users.Name = "dgvAssignTestsForm_Users";
             this.dgvAssignTestsForm_Users.ReadOnly = true;
@@ -1494,10 +1531,10 @@
             this.toolStripButtonAssignNewTestByCopyForUser,
             this.toolStripSeparator10,
             this.toolStripButtonRemoveAssignedTestForUser});
-            this.toolStrip8.Location = new System.Drawing.Point(936, 342);
+            this.toolStrip8.Location = new System.Drawing.Point(936, 344);
             this.toolStrip8.Name = "toolStrip8";
             this.toolStrip8.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.toolStrip8.Size = new System.Drawing.Size(114, 27);
+            this.toolStrip8.Size = new System.Drawing.Size(83, 27);
             this.toolStrip8.TabIndex = 41;
             this.toolStrip8.Text = "toolStrip8";
             // 
@@ -1552,7 +1589,7 @@
             this.dataGridViewTextBoxColumn5,
             this.dataGridViewTextBoxColumn6,
             this.dataGridViewTextBoxColumn7});
-            this.dgvAssignTestsForm_Groups.Location = new System.Drawing.Point(569, 69);
+            this.dgvAssignTestsForm_Groups.Location = new System.Drawing.Point(569, 68);
             this.dgvAssignTestsForm_Groups.MultiSelect = false;
             this.dgvAssignTestsForm_Groups.Name = "dgvAssignTestsForm_Groups";
             this.dgvAssignTestsForm_Groups.ReadOnly = true;
@@ -1594,16 +1631,197 @@
             this.label20.Text = "Assign tests to user";
             this.label20.UseMnemonic = false;
             // 
-            // panelReviewPassedTests
+            // panelReviewTestResults
             // 
-            this.panelReviewPassedTests.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.panelReviewPassedTests.Controls.Add(this.pictureBox7);
-            this.panelReviewPassedTests.Controls.Add(this.label21);
-            this.panelReviewPassedTests.Location = new System.Drawing.Point(732, 327);
-            this.panelReviewPassedTests.Name = "panelReviewPassedTests";
-            this.panelReviewPassedTests.Size = new System.Drawing.Size(200, 100);
-            this.panelReviewPassedTests.TabIndex = 15;
-            this.panelReviewPassedTests.Visible = false;
+            this.panelReviewTestResults.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelReviewTestResults.Controls.Add(this.toolStrip3);
+            this.panelReviewTestResults.Controls.Add(this.dgvReviewForm_UserTests);
+            this.panelReviewTestResults.Controls.Add(this.btnReviewForm_SelectTest);
+            this.panelReviewTestResults.Controls.Add(this.label16);
+            this.panelReviewTestResults.Controls.Add(this.label15);
+            this.panelReviewTestResults.Controls.Add(this.btnReviewForm_SelectUser);
+            this.panelReviewTestResults.Controls.Add(this.tbReviewForm_Test);
+            this.panelReviewTestResults.Controls.Add(this.tbReviewForm_User);
+            this.panelReviewTestResults.Controls.Add(this.pictureBox7);
+            this.panelReviewTestResults.Controls.Add(this.label21);
+            this.panelReviewTestResults.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelReviewTestResults.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.panelReviewTestResults.Location = new System.Drawing.Point(217, 55);
+            this.panelReviewTestResults.Name = "panelReviewTestResults";
+            this.panelReviewTestResults.Size = new System.Drawing.Size(1044, 607);
+            this.panelReviewTestResults.TabIndex = 15;
+            this.panelReviewTestResults.Visible = false;
+            this.panelReviewTestResults.VisibleChanged += new System.EventHandler(this.panelReviewTestResults_VisibleChanged);
+            // 
+            // toolStrip3
+            // 
+            this.toolStrip3.Dock = System.Windows.Forms.DockStyle.None;
+            this.toolStrip3.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripButtonLookupTest,
+            this.toolStripSeparator13,
+            this.toolStripButtonRefresh});
+            this.toolStrip3.Location = new System.Drawing.Point(19, 40);
+            this.toolStrip3.Name = "toolStrip3";
+            this.toolStrip3.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
+            this.toolStrip3.Size = new System.Drawing.Size(61, 28);
+            this.toolStrip3.TabIndex = 64;
+            this.toolStrip3.Text = "toolStrip3";
+            // 
+            // toolStripButtonLookupTest
+            // 
+            this.toolStripButtonLookupTest.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonLookupTest.Enabled = false;
+            this.toolStripButtonLookupTest.Image = global::TestServer.Properties.Resources.lookup;
+            this.toolStripButtonLookupTest.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonLookupTest.Name = "toolStripButtonLookupTest";
+            this.toolStripButtonLookupTest.Padding = new System.Windows.Forms.Padding(2);
+            this.toolStripButtonLookupTest.Size = new System.Drawing.Size(24, 25);
+            this.toolStripButtonLookupTest.ToolTipText = "Lookup taked test";
+            this.toolStripButtonLookupTest.Click += new System.EventHandler(this.toolStripButtonLookupTest_Click);
+            // 
+            // toolStripSeparator13
+            // 
+            this.toolStripSeparator13.Name = "toolStripSeparator13";
+            this.toolStripSeparator13.Size = new System.Drawing.Size(6, 28);
+            // 
+            // toolStripButtonRefresh
+            // 
+            this.toolStripButtonRefresh.AutoSize = false;
+            this.toolStripButtonRefresh.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonRefresh.Image = global::TestServer.Properties.Resources.refresh;
+            this.toolStripButtonRefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonRefresh.Margin = new System.Windows.Forms.Padding(2);
+            this.toolStripButtonRefresh.Name = "toolStripButtonRefresh";
+            this.toolStripButtonRefresh.Size = new System.Drawing.Size(24, 24);
+            this.toolStripButtonRefresh.Text = "toolStripButton1";
+            this.toolStripButtonRefresh.ToolTipText = "Refresh list";
+            this.toolStripButtonRefresh.Click += new System.EventHandler(this.toolStripButtonRefresh_Click);
+            // 
+            // dgvReviewForm_UserTests
+            // 
+            this.dgvReviewForm_UserTests.AllowUserToAddRows = false;
+            this.dgvReviewForm_UserTests.AllowUserToDeleteRows = false;
+            this.dgvReviewForm_UserTests.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvReviewForm_UserTests.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column18,
+            this.Column19,
+            this.Column20,
+            this.Column21,
+            this.Column22,
+            this.Column23});
+            this.dgvReviewForm_UserTests.Location = new System.Drawing.Point(19, 68);
+            this.dgvReviewForm_UserTests.MultiSelect = false;
+            this.dgvReviewForm_UserTests.Name = "dgvReviewForm_UserTests";
+            this.dgvReviewForm_UserTests.ReadOnly = true;
+            this.dgvReviewForm_UserTests.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvReviewForm_UserTests.Size = new System.Drawing.Size(1000, 524);
+            this.dgvReviewForm_UserTests.TabIndex = 51;
+            this.dgvReviewForm_UserTests.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvReviewForm_UserTests_CellDoubleClick);
+            this.dgvReviewForm_UserTests.SelectionChanged += new System.EventHandler(this.dgvReviewForm_UserTests_SelectionChanged);
+            // 
+            // Column18
+            // 
+            this.Column18.HeaderText = "Id";
+            this.Column18.Name = "Column18";
+            this.Column18.ReadOnly = true;
+            this.Column18.Width = 50;
+            // 
+            // Column19
+            // 
+            this.Column19.HeaderText = "User";
+            this.Column19.Name = "Column19";
+            this.Column19.ReadOnly = true;
+            this.Column19.Width = 250;
+            // 
+            // Column20
+            // 
+            this.Column20.HeaderText = "Test";
+            this.Column20.Name = "Column20";
+            this.Column20.ReadOnly = true;
+            this.Column20.Width = 360;
+            // 
+            // Column21
+            // 
+            this.Column21.HeaderText = "Grade";
+            this.Column21.Name = "Column21";
+            this.Column21.ReadOnly = true;
+            this.Column21.Width = 80;
+            // 
+            // Column22
+            // 
+            this.Column22.HeaderText = "Passed";
+            this.Column22.Name = "Column22";
+            this.Column22.ReadOnly = true;
+            this.Column22.Width = 80;
+            // 
+            // Column23
+            // 
+            this.Column23.HeaderText = "Taked date";
+            this.Column23.Name = "Column23";
+            this.Column23.ReadOnly = true;
+            this.Column23.Width = 120;
+            // 
+            // btnReviewForm_SelectTest
+            // 
+            this.btnReviewForm_SelectTest.FlatAppearance.BorderSize = 0;
+            this.btnReviewForm_SelectTest.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnReviewForm_SelectTest.Location = new System.Drawing.Point(991, 33);
+            this.btnReviewForm_SelectTest.Name = "btnReviewForm_SelectTest";
+            this.btnReviewForm_SelectTest.Size = new System.Drawing.Size(30, 22);
+            this.btnReviewForm_SelectTest.TabIndex = 50;
+            this.btnReviewForm_SelectTest.Text = "• • •";
+            this.btnReviewForm_SelectTest.UseVisualStyleBackColor = true;
+            this.btnReviewForm_SelectTest.Click += new System.EventHandler(this.btnReviewForm_SelectTest_Click);
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(632, 15);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(30, 15);
+            this.label16.TabIndex = 47;
+            this.label16.Text = "Test";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(318, 15);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(33, 15);
+            this.label15.TabIndex = 45;
+            this.label15.Text = "User";
+            // 
+            // btnReviewForm_SelectUser
+            // 
+            this.btnReviewForm_SelectUser.FlatAppearance.BorderSize = 0;
+            this.btnReviewForm_SelectUser.Font = new System.Drawing.Font("Microsoft Sans Serif", 6.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.btnReviewForm_SelectUser.Location = new System.Drawing.Point(575, 33);
+            this.btnReviewForm_SelectUser.Name = "btnReviewForm_SelectUser";
+            this.btnReviewForm_SelectUser.Size = new System.Drawing.Size(30, 22);
+            this.btnReviewForm_SelectUser.TabIndex = 29;
+            this.btnReviewForm_SelectUser.Text = "• • •";
+            this.btnReviewForm_SelectUser.UseVisualStyleBackColor = true;
+            this.btnReviewForm_SelectUser.Click += new System.EventHandler(this.btnReviewForm_SelectUser_Click);
+            // 
+            // tbReviewForm_Test
+            // 
+            this.tbReviewForm_Test.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tbReviewForm_Test.Location = new System.Drawing.Point(635, 33);
+            this.tbReviewForm_Test.Name = "tbReviewForm_Test";
+            this.tbReviewForm_Test.ReadOnly = true;
+            this.tbReviewForm_Test.Size = new System.Drawing.Size(350, 21);
+            this.tbReviewForm_Test.TabIndex = 28;
+            // 
+            // tbReviewForm_User
+            // 
+            this.tbReviewForm_User.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.tbReviewForm_User.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.tbReviewForm_User.Location = new System.Drawing.Point(319, 33);
+            this.tbReviewForm_User.Name = "tbReviewForm_User";
+            this.tbReviewForm_User.ReadOnly = true;
+            this.tbReviewForm_User.Size = new System.Drawing.Size(250, 21);
+            this.tbReviewForm_User.TabIndex = 22;
             // 
             // pictureBox7
             // 
@@ -1622,9 +1840,9 @@
             this.label21.Location = new System.Drawing.Point(42, 5);
             this.label21.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(174, 20);
+            this.label21.Size = new System.Drawing.Size(161, 20);
             this.label21.TabIndex = 21;
-            this.label21.Text = "Review passed tests";
+            this.label21.Text = "Review test results";
             this.label21.UseMnemonic = false;
             // 
             // panelTests
@@ -1770,7 +1988,7 @@
             this.toolStripButtonTestLookup,
             this.toolStripSeparator2,
             this.toolStripButtonTestDelete});
-            this.toolStrip2.Location = new System.Drawing.Point(19, 37);
+            this.toolStrip2.Location = new System.Drawing.Point(19, 40);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
             this.toolStrip2.Size = new System.Drawing.Size(89, 27);
@@ -1835,7 +2053,7 @@
             this.Column15,
             this.Column16,
             this.Column17});
-            this.dgvTestsExplorerForm_Tests.Location = new System.Drawing.Point(19, 67);
+            this.dgvTestsExplorerForm_Tests.Location = new System.Drawing.Point(19, 68);
             this.dgvTestsExplorerForm_Tests.MultiSelect = false;
             this.dgvTestsExplorerForm_Tests.Name = "dgvTestsExplorerForm_Tests";
             this.dgvTestsExplorerForm_Tests.ReadOnly = true;
@@ -1930,7 +2148,7 @@
             this.pictureBoxWarningDone.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBoxWarningDone.Image = global::TestServer.Properties.Resources.warning;
             this.pictureBoxWarningDone.InitialImage = ((System.Drawing.Image)(resources.GetObject("pictureBoxWarningDone.InitialImage")));
-            this.pictureBoxWarningDone.Location = new System.Drawing.Point(837, 570);
+            this.pictureBoxWarningDone.Location = new System.Drawing.Point(837, 560);
             this.pictureBoxWarningDone.Name = "pictureBoxWarningDone";
             this.pictureBoxWarningDone.Size = new System.Drawing.Size(27, 27);
             this.pictureBoxWarningDone.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -1951,7 +2169,7 @@
             // btnLoadTestForm_SaveTestToDB
             // 
             this.btnLoadTestForm_SaveTestToDB.Enabled = false;
-            this.btnLoadTestForm_SaveTestToDB.Location = new System.Drawing.Point(870, 570);
+            this.btnLoadTestForm_SaveTestToDB.Location = new System.Drawing.Point(870, 560);
             this.btnLoadTestForm_SaveTestToDB.Name = "btnLoadTestForm_SaveTestToDB";
             this.btnLoadTestForm_SaveTestToDB.Size = new System.Drawing.Size(122, 27);
             this.btnLoadTestForm_SaveTestToDB.TabIndex = 19;
@@ -1961,7 +2179,7 @@
             // 
             // btnLoadTestForm_LoadTest
             // 
-            this.btnLoadTestForm_LoadTest.Location = new System.Drawing.Point(645, 570);
+            this.btnLoadTestForm_LoadTest.Location = new System.Drawing.Point(645, 560);
             this.btnLoadTestForm_LoadTest.Name = "btnLoadTestForm_LoadTest";
             this.btnLoadTestForm_LoadTest.Size = new System.Drawing.Size(122, 27);
             this.btnLoadTestForm_LoadTest.TabIndex = 18;
@@ -2230,18 +2448,6 @@
             this.label11.TabIndex = 3;
             this.label11.Text = "Author";
             // 
-            // toolStripButtonServer
-            // 
-            this.toolStripButtonServer.AutoSize = false;
-            this.toolStripButtonServer.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonServer.Image = global::TestServer.Properties.Resources.monitor;
-            this.toolStripButtonServer.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonServer.Margin = new System.Windows.Forms.Padding(1);
-            this.toolStripButtonServer.Name = "toolStripButtonServer";
-            this.toolStripButtonServer.Size = new System.Drawing.Size(23, 24);
-            this.toolStripButtonServer.ToolTipText = "Server";
-            this.toolStripButtonServer.Click += new System.EventHandler(this.toolStripButtonMainForm_Click);
-            // 
             // panelServer
             // 
             this.panelServer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -2280,12 +2486,12 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1261, 684);
+            this.Controls.Add(this.panelReviewTestResults);
             this.Controls.Add(this.panelAssignTestsToUsers);
-            this.Controls.Add(this.panelServer);
             this.Controls.Add(this.panelTestsExplorer);
             this.Controls.Add(this.panelLoadTest);
             this.Controls.Add(this.panelTests);
-            this.Controls.Add(this.panelReviewPassedTests);
+            this.Controls.Add(this.panelServer);
             this.Controls.Add(this.panelUsersAndTests);
             this.Controls.Add(this.panelGroups);
             this.Controls.Add(this.panelUsersAndGroups);
@@ -2340,8 +2546,11 @@
             this.toolStrip8.ResumeLayout(false);
             this.toolStrip8.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAssignTestsForm_Groups)).EndInit();
-            this.panelReviewPassedTests.ResumeLayout(false);
-            this.panelReviewPassedTests.PerformLayout();
+            this.panelReviewTestResults.ResumeLayout(false);
+            this.panelReviewTestResults.PerformLayout();
+            this.toolStrip3.ResumeLayout(false);
+            this.toolStrip3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvReviewForm_UserTests)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
             this.panelTests.ResumeLayout(false);
             this.panelTests.PerformLayout();
@@ -2363,6 +2572,9 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownMinPass)).EndInit();
+            this.panelServer.ResumeLayout(false);
+            this.panelServer.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsLoadTestForm_Questions)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsLoadTestForm_Answers)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsTestsExplorerForm_Tests)).EndInit();
@@ -2372,9 +2584,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.bsAssignTestsForm_Groups)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsAssignTestsForm_Tests)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsGroupsForm_Users)).EndInit();
-            this.panelServer.ResumeLayout(false);
-            this.panelServer.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsReviewForm_Questions)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsReviewForm_Answers)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsReviewForm_UserTests)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2395,7 +2607,7 @@
         private System.Windows.Forms.Panel panelGroups;
         private System.Windows.Forms.Panel panelUsersAndTests;
         private System.Windows.Forms.Panel panelAssignTestsToUsers;
-        private System.Windows.Forms.Panel panelReviewPassedTests;
+        private System.Windows.Forms.Panel panelReviewTestResults;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.DataGridView dgvUsersForm_Users;
         private System.Windows.Forms.BindingSource bsLoadTestForm_Questions;
@@ -2572,6 +2784,26 @@
         private System.Windows.Forms.Panel panelServer;
         private System.Windows.Forms.PictureBox pictureBox11;
         private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.TextBox tbReviewForm_User;
+        private System.Windows.Forms.TextBox tbReviewForm_Test;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Button btnReviewForm_SelectUser;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Button btnReviewForm_SelectTest;
+        private System.Windows.Forms.BindingSource bsReviewForm_Questions;
+        private System.Windows.Forms.BindingSource bsReviewForm_Answers;
+        private System.Windows.Forms.DataGridView dgvReviewForm_UserTests;
+        private System.Windows.Forms.ToolStrip toolStrip3;
+        private System.Windows.Forms.ToolStripButton toolStripButtonLookupTest;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator13;
+        private System.Windows.Forms.ToolStripButton toolStripButtonRefresh;
+        private System.Windows.Forms.BindingSource bsReviewForm_UserTests;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column18;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column19;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column20;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column21;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column22;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column23;
     }
 }
 

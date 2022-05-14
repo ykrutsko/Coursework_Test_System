@@ -144,7 +144,7 @@ namespace TestServer
                 MessageBox.Show("No new groups for user!", "Test server", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             } 
-            NewGroupForUserForm newGroupForUserForm = new NewGroupForUserForm(newGroupsForUser);
+            SelectGroupForm newGroupForUserForm = new SelectGroupForm(newGroupsForUser, OpenMode.NewGroupForUser);
             if (newGroupForUserForm.ShowDialog() == DialogResult.OK)
             {
                 User.Groups.Add(newGroupForUserForm.Group);

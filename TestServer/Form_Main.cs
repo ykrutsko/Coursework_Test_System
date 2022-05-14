@@ -25,6 +25,7 @@ namespace TestServer
         bool firstTimeGroups = true;
         bool firstTimeAssignTests = true;
         bool firstTimeTestsExplorer = true;
+        bool firstTimeReviewPassedTests = true;
 
         #region Main
         public MainForm()
@@ -76,8 +77,8 @@ namespace TestServer
                 case "NodeAssignTestsToUsers":
                     activePanel = panelAssignTestsToUsers;
                     break;
-                case "NodeReviewPassedTests":
-                    activePanel = panelReviewPassedTests;
+                case "NodeReviewTestResults":
+                    activePanel = panelReviewTestResults;
                     break;
                 case "NodeTests":
                     activePanel = panelTests;
@@ -121,7 +122,7 @@ namespace TestServer
                     nodeName = "NodeAssignTestsToUsers";
                     break;
                 case "toolStripButtonReviewPassedTests":
-                    nodeName = "NodeReviewPassedTests";
+                    nodeName = "NodeReviewTestResults";
                     break;
                 case "toolStripButtonTests":
                     nodeName = "NodeTests";
@@ -724,12 +725,14 @@ namespace TestServer
 
         private async void toolStripButtonAssignNewTestForGroup_Click(object sender, EventArgs e)
         {
-            AssignNewTestForm assignNewTestForm = new AssignNewTestForm(OpenMode.Group);
-            if (!await Task.Run(() => Globals.repoTest.GetAll().Any()))
+            var testsForGroup = await Task.Run(() => Globals.repoTest.GetAll().ToList());
+            if (!testsForGroup.Any())
             {
                 MessageBox.Show("There are no Tests in database!", "Test server", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
+
+            SelectTestForm assignNewTestForm = new SelectTestForm(testsForGroup, OpenMode.NewTestForGroup);
             if (assignNewTestForm.ShowDialog() == DialogResult.OK)
             {
                 DALTestingSystemDB.Test newTest = assignNewTestForm.Test;
@@ -762,12 +765,14 @@ namespace TestServer
 
         private async void toolStripButtonAssignNewTestForUser_Click(object sender, EventArgs e)
         {
-            AssignNewTestForm assignNewTestForm = new AssignNewTestForm(OpenMode.User);
-            if(!await Task.Run(() => Globals.repoTest.GetAll().Any()))
+            var testsForUser = await Task.Run(() => Globals.repoTest.GetAll().ToList());
+            if (!testsForUser.Any())
             {
                 MessageBox.Show("There are no Tests in database!", "Test server", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
+
+            SelectTestForm assignNewTestForm = new SelectTestForm(testsForUser, OpenMode.NewTestForGroup);
             if(assignNewTestForm.ShowDialog() == DialogResult.OK)
             {
                 DALTestingSystemDB.Test newTest = assignNewTestForm.Test;
@@ -1265,32 +1270,171 @@ namespace TestServer
                 this.dgvTestsExplorerForm_Tests.SelectionChanged += new System.EventHandler(this.dgvTestsExplorerForm_Tests_SelectionChanged);
             }
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         //-----------------------------------------------------------------------------
         #endregion TestsExplorerForm
+
+        #region ReviewTestResults
+        //-----------------------------------------------------------------------------
+        FormSelector ReviewForm_selector = FormSelector.All;
+        User ReviewForm_currUser;
+        DALTestingSystemDB.Test ReviewForm_currTest;
+        UserTest ReviewForm_currUserTest;
+
+        private async void panelReviewTestResults_VisibleChanged(object sender, EventArgs e)
+        {
+            if (panelReviewTestResults.Visible == false) return;
+
+            this.dgvReviewForm_UserTests.SelectionChanged -= new System.EventHandler(this.dgvReviewForm_UserTests_SelectionChanged);
+            if (firstTimeReviewPassedTests)
+            {
+                dgvReviewForm_UserTests.Columns.Clear();
+                await Task.Run(() => ReviewForm_LoadUserTestsBySelector(ReviewForm_selector));
+                dgvReviewForm_UserTests.DataSource = bsReviewForm_UserTests;
+                
+                dgvReviewForm_UserTests.Columns[6].Visible = false;
+                dgvReviewForm_UserTests.Columns[7].Visible = false;
+                dgvReviewForm_UserTests.Columns[0].Width = 50;
+                dgvReviewForm_UserTests.Columns[1].Width = 250;
+                dgvReviewForm_UserTests.Columns[2].Width = 360;
+                dgvReviewForm_UserTests.Columns[3].Width = 80;
+                dgvReviewForm_UserTests.Columns[4].Width = 80;
+                dgvReviewForm_UserTests.Columns[5].Width = 120;
+                dgvReviewForm_UserTests.Columns[3].HeaderText = "Grade";
+                dgvReviewForm_UserTests.Columns[4].HeaderText = "Passed";
+                dgvReviewForm_UserTests.Columns[5].HeaderText = "Taked date";
+
+                firstTimeReviewPassedTests = false;
+            }
+            else
+            {
+                await Task.Run(() => ReviewForm_LoadUserTestsBySelector(ReviewForm_selector));
+            }
+            dgvReviewForm_Tests_WhenRowGetSelect();
+            this.dgvReviewForm_UserTests.SelectionChanged += new System.EventHandler(this.dgvReviewForm_UserTests_SelectionChanged);
+        }
+
+        private void dgvReviewForm_Tests_WhenRowGetSelect()
+        {
+            if (dgvReviewForm_UserTests.Rows.Count == 0 || dgvReviewForm_UserTests.SelectedRows.Count == 0)
+            {
+                toolStripButtonLookupTest.Enabled = false;
+                ReviewForm_currUserTest = null;
+            }
+            else
+            {
+                toolStripButtonLookupTest.Enabled = true;
+                ReviewForm_currUserTest = dgvReviewForm_UserTests.CurrentRow.DataBoundItem as UserTest;
+            }
+        }
+
+        private void dgvReviewForm_UserTests_SelectionChanged(object sender, EventArgs e)
+        {
+            dgvReviewForm_Tests_WhenRowGetSelect();
+        }
+
+        private FormSelector ReviewForm_SetSelector()
+        {
+            if (!tbReviewForm_User.Text.Any() && !tbReviewForm_Test.Text.Any())
+                return FormSelector.All;
+            if (tbReviewForm_User.Text.Any() && !tbReviewForm_Test.Text.Any())
+                return FormSelector.ByUser;
+            if (!tbReviewForm_User.Text.Any() && tbReviewForm_Test.Text.Any())
+                return FormSelector.ByTest;
+            return FormSelector.ByUserAndTest;
+        }
+
+        private async void btnReviewForm_SelectUser_Click(object sender, EventArgs e)
+        {
+            if(btnReviewForm_SelectUser.Text == "X")
+            {
+                tbReviewForm_User.Text = String.Empty;
+                ReviewForm_selector = ReviewForm_SetSelector();
+                await Task.Run(() => ReviewForm_LoadUserTestsBySelector(ReviewForm_selector));
+                btnReviewForm_SelectUser.Text = "• • •";
+                return;
+            }
+
+            List<User> users = await Task.Run(() => Globals.repoUser.GetAll().ToList());
+            SelectUserForm userForm = new SelectUserForm(users, OpenMode.SelectUser);
+            if (userForm.ShowDialog() == DialogResult.OK)
+            {
+                ReviewForm_currUser = userForm.User;
+                tbReviewForm_User.Text = ReviewForm_currUser.ToString();
+                ReviewForm_selector = ReviewForm_SetSelector();
+                await Task.Run(() => ReviewForm_LoadUserTestsBySelector(ReviewForm_selector));
+                btnReviewForm_SelectUser.Text = "X";
+            }
+        }
+
+        private async void btnReviewForm_SelectTest_Click(object sender, EventArgs e)
+        {
+            if (btnReviewForm_SelectTest.Text == "X")
+            {
+                tbReviewForm_Test.Text = String.Empty;
+                ReviewForm_selector = ReviewForm_SetSelector();
+                await Task.Run(() => ReviewForm_LoadUserTestsBySelector(ReviewForm_selector));
+                btnReviewForm_SelectTest.Text = "• • •";
+                return;
+            }
+
+            List<DALTestingSystemDB.Test> tests = await Task.Run(() => Globals.repoTest.GetAll().ToList());
+            SelectTestForm userForm = new SelectTestForm(tests, OpenMode.SelectTest);
+            if (userForm.ShowDialog() == DialogResult.OK)
+            {
+                ReviewForm_currTest = userForm.Test;
+                tbReviewForm_Test.Text = ReviewForm_currTest.ToString();
+                ReviewForm_selector = ReviewForm_SetSelector();
+                await Task.Run(() => ReviewForm_LoadUserTestsBySelector(ReviewForm_selector));
+                btnReviewForm_SelectTest.Text = "X";
+            }
+        }
+
+        private void ReviewForm_LoadUserTestsBySelector(FormSelector selector)
+        {
+            switch (selector)
+            {
+                case FormSelector.All:
+                    this.Invoke(new Action(() => bsReviewForm_UserTests.DataSource = Globals.repoUserTest
+                        .FindAll(x => x.IsTaked)));
+                    break;
+                case FormSelector.ByUser:
+                    this.Invoke(new Action(() => bsReviewForm_UserTests.DataSource = Globals.repoUserTest
+                        .FindAll(x => x.IsTaked && x.User.Id == ReviewForm_currUser.Id)));
+                    break;
+                case FormSelector.ByTest:
+                    this.Invoke(new Action(() => bsReviewForm_UserTests.DataSource = Globals.repoUserTest
+                        .FindAll(x => x.IsTaked && x.Test.Id == ReviewForm_currTest.Id)));
+                    break;
+                case FormSelector.ByUserAndTest:
+                    this.Invoke(new Action(() => bsReviewForm_UserTests.DataSource = Globals.repoUserTest
+                        .FindAll(x => x.IsTaked && x.User.Id == ReviewForm_currUser.Id && x.Test.Id == ReviewForm_currTest.Id)));
+                    break;
+            }
+            bsReviewForm_UserTests.ResetBindings(false);
+        }
+
+        private void toolStripButtonLookupTest_Click(object sender, EventArgs e)
+        {
+            UserTestLookupForm userTestLookupForm = new UserTestLookupForm(ReviewForm_currUserTest);
+            userTestLookupForm.ShowDialog();
+        }
+
+        private void dgvReviewForm_UserTests_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                toolStripButtonLookupTest_Click(sender, e);
+            }
+        }
+
+        private async void toolStripButtonRefresh_Click(object sender, EventArgs e)
+        {
+            btnReviewForm_SelectUser.Enabled = btnReviewForm_SelectTest.Enabled = toolStripButtonLookupTest.Enabled = false;
+            await Task.Run(() => ReviewForm_LoadUserTestsBySelector(ReviewForm_selector));
+            btnReviewForm_SelectUser.Enabled = btnReviewForm_SelectTest.Enabled = true;
+            dgvReviewForm_Tests_WhenRowGetSelect();
+        }
+        #endregion ReviewTestResults
 
 
 
@@ -1298,6 +1442,21 @@ namespace TestServer
         {
             this.Size = new Size(1277, 723);
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

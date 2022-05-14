@@ -10,21 +10,23 @@ using System.Windows.Forms;
 
 namespace TestServer
 {
-    public partial class AssignNewTestForm : Form
+    public partial class SelectTestForm : Form
     {
-        public DALTestingSystemDB.Test Test  { get; set; }
         OpenMode openMode;
-        public AssignNewTestForm(OpenMode mode)
+        public DALTestingSystemDB.Test Test  { get; set; }
+        public List<DALTestingSystemDB.Test> Tests { get; set; }
+        public SelectTestForm(List<DALTestingSystemDB.Test> tests, OpenMode mode)
         {
             openMode = mode;
+            Tests = tests;
             InitializeComponent();
         }
 
-        private async void AssignNewTestForm_Load(object sender, EventArgs e)
+        private void SelectTestForm_Load(object sender, EventArgs e)
         {
-            this.Text = openMode == OpenMode.User ? "Assign new test for User" : "Assign new test for Group";
+            this.Text = openMode == OpenMode.NewTestForUser ? "Select new test for User" : "Select new test for Group";
             dataGridView.Columns.Clear();
-            bindingSource.DataSource = await Task.Run(() => Globals.repoTest.GetAll());
+            bindingSource.DataSource = Tests;
             dataGridView.DataSource = bindingSource;
             for (int i = 4; i <= 9; i++)
                 if (i != 6 && i != 7)

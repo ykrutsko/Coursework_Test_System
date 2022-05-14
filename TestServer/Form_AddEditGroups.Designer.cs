@@ -38,7 +38,9 @@
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolStrip5 = new System.Windows.Forms.ToolStrip();
+            this.toolStripButtonAddUserToGroup = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButtonDeleteUserFromGroup = new System.Windows.Forms.ToolStripButton();
             this.label6 = new System.Windows.Forms.Label();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnOk = new System.Windows.Forms.Button();
@@ -46,8 +48,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.lbSuperAdmin = new System.Windows.Forms.Label();
             this.pictureBoxName = new System.Windows.Forms.PictureBox();
-            this.toolStripButtonAddUserToGroup = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButtonDeleteUserFromGroup = new System.Windows.Forms.ToolStripButton();
             this.bindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.toolStrip5.SuspendLayout();
@@ -137,18 +137,41 @@
             this.toolStripButtonAddUserToGroup,
             this.toolStripSeparator4,
             this.toolStripButtonDeleteUserFromGroup});
-            this.toolStrip5.Location = new System.Drawing.Point(337, 9);
+            this.toolStrip5.Location = new System.Drawing.Point(337, 11);
             this.toolStrip5.Name = "toolStrip5";
             this.toolStrip5.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.toolStrip5.Size = new System.Drawing.Size(90, 27);
+            this.toolStrip5.Size = new System.Drawing.Size(59, 27);
             this.toolStrip5.TabIndex = 91;
             this.toolStrip5.Text = "toolStrip5";
+            // 
+            // toolStripButtonAddUserToGroup
+            // 
+            this.toolStripButtonAddUserToGroup.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonAddUserToGroup.Image = global::TestServer.Properties.Resources.plus;
+            this.toolStripButtonAddUserToGroup.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonAddUserToGroup.Name = "toolStripButtonAddUserToGroup";
+            this.toolStripButtonAddUserToGroup.Padding = new System.Windows.Forms.Padding(2);
+            this.toolStripButtonAddUserToGroup.Size = new System.Drawing.Size(24, 24);
+            this.toolStripButtonAddUserToGroup.ToolTipText = "Add user to group";
+            this.toolStripButtonAddUserToGroup.Click += new System.EventHandler(this.toolStripButtonAddUserToGroup_Click);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Margin = new System.Windows.Forms.Padding(0, 0, 2, 0);
             this.toolStripSeparator4.Name = "toolStripSeparator4";
             this.toolStripSeparator4.Size = new System.Drawing.Size(6, 27);
+            // 
+            // toolStripButtonDeleteUserFromGroup
+            // 
+            this.toolStripButtonDeleteUserFromGroup.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonDeleteUserFromGroup.Enabled = false;
+            this.toolStripButtonDeleteUserFromGroup.Image = global::TestServer.Properties.Resources.delete;
+            this.toolStripButtonDeleteUserFromGroup.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonDeleteUserFromGroup.Name = "toolStripButtonDeleteUserFromGroup";
+            this.toolStripButtonDeleteUserFromGroup.Padding = new System.Windows.Forms.Padding(2);
+            this.toolStripButtonDeleteUserFromGroup.Size = new System.Drawing.Size(24, 24);
+            this.toolStripButtonDeleteUserFromGroup.ToolTipText = "Remove user from group";
+            this.toolStripButtonDeleteUserFromGroup.Click += new System.EventHandler(this.toolStripButtonDeleteUserFromGroup_Click);
             // 
             // label6
             // 
@@ -224,29 +247,6 @@
             this.pictureBoxName.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBoxName.TabIndex = 97;
             this.pictureBoxName.TabStop = false;
-            // 
-            // toolStripButtonAddUserToGroup
-            // 
-            this.toolStripButtonAddUserToGroup.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonAddUserToGroup.Image = global::TestServer.Properties.Resources.plus;
-            this.toolStripButtonAddUserToGroup.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonAddUserToGroup.Name = "toolStripButtonAddUserToGroup";
-            this.toolStripButtonAddUserToGroup.Padding = new System.Windows.Forms.Padding(2);
-            this.toolStripButtonAddUserToGroup.Size = new System.Drawing.Size(24, 24);
-            this.toolStripButtonAddUserToGroup.ToolTipText = "Add user to group";
-            this.toolStripButtonAddUserToGroup.Click += new System.EventHandler(this.toolStripButtonAddUserToGroup_Click);
-            // 
-            // toolStripButtonDeleteUserFromGroup
-            // 
-            this.toolStripButtonDeleteUserFromGroup.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonDeleteUserFromGroup.Enabled = false;
-            this.toolStripButtonDeleteUserFromGroup.Image = global::TestServer.Properties.Resources.delete;
-            this.toolStripButtonDeleteUserFromGroup.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonDeleteUserFromGroup.Name = "toolStripButtonDeleteUserFromGroup";
-            this.toolStripButtonDeleteUserFromGroup.Padding = new System.Windows.Forms.Padding(2);
-            this.toolStripButtonDeleteUserFromGroup.Size = new System.Drawing.Size(24, 24);
-            this.toolStripButtonDeleteUserFromGroup.ToolTipText = "Remove user from group";
-            this.toolStripButtonDeleteUserFromGroup.Click += new System.EventHandler(this.toolStripButtonDeleteUserFromGroup_Click);
             // 
             // GroupsAddEditForm
             // 

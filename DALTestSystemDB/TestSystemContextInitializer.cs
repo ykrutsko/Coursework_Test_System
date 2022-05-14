@@ -29,7 +29,7 @@ namespace DALTestingSystemDB
             {
                 Name = "Teachers",
                 Description = "Math teachers",
-                IsAdminGroup = true
+                IsAdminGroup = false
             };
 
             context.Users.Add(user);
