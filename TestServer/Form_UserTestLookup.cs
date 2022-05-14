@@ -76,7 +76,7 @@ namespace TestServer
             decimal gotInPercent = (decimal)(((double)gotInPoints / max) * 100);
             tbGotInPercent.Text = gotInPercent.ToString();
 
-            if(gotInPercent > (decimal)UserTest.Test.PassPercent)
+            if(gotInPercent >= (decimal)UserTest.Test.PassPercent)
             {
                 labelYesNo.ForeColor = Color.Green;
                 labelYesNo.Text = "YES";
