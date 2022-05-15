@@ -27,8 +27,10 @@ namespace TestServer
         bool firstTimeAssignTests = true;
         bool firstTimeTestsExplorer = true;
         bool firstTimeReviewPassedTests = true;
+        bool firstTimeLoadTestForm = true;
 
         #region Main
+        //----------------------------------------------------------------------------
         public MainForm()
         {
             InitializeComponent();
@@ -47,15 +49,10 @@ namespace TestServer
                 Globals.repoUserAnswer = Globals.work.Repository<UserAnswer>();
 
             });
-
-            // DataGridView Sources
-            dgvLoadTestForm_Questions.DataSource = bsLoadTestForm_Questions;
-            dgvLoadTestForm_Answers.DataSource = bsLoadTestForm_Answers;
         }
 
         private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
-        {
-            
+        {            
             e.Node.Tag = this.treeView1.SelectedNode.Name;
             activePanel.Visible = false;
             switch (e.Node.Tag)
@@ -141,9 +138,7 @@ namespace TestServer
             treeView1.SelectedNode = treeView1.Nodes.Find(nodeName, true)[0];
             treeView1.Focus();
         }
-
-
-
+        //----------------------------------------------------------------------------
         #endregion Main
 
         #region General
@@ -170,15 +165,16 @@ namespace TestServer
                 this.Invoke(new Action(() => tbGeneralFailed.Text = userTest.Where(x => x.IsTaked && !x.IsPassed).Count().ToString()));
                 int sumTestPoints = userTest.Where(x => x.IsTaked).SelectMany(x => x.Test.Questions).Select(z => z.Points).Sum();
                 int sumUserPoints = (int)userTest.Where(x => x.IsTaked).Select(y => y.PointsGrade).Sum();
-                decimal avg = (decimal)(((double)sumUserPoints / sumTestPoints) * 100);
+                decimal avg = sumTestPoints == 0? 0 : (decimal)(((double)sumUserPoints / sumTestPoints) * 100);
                 this.Invoke(new Action(() => tbGeneralAVG.Text = avg.ToString()));
-                this.Invoke(new Action(() => tbGeneralAvgPassed.Text = ((decimal)(((double)passedCount / takedCount) * 100)).ToString()));
+                decimal avgPassed = takedCount == 0 ? 0 : (decimal)(((double)passedCount / takedCount) * 100);
+                this.Invoke(new Action(() => tbGeneralAvgPassed.Text = avgPassed.ToString()));
 
                 var tests = Globals.repoTest.GetAll();
                 this.Invoke(new Action(() => tbGeneralCountTests.Text = tests.Count().ToString()));
-                this.Invoke(new Action(() => tbGeneralMaxQCount.Text = tests.Select(x=> x.Questions.Count()).Max().ToString()));
-                this.Invoke(new Action(() => tbGeneralMinQCount.Text = tests.Select(x=> x.Questions.Count()).Min().ToString()));
-                this.Invoke(new Action(() => tbGeneralAvgQCount.Text = tests.Select(x=> x.Questions.Count()).Average().ToString()));
+                this.Invoke(new Action(() => tbGeneralMaxQCount.Text = tests.Select(x => x.Questions.Count()).Any() ? tests.Select(x => x.Questions.Count()).Max().ToString() : "0"));
+                this.Invoke(new Action(() => tbGeneralMinQCount.Text = tests.Select(x => x.Questions.Count()).Any() ? tests.Select(x => x.Questions.Count()).Min().ToString() : "0"));
+                this.Invoke(new Action(() => tbGeneralAvgQCount.Text = tests.Select(x => x.Questions.Count()).Any() ? tests.Select(x => x.Questions.Count()).Average().ToString() : "0"));
             });
         }
         //----------------------------------------------------------------------------
@@ -234,13 +230,22 @@ namespace TestServer
                 dgvUsersForm_Users.Columns[6].HeaderText = "Admin";
                 dgvUsersForm_Users.Columns[8].HeaderText = "Register date";
 
+                tbUsersForm_FindById.InitHint("Id...");
+                tbUsersForm_FindByFirstName.InitHint("First name...");
+                tbUsersForm_FindByLastName.InitHint("Last name...");
+                tbUsersForm_FindByLogin.InitHint("Login...");
+                tbUsersForm_FindByDescription.InitHint("Description...");
+
                 firstTimeUsers = false;
             }
             else
             {
                 await Task.Run(() => UsersForm_LoadUsersBySelector(UsersForm_selector));
+                tbUsersForm_FindById.Text = string.Empty;
+                tbUsersForm_FindByFirstName.Text = string.Empty;
                 tbUsersForm_FindByLastName.Text = string.Empty;
                 tbUsersForm_FindByLogin.Text = string.Empty;
+                tbUsersForm_FindByDescription.Text = string.Empty;
             }
         }
 
@@ -350,7 +355,7 @@ namespace TestServer
 
         private async void toolStripButtonDeleteUser_Click(object sender, EventArgs e)
         {
-            var dialog = MessageBox.Show("Delete selected user?", "Test server", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+            var dialog = MessageBox.Show("Delete selected User?", "Test server", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
             if (dialog == DialogResult.Cancel)
                 return;
 
@@ -418,10 +423,10 @@ namespace TestServer
             switch (selector)
             {
                 case FormSelector.Active:
-                    this.Invoke(new Action(() => bsUsersForm_Users.DataSource = Globals.repoUser.FindAll(x => !x.IsArhived)));
+                    this.Invoke(new Action(() => bsUsersForm_Users.DataSource = Globals.repoUser.FindAll(x => !x.IsArchived)));
                     break;
                 case FormSelector.Archived:
-                    this.Invoke(new Action(() => bsUsersForm_Users.DataSource = Globals.repoUser.FindAll(x => x.IsArhived)));
+                    this.Invoke(new Action(() => bsUsersForm_Users.DataSource = Globals.repoUser.FindAll(x => x.IsArchived)));
                     break;
                 case FormSelector.All:
                     this.Invoke(new Action(() => bsUsersForm_Users.DataSource = Globals.repoUser.GetAll()));
@@ -433,33 +438,37 @@ namespace TestServer
                     this.Invoke(new Action(() => bsUsersForm_Users.Clear()));
                     break;
             }
-        }
+        }       
 
-        private void tbUsersForm_FindByLastName_TextChanged(object sender, EventArgs e)
+        private void tbUsersForm_Find_TextChanged(object sender, EventArgs e)
         {
-            if (!tbUsersForm_FindByLastName.Text.Any()) return;
-            DataGridViewRow row = dgvUsersForm_Users.Rows
-                .Cast<DataGridViewRow>()
-                .Where(r => r.Cells["LastName"].Value.ToString().ToLower().StartsWith(tbUsersForm_FindByLastName.Text.ToLower()))
-                .FirstOrDefault();
-            if (row != null)
+            TextBox tb = (TextBox)sender;
+            if (!tb.Text.Any()) return;
+            string columnName = string.Empty;
+            switch (tb.Name)
             {
-                this.dgvUsersForm_Users.SelectionChanged -= new System.EventHandler(this.dgvUsersForm_Users_SelectionChanged);
-                {
-                    dgvUsersForm_Users.CurrentCell = dgvUsersForm_Users.Rows[row.Index].Cells[0];
-                    dgvUsersForm_Users_WhenRowGetSelect();
-                }
-                this.dgvUsersForm_Users.SelectionChanged += new System.EventHandler(this.dgvUsersForm_Users_SelectionChanged);
+                case "tbUsersForm_FindById":
+                    columnName = "Id";
+                    break;
+                case "tbUsersForm_FindByFirstName":
+                    columnName = "FirstName";
+                    break;
+                case "tbUsersForm_FindByLastName":
+                    columnName = "LastName";
+                    break;
+                case "tbUsersForm_FindByLogin":
+                    columnName = "Login";
+                    break;
+                case "tbUsersForm_FindByDescription":
+                    columnName = "Description";
+                    break;
             }
-        }
 
-        private void tbUsersForm_FindByLogin_TextChanged(object sender, EventArgs e)
-        {
-            if (!tbUsersForm_FindByLogin.Text.Any()) return;
             DataGridViewRow row = dgvUsersForm_Users.Rows
                 .Cast<DataGridViewRow>()
-                .Where(r => r.Cells["Login"].Value.ToString().ToLower().StartsWith(tbUsersForm_FindByLogin.Text.ToLower()))
+                .Where(r => r.Cells[columnName].Value == null ? false : r.Cells[columnName].Value.ToString().ToLower().StartsWith(tb.Text.ToLower()))
                 .FirstOrDefault();
+
             if (row != null)
             {
                 this.dgvUsersForm_Users.SelectionChanged -= new System.EventHandler(this.dgvUsersForm_Users_SelectionChanged);
@@ -508,12 +517,21 @@ namespace TestServer
                 dgvGroupsForm_Users.Columns[3].Width = 100;
                 dgvGroupsForm_Users.Columns[1].HeaderText = "First name";
                 dgvGroupsForm_Users.Columns[2].HeaderText = "Last name";
+
+                tbGroupsForm_FindById.InitHint("Id...");
+                tbGroupsForm_FindByName.InitHint("Name...");
+                tbGroupsForm_FindByDescription.InitHint("Description...");
+
                 firstTimeGroups = false;                
             }
             else
             {
                 bsGroupsForm_Groups.ResetBindings(false);
                 dgvGroupsForm_Groups_WhenRowGetSelect();
+
+                tbGroupsForm_FindById.Text = String.Empty;
+                tbGroupsForm_FindByName.Text = String.Empty;
+                tbGroupsForm_FindByDescription.Text = String.Empty;
             }
             this.dgvGroupsForm_Groups.SelectionChanged += new System.EventHandler(this.dgvGroupsForm_Groups_SelectionChanged);
         }
@@ -617,7 +635,7 @@ namespace TestServer
 
         private async void toolStripButtonDeleteGroup_Click(object sender, EventArgs e)
         {
-            var dialog = MessageBox.Show("Delete selected group?", "Test server", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+            var dialog = MessageBox.Show("Delete selected Group?", "Test server", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
             if (dialog == DialogResult.Cancel)
                 return;
 
@@ -635,14 +653,30 @@ namespace TestServer
             this.dgvGroupsForm_Groups.SelectionChanged += new System.EventHandler(this.dgvGroupsForm_Groups_SelectionChanged);
         }
 
-        private void tbGroups_FindByName_TextChanged(object sender, EventArgs e)
+        private void tbGroupsForm_Find_TextChanged(object sender, EventArgs e)
         {
-            if (!tbGroups_FindByName.Text.Any()) return;
+            TextBox tb = (TextBox)sender;
+            if (!tb.Text.Any()) return;
+            string columnName = string.Empty;
+            switch (tb.Name)
+            {
+                case "tbGroupsForm_FindById":
+                    columnName = "Id";
+                    break;
+                case "tbGroupsForm_FindByName":
+                    columnName = "Name";
+                    break;
+                case "tbGroupsForm_FindByDescription":
+                    columnName = "Description";
+                    break;
+            }
+
             DataGridViewRow row = dgvGroupsForm_Groups.Rows
                 .Cast<DataGridViewRow>()
-                .Where(r => r.Cells["Name"].Value.ToString().ToLower().StartsWith(tbGroups_FindByName.Text.ToLower()))
+                .Where(r => r.Cells[columnName].Value == null ? false : r.Cells[columnName].Value.ToString().ToLower().StartsWith(tb.Text.ToLower()))
                 .FirstOrDefault();
-            if(row != null)
+
+            if (row != null)
             {
                 this.dgvGroupsForm_Groups.SelectionChanged -= new System.EventHandler(this.dgvGroupsForm_Groups_SelectionChanged);
                 {
@@ -673,9 +707,10 @@ namespace TestServer
                 this.Invoke(new Action(() => tbUsersAndTestsForm_Failed.Text = userTest.Where(x => x.IsTaked && !x.IsPassed).Count().ToString()));
                 int sumTestPoints = userTest.Where(x => x.IsTaked).SelectMany(x => x.Test.Questions).Select(z => z.Points).Sum();
                 int sumUserPoints = (int)userTest.Where(x => x.IsTaked).Select(y => y.PointsGrade).Sum();
-                decimal avg = (decimal)(((double)sumUserPoints / sumTestPoints) * 100);
+                decimal avg = sumTestPoints == 0 ? 0 : (decimal)(((double)sumUserPoints / sumTestPoints) * 100);
                 this.Invoke(new Action(() => tbUsersAndTestsForm_AVG.Text = avg.ToString()));
-                this.Invoke(new Action(() => tbUsersAndTestsForm_AvgPassed.Text = ((decimal)(((double)passedCount / takedCount) * 100)).ToString()));
+                decimal avgPassed = takedCount == 0 ? 0 : (decimal)(((double)passedCount / takedCount) * 100);
+                this.Invoke(new Action(() => tbUsersAndTestsForm_AvgPassed.Text = avgPassed.ToString()));
             });
         }
         //----------------------------------------------------------------------------
@@ -740,6 +775,16 @@ namespace TestServer
                 dgvAssignTestsForm_Tests.Columns[7].HeaderText = "Loaded date";
                 if (userTests.Any())
                     AssignTestsForm_currTest = dgvAssignTestsForm_Tests.CurrentRow.DataBoundItem as DALTestingSystemDB.Test;
+
+                tbAssignTestsForm_FindUserById.InitHint("Id...");
+                tbAssignTestsForm_FindUserByFirstName.InitHint("First name...");
+                tbAssignTestsForm_FindUserByLastName.InitHint("Last name...");
+                tbAssignTestsForm_FindUserByLogin.InitHint("Login...");
+
+                tbAssignTestsForm_FindGroupById.InitHint("Id...");
+                tbAssignTestsForm_FindGroupByName.InitHint("Name...");
+                tbAssignTestsForm_FindGroupByDescription.InitHint("Description...");
+
                 firstTimeAssignTests = false;
             }
             else
@@ -750,9 +795,14 @@ namespace TestServer
                 bsAssignTestsForm_Groups.DataSource = await Task.Run(() => Globals.repoGroup.GetAll());
                 dgvAssignTestsForm_Groups_WhenRowGetSelect();
 
+                tbAssignTestsForm_FindUserById.Text = string.Empty;
+                tbAssignTestsForm_FindUserByFirstName.Text = string.Empty;
                 tbAssignTestsForm_FindUserByLastName.Text = string.Empty;
                 tbAssignTestsForm_FindUserByLogin.Text = string.Empty;
+
+                tbAssignTestsForm_FindGroupById.Text = string.Empty;
                 tbAssignTestsForm_FindGroupByName.Text = string.Empty;
+                tbAssignTestsForm_FindGroupByDescription.Text = string.Empty;
             }
             this.dgvAssignTestsForm_Users.SelectionChanged += new System.EventHandler(this.dgvAssignTestsForm_Users_SelectionChanged);
             this.dgvAssignTestsForm_Groups.SelectionChanged += new System.EventHandler(this.dgvAssignTestsForm_Groups_SelectionChanged);
@@ -815,6 +865,12 @@ namespace TestServer
                 MessageBox.Show("There are no Tests in database!", "Test server", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
+            
+            if (!AssignTestsForm_currGroup.Users.Any())
+            {
+                MessageBox.Show("There are no Users in this Group!", "Test server", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
 
             SelectTestForm assignNewTestForm = new SelectTestForm(testsForGroup, OpenMode.NewTestForGroup);
             if (assignNewTestForm.ShowDialog() == DialogResult.OK)
@@ -844,6 +900,8 @@ namespace TestServer
                     dgvAssignTestsForm_Tests_WhenRowGetSelect();
                 }
                 this.dgvAssignTestsForm_Tests.SelectionChanged += new System.EventHandler(this.dgvAssignTestsForm_Tests_SelectionChanged);
+
+                MessageBox.Show("Done!!!", "Test server", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -910,7 +968,7 @@ namespace TestServer
                 .LastOrDefault();
 
             if(deletableUserTest == null)
-                MessageBox.Show("This test is already in progress!", "Test server", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("This Test is already in progress!", "Test server", MessageBoxButtons.OK, MessageBoxIcon.Information);
             else
                 await Task.Run(() => Globals.repoUserTest.Remove(deletableUserTest));
 
@@ -927,13 +985,32 @@ namespace TestServer
             this.dgvAssignTestsForm_Tests.SelectionChanged += new System.EventHandler(this.dgvAssignTestsForm_Tests_SelectionChanged);
         }
 
-        private void tbAssignTestsForm_FindUserByLastName_TextChanged(object sender, EventArgs e)
+        private void tbAssignTestsForm_FindUser_TextChanged(object sender, EventArgs e)
         {
-            if (!tbAssignTestsForm_FindUserByLastName.Text.Any()) return;
+            TextBox tb = (TextBox)sender;
+            if (!tb.Text.Any()) return;
+            string columnName = string.Empty;
+            switch (tb.Name)
+            {
+                case "tbAssignTestsForm_FindUserById":
+                    columnName = "Id";
+                    break;
+                case "tbAssignTestsForm_FindUserByFirstName":
+                    columnName = "FirstName";
+                    break;
+                case "tbAssignTestsForm_FindUserByLastName":
+                    columnName = "LastName";
+                    break;
+                case "tbAssignTestsForm_FindUserByLogin":
+                    columnName = "Login";
+                    break;
+            }
+
             DataGridViewRow row = dgvAssignTestsForm_Users.Rows
                 .Cast<DataGridViewRow>()
-                .Where(r => r.Cells["LastName"].Value.ToString().ToLower().StartsWith(tbAssignTestsForm_FindUserByLastName.Text.ToLower()))
+                .Where(r => r.Cells[columnName].Value == null ? false : r.Cells[columnName].Value.ToString().ToLower().StartsWith(tb.Text.ToLower()))
                 .FirstOrDefault();
+
             if (row != null)
             {
                 this.dgvAssignTestsForm_Users.SelectionChanged -= new System.EventHandler(this.dgvAssignTestsForm_Users_SelectionChanged);
@@ -945,31 +1022,29 @@ namespace TestServer
             }
         }
 
-        private void tbAssignTestsForm_FindUserByLogin_TextChanged(object sender, EventArgs e)
+        private void tbAssignTestsForm_FindGroup_TextChanged(object sender, EventArgs e)
         {
-            if (!tbAssignTestsForm_FindUserByLogin.Text.Any()) return;
-            DataGridViewRow row = dgvAssignTestsForm_Users.Rows
-                .Cast<DataGridViewRow>()
-                .Where(r => r.Cells["Login"].Value.ToString().ToLower().StartsWith(tbAssignTestsForm_FindUserByLogin.Text.ToLower()))
-                .FirstOrDefault();
-            if (row != null)
+            TextBox tb = (TextBox)sender;
+            if (!tb.Text.Any()) return;
+            string columnName = string.Empty;
+            switch (tb.Name)
             {
-                this.dgvAssignTestsForm_Users.SelectionChanged -= new System.EventHandler(this.dgvAssignTestsForm_Users_SelectionChanged);
-                {
-                    dgvAssignTestsForm_Users.CurrentCell = dgvAssignTestsForm_Users.Rows[row.Index].Cells[0];
-                    dgvAssignTestsForm_Users_WhenRowGetSelect();
-                }
-                this.dgvAssignTestsForm_Users.SelectionChanged -= new System.EventHandler(this.dgvAssignTestsForm_Users_SelectionChanged);
+                case "tbAssignTestsForm_FindGroupById":
+                    columnName = "Id";
+                    break;
+                case "tbAssignTestsForm_FindGroupByName":
+                    columnName = "Name";
+                    break;
+                case "tbAssignTestsForm_FindGroupByDescription":
+                    columnName = "Description";
+                    break;
             }
-        }
 
-        private void tbAssignTestsForm_FindGroupByName_TextChanged(object sender, EventArgs e)
-        {
-            if (!tbAssignTestsForm_FindGroupByName.Text.Any()) return;
             DataGridViewRow row = dgvAssignTestsForm_Groups.Rows
                 .Cast<DataGridViewRow>()
-                .Where(r => r.Cells["Name"].Value.ToString().ToLower().StartsWith(tbAssignTestsForm_FindGroupByName.Text.ToLower()))
+                .Where(r => r.Cells[columnName].Value == null ? false : r.Cells[columnName].Value.ToString().ToLower().StartsWith(tb.Text.ToLower()))
                 .FirstOrDefault();
+
             if (row != null)
             {
                 this.dgvAssignTestsForm_Groups.SelectionChanged -= new System.EventHandler(this.dgvAssignTestsForm_Groups_SelectionChanged);
@@ -989,6 +1064,17 @@ namespace TestServer
         TestLib.Test currTest;
         TestLib.Question currQuestion;
         Bitmap noPhotoBitmap = new Bitmap(Resources.nophoto);
+        private void panelLoadTest_VisibleChanged(object sender, EventArgs e)
+        {
+            if(panelLoadTest.Visible == false) return;
+            if(firstTimeLoadTestForm)
+            {
+                dgvLoadTestForm_Questions.DataSource = bsLoadTestForm_Questions;
+                dgvLoadTestForm_Answers.DataSource = bsLoadTestForm_Answers;
+                firstTimeLoadTestForm = false;
+            }
+        }
+
         void LoadTestForm_CleanForm()
         {
             currTest = null;
@@ -1109,10 +1195,19 @@ namespace TestServer
                     throw ex;
                 }
                 LoadTestForm_FillForm();
-                btnLoadTestForm_SaveTestToDB.Enabled = true;
-                pictureBoxWarningDone.Image = Resources.warning;
-                pictureBoxWarningDone.Visible = true;
-                btnLoadTestForm_SaveTestToDB.Select();
+                if(currTest.Questions.Any())
+                {
+                    btnLoadTestForm_SaveTestToDB.Enabled = true;
+                    pictureBoxWarningDone.Image = Resources.warning;
+                    pictureBoxWarningDone.Visible = true;
+                    btnLoadTestForm_SaveTestToDB.Select();
+                }
+                else
+                {
+                    btnLoadTestForm_SaveTestToDB.Enabled = false;
+                    pictureBoxWarningDone.Image = Resources.prohibition;
+                    pictureBoxWarningDone.Visible = true;
+                }
             }
         }
         private void btnLoadTestForm_Clean_Click(object sender, EventArgs e)
@@ -1182,9 +1277,9 @@ namespace TestServer
             {
                 var tests = Globals.repoTest.GetAll();
                 this.Invoke(new Action(() => tbTestsForm_Count.Text = tests.Count().ToString()));
-                this.Invoke(new Action(() => tbTestsForm_Max.Text = tests.Select(x => x.Questions.Count()).Max().ToString()));
-                this.Invoke(new Action(() => tbTestsForm_Min.Text = tests.Select(x => x.Questions.Count()).Min().ToString()));
-                this.Invoke(new Action(() => tbTestsForm_AVG.Text = tests.Select(x => x.Questions.Count()).Average().ToString()));
+                this.Invoke(new Action(() => tbTestsForm_Max.Text = tests.Select(x => x.Questions.Count()).Any() ? tests.Select(x => x.Questions.Count()).Max().ToString() : "0"));
+                this.Invoke(new Action(() => tbTestsForm_Min.Text = tests.Select(x => x.Questions.Count()).Any() ? tests.Select(x => x.Questions.Count()).Min().ToString() : "0"));
+                this.Invoke(new Action(() => tbTestsForm_AVG.Text = tests.Select(x => x.Questions.Count()).Any() ? tests.Select(x => x.Questions.Count()).Average().ToString() : "0"));
             });
         }
         //----------------------------------------------------------------------------
@@ -1220,17 +1315,21 @@ namespace TestServer
                 tbTestsExplorerForm_FindById.InitHint("Id...");
                 tbTestsExplorerForm_FindByTitle.InitHint("Title...");
                 tbTestsExplorerForm_FindByAuthor.InitHint("Author...");
+                tbTestsExplorerForm_FindByDescription.InitHint("Description");
 
                 firstTimeTestsExplorer = false;
             }
             else
             {
                 await Task.Run(() => TestsExplorerForm_LoadTestsBySelector(TestsExplorerForm_selector));
-                tbTestsExplorerForm_FindById.Text = tbTestsExplorerForm_FindByTitle.Text = tbTestsExplorerForm_FindByAuthor.Text = string.Empty;
+                tbTestsExplorerForm_FindById.Text 
+                    = tbTestsExplorerForm_FindByTitle.Text 
+                    = tbTestsExplorerForm_FindByAuthor.Text
+                    = tbTestsExplorerForm_FindByDescription.Text
+                    = string.Empty;
             }
             dgvTestsExplorerForm_Tests_WhenRowGetSelect();
             this.dgvTestsExplorerForm_Tests.SelectionChanged += new System.EventHandler(this.dgvTestsExplorerForm_Tests_SelectionChanged);
-
         }
 
         private void dgvTestsExplorerForm_Tests_WhenRowGetSelect()
@@ -1328,7 +1427,7 @@ namespace TestServer
 
         private async void toolStripButtonTestDelete_Click(object sender, EventArgs e)
         {
-            var dialog = MessageBox.Show("Delete selected test?", "Test server", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+            var dialog = MessageBox.Show("Delete selected Test?", "Test server", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
             if (dialog == DialogResult.Cancel)
                 return;
 
@@ -1355,11 +1454,14 @@ namespace TestServer
                 case "tbTestsExplorerForm_FindByAuthor":
                     columnName = "Author";
                     break;
+                case "tbTestsExplorerForm_FindByDescription":
+                    columnName = "Description";
+                    break;
             }
 
             DataGridViewRow row = dgvTestsExplorerForm_Tests.Rows
                 .Cast<DataGridViewRow>()
-                .Where(r => r.Cells[columnName].Value.ToString().ToLower().StartsWith(tb.Text.ToLower()))
+                .Where(r => r.Cells[columnName].Value == null ? false : r.Cells[columnName].Value.ToString().ToLower().StartsWith(tb.Text.ToLower()))
                 .FirstOrDefault();
 
             if (row != null)
@@ -1538,6 +1640,13 @@ namespace TestServer
         }
         #endregion ReviewTestResults
 
+        #region Server
+        //-----------------------------------------------------------------------------
+
+        //-----------------------------------------------------------------------------
+        #endregion Server
+
+
 
 
         private void originalSizeToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1545,26 +1654,8 @@ namespace TestServer
             this.Size = new Size(1277, 723);
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         //dgvGroupsForm_Groups.Columns[0].Width = (int)(dgvGroupsForm_Groups.Width * 0.1);
         // last - dgvGrd.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-
 
     }
 }

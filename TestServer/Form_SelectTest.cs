@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TextBoxHintLib;
 
 namespace TestServer
 {
@@ -39,7 +40,11 @@ namespace TestServer
             dataGridView.Columns[7].Width = 120;
             dataGridView.Columns[6].HeaderText = "Archived";
             dataGridView.Columns[7].HeaderText = "Loaded date";
-            textBox.Select();
+
+            textBoxId.InitHint("Id...");
+            textBoxTitle.InitHint("Title...");
+            textBoxAuthor.InitHint("Author...");
+            textBoxDescription.InitHint("Description...");
         }
 
         private void btnOk_Click(object sender, EventArgs e)
@@ -58,13 +63,33 @@ namespace TestServer
 
         private void textBox_TextChanged(object sender, EventArgs e)
         {
-            if (!textBox.Text.Any()) return;
+            TextBox tb = (TextBox)sender;
+            if (!tb.Text.Any()) return;
+            string columnName = string.Empty;
+            switch (tb.Name)
+            {
+                case "textBoxId":
+                    columnName = "Id";
+                    break;
+                case "textBoxTitle":
+                    columnName = "Title";
+                    break;
+                case "textBoxAuthor":
+                    columnName = "Author";
+                    break;
+                case "textBoxDescription":
+                    columnName = "Description";
+                    break;
+            }
+
             DataGridViewRow row = dataGridView.Rows
                 .Cast<DataGridViewRow>()
-                .Where(r => r.Cells["Title"].Value.ToString().ToLower().StartsWith(textBox.Text.ToLower()))
+                .Where(r => r.Cells[columnName].Value == null ? false : r.Cells[columnName].Value.ToString().ToLower().StartsWith(tb.Text.ToLower()))
                 .FirstOrDefault();
+
             if (row != null)
                 dataGridView.CurrentCell = dataGridView.Rows[row.Index].Cells[0];
         }
+
     }
 }

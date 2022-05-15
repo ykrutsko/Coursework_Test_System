@@ -17,7 +17,7 @@ namespace DALTestingSystemDB
         public string Password { get; set; }
         public string Description { get; set; }
         public bool IsAdmin { get; set; }
-        public bool IsArhived { get; set; }
+        public bool IsArchived { get; set; }
         public DateTime RegisterDate { get; set; }
         public virtual ICollection<Group> Groups { get; set; }
         public virtual ICollection<UserTest> UserTests { get; set; }
@@ -39,10 +39,6 @@ namespace DALTestingSystemDB
             foreach (Group group in Groups)
                 groupsClone.Add(group);
 
-            ICollection<UserTest> userTestsClone = new List<UserTest>();
-            foreach (UserTest userTest in userTestsClone)
-                userTestsClone.Add(userTest);
-
             return new User
             {
                 FirstName = this.FirstName,
@@ -50,9 +46,8 @@ namespace DALTestingSystemDB
                 Login = this.Login,
                 Description = this.Description,
                 IsAdmin = this.IsAdmin,
-                IsArhived = false,
+                IsArchived = false,
                 Groups = groupsClone,
-                UserTests = userTestsClone
             };
         }
 
@@ -71,7 +66,7 @@ namespace DALTestingSystemDB
                 Password = this.Password,
                 Description = this.Description,
                 IsAdmin = this.IsAdmin,
-                IsArhived = this.IsArhived,
+                IsArchived = this.IsArchived,
                 RegisterDate = this.RegisterDate,
                 Groups = groupsClone,
             };            
@@ -85,7 +80,7 @@ namespace DALTestingSystemDB
             this.Password = other.Password;
             this.Description = other.Description;
             this.IsAdmin = other.IsAdmin;
-            this.IsArhived = other.IsArhived;
+            this.IsArchived = other.IsArchived;
             this.RegisterDate = other.RegisterDate;
 
             this.Groups.Clear();

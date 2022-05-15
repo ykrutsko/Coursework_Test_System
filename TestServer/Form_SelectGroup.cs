@@ -9,6 +9,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TextBoxHintLib;
 
 namespace TestServer
 {
@@ -39,16 +40,35 @@ namespace TestServer
             dataGridView.Columns[3].Width = 100;
             dataGridView.Columns[4].Visible = false;
             dataGridView.Columns[3].HeaderText = "Admin group";
-            textBox1.Select();
+
+            textBoxId.InitHint("Id...");
+            textBoxName.InitHint("Name...");
+            textBoxDescription.InitHint("Description...");
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        private void textBox_TextChanged(object sender, EventArgs e)
         {
-            if (!textBox1.Text.Any()) return;
+            TextBox tb = (TextBox)sender;
+            if (!tb.Text.Any()) return;
+            string columnName = string.Empty;
+            switch (tb.Name)
+            {
+                case "textBoxId":
+                    columnName = "Id";
+                    break;
+                case "textBoxName":
+                    columnName = "Name";
+                    break;
+                case "textBoxDescription":
+                    columnName = "Description";
+                    break;
+            }
+
             DataGridViewRow row = dataGridView.Rows
                 .Cast<DataGridViewRow>()
-                .Where(r => r.Cells["Name"].Value.ToString().ToLower().StartsWith(textBox1.Text.ToLower()))
+                .Where(r => r.Cells[columnName].Value == null ? false : r.Cells[columnName].Value.ToString().ToLower().StartsWith(tb.Text.ToLower()))
                 .FirstOrDefault();
+
             if (row != null)
                 dataGridView.CurrentCell = dataGridView.Rows[row.Index].Cells[0];
         }

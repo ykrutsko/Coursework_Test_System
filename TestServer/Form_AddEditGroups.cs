@@ -81,7 +81,7 @@ namespace TestServer
             var newUsersForGroup = await Task.Run(() => Globals.repoUser.GetAll().Except(Group.Users).ToList());
             if (!newUsersForGroup.Any())
             {
-                MessageBox.Show("No new users for group!", "Test server", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("No new Users for Group!", "Test server", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
             SelectUserForm newGroupForUserForm = new SelectUserForm(newUsersForGroup, OpenMode.NewUserForGroup);
@@ -126,7 +126,7 @@ namespace TestServer
         {
             if (openMode != OpenMode.Edit)
                 return tbName.Text.Any() && !GroupsNameCollection.Contains(tbName.Text.ToLower());
-            return tbName.Text == Group.Name || !GroupsNameCollection.Contains(tbName.Text.ToLower());
+            return tbName.Text.ToLower() == Group.Name.ToLower() || tbName.Text.Any() && !GroupsNameCollection.Contains(tbName.Text.ToLower());
         }
 
         void EnableBtnOk()

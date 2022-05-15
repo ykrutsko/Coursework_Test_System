@@ -68,7 +68,7 @@ namespace TestServer
                     {
                         cbIsArchive.Visible = true;
                         cbIsAdmin.Checked = User.IsAdmin;
-                        cbIsArchive.Checked = User.IsArhived;
+                        cbIsArchive.Checked = User.IsArchived;
                     }
                     tbLogin.Text = User.Login;
                     tbFN.Text = User.FirstName;
@@ -107,11 +107,11 @@ namespace TestServer
 
             if (openMode != OpenMode.Edit)
             {
-                User.IsArhived = false;
+                User.IsArchived = false;
                 User.RegisterDate = DateTime.Now;
             }
             else
-                User.IsArhived = cbIsArchive.Checked;
+                User.IsArchived = cbIsArchive.Checked;
         }
 
         void WindowTitleText()
@@ -141,7 +141,7 @@ namespace TestServer
             var newGroupsForUser = await Task.Run(() => Globals.repoGroup.GetAll().Except(User.Groups).ToList());
             if (!newGroupsForUser.Any())
             {
-                MessageBox.Show("No new groups for user!", "Test server", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("No new Groups for User!", "Test server", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             } 
             SelectGroupForm newGroupForUserForm = new SelectGroupForm(newGroupsForUser, OpenMode.NewGroupForUser);
@@ -205,7 +205,7 @@ namespace TestServer
         {
             if (openMode != OpenMode.Edit)
                 return tbLogin.Text.Any() && !LoginsCollection.Contains(tbLogin.Text.ToLower());
-            return tbLogin.Text == User.Login || !LoginsCollection.Contains(tbLogin.Text.ToLower());
+            return tbLogin.Text.ToLower() == User.Login.ToLower() || tbLogin.Text.Any() && !LoginsCollection.Contains(tbLogin.Text.ToLower());
         }
 
         void EnableBtnOk()

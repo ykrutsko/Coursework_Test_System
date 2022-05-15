@@ -17,7 +17,7 @@ namespace DALTestingSystemDB
                 Password = ("admin").GetSha512(),
                 Description = "SUPER administrator",
                 IsAdmin = true, 
-                IsArhived = false,
+                IsArchived = false,
                 RegisterDate = DateTime.Now };
 
             Group group = new Group() { 

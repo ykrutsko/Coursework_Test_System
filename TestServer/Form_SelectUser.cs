@@ -50,6 +50,7 @@ namespace TestServer
             dataGridView.Columns[1].HeaderText = "First name";
             dataGridView.Columns[2].HeaderText = "Last name";
             dataGridView.Columns[6].HeaderText = "Admin";
+
             textBoxId.InitHint("Id...");
             textBoxFirstName.InitHint("First name...");
             textBoxLastName.InitHint("Last name...");
@@ -83,7 +84,7 @@ namespace TestServer
 
             DataGridViewRow row = dataGridView.Rows
                 .Cast<DataGridViewRow>()
-                .Where(r => r.Cells[columnName].Value.ToString().ToLower().StartsWith(tb.Text.ToLower()))
+                .Where(r => r.Cells[columnName].Value == null ? false : r.Cells[columnName].Value.ToString().ToLower().StartsWith(tb.Text.ToLower()))
                 .FirstOrDefault();
 
             if (row != null)
