@@ -145,6 +145,45 @@ namespace TestServer
 
         #endregion Main
 
+        #region General
+        //----------------------------------------------------------------------------
+        private void panelGeneral_VisibleChanged(object sender, EventArgs e)
+        {
+            if (panelGeneral.Visible == false) return;
+
+            Task.Run(() =>
+            {
+                var users = Globals.repoUser.GetAll();
+                this.Invoke(new Action(() => tbGeneralUsers.Text = users.Count().ToString()));
+                this.Invoke(new Action(() => tbGeneralAdmins.Text = users.Where(x => x.IsAdmin).Count().ToString()));
+
+                var groups = Globals.repoGroup.GetAll();
+                this.Invoke(new Action(() => tbGeneralGroups.Text = groups.Count().ToString()));
+
+                var userTest = Globals.repoUserTest.GetAll();
+                this.Invoke(new Action(() => tbGeneralAssign.Text = userTest.Where(x => !x.IsTaked).Count().ToString()));
+                int takedCount = userTest.Where(x => x.IsTaked).Count();
+                this.Invoke(new Action(() => tbGeneralComleted.Text = takedCount.ToString()));
+                int passedCount = userTest.Where(x => x.IsTaked && x.IsPassed).Count();
+                this.Invoke(new Action(() => tbGeneralPassed.Text = passedCount.ToString()));
+                this.Invoke(new Action(() => tbGeneralFailed.Text = userTest.Where(x => x.IsTaked && !x.IsPassed).Count().ToString()));
+                this.Invoke(new Action(() => tbGeneralAVG.Text = userTest.Where(x => !x.IsPassed).Count().ToString()));
+                int sumTestPoints = userTest.Where(x => x.IsTaked).SelectMany(x => x.Test.Questions).Select(z => z.Points).Sum();
+                int sumUserPoints = (int)userTest.Where(x => x.IsTaked).Select(y => y.PointsGrade).Sum();
+                decimal avg = (decimal)(((double)sumUserPoints / sumTestPoints) * 100);
+                this.Invoke(new Action(() => tbGeneralAVG.Text = avg.ToString()));
+                this.Invoke(new Action(() => tbGeneralAvgPassed.Text = ((decimal)(((double)passedCount / takedCount) * 100)).ToString()));
+
+                var tests = Globals.repoTest.GetAll();
+                this.Invoke(new Action(() => tbGeneralCountTests.Text = tests.Count().ToString()));
+                this.Invoke(new Action(() => tbGeneralMaxQCount.Text = tests.Select(x=> x.Questions.Count()).Max().ToString()));
+                this.Invoke(new Action(() => tbGeneralMinQCount.Text = tests.Select(x=> x.Questions.Count()).Min().ToString()));
+                this.Invoke(new Action(() => tbGeneralAvgQCount.Text = tests.Select(x=> x.Questions.Count()).Average().ToString()));
+            });
+        }
+        //----------------------------------------------------------------------------
+        #endregion General
+
         #region UsersForm
         //----------------------------------------------------------------------------
         FormSelector UsersForm_selector = FormSelector.Active;
@@ -1442,6 +1481,8 @@ namespace TestServer
         {
             this.Size = new Size(1277, 723);
         }
+
+
 
 
 
