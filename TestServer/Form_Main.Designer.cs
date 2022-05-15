@@ -71,15 +71,49 @@
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.panelGeneral = new System.Windows.Forms.Panel();
+            this.label51 = new System.Windows.Forms.Label();
+            this.label52 = new System.Windows.Forms.Label();
+            this.tbGeneralAvgPassed = new System.Windows.Forms.TextBox();
+            this.label50 = new System.Windows.Forms.Label();
+            this.tbGeneralAvgQCount = new System.Windows.Forms.TextBox();
+            this.label49 = new System.Windows.Forms.Label();
+            this.label48 = new System.Windows.Forms.Label();
+            this.tbGeneralAVG = new System.Windows.Forms.TextBox();
+            this.label47 = new System.Windows.Forms.Label();
+            this.tbGeneralFailed = new System.Windows.Forms.TextBox();
+            this.label43 = new System.Windows.Forms.Label();
+            this.tbGeneralMinQCount = new System.Windows.Forms.TextBox();
+            this.label44 = new System.Windows.Forms.Label();
+            this.tbGeneralMaxQCount = new System.Windows.Forms.TextBox();
+            this.label45 = new System.Windows.Forms.Label();
+            this.tbGeneralCountTests = new System.Windows.Forms.TextBox();
+            this.label46 = new System.Windows.Forms.Label();
+            this.label42 = new System.Windows.Forms.Label();
+            this.tbGeneralPassed = new System.Windows.Forms.TextBox();
+            this.label41 = new System.Windows.Forms.Label();
+            this.tbGeneralGroups = new System.Windows.Forms.TextBox();
+            this.label38 = new System.Windows.Forms.Label();
+            this.tbGeneralComleted = new System.Windows.Forms.TextBox();
+            this.label39 = new System.Windows.Forms.Label();
+            this.tbGeneralAssign = new System.Windows.Forms.TextBox();
+            this.label40 = new System.Windows.Forms.Label();
+            this.label37 = new System.Windows.Forms.Label();
+            this.tbGeneralAdmins = new System.Windows.Forms.TextBox();
+            this.label36 = new System.Windows.Forms.Label();
             this.tbGeneralUsers = new System.Windows.Forms.TextBox();
             this.label35 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label23 = new System.Windows.Forms.Label();
             this.panelUsersAndGroups = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.tbUsersAndGroup_Groups = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.tbUsersAndGroup_Admins = new System.Windows.Forms.TextBox();
+            this.label53 = new System.Windows.Forms.Label();
+            this.tbUsersAndGroup_Users = new System.Windows.Forms.TextBox();
+            this.label54 = new System.Windows.Forms.Label();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.panelUsers = new System.Windows.Forms.Panel();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.label33 = new System.Windows.Forms.Label();
@@ -259,35 +293,30 @@
             this.bsReviewForm_Questions = new System.Windows.Forms.BindingSource(this.components);
             this.bsReviewForm_Answers = new System.Windows.Forms.BindingSource(this.components);
             this.bsReviewForm_UserTests = new System.Windows.Forms.BindingSource(this.components);
-            this.label36 = new System.Windows.Forms.Label();
-            this.label37 = new System.Windows.Forms.Label();
-            this.tbGeneralAdmins = new System.Windows.Forms.TextBox();
-            this.label38 = new System.Windows.Forms.Label();
-            this.tbGeneralComleted = new System.Windows.Forms.TextBox();
-            this.label39 = new System.Windows.Forms.Label();
-            this.tbGeneralAssign = new System.Windows.Forms.TextBox();
-            this.label40 = new System.Windows.Forms.Label();
-            this.label41 = new System.Windows.Forms.Label();
-            this.tbGeneralGroups = new System.Windows.Forms.TextBox();
-            this.label42 = new System.Windows.Forms.Label();
-            this.tbGeneralPassed = new System.Windows.Forms.TextBox();
-            this.label43 = new System.Windows.Forms.Label();
-            this.tbGeneralMinQCount = new System.Windows.Forms.TextBox();
-            this.label44 = new System.Windows.Forms.Label();
-            this.tbGeneralMaxQCount = new System.Windows.Forms.TextBox();
-            this.label45 = new System.Windows.Forms.Label();
-            this.tbGeneralCountTests = new System.Windows.Forms.TextBox();
-            this.label46 = new System.Windows.Forms.Label();
-            this.label47 = new System.Windows.Forms.Label();
-            this.tbGeneralFailed = new System.Windows.Forms.TextBox();
-            this.label48 = new System.Windows.Forms.Label();
-            this.tbGeneralAVG = new System.Windows.Forms.TextBox();
-            this.label49 = new System.Windows.Forms.Label();
-            this.label50 = new System.Windows.Forms.Label();
-            this.tbGeneralAvgQCount = new System.Windows.Forms.TextBox();
-            this.label51 = new System.Windows.Forms.Label();
-            this.label52 = new System.Windows.Forms.Label();
-            this.tbGeneralAvgPassed = new System.Windows.Forms.TextBox();
+            this.label55 = new System.Windows.Forms.Label();
+            this.label81 = new System.Windows.Forms.Label();
+            this.tbUsersAndTestsForm_AvgPassed = new System.Windows.Forms.TextBox();
+            this.label57 = new System.Windows.Forms.Label();
+            this.label58 = new System.Windows.Forms.Label();
+            this.tbUsersAndTestsForm_AVG = new System.Windows.Forms.TextBox();
+            this.label59 = new System.Windows.Forms.Label();
+            this.tbUsersAndTestsForm_Failed = new System.Windows.Forms.TextBox();
+            this.label60 = new System.Windows.Forms.Label();
+            this.tbUsersAndTestsForm_Passed = new System.Windows.Forms.TextBox();
+            this.label80 = new System.Windows.Forms.Label();
+            this.tbUsersAndTestsForm_Comleted = new System.Windows.Forms.TextBox();
+            this.label62 = new System.Windows.Forms.Label();
+            this.tbUsersAndTestsForm_Assigned = new System.Windows.Forms.TextBox();
+            this.label63 = new System.Windows.Forms.Label();
+            this.label56 = new System.Windows.Forms.Label();
+            this.tbTestsForm_AVG = new System.Windows.Forms.TextBox();
+            this.label61 = new System.Windows.Forms.Label();
+            this.tbTestsForm_Min = new System.Windows.Forms.TextBox();
+            this.label64 = new System.Windows.Forms.Label();
+            this.tbTestsForm_Max = new System.Windows.Forms.TextBox();
+            this.label65 = new System.Windows.Forms.Label();
+            this.tbTestsForm_Count = new System.Windows.Forms.TextBox();
+            this.label66 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.panelGeneral.SuspendLayout();
@@ -697,13 +726,265 @@
             this.panelGeneral.Controls.Add(this.label35);
             this.panelGeneral.Controls.Add(this.pictureBox1);
             this.panelGeneral.Controls.Add(this.label23);
-            this.panelGeneral.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelGeneral.Location = new System.Drawing.Point(217, 55);
+            this.panelGeneral.Location = new System.Drawing.Point(254, 78);
             this.panelGeneral.Name = "panelGeneral";
-            this.panelGeneral.Size = new System.Drawing.Size(1044, 607);
+            this.panelGeneral.Size = new System.Drawing.Size(200, 77);
             this.panelGeneral.TabIndex = 9;
             this.panelGeneral.Visible = false;
             this.panelGeneral.VisibleChanged += new System.EventHandler(this.panelGeneral_VisibleChanged);
+            // 
+            // label51
+            // 
+            this.label51.AutoSize = true;
+            this.label51.Location = new System.Drawing.Point(556, 228);
+            this.label51.Name = "label51";
+            this.label51.Size = new System.Drawing.Size(18, 15);
+            this.label51.TabIndex = 52;
+            this.label51.Text = "%";
+            // 
+            // label52
+            // 
+            this.label52.AutoSize = true;
+            this.label52.Location = new System.Drawing.Point(342, 228);
+            this.label52.Name = "label52";
+            this.label52.Size = new System.Drawing.Size(73, 15);
+            this.label52.TabIndex = 51;
+            this.label52.Text = "AVG passed";
+            // 
+            // tbGeneralAvgPassed
+            // 
+            this.tbGeneralAvgPassed.Location = new System.Drawing.Point(450, 225);
+            this.tbGeneralAvgPassed.Name = "tbGeneralAvgPassed";
+            this.tbGeneralAvgPassed.ReadOnly = true;
+            this.tbGeneralAvgPassed.Size = new System.Drawing.Size(100, 21);
+            this.tbGeneralAvgPassed.TabIndex = 50;
+            // 
+            // label50
+            // 
+            this.label50.AutoSize = true;
+            this.label50.Location = new System.Drawing.Point(655, 172);
+            this.label50.Name = "label50";
+            this.label50.Size = new System.Drawing.Size(83, 15);
+            this.label50.TabIndex = 49;
+            this.label50.Text = "AVG q-s count";
+            // 
+            // tbGeneralAvgQCount
+            // 
+            this.tbGeneralAvgQCount.Location = new System.Drawing.Point(763, 169);
+            this.tbGeneralAvgQCount.Name = "tbGeneralAvgQCount";
+            this.tbGeneralAvgQCount.ReadOnly = true;
+            this.tbGeneralAvgQCount.Size = new System.Drawing.Size(100, 21);
+            this.tbGeneralAvgQCount.TabIndex = 48;
+            // 
+            // label49
+            // 
+            this.label49.AutoSize = true;
+            this.label49.Location = new System.Drawing.Point(556, 201);
+            this.label49.Name = "label49";
+            this.label49.Size = new System.Drawing.Size(18, 15);
+            this.label49.TabIndex = 47;
+            this.label49.Text = "%";
+            // 
+            // label48
+            // 
+            this.label48.AutoSize = true;
+            this.label48.Location = new System.Drawing.Point(342, 201);
+            this.label48.Name = "label48";
+            this.label48.Size = new System.Drawing.Size(106, 15);
+            this.label48.TabIndex = 46;
+            this.label48.Text = "AVG performance ";
+            // 
+            // tbGeneralAVG
+            // 
+            this.tbGeneralAVG.Location = new System.Drawing.Point(450, 198);
+            this.tbGeneralAVG.Name = "tbGeneralAVG";
+            this.tbGeneralAVG.ReadOnly = true;
+            this.tbGeneralAVG.Size = new System.Drawing.Size(100, 21);
+            this.tbGeneralAVG.TabIndex = 45;
+            // 
+            // label47
+            // 
+            this.label47.AutoSize = true;
+            this.label47.Location = new System.Drawing.Point(343, 173);
+            this.label47.Name = "label47";
+            this.label47.Size = new System.Drawing.Size(69, 15);
+            this.label47.TabIndex = 44;
+            this.label47.Text = "Failed tests";
+            // 
+            // tbGeneralFailed
+            // 
+            this.tbGeneralFailed.Location = new System.Drawing.Point(450, 170);
+            this.tbGeneralFailed.Name = "tbGeneralFailed";
+            this.tbGeneralFailed.ReadOnly = true;
+            this.tbGeneralFailed.Size = new System.Drawing.Size(100, 21);
+            this.tbGeneralFailed.TabIndex = 43;
+            // 
+            // label43
+            // 
+            this.label43.AutoSize = true;
+            this.label43.Location = new System.Drawing.Point(655, 145);
+            this.label43.Name = "label43";
+            this.label43.Size = new System.Drawing.Size(80, 15);
+            this.label43.TabIndex = 42;
+            this.label43.Text = "Mix q-s count";
+            // 
+            // tbGeneralMinQCount
+            // 
+            this.tbGeneralMinQCount.Location = new System.Drawing.Point(763, 142);
+            this.tbGeneralMinQCount.Name = "tbGeneralMinQCount";
+            this.tbGeneralMinQCount.ReadOnly = true;
+            this.tbGeneralMinQCount.Size = new System.Drawing.Size(100, 21);
+            this.tbGeneralMinQCount.TabIndex = 41;
+            // 
+            // label44
+            // 
+            this.label44.AutoSize = true;
+            this.label44.Location = new System.Drawing.Point(655, 118);
+            this.label44.Name = "label44";
+            this.label44.Size = new System.Drawing.Size(84, 15);
+            this.label44.TabIndex = 40;
+            this.label44.Text = "Max q-s count";
+            // 
+            // tbGeneralMaxQCount
+            // 
+            this.tbGeneralMaxQCount.Location = new System.Drawing.Point(763, 115);
+            this.tbGeneralMaxQCount.Name = "tbGeneralMaxQCount";
+            this.tbGeneralMaxQCount.ReadOnly = true;
+            this.tbGeneralMaxQCount.Size = new System.Drawing.Size(100, 21);
+            this.tbGeneralMaxQCount.TabIndex = 39;
+            // 
+            // label45
+            // 
+            this.label45.AutoSize = true;
+            this.label45.Location = new System.Drawing.Point(655, 91);
+            this.label45.Name = "label45";
+            this.label45.Size = new System.Drawing.Size(72, 15);
+            this.label45.TabIndex = 38;
+            this.label45.Text = "Count in DB";
+            // 
+            // tbGeneralCountTests
+            // 
+            this.tbGeneralCountTests.Location = new System.Drawing.Point(763, 88);
+            this.tbGeneralCountTests.Name = "tbGeneralCountTests";
+            this.tbGeneralCountTests.ReadOnly = true;
+            this.tbGeneralCountTests.Size = new System.Drawing.Size(100, 21);
+            this.tbGeneralCountTests.TabIndex = 37;
+            // 
+            // label46
+            // 
+            this.label46.AutoSize = true;
+            this.label46.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label46.Location = new System.Drawing.Point(631, 55);
+            this.label46.Name = "label46";
+            this.label46.Size = new System.Drawing.Size(48, 17);
+            this.label46.TabIndex = 36;
+            this.label46.Text = "Tests";
+            this.label46.UseMnemonic = false;
+            // 
+            // label42
+            // 
+            this.label42.AutoSize = true;
+            this.label42.Location = new System.Drawing.Point(343, 145);
+            this.label42.Name = "label42";
+            this.label42.Size = new System.Drawing.Size(76, 15);
+            this.label42.TabIndex = 35;
+            this.label42.Text = "Passed tests";
+            // 
+            // tbGeneralPassed
+            // 
+            this.tbGeneralPassed.Location = new System.Drawing.Point(450, 142);
+            this.tbGeneralPassed.Name = "tbGeneralPassed";
+            this.tbGeneralPassed.ReadOnly = true;
+            this.tbGeneralPassed.Size = new System.Drawing.Size(100, 21);
+            this.tbGeneralPassed.TabIndex = 34;
+            // 
+            // label41
+            // 
+            this.label41.AutoSize = true;
+            this.label41.Location = new System.Drawing.Point(67, 145);
+            this.label41.Name = "label41";
+            this.label41.Size = new System.Drawing.Size(47, 15);
+            this.label41.TabIndex = 33;
+            this.label41.Text = "Groups";
+            // 
+            // tbGeneralGroups
+            // 
+            this.tbGeneralGroups.Location = new System.Drawing.Point(153, 142);
+            this.tbGeneralGroups.Name = "tbGeneralGroups";
+            this.tbGeneralGroups.ReadOnly = true;
+            this.tbGeneralGroups.Size = new System.Drawing.Size(100, 21);
+            this.tbGeneralGroups.TabIndex = 32;
+            // 
+            // label38
+            // 
+            this.label38.AutoSize = true;
+            this.label38.Location = new System.Drawing.Point(343, 118);
+            this.label38.Name = "label38";
+            this.label38.Size = new System.Drawing.Size(95, 15);
+            this.label38.TabIndex = 31;
+            this.label38.Text = "Сompleted tests";
+            // 
+            // tbGeneralComleted
+            // 
+            this.tbGeneralComleted.Location = new System.Drawing.Point(450, 115);
+            this.tbGeneralComleted.Name = "tbGeneralComleted";
+            this.tbGeneralComleted.ReadOnly = true;
+            this.tbGeneralComleted.Size = new System.Drawing.Size(100, 21);
+            this.tbGeneralComleted.TabIndex = 30;
+            // 
+            // label39
+            // 
+            this.label39.AutoSize = true;
+            this.label39.Location = new System.Drawing.Point(343, 91);
+            this.label39.Name = "label39";
+            this.label39.Size = new System.Drawing.Size(85, 15);
+            this.label39.TabIndex = 29;
+            this.label39.Text = "Assigned tests";
+            // 
+            // tbGeneralAssign
+            // 
+            this.tbGeneralAssign.Location = new System.Drawing.Point(450, 88);
+            this.tbGeneralAssign.Name = "tbGeneralAssign";
+            this.tbGeneralAssign.ReadOnly = true;
+            this.tbGeneralAssign.Size = new System.Drawing.Size(100, 21);
+            this.tbGeneralAssign.TabIndex = 28;
+            // 
+            // label40
+            // 
+            this.label40.AutoSize = true;
+            this.label40.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label40.Location = new System.Drawing.Point(318, 55);
+            this.label40.Name = "label40";
+            this.label40.Size = new System.Drawing.Size(110, 17);
+            this.label40.TabIndex = 27;
+            this.label40.Text = "Users & Tests";
+            this.label40.UseMnemonic = false;
+            // 
+            // label37
+            // 
+            this.label37.AutoSize = true;
+            this.label37.Location = new System.Drawing.Point(67, 118);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(48, 15);
+            this.label37.TabIndex = 26;
+            this.label37.Text = "Admins";
+            // 
+            // tbGeneralAdmins
+            // 
+            this.tbGeneralAdmins.Location = new System.Drawing.Point(153, 115);
+            this.tbGeneralAdmins.Name = "tbGeneralAdmins";
+            this.tbGeneralAdmins.ReadOnly = true;
+            this.tbGeneralAdmins.Size = new System.Drawing.Size(100, 21);
+            this.tbGeneralAdmins.TabIndex = 25;
+            // 
+            // label36
+            // 
+            this.label36.AutoSize = true;
+            this.label36.Location = new System.Drawing.Point(67, 91);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(39, 15);
+            this.label36.TabIndex = 24;
+            this.label36.Text = "Users";
             // 
             // tbGeneralUsers
             // 
@@ -749,15 +1030,83 @@
             // panelUsersAndGroups
             // 
             this.panelUsersAndGroups.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelUsersAndGroups.Controls.Add(this.label2);
+            this.panelUsersAndGroups.Controls.Add(this.tbUsersAndGroup_Groups);
+            this.panelUsersAndGroups.Controls.Add(this.label3);
+            this.panelUsersAndGroups.Controls.Add(this.tbUsersAndGroup_Admins);
+            this.panelUsersAndGroups.Controls.Add(this.label53);
+            this.panelUsersAndGroups.Controls.Add(this.tbUsersAndGroup_Users);
+            this.panelUsersAndGroups.Controls.Add(this.label54);
             this.panelUsersAndGroups.Controls.Add(this.pictureBox2);
             this.panelUsersAndGroups.Controls.Add(this.label1);
-            this.panelUsersAndGroups.Controls.Add(this.label3);
-            this.panelUsersAndGroups.Controls.Add(this.label2);
-            this.panelUsersAndGroups.Location = new System.Drawing.Point(254, 197);
+            this.panelUsersAndGroups.Location = new System.Drawing.Point(254, 194);
             this.panelUsersAndGroups.Name = "panelUsersAndGroups";
-            this.panelUsersAndGroups.Size = new System.Drawing.Size(200, 97);
+            this.panelUsersAndGroups.Size = new System.Drawing.Size(200, 101);
             this.panelUsersAndGroups.TabIndex = 10;
             this.panelUsersAndGroups.Visible = false;
+            this.panelUsersAndGroups.VisibleChanged += new System.EventHandler(this.panelUsersAndGroups_VisibleChanged);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(67, 145);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(47, 15);
+            this.label2.TabIndex = 40;
+            this.label2.Text = "Groups";
+            // 
+            // tbUsersAndGroup_Groups
+            // 
+            this.tbUsersAndGroup_Groups.Location = new System.Drawing.Point(153, 142);
+            this.tbUsersAndGroup_Groups.Name = "tbUsersAndGroup_Groups";
+            this.tbUsersAndGroup_Groups.ReadOnly = true;
+            this.tbUsersAndGroup_Groups.Size = new System.Drawing.Size(100, 21);
+            this.tbUsersAndGroup_Groups.TabIndex = 39;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(67, 118);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(48, 15);
+            this.label3.TabIndex = 38;
+            this.label3.Text = "Admins";
+            // 
+            // tbUsersAndGroup_Admins
+            // 
+            this.tbUsersAndGroup_Admins.Location = new System.Drawing.Point(153, 115);
+            this.tbUsersAndGroup_Admins.Name = "tbUsersAndGroup_Admins";
+            this.tbUsersAndGroup_Admins.ReadOnly = true;
+            this.tbUsersAndGroup_Admins.Size = new System.Drawing.Size(100, 21);
+            this.tbUsersAndGroup_Admins.TabIndex = 37;
+            // 
+            // label53
+            // 
+            this.label53.AutoSize = true;
+            this.label53.Location = new System.Drawing.Point(67, 91);
+            this.label53.Name = "label53";
+            this.label53.Size = new System.Drawing.Size(39, 15);
+            this.label53.TabIndex = 36;
+            this.label53.Text = "Users";
+            // 
+            // tbUsersAndGroup_Users
+            // 
+            this.tbUsersAndGroup_Users.Location = new System.Drawing.Point(153, 88);
+            this.tbUsersAndGroup_Users.Name = "tbUsersAndGroup_Users";
+            this.tbUsersAndGroup_Users.ReadOnly = true;
+            this.tbUsersAndGroup_Users.Size = new System.Drawing.Size(100, 21);
+            this.tbUsersAndGroup_Users.TabIndex = 35;
+            // 
+            // label54
+            // 
+            this.label54.AutoSize = true;
+            this.label54.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label54.Location = new System.Drawing.Point(43, 55);
+            this.label54.Name = "label54";
+            this.label54.Size = new System.Drawing.Size(94, 17);
+            this.label54.TabIndex = 34;
+            this.label54.Text = "Information:";
+            this.label54.UseMnemonic = false;
             // 
             // pictureBox2
             // 
@@ -780,24 +1129,6 @@
             this.label1.TabIndex = 18;
             this.label1.Text = "Users & Groups";
             this.label1.UseMnemonic = false;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(135, 131);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(41, 15);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "label3";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(135, 101);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(41, 15);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "label2";
             // 
             // panelUsers
             // 
@@ -1320,6 +1651,21 @@
             // panelUsersAndTests
             // 
             this.panelUsersAndTests.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelUsersAndTests.Controls.Add(this.label55);
+            this.panelUsersAndTests.Controls.Add(this.label81);
+            this.panelUsersAndTests.Controls.Add(this.tbUsersAndTestsForm_AvgPassed);
+            this.panelUsersAndTests.Controls.Add(this.label57);
+            this.panelUsersAndTests.Controls.Add(this.label58);
+            this.panelUsersAndTests.Controls.Add(this.tbUsersAndTestsForm_AVG);
+            this.panelUsersAndTests.Controls.Add(this.label59);
+            this.panelUsersAndTests.Controls.Add(this.tbUsersAndTestsForm_Failed);
+            this.panelUsersAndTests.Controls.Add(this.label60);
+            this.panelUsersAndTests.Controls.Add(this.tbUsersAndTestsForm_Passed);
+            this.panelUsersAndTests.Controls.Add(this.label80);
+            this.panelUsersAndTests.Controls.Add(this.tbUsersAndTestsForm_Comleted);
+            this.panelUsersAndTests.Controls.Add(this.label62);
+            this.panelUsersAndTests.Controls.Add(this.tbUsersAndTestsForm_Assigned);
+            this.panelUsersAndTests.Controls.Add(this.label63);
             this.panelUsersAndTests.Controls.Add(this.pictureBox5);
             this.panelUsersAndTests.Controls.Add(this.label19);
             this.panelUsersAndTests.Location = new System.Drawing.Point(254, 327);
@@ -1327,6 +1673,7 @@
             this.panelUsersAndTests.Size = new System.Drawing.Size(200, 100);
             this.panelUsersAndTests.TabIndex = 13;
             this.panelUsersAndTests.Visible = false;
+            this.panelUsersAndTests.VisibleChanged += new System.EventHandler(this.panelUsersAndTests_VisibleChanged);
             // 
             // pictureBox5
             // 
@@ -1930,13 +2277,24 @@
             // panelTests
             // 
             this.panelTests.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panelTests.Controls.Add(this.label56);
+            this.panelTests.Controls.Add(this.tbTestsForm_AVG);
+            this.panelTests.Controls.Add(this.label61);
+            this.panelTests.Controls.Add(this.tbTestsForm_Min);
+            this.panelTests.Controls.Add(this.label64);
+            this.panelTests.Controls.Add(this.tbTestsForm_Max);
+            this.panelTests.Controls.Add(this.label65);
+            this.panelTests.Controls.Add(this.tbTestsForm_Count);
+            this.panelTests.Controls.Add(this.label66);
             this.panelTests.Controls.Add(this.pictureBox8);
             this.panelTests.Controls.Add(this.label22);
-            this.panelTests.Location = new System.Drawing.Point(254, 458);
+            this.panelTests.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelTests.Location = new System.Drawing.Point(217, 55);
             this.panelTests.Name = "panelTests";
-            this.panelTests.Size = new System.Drawing.Size(200, 100);
+            this.panelTests.Size = new System.Drawing.Size(1044, 607);
             this.panelTests.TabIndex = 16;
             this.panelTests.Visible = false;
+            this.panelTests.VisibleChanged += new System.EventHandler(this.panelTests_VisibleChanged);
             // 
             // pictureBox8
             // 
@@ -2563,275 +2921,232 @@
             this.label14.Text = "Server";
             this.label14.UseMnemonic = false;
             // 
-            // label36
+            // label55
             // 
-            this.label36.AutoSize = true;
-            this.label36.Location = new System.Drawing.Point(67, 91);
-            this.label36.Name = "label36";
-            this.label36.Size = new System.Drawing.Size(39, 15);
-            this.label36.TabIndex = 24;
-            this.label36.Text = "Users";
+            this.label55.AutoSize = true;
+            this.label55.Location = new System.Drawing.Point(281, 228);
+            this.label55.Name = "label55";
+            this.label55.Size = new System.Drawing.Size(18, 15);
+            this.label55.TabIndex = 67;
+            this.label55.Text = "%";
             // 
-            // label37
+            // label81
             // 
-            this.label37.AutoSize = true;
-            this.label37.Location = new System.Drawing.Point(67, 118);
-            this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(48, 15);
-            this.label37.TabIndex = 26;
-            this.label37.Text = "Admins";
+            this.label81.AutoSize = true;
+            this.label81.Location = new System.Drawing.Point(67, 228);
+            this.label81.Name = "label81";
+            this.label81.Size = new System.Drawing.Size(73, 15);
+            this.label81.TabIndex = 66;
+            this.label81.Text = "AVG passed";
             // 
-            // tbGeneralAdmins
+            // tbUsersAndTestsForm_AvgPassed
             // 
-            this.tbGeneralAdmins.Location = new System.Drawing.Point(153, 115);
-            this.tbGeneralAdmins.Name = "tbGeneralAdmins";
-            this.tbGeneralAdmins.ReadOnly = true;
-            this.tbGeneralAdmins.Size = new System.Drawing.Size(100, 21);
-            this.tbGeneralAdmins.TabIndex = 25;
+            this.tbUsersAndTestsForm_AvgPassed.Location = new System.Drawing.Point(175, 225);
+            this.tbUsersAndTestsForm_AvgPassed.Name = "tbUsersAndTestsForm_AvgPassed";
+            this.tbUsersAndTestsForm_AvgPassed.ReadOnly = true;
+            this.tbUsersAndTestsForm_AvgPassed.Size = new System.Drawing.Size(100, 21);
+            this.tbUsersAndTestsForm_AvgPassed.TabIndex = 65;
             // 
-            // label38
+            // label57
             // 
-            this.label38.AutoSize = true;
-            this.label38.Location = new System.Drawing.Point(343, 118);
-            this.label38.Name = "label38";
-            this.label38.Size = new System.Drawing.Size(95, 15);
-            this.label38.TabIndex = 31;
-            this.label38.Text = "Сompleted tests";
+            this.label57.AutoSize = true;
+            this.label57.Location = new System.Drawing.Point(281, 201);
+            this.label57.Name = "label57";
+            this.label57.Size = new System.Drawing.Size(18, 15);
+            this.label57.TabIndex = 64;
+            this.label57.Text = "%";
             // 
-            // tbGeneralComleted
+            // label58
             // 
-            this.tbGeneralComleted.Location = new System.Drawing.Point(450, 115);
-            this.tbGeneralComleted.Name = "tbGeneralComleted";
-            this.tbGeneralComleted.ReadOnly = true;
-            this.tbGeneralComleted.Size = new System.Drawing.Size(100, 21);
-            this.tbGeneralComleted.TabIndex = 30;
+            this.label58.AutoSize = true;
+            this.label58.Location = new System.Drawing.Point(67, 201);
+            this.label58.Name = "label58";
+            this.label58.Size = new System.Drawing.Size(106, 15);
+            this.label58.TabIndex = 63;
+            this.label58.Text = "AVG performance ";
             // 
-            // label39
+            // tbUsersAndTestsForm_AVG
             // 
-            this.label39.AutoSize = true;
-            this.label39.Location = new System.Drawing.Point(343, 91);
-            this.label39.Name = "label39";
-            this.label39.Size = new System.Drawing.Size(85, 15);
-            this.label39.TabIndex = 29;
-            this.label39.Text = "Assigned tests";
+            this.tbUsersAndTestsForm_AVG.Location = new System.Drawing.Point(175, 198);
+            this.tbUsersAndTestsForm_AVG.Name = "tbUsersAndTestsForm_AVG";
+            this.tbUsersAndTestsForm_AVG.ReadOnly = true;
+            this.tbUsersAndTestsForm_AVG.Size = new System.Drawing.Size(100, 21);
+            this.tbUsersAndTestsForm_AVG.TabIndex = 62;
             // 
-            // tbGeneralAssign
+            // label59
             // 
-            this.tbGeneralAssign.Location = new System.Drawing.Point(450, 88);
-            this.tbGeneralAssign.Name = "tbGeneralAssign";
-            this.tbGeneralAssign.ReadOnly = true;
-            this.tbGeneralAssign.Size = new System.Drawing.Size(100, 21);
-            this.tbGeneralAssign.TabIndex = 28;
+            this.label59.AutoSize = true;
+            this.label59.Location = new System.Drawing.Point(68, 173);
+            this.label59.Name = "label59";
+            this.label59.Size = new System.Drawing.Size(69, 15);
+            this.label59.TabIndex = 61;
+            this.label59.Text = "Failed tests";
             // 
-            // label40
+            // tbUsersAndTestsForm_Failed
             // 
-            this.label40.AutoSize = true;
-            this.label40.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label40.Location = new System.Drawing.Point(318, 55);
-            this.label40.Name = "label40";
-            this.label40.Size = new System.Drawing.Size(110, 17);
-            this.label40.TabIndex = 27;
-            this.label40.Text = "Users & Tests";
-            this.label40.UseMnemonic = false;
+            this.tbUsersAndTestsForm_Failed.Location = new System.Drawing.Point(175, 170);
+            this.tbUsersAndTestsForm_Failed.Name = "tbUsersAndTestsForm_Failed";
+            this.tbUsersAndTestsForm_Failed.ReadOnly = true;
+            this.tbUsersAndTestsForm_Failed.Size = new System.Drawing.Size(100, 21);
+            this.tbUsersAndTestsForm_Failed.TabIndex = 60;
             // 
-            // label41
+            // label60
             // 
-            this.label41.AutoSize = true;
-            this.label41.Location = new System.Drawing.Point(67, 145);
-            this.label41.Name = "label41";
-            this.label41.Size = new System.Drawing.Size(47, 15);
-            this.label41.TabIndex = 33;
-            this.label41.Text = "Groups";
+            this.label60.AutoSize = true;
+            this.label60.Location = new System.Drawing.Point(68, 145);
+            this.label60.Name = "label60";
+            this.label60.Size = new System.Drawing.Size(76, 15);
+            this.label60.TabIndex = 59;
+            this.label60.Text = "Passed tests";
             // 
-            // tbGeneralGroups
+            // tbUsersAndTestsForm_Passed
             // 
-            this.tbGeneralGroups.Location = new System.Drawing.Point(153, 142);
-            this.tbGeneralGroups.Name = "tbGeneralGroups";
-            this.tbGeneralGroups.ReadOnly = true;
-            this.tbGeneralGroups.Size = new System.Drawing.Size(100, 21);
-            this.tbGeneralGroups.TabIndex = 32;
+            this.tbUsersAndTestsForm_Passed.Location = new System.Drawing.Point(175, 142);
+            this.tbUsersAndTestsForm_Passed.Name = "tbUsersAndTestsForm_Passed";
+            this.tbUsersAndTestsForm_Passed.ReadOnly = true;
+            this.tbUsersAndTestsForm_Passed.Size = new System.Drawing.Size(100, 21);
+            this.tbUsersAndTestsForm_Passed.TabIndex = 58;
             // 
-            // label42
+            // label80
             // 
-            this.label42.AutoSize = true;
-            this.label42.Location = new System.Drawing.Point(343, 145);
-            this.label42.Name = "label42";
-            this.label42.Size = new System.Drawing.Size(76, 15);
-            this.label42.TabIndex = 35;
-            this.label42.Text = "Passed tests";
+            this.label80.AutoSize = true;
+            this.label80.Location = new System.Drawing.Point(68, 118);
+            this.label80.Name = "label80";
+            this.label80.Size = new System.Drawing.Size(95, 15);
+            this.label80.TabIndex = 57;
+            this.label80.Text = "Сompleted tests";
             // 
-            // tbGeneralPassed
+            // tbUsersAndTestsForm_Comleted
             // 
-            this.tbGeneralPassed.Location = new System.Drawing.Point(450, 142);
-            this.tbGeneralPassed.Name = "tbGeneralPassed";
-            this.tbGeneralPassed.ReadOnly = true;
-            this.tbGeneralPassed.Size = new System.Drawing.Size(100, 21);
-            this.tbGeneralPassed.TabIndex = 34;
+            this.tbUsersAndTestsForm_Comleted.Location = new System.Drawing.Point(175, 115);
+            this.tbUsersAndTestsForm_Comleted.Name = "tbUsersAndTestsForm_Comleted";
+            this.tbUsersAndTestsForm_Comleted.ReadOnly = true;
+            this.tbUsersAndTestsForm_Comleted.Size = new System.Drawing.Size(100, 21);
+            this.tbUsersAndTestsForm_Comleted.TabIndex = 56;
             // 
-            // label43
+            // label62
             // 
-            this.label43.AutoSize = true;
-            this.label43.Location = new System.Drawing.Point(655, 145);
-            this.label43.Name = "label43";
-            this.label43.Size = new System.Drawing.Size(80, 15);
-            this.label43.TabIndex = 42;
-            this.label43.Text = "Mix q-s count";
+            this.label62.AutoSize = true;
+            this.label62.Location = new System.Drawing.Point(68, 91);
+            this.label62.Name = "label62";
+            this.label62.Size = new System.Drawing.Size(85, 15);
+            this.label62.TabIndex = 55;
+            this.label62.Text = "Assigned tests";
             // 
-            // tbGeneralMinQCount
+            // tbUsersAndTestsForm_Assigned
             // 
-            this.tbGeneralMinQCount.Location = new System.Drawing.Point(763, 142);
-            this.tbGeneralMinQCount.Name = "tbGeneralMinQCount";
-            this.tbGeneralMinQCount.ReadOnly = true;
-            this.tbGeneralMinQCount.Size = new System.Drawing.Size(100, 21);
-            this.tbGeneralMinQCount.TabIndex = 41;
+            this.tbUsersAndTestsForm_Assigned.Location = new System.Drawing.Point(175, 88);
+            this.tbUsersAndTestsForm_Assigned.Name = "tbUsersAndTestsForm_Assigned";
+            this.tbUsersAndTestsForm_Assigned.ReadOnly = true;
+            this.tbUsersAndTestsForm_Assigned.Size = new System.Drawing.Size(100, 21);
+            this.tbUsersAndTestsForm_Assigned.TabIndex = 54;
             // 
-            // label44
+            // label63
             // 
-            this.label44.AutoSize = true;
-            this.label44.Location = new System.Drawing.Point(655, 118);
-            this.label44.Name = "label44";
-            this.label44.Size = new System.Drawing.Size(84, 15);
-            this.label44.TabIndex = 40;
-            this.label44.Text = "Max q-s count";
+            this.label63.AutoSize = true;
+            this.label63.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label63.Location = new System.Drawing.Point(43, 55);
+            this.label63.Name = "label63";
+            this.label63.Size = new System.Drawing.Size(89, 17);
+            this.label63.TabIndex = 53;
+            this.label63.Text = "Information";
+            this.label63.UseMnemonic = false;
             // 
-            // tbGeneralMaxQCount
+            // label56
             // 
-            this.tbGeneralMaxQCount.Location = new System.Drawing.Point(763, 115);
-            this.tbGeneralMaxQCount.Name = "tbGeneralMaxQCount";
-            this.tbGeneralMaxQCount.ReadOnly = true;
-            this.tbGeneralMaxQCount.Size = new System.Drawing.Size(100, 21);
-            this.tbGeneralMaxQCount.TabIndex = 39;
+            this.label56.AutoSize = true;
+            this.label56.Location = new System.Drawing.Point(67, 172);
+            this.label56.Name = "label56";
+            this.label56.Size = new System.Drawing.Size(83, 15);
+            this.label56.TabIndex = 58;
+            this.label56.Text = "AVG q-s count";
             // 
-            // label45
+            // tbTestsForm_AVG
             // 
-            this.label45.AutoSize = true;
-            this.label45.Location = new System.Drawing.Point(655, 91);
-            this.label45.Name = "label45";
-            this.label45.Size = new System.Drawing.Size(72, 15);
-            this.label45.TabIndex = 38;
-            this.label45.Text = "Count in DB";
+            this.tbTestsForm_AVG.Location = new System.Drawing.Point(175, 169);
+            this.tbTestsForm_AVG.Name = "tbTestsForm_AVG";
+            this.tbTestsForm_AVG.ReadOnly = true;
+            this.tbTestsForm_AVG.Size = new System.Drawing.Size(100, 21);
+            this.tbTestsForm_AVG.TabIndex = 57;
             // 
-            // tbGeneralCountTests
+            // label61
             // 
-            this.tbGeneralCountTests.Location = new System.Drawing.Point(763, 88);
-            this.tbGeneralCountTests.Name = "tbGeneralCountTests";
-            this.tbGeneralCountTests.ReadOnly = true;
-            this.tbGeneralCountTests.Size = new System.Drawing.Size(100, 21);
-            this.tbGeneralCountTests.TabIndex = 37;
+            this.label61.AutoSize = true;
+            this.label61.Location = new System.Drawing.Point(67, 145);
+            this.label61.Name = "label61";
+            this.label61.Size = new System.Drawing.Size(80, 15);
+            this.label61.TabIndex = 56;
+            this.label61.Text = "Mix q-s count";
             // 
-            // label46
+            // tbTestsForm_Min
             // 
-            this.label46.AutoSize = true;
-            this.label46.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label46.Location = new System.Drawing.Point(631, 55);
-            this.label46.Name = "label46";
-            this.label46.Size = new System.Drawing.Size(48, 17);
-            this.label46.TabIndex = 36;
-            this.label46.Text = "Tests";
-            this.label46.UseMnemonic = false;
+            this.tbTestsForm_Min.Location = new System.Drawing.Point(175, 142);
+            this.tbTestsForm_Min.Name = "tbTestsForm_Min";
+            this.tbTestsForm_Min.ReadOnly = true;
+            this.tbTestsForm_Min.Size = new System.Drawing.Size(100, 21);
+            this.tbTestsForm_Min.TabIndex = 55;
             // 
-            // label47
+            // label64
             // 
-            this.label47.AutoSize = true;
-            this.label47.Location = new System.Drawing.Point(343, 173);
-            this.label47.Name = "label47";
-            this.label47.Size = new System.Drawing.Size(69, 15);
-            this.label47.TabIndex = 44;
-            this.label47.Text = "Failed tests";
+            this.label64.AutoSize = true;
+            this.label64.Location = new System.Drawing.Point(67, 118);
+            this.label64.Name = "label64";
+            this.label64.Size = new System.Drawing.Size(84, 15);
+            this.label64.TabIndex = 54;
+            this.label64.Text = "Max q-s count";
             // 
-            // tbGeneralFailed
+            // tbTestsForm_Max
             // 
-            this.tbGeneralFailed.Location = new System.Drawing.Point(450, 170);
-            this.tbGeneralFailed.Name = "tbGeneralFailed";
-            this.tbGeneralFailed.ReadOnly = true;
-            this.tbGeneralFailed.Size = new System.Drawing.Size(100, 21);
-            this.tbGeneralFailed.TabIndex = 43;
+            this.tbTestsForm_Max.Location = new System.Drawing.Point(175, 115);
+            this.tbTestsForm_Max.Name = "tbTestsForm_Max";
+            this.tbTestsForm_Max.ReadOnly = true;
+            this.tbTestsForm_Max.Size = new System.Drawing.Size(100, 21);
+            this.tbTestsForm_Max.TabIndex = 53;
             // 
-            // label48
+            // label65
             // 
-            this.label48.AutoSize = true;
-            this.label48.Location = new System.Drawing.Point(342, 201);
-            this.label48.Name = "label48";
-            this.label48.Size = new System.Drawing.Size(106, 15);
-            this.label48.TabIndex = 46;
-            this.label48.Text = "AVG performance ";
+            this.label65.AutoSize = true;
+            this.label65.Location = new System.Drawing.Point(67, 91);
+            this.label65.Name = "label65";
+            this.label65.Size = new System.Drawing.Size(72, 15);
+            this.label65.TabIndex = 52;
+            this.label65.Text = "Count in DB";
             // 
-            // tbGeneralAVG
+            // tbTestsForm_Count
             // 
-            this.tbGeneralAVG.Location = new System.Drawing.Point(450, 198);
-            this.tbGeneralAVG.Name = "tbGeneralAVG";
-            this.tbGeneralAVG.ReadOnly = true;
-            this.tbGeneralAVG.Size = new System.Drawing.Size(100, 21);
-            this.tbGeneralAVG.TabIndex = 45;
+            this.tbTestsForm_Count.Location = new System.Drawing.Point(175, 88);
+            this.tbTestsForm_Count.Name = "tbTestsForm_Count";
+            this.tbTestsForm_Count.ReadOnly = true;
+            this.tbTestsForm_Count.Size = new System.Drawing.Size(100, 21);
+            this.tbTestsForm_Count.TabIndex = 51;
             // 
-            // label49
+            // label66
             // 
-            this.label49.AutoSize = true;
-            this.label49.Location = new System.Drawing.Point(556, 201);
-            this.label49.Name = "label49";
-            this.label49.Size = new System.Drawing.Size(18, 15);
-            this.label49.TabIndex = 47;
-            this.label49.Text = "%";
-            // 
-            // label50
-            // 
-            this.label50.AutoSize = true;
-            this.label50.Location = new System.Drawing.Point(655, 172);
-            this.label50.Name = "label50";
-            this.label50.Size = new System.Drawing.Size(83, 15);
-            this.label50.TabIndex = 49;
-            this.label50.Text = "AVG q-s count";
-            // 
-            // tbGeneralAvgQCount
-            // 
-            this.tbGeneralAvgQCount.Location = new System.Drawing.Point(763, 169);
-            this.tbGeneralAvgQCount.Name = "tbGeneralAvgQCount";
-            this.tbGeneralAvgQCount.ReadOnly = true;
-            this.tbGeneralAvgQCount.Size = new System.Drawing.Size(100, 21);
-            this.tbGeneralAvgQCount.TabIndex = 48;
-            // 
-            // label51
-            // 
-            this.label51.AutoSize = true;
-            this.label51.Location = new System.Drawing.Point(556, 228);
-            this.label51.Name = "label51";
-            this.label51.Size = new System.Drawing.Size(18, 15);
-            this.label51.TabIndex = 52;
-            this.label51.Text = "%";
-            // 
-            // label52
-            // 
-            this.label52.AutoSize = true;
-            this.label52.Location = new System.Drawing.Point(342, 228);
-            this.label52.Name = "label52";
-            this.label52.Size = new System.Drawing.Size(73, 15);
-            this.label52.TabIndex = 51;
-            this.label52.Text = "AVG passed";
-            // 
-            // tbGeneralAvgPassed
-            // 
-            this.tbGeneralAvgPassed.Location = new System.Drawing.Point(450, 225);
-            this.tbGeneralAvgPassed.Name = "tbGeneralAvgPassed";
-            this.tbGeneralAvgPassed.ReadOnly = true;
-            this.tbGeneralAvgPassed.Size = new System.Drawing.Size(100, 21);
-            this.tbGeneralAvgPassed.TabIndex = 50;
+            this.label66.AutoSize = true;
+            this.label66.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label66.Location = new System.Drawing.Point(43, 55);
+            this.label66.Name = "label66";
+            this.label66.Size = new System.Drawing.Size(89, 17);
+            this.label66.TabIndex = 50;
+            this.label66.Text = "Information";
+            this.label66.UseMnemonic = false;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1261, 684);
+            this.Controls.Add(this.panelTests);
+            this.Controls.Add(this.panelUsersAndTests);
             this.Controls.Add(this.panelGeneral);
+            this.Controls.Add(this.panelUsersAndGroups);
+            this.Controls.Add(this.panelUsers);
             this.Controls.Add(this.panelReviewTestResults);
             this.Controls.Add(this.panelAssignTestsToUsers);
             this.Controls.Add(this.panelTestsExplorer);
             this.Controls.Add(this.panelLoadTest);
-            this.Controls.Add(this.panelTests);
             this.Controls.Add(this.panelServer);
-            this.Controls.Add(this.panelUsersAndTests);
             this.Controls.Add(this.panelGroups);
-            this.Controls.Add(this.panelUsersAndGroups);
-            this.Controls.Add(this.panelUsers);
             this.Controls.Add(this.splitter1);
             this.Controls.Add(this.treeView1);
             this.Controls.Add(this.toolStrip1);
@@ -2937,13 +3252,11 @@
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.Panel panelGeneral;
         private System.Windows.Forms.Panel panelUsersAndGroups;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Panel panelUsers;
         private System.Windows.Forms.Panel panelGroups;
         private System.Windows.Forms.Panel panelUsersAndTests;
         private System.Windows.Forms.Panel panelAssignTestsToUsers;
         private System.Windows.Forms.Panel panelReviewTestResults;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.DataGridView dgvUsersForm_Users;
         private System.Windows.Forms.BindingSource bsLoadTestForm_Questions;
         private System.Windows.Forms.Panel panelTests;
@@ -3170,6 +3483,37 @@
         private System.Windows.Forms.Label label51;
         private System.Windows.Forms.Label label52;
         private System.Windows.Forms.TextBox tbGeneralAvgPassed;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox tbUsersAndGroup_Groups;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox tbUsersAndGroup_Admins;
+        private System.Windows.Forms.Label label53;
+        private System.Windows.Forms.TextBox tbUsersAndGroup_Users;
+        private System.Windows.Forms.Label label54;
+        private System.Windows.Forms.Label label55;
+        private System.Windows.Forms.Label label81;
+        private System.Windows.Forms.TextBox tbUsersAndTestsForm_AvgPassed;
+        private System.Windows.Forms.Label label57;
+        private System.Windows.Forms.Label label58;
+        private System.Windows.Forms.TextBox tbUsersAndTestsForm_AVG;
+        private System.Windows.Forms.Label label59;
+        private System.Windows.Forms.TextBox tbUsersAndTestsForm_Failed;
+        private System.Windows.Forms.Label label60;
+        private System.Windows.Forms.TextBox tbUsersAndTestsForm_Passed;
+        private System.Windows.Forms.Label label80;
+        private System.Windows.Forms.TextBox tbUsersAndTestsForm_Comleted;
+        private System.Windows.Forms.Label label62;
+        private System.Windows.Forms.TextBox tbUsersAndTestsForm_Assigned;
+        private System.Windows.Forms.Label label63;
+        private System.Windows.Forms.Label label56;
+        private System.Windows.Forms.TextBox tbTestsForm_AVG;
+        private System.Windows.Forms.Label label61;
+        private System.Windows.Forms.TextBox tbTestsForm_Min;
+        private System.Windows.Forms.Label label64;
+        private System.Windows.Forms.TextBox tbTestsForm_Max;
+        private System.Windows.Forms.Label label65;
+        private System.Windows.Forms.TextBox tbTestsForm_Count;
+        private System.Windows.Forms.Label label66;
     }
 }
 
