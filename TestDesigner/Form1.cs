@@ -353,11 +353,11 @@ namespace TestDesigner
 
         private void tbTitle_TextChanged(object sender, EventArgs e)
         {
-            if(!IsFileMode)
-            {
-                IsTestChanged = true;
-                WindowTitleText();
-            }
+            //if(!IsFileMode)
+            //{
+            //    IsTestChanged = true;
+            //    WindowTitleText();
+            //}
         }
 
         //Modify questions
