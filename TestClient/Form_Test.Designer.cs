@@ -49,6 +49,7 @@
             this.btnNext = new System.Windows.Forms.Button();
             this.btnFinish = new System.Windows.Forms.Button();
             this.btnPrev = new System.Windows.Forms.Button();
+            this.lbPoints = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.flowPanelProgress.SuspendLayout();
@@ -78,6 +79,7 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.lbPoints);
             this.groupBox2.Controls.Add(this.flowPanelProgress);
             this.groupBox2.Controls.Add(this.flowPanelDemo);
             this.groupBox2.Controls.Add(this.lbQuestionText);
@@ -259,6 +261,16 @@
             this.btnPrev.Text = "<< Previous";
             this.btnPrev.UseVisualStyleBackColor = true;
             // 
+            // lbPoints
+            // 
+            this.lbPoints.AutoSize = true;
+            this.lbPoints.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lbPoints.Location = new System.Drawing.Point(529, 44);
+            this.lbPoints.Name = "lbPoints";
+            this.lbPoints.Size = new System.Drawing.Size(76, 15);
+            this.lbPoints.TabIndex = 5;
+            this.lbPoints.Text = "20 point(s)";
+            // 
             // TestForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -313,6 +325,7 @@
         private System.Windows.Forms.Button btnNext;
         private System.Windows.Forms.Button btnFinish;
         private System.Windows.Forms.Button btnPrev;
+        private System.Windows.Forms.Label lbPoints;
     }
 }
 

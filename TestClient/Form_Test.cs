@@ -49,7 +49,7 @@ namespace TestClient
             tb.WordWrap = true;
             tb.Multiline = true;
             tb.Width = 490;
-            tb.Font = new Font("Microsoft Sans Serif", 11);
+            tb.Font = flowPanelDemo.Font;
             tb.Text = text;
 
             int count = tb.GetLineFromCharIndex(int.MaxValue) + 1;
