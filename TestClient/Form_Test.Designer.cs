@@ -125,8 +125,7 @@
             // 
             // panel3
             // 
-            this.panel3.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel3.BackColor = System.Drawing.Color.DarkSeaGreen;
             this.panel3.Location = new System.Drawing.Point(112, 2);
             this.panel3.Margin = new System.Windows.Forms.Padding(2);
             this.panel3.Name = "panel3";
@@ -145,6 +144,7 @@
             // panel6
             // 
             this.panel6.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.panel6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel6.Location = new System.Drawing.Point(222, 2);
             this.panel6.Margin = new System.Windows.Forms.Padding(2);
             this.panel6.Name = "panel6";
@@ -180,22 +180,26 @@
             // 
             // flowPanelDemo
             // 
+            this.flowPanelDemo.AutoScroll = true;
             this.flowPanelDemo.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.flowPanelDemo.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flowPanelDemo.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.flowPanelDemo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.flowPanelDemo.Location = new System.Drawing.Point(528, 161);
             this.flowPanelDemo.Name = "flowPanelDemo";
-            this.flowPanelDemo.Padding = new System.Windows.Forms.Padding(10, 5, 5, 5);
+            this.flowPanelDemo.Padding = new System.Windows.Forms.Padding(25, 5, 5, 5);
             this.flowPanelDemo.Size = new System.Drawing.Size(576, 371);
             this.flowPanelDemo.TabIndex = 3;
+            this.flowPanelDemo.WrapContents = false;
             // 
             // lbQuestionText
             // 
             this.lbQuestionText.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lbQuestionText.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.lbQuestionText.Location = new System.Drawing.Point(528, 48);
+            this.lbQuestionText.Location = new System.Drawing.Point(528, 68);
             this.lbQuestionText.Name = "lbQuestionText";
             this.lbQuestionText.Padding = new System.Windows.Forms.Padding(3);
-            this.lbQuestionText.Size = new System.Drawing.Size(576, 110);
+            this.lbQuestionText.Size = new System.Drawing.Size(576, 90);
             this.lbQuestionText.TabIndex = 2;
             this.lbQuestionText.Text = resources.GetString("lbQuestionText.Text");
             // 
@@ -205,13 +209,13 @@
             this.lbQuestionNumber.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.lbQuestionNumber.Location = new System.Drawing.Point(524, 20);
             this.lbQuestionNumber.Name = "lbQuestionNumber";
-            this.lbQuestionNumber.Size = new System.Drawing.Size(121, 24);
+            this.lbQuestionNumber.Size = new System.Drawing.Size(111, 24);
             this.lbQuestionNumber.TabIndex = 1;
-            this.lbQuestionNumber.Text = "Question #18";
+            this.lbQuestionNumber.Text = "Question #5";
             // 
             // pictureBox
             // 
-            this.pictureBox.Image = global::TestClient.Properties.Resources.csharp;
+            this.pictureBox.Image = global::TestClient.Properties.Resources.latin;
             this.pictureBox.Location = new System.Drawing.Point(6, 20);
             this.pictureBox.Name = "pictureBox";
             this.pictureBox.Size = new System.Drawing.Size(512, 512);
@@ -269,12 +273,14 @@
             this.Controls.Add(this.groupBox1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "TestForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.TestForm_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();

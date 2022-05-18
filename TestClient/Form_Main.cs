@@ -22,11 +22,16 @@ namespace TestClient
 
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void btnRadioDemo_Click(object sender, EventArgs e)
         {
-            TestForm testForm = new TestForm();
-            testForm.Show();
+            TestForm testForm = new TestForm(OpenTestFormMode.DemoRadio);
+            testForm.ShowDialog();
+        }
 
+        private void btnCheckDemo_Click(object sender, EventArgs e)
+        {
+            TestForm testForm = new TestForm(OpenTestFormMode.DemoCheck);
+            testForm.ShowDialog();
         }
     }
 }

@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enums.cs" />
     <Compile Include="Form_Login.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -106,6 +107,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\isconnect.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\noconnect.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\latin.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

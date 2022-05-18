@@ -35,6 +35,7 @@
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -46,10 +47,11 @@
             this.Column10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lbUser = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btnStart = new System.Windows.Forms.Button();
+            this.btnRadioDemo = new System.Windows.Forms.Button();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.btnCheckDemo = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -86,6 +88,7 @@
             this.Column1,
             this.Column2,
             this.Column4,
+            this.Column12,
             this.Column5,
             this.Column6});
             this.dataGridView1.Location = new System.Drawing.Point(6, 20);
@@ -108,26 +111,35 @@
             this.Column2.HeaderText = "Title";
             this.Column2.Name = "Column2";
             this.Column2.ReadOnly = true;
-            this.Column2.Width = 270;
+            this.Column2.Width = 240;
             // 
             // Column4
             // 
             this.Column4.HeaderText = "Info";
             this.Column4.Name = "Column4";
             this.Column4.ReadOnly = true;
-            this.Column4.Width = 270;
+            this.Column4.Width = 250;
+            // 
+            // Column12
+            // 
+            this.Column12.HeaderText = "Questions";
+            this.Column12.Name = "Column12";
+            this.Column12.ReadOnly = true;
+            this.Column12.Width = 80;
             // 
             // Column5
             // 
             this.Column5.HeaderText = "Max points";
             this.Column5.Name = "Column5";
             this.Column5.ReadOnly = true;
+            this.Column5.Width = 90;
             // 
             // Column6
             // 
             this.Column6.HeaderText = "Pass %";
             this.Column6.Name = "Column6";
             this.Column6.ReadOnly = true;
+            this.Column6.Width = 80;
             // 
             // groupBox2
             // 
@@ -211,24 +223,24 @@
             this.lbUser.TabIndex = 3;
             this.lbUser.Text = "[1] Yurii Krutsko (Giorgio)";
             // 
-            // button1
+            // btnStart
             // 
-            this.button1.Location = new System.Drawing.Point(787, 253);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(90, 27);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "Start";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnStart.Location = new System.Drawing.Point(787, 253);
+            this.btnStart.Name = "btnStart";
+            this.btnStart.Size = new System.Drawing.Size(90, 27);
+            this.btnStart.TabIndex = 4;
+            this.btnStart.Text = "Start";
+            this.btnStart.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // btnRadioDemo
             // 
-            this.button2.Location = new System.Drawing.Point(636, 253);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(145, 27);
-            this.button2.TabIndex = 5;
-            this.button2.Text = "Show test form demo";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.btnRadioDemo.Location = new System.Drawing.Point(17, 253);
+            this.btnRadioDemo.Name = "btnRadioDemo";
+            this.btnRadioDemo.Size = new System.Drawing.Size(220, 27);
+            this.btnRadioDemo.TabIndex = 5;
+            this.btnRadioDemo.Text = "Show one answer question demo";
+            this.btnRadioDemo.UseVisualStyleBackColor = true;
+            this.btnRadioDemo.Click += new System.EventHandler(this.btnRadioDemo_Click);
             // 
             // statusStrip1
             // 
@@ -248,15 +260,26 @@
             this.pictureBox1.TabIndex = 7;
             this.pictureBox1.TabStop = false;
             // 
+            // btnCheckDemo
+            // 
+            this.btnCheckDemo.Location = new System.Drawing.Point(243, 253);
+            this.btnCheckDemo.Name = "btnCheckDemo";
+            this.btnCheckDemo.Size = new System.Drawing.Size(220, 27);
+            this.btnCheckDemo.TabIndex = 8;
+            this.btnCheckDemo.Text = "Show multi answers question demo";
+            this.btnCheckDemo.UseVisualStyleBackColor = true;
+            this.btnCheckDemo.Click += new System.EventHandler(this.btnCheckDemo_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(889, 606);
+            this.Controls.Add(this.btnCheckDemo);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.statusStrip1);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnRadioDemo);
+            this.Controls.Add(this.btnStart);
             this.Controls.Add(this.lbUser);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -267,6 +290,7 @@
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.MaximizeBox = false;
             this.Name = "MainForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Test client";
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.groupBox1.ResumeLayout(false);
@@ -287,14 +311,9 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.DataGridView dataGridView2;
         private System.Windows.Forms.Label lbUser;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnStart;
+        private System.Windows.Forms.Button btnRadioDemo;
         private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
@@ -302,5 +321,12 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column10;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column11;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column12;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
+        private System.Windows.Forms.Button btnCheckDemo;
     }
 }
