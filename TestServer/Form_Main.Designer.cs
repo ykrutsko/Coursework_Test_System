@@ -3215,8 +3215,9 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1261, 684);
-            this.Controls.Add(this.panelLoadTest);
             this.Controls.Add(this.panelTestsExplorer);
+            this.Controls.Add(this.panelReviewTestResults);
+            this.Controls.Add(this.panelLoadTest);
             this.Controls.Add(this.panelAssignTestsToUsers);
             this.Controls.Add(this.panelGroups);
             this.Controls.Add(this.panelUsers);
@@ -3224,7 +3225,6 @@
             this.Controls.Add(this.panelUsersAndTests);
             this.Controls.Add(this.panelGeneral);
             this.Controls.Add(this.panelUsersAndGroups);
-            this.Controls.Add(this.panelReviewTestResults);
             this.Controls.Add(this.panelServer);
             this.Controls.Add(this.splitter1);
             this.Controls.Add(this.treeView1);
