@@ -41,7 +41,7 @@
             this.panel5 = new System.Windows.Forms.Panel();
             this.panel7 = new System.Windows.Forms.Panel();
             this.panel8 = new System.Windows.Forms.Panel();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.flowPanelDemo = new System.Windows.Forms.FlowLayoutPanel();
             this.lbQuestionText = new System.Windows.Forms.Label();
             this.lbQuestionNumber = new System.Windows.Forms.Label();
             this.pictureBox = new System.Windows.Forms.PictureBox();
@@ -79,7 +79,7 @@
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.flowPanelProgress);
-            this.groupBox2.Controls.Add(this.flowLayoutPanel1);
+            this.groupBox2.Controls.Add(this.flowPanelDemo);
             this.groupBox2.Controls.Add(this.lbQuestionText);
             this.groupBox2.Controls.Add(this.lbQuestionNumber);
             this.groupBox2.Controls.Add(this.pictureBox);
@@ -178,15 +178,15 @@
             this.panel8.Size = new System.Drawing.Size(51, 21);
             this.panel8.TabIndex = 6;
             // 
-            // flowLayoutPanel1
+            // flowPanelDemo
             // 
-            this.flowLayoutPanel1.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.flowLayoutPanel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(528, 161);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Padding = new System.Windows.Forms.Padding(10, 5, 5, 5);
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(576, 371);
-            this.flowLayoutPanel1.TabIndex = 3;
+            this.flowPanelDemo.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.flowPanelDemo.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.flowPanelDemo.Location = new System.Drawing.Point(528, 161);
+            this.flowPanelDemo.Name = "flowPanelDemo";
+            this.flowPanelDemo.Padding = new System.Windows.Forms.Padding(10, 5, 5, 5);
+            this.flowPanelDemo.Size = new System.Drawing.Size(576, 371);
+            this.flowPanelDemo.TabIndex = 3;
             // 
             // lbQuestionText
             // 
@@ -207,7 +207,7 @@
             this.lbQuestionNumber.Name = "lbQuestionNumber";
             this.lbQuestionNumber.Size = new System.Drawing.Size(121, 24);
             this.lbQuestionNumber.TabIndex = 1;
-            this.lbQuestionNumber.Text = "Question #25";
+            this.lbQuestionNumber.Text = "Question #18";
             // 
             // pictureBox
             // 
@@ -273,6 +273,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "TestForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
@@ -293,7 +294,7 @@
         private System.Windows.Forms.PictureBox pictureBox;
         private System.Windows.Forms.FlowLayoutPanel flowPanelProgress;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.FlowLayoutPanel flowPanelDemo;
         private System.Windows.Forms.Label lbQuestionText;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
