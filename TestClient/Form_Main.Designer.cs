@@ -28,10 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.lbWellcome = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dataGridViewNewTest = new System.Windows.Forms.DataGridView();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -39,7 +40,7 @@
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.dataGridViewCompletedTest = new System.Windows.Forms.DataGridView();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -52,11 +53,15 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnCheckDemo = new System.Windows.Forms.Button();
+            this.bindingSourceNewTest = new System.Windows.Forms.BindingSource(this.components);
+            this.bindingSourceCompletedTest = new System.Windows.Forms.BindingSource(this.components);
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewNewTest)).BeginInit();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCompletedTest)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceNewTest)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceCompletedTest)).BeginInit();
             this.SuspendLayout();
             // 
             // lbWellcome
@@ -71,7 +76,7 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.dataGridView1);
+            this.groupBox1.Controls.Add(this.dataGridViewNewTest);
             this.groupBox1.Location = new System.Drawing.Point(11, 56);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(866, 191);
@@ -79,25 +84,25 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "New tests for you";
             // 
-            // dataGridView1
+            // dataGridViewNewTest
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewNewTest.AllowUserToAddRows = false;
+            this.dataGridViewNewTest.AllowUserToDeleteRows = false;
+            this.dataGridViewNewTest.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewNewTest.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column1,
             this.Column2,
             this.Column4,
             this.Column12,
             this.Column5,
             this.Column6});
-            this.dataGridView1.Location = new System.Drawing.Point(6, 20);
-            this.dataGridView1.MultiSelect = false;
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(850, 165);
-            this.dataGridView1.TabIndex = 0;
+            this.dataGridViewNewTest.Location = new System.Drawing.Point(6, 20);
+            this.dataGridViewNewTest.MultiSelect = false;
+            this.dataGridViewNewTest.Name = "dataGridViewNewTest";
+            this.dataGridViewNewTest.ReadOnly = true;
+            this.dataGridViewNewTest.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridViewNewTest.Size = new System.Drawing.Size(850, 165);
+            this.dataGridViewNewTest.TabIndex = 0;
             // 
             // Column1
             // 
@@ -143,7 +148,7 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.dataGridView2);
+            this.groupBox2.Controls.Add(this.dataGridViewCompletedTest);
             this.groupBox2.Location = new System.Drawing.Point(11, 308);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(866, 270);
@@ -151,25 +156,25 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Completed tests";
             // 
-            // dataGridView2
+            // dataGridViewCompletedTest
             // 
-            this.dataGridView2.AllowUserToAddRows = false;
-            this.dataGridView2.AllowUserToDeleteRows = false;
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dataGridViewCompletedTest.AllowUserToAddRows = false;
+            this.dataGridViewCompletedTest.AllowUserToDeleteRows = false;
+            this.dataGridViewCompletedTest.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewCompletedTest.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column3,
             this.Column7,
             this.Column8,
             this.Column9,
             this.Column10,
             this.Column11});
-            this.dataGridView2.Location = new System.Drawing.Point(6, 20);
-            this.dataGridView2.MultiSelect = false;
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.ReadOnly = true;
-            this.dataGridView2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView2.Size = new System.Drawing.Size(850, 244);
-            this.dataGridView2.TabIndex = 1;
+            this.dataGridViewCompletedTest.Location = new System.Drawing.Point(6, 20);
+            this.dataGridViewCompletedTest.MultiSelect = false;
+            this.dataGridViewCompletedTest.Name = "dataGridViewCompletedTest";
+            this.dataGridViewCompletedTest.ReadOnly = true;
+            this.dataGridViewCompletedTest.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridViewCompletedTest.Size = new System.Drawing.Size(850, 244);
+            this.dataGridViewCompletedTest.TabIndex = 1;
             // 
             // Column3
             // 
@@ -244,6 +249,7 @@
             // 
             // statusStrip1
             // 
+            this.statusStrip1.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.statusStrip1.Location = new System.Drawing.Point(0, 584);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(889, 22);
@@ -274,6 +280,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(889, 606);
             this.Controls.Add(this.btnCheckDemo);
             this.Controls.Add(this.pictureBox1);
@@ -294,10 +301,12 @@
             this.Text = "Test client";
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.groupBox1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewNewTest)).EndInit();
             this.groupBox2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCompletedTest)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceNewTest)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSourceCompletedTest)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -307,9 +316,9 @@
 
         private System.Windows.Forms.Label lbWellcome;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dataGridViewNewTest;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.DataGridView dataGridViewCompletedTest;
         private System.Windows.Forms.Label lbUser;
         private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.Button btnRadioDemo;
@@ -328,5 +337,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column6;
         private System.Windows.Forms.Button btnCheckDemo;
+        private System.Windows.Forms.BindingSource bindingSourceNewTest;
+        private System.Windows.Forms.BindingSource bindingSourceCompletedTest;
     }
 }
