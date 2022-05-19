@@ -114,5 +114,11 @@
   <ItemGroup>
     <None Include="Resources\latin.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DALTestSystemDB\DALTestSystemDB.csproj">
+      <Project>{6bce373f-fb85-4853-aae8-3a1c3a9f6141}</Project>
+      <Name>DALTestSystemDB</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
