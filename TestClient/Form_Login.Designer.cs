@@ -75,6 +75,7 @@
             this.btnOK.TabIndex = 12;
             this.btnOK.Text = "Log in";
             this.btnOK.UseVisualStyleBackColor = true;
+            this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
             // 
             // tbPass
             // 
@@ -83,6 +84,7 @@
             this.tbPass.PasswordChar = '*';
             this.tbPass.Size = new System.Drawing.Size(186, 21);
             this.tbPass.TabIndex = 11;
+            this.tbPass.TextChanged += new System.EventHandler(this.TextBox_TextChanged);
             // 
             // tbLog
             // 
@@ -90,6 +92,7 @@
             this.tbLog.Name = "tbLog";
             this.tbLog.Size = new System.Drawing.Size(186, 21);
             this.tbLog.TabIndex = 10;
+            this.tbLog.TextChanged += new System.EventHandler(this.TextBox_TextChanged);
             // 
             // label2
             // 
@@ -128,6 +131,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(404, 144);
             this.Controls.Add(this.lbMessage);
             this.Controls.Add(this.pictureBox);
@@ -144,6 +148,8 @@
             this.MaximizeBox = false;
             this.Name = "LoginForm";
             this.Text = "Test client authorization";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.LoginForm_FormClosing);
+            this.Load += new System.EventHandler(this.LoginForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

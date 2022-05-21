@@ -12,7 +12,7 @@ namespace RepositoryLib
         // add
         void Add(TEntity item);
 
-        // return one
+        // return one by Id
         TEntity FindById(object id);
 
         // return all

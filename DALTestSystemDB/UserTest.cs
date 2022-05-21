@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace DALTestingSystemDB
 {
+    [Serializable]
     public class UserTest
     {
         public int Id { get; set; }

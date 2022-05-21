@@ -33,5 +33,10 @@ namespace TestClient
             TestForm testForm = new TestForm(OpenTestFormMode.DemoCheck);
             testForm.ShowDialog();
         }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            //Globals.client.Close();
+        }
     }
 }

@@ -1,5 +1,8 @@
-﻿namespace DALTestingSystemDB
+﻿using System;
+
+namespace DALTestingSystemDB
 {
+    [Serializable]
     public class UserAnswer
     {
         public int Id { get; set; }

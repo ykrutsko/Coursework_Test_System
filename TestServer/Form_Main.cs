@@ -8,6 +8,8 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -15,7 +17,11 @@ using System.Windows.Forms;
 using TestLib;
 using TestServer.Properties;
 using TextBoxHintLib;
-
+using BinObjConverterLib;
+using System.Runtime.Serialization.Formatters.Binary;
+using SHA512Lib;
+using EnumsLib;
+using NetPackLib;
 
 namespace TestServer
 {
@@ -1642,6 +1648,143 @@ namespace TestServer
 
         #region Server
         //-----------------------------------------------------------------------------
+        TcpListener server;
+        //Dictionary<TcpClient, int> clientsList = new Dictionary<TcpClient, int>();
+        CancellationTokenSource cancellation;
+        TcpPackType tcpPackType;
+
+        private async void btnStartServer_Click(object sender, EventArgs e)
+        {
+            btnStartServer.Enabled = false;
+            await StartServer();
+            btnStopServer.Enabled = true;
+        }
+
+        private async Task StartServer()
+        {            
+            cancellation = new CancellationTokenSource();
+            server = new TcpListener(IPAddress.Any, 13000);
+            server.Start();
+            UpdateUI("Server started at " + server.LocalEndpoint);
+            UpdateUI("Server awaits incoming requests");
+            
+            try
+            {
+                while (true)
+                {
+                    TcpClient client = await server.AcceptTcpClientAsync();
+                    UpdateUI("Client " + client.Client.RemoteEndPoint + " — online");
+                    Task receiveTask = new Task(() =>
+                    {
+                        ServerReceive(client);
+                    });
+                    receiveTask.Start();
+                }
+            }
+            catch (Exception)
+            {
+                server.Stop();
+            }
+        }
+
+        private async void ServerReceive(TcpClient client)
+        {
+            int sizeInt32 = sizeof(Int32);
+            byte[] incomingPack = new byte[61440];
+            string login = string.Empty;
+            string password = string.Empty;
+            DALTestingSystemDB.User currUser = null;
+            bool authorized = false;            
+            while (true)
+            {
+                try
+                {
+                    NetworkStream stream = client.GetStream();
+                    stream.Read(incomingPack, 0, incomingPack.Length); 
+                    tcpPackType = (TcpPackType)BitConverter.ToInt32(incomingPack, 0);
+                    int tcpPackSize = BitConverter.ToInt32(incomingPack, sizeInt32);
+                    switch (tcpPackType)
+                    {
+                        case TcpPackType.ClientAuthDataPack:
+                            string[] logPassStrArr = (string[])BinObjConverter.ByteArrayToObject(incomingPack, sizeInt32 * 2, tcpPackSize);
+                            login = logPassStrArr[0];
+                            password = logPassStrArr[1];
+                            this.Invoke(new Action(() => UpdateUI("Client " + client.Client.RemoteEndPoint + " —  login " + login.ToUpper() + " authorization request")));
+
+                            var usersList = await Task.Run(() => Globals.repoUser
+                            .FindAll(x => x.Login.ToLower().Equals(login.ToLower())
+                            && x.Password.Equals(password)));
+
+                            if (usersList != null && usersList.Any())
+                            {
+                                currUser = usersList.ToList().First() as DALTestingSystemDB.User;
+                                //clientsList.Add(client, currUser.Id);
+                                this.Invoke(new Action(() => listBoxClientsOnline.Items.Add(currUser.ToString())));
+                                this.Invoke(new Action(() => UpdateUI("Client " + client.Client.RemoteEndPoint + " —  login " + login.ToUpper() + " connected — user: " + currUser.ToString())));
+                                authorized = true;
+                            }
+                            else
+                            {
+                                this.Invoke(new Action(() => UpdateUI("Client " + client.Client.RemoteEndPoint + " —  login " + login.ToUpper() + " authorization fail")));
+                                authorized = false;
+                            }
+                            // send to client
+                            Byte[] byteNetPack = NetPack.CreateNetPack(TcpPackType.ServerAuthAnswerPack, authorized);
+                            stream.Write(byteNetPack, 0, byteNetPack.Length);
+                            stream.Flush();
+                            break;
+
+                        case TcpPackType.ClientFormClosePack:
+                            if (authorized)
+                            {
+                                this.Invoke(new Action(() => UpdateUI("Client " + client.Client.RemoteEndPoint + " —  login " + login.ToUpper() + " disconnected")));
+                                this.Invoke(new Action(() => listBoxClientsOnline.Items.Remove(currUser.ToString())));
+                                //clientsList.Remove(client);
+                            }
+                            else
+                            {
+                                this.Invoke(new Action(() => UpdateUI("Client " + client.Client.RemoteEndPoint + " — disconnected")));
+                            }
+                            return;
+                    }
+                }
+                catch (Exception)
+                {
+                    if(authorized)
+                    {
+                        this.Invoke(new Action(() => UpdateUI("Client " + client.Client.RemoteEndPoint + " —  login " + login.ToUpper() + " disconnected")));
+                        this.Invoke(new Action(() => listBoxClientsOnline.Items.Remove(currUser.ToString())));
+                        //clientsList.Remove(client);
+                    }
+                    else
+                    {
+                        this.Invoke(new Action(() => UpdateUI("Client " + client.Client.RemoteEndPoint + " — disconnected")));
+                    }
+                    return;
+                }
+            } 
+        }
+
+        private void UpdateUI(string m)
+        {
+            tbServerHistory.AppendText(">> " + m + Environment.NewLine);
+        }
+
+
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
 
         //-----------------------------------------------------------------------------
         #endregion Server
@@ -1653,6 +1796,8 @@ namespace TestServer
         {
             this.Size = new Size(1277, 723);
         }
+
+
 
         //dgvGroupsForm_Groups.Columns[0].Width = (int)(dgvGroupsForm_Groups.Width * 0.1);
         // last - dgvGrd.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;

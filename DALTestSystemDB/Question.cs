@@ -1,7 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 
 namespace DALTestingSystemDB
 {
+    [Serializable]
     public class Question
     {
         public int Id { get; set; }
@@ -10,6 +14,14 @@ namespace DALTestingSystemDB
         public int Points { get; set; }
         public virtual Test Test { get; set; }
         public virtual ICollection<Answer> Answers { get; set; }
+        [NotMapped]
+        public int RightAnswersCount
+        {
+            get
+            {
+                return Answers == null? 0: Answers.Where(x => x.IsRight).Count();
+            }
+        }
 
         public Question()
         {

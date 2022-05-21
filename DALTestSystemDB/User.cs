@@ -8,18 +8,19 @@ using System.Xml.Serialization;
 
 namespace DALTestingSystemDB
 {
+    [Serializable]
     public class User
     {
         public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Login { get; set; }
-        public string Password { get; set; }
-        public string Description { get; set; }
-        public bool IsAdmin { get; set; }
-        public bool IsArchived { get; set; }
-        public DateTime RegisterDate { get; set; }
-        public virtual ICollection<Group> Groups { get; set; }
+        [field: NonSerialized] public string Password { get; set; }
+        [field: NonSerialized] public string Description { get; set; }
+        [field: NonSerialized] public bool IsAdmin { get; set; }
+        [field: NonSerialized] public bool IsArchived { get; set; }
+        [field: NonSerialized] public DateTime RegisterDate { get; set; }
+        [field: NonSerialized] public virtual ICollection<Group> Groups { get; set; }
         public virtual ICollection<UserTest> UserTests { get; set; }
 
         public User()

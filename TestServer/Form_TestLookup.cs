@@ -46,6 +46,7 @@ namespace TestServer
                 dataGridView_Questions.Columns[2].Visible 
                     = dataGridView_Questions.Columns[4].Visible 
                     = dataGridView_Questions.Columns[5].Visible 
+                    = dataGridView_Questions.Columns[6].Visible 
                     = false;
 
                 dataGridView_Questions.Columns[0].Width = 50;

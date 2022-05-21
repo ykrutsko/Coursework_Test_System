@@ -65,6 +65,7 @@
     <Compile Include="Form_Test.Designer.cs">
       <DependentUpon>Form_Test.cs</DependentUpon>
     </Compile>
+    <Compile Include="Globals.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form_Login.resx">
@@ -115,9 +116,25 @@
     <None Include="Resources\latin.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BinObjConverterLib\BinObjConverterLib.csproj">
+      <Project>{39a112cc-da6d-4134-8e7f-9e0f8625723c}</Project>
+      <Name>BinObjConverterLib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DALTestSystemDB\DALTestSystemDB.csproj">
       <Project>{6bce373f-fb85-4853-aae8-3a1c3a9f6141}</Project>
       <Name>DALTestSystemDB</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EnumsLib\EnumsLib.csproj">
+      <Project>{43be69e3-18d7-432f-a525-87a8681697be}</Project>
+      <Name>EnumsLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\NetPackLib\NetPackLib.csproj">
+      <Project>{06ba8ca1-e10d-41c8-a50f-1e82a4596ba8}</Project>
+      <Name>NetPackLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SHA512Lib\SHA512Lib.csproj">
+      <Project>{1a452544-32d7-48f6-abc4-1734f7a58d64}</Project>
+      <Name>SHA512Lib</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

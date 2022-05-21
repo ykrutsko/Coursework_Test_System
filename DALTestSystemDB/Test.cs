@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace DALTestingSystemDB
 {
+    [Serializable]
     public class Test
     {
         public int Id { get; set; }
@@ -14,8 +15,8 @@ namespace DALTestingSystemDB
         public string Description { get; set; }
         public string Info { get; set; }
         public int? PassPercent { get; set; }
-        public bool IsArchived { get; set; }
-        public DateTime LoadedDate { get; set; }
+        [field: NonSerialized] public bool IsArchived { get; set; }
+        [field: NonSerialized] public DateTime LoadedDate { get; set; }
         public virtual ICollection<UserTest> UserTests { get; set; }
         public virtual ICollection<Question> Questions { get; set; }
 
