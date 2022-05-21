@@ -1690,11 +1690,13 @@ namespace TestServer
         private async void ServerReceive(TcpClient client)
         {
             int sizeInt32 = sizeof(Int32);
-            byte[] incomingPack = new byte[61440];
+            Byte[] incomingPack = new byte[61440];
+            Byte[] outgoingPack = null;
+            int tcpPackSize = 0;
+            DALTestingSystemDB.User currUser = null;
             string login = string.Empty;
             string password = string.Empty;
-            DALTestingSystemDB.User currUser = null;
-            bool authorized = false;            
+            bool authorized = false;
             while (true)
             {
                 try
@@ -1702,10 +1704,10 @@ namespace TestServer
                     NetworkStream stream = client.GetStream();
                     stream.Read(incomingPack, 0, incomingPack.Length); 
                     tcpPackType = (TcpPackType)BitConverter.ToInt32(incomingPack, 0);
-                    int tcpPackSize = BitConverter.ToInt32(incomingPack, sizeInt32);
                     switch (tcpPackType)
                     {
                         case TcpPackType.ClientAuthDataPack:
+                            tcpPackSize = BitConverter.ToInt32(incomingPack, sizeInt32);
                             string[] logPassStrArr = (string[])BinObjConverter.ByteArrayToObject(incomingPack, sizeInt32 * 2, tcpPackSize);
                             login = logPassStrArr[0];
                             password = logPassStrArr[1];
@@ -1728,12 +1730,34 @@ namespace TestServer
                                 this.Invoke(new Action(() => UpdateUI("Client " + client.Client.RemoteEndPoint + " —  login " + login.ToUpper() + " authorization fail")));
                                 authorized = false;
                             }
-                            // send to client
-                            Byte[] byteNetPack = NetPack.CreateNetPack(TcpPackType.ServerAuthAnswerPack, authorized);
-                            stream.Write(byteNetPack, 0, byteNetPack.Length);
+                            outgoingPack = DataPack.CreateDataPack(TcpPackType.ServerAuthAnswerPack, authorized);
+                            stream.Write(outgoingPack, 0, outgoingPack.Length);
                             stream.Flush();
                             break;
 
+                        case TcpPackType.ClientUserIdRequestPack:
+                            outgoingPack = DataPack.CreateDataPack(TcpPackType.ServerUserIdAnswerPack, currUser.Id);
+                            stream.Write(outgoingPack, 0, outgoingPack.Length);
+                            stream.Flush();
+                            break;
+
+                        case TcpPackType.ClientUserToStringRequestPack:
+                            outgoingPack = DataPack.CreateDataPack(TcpPackType.ServerUserToStringAnswerPack, currUser.ToString());
+                            stream.Write(outgoingPack, 0, outgoingPack.Length);
+                            stream.Flush();
+                            break;
+
+                        case TcpPackType.ClientUserTestsRequestPack:
+                            List<Byte[]> list = DataPartCreate.CreateDataParts(TcpPackType.ServerUserTestsAnswerPack, Globals.repoUserTest.FindAll(x => x.User.Id == currUser.Id));
+                            this.Invoke(new Action(() => UpdateUI("Client " + client.Client.RemoteEndPoint + " —  login " + login.ToUpper() + " start transferring user tests")));
+                            foreach (var item in list)
+                            {
+                                stream.Write(item, 0, item.Length);
+                                stream.Flush();
+                                Thread.Sleep(200);
+                            }
+                            this.Invoke(new Action(() => UpdateUI("Client " + client.Client.RemoteEndPoint + " —  login " + login.ToUpper() + " complete the transfer of user tests")));
+                            break;
                         case TcpPackType.ClientFormClosePack:
                             if (authorized)
                             {

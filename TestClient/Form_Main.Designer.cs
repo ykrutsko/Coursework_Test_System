@@ -55,6 +55,8 @@
             this.btnCheckDemo = new System.Windows.Forms.Button();
             this.bindingSourceNewTest = new System.Windows.Forms.BindingSource(this.components);
             this.bindingSourceCompletedTest = new System.Windows.Forms.BindingSource(this.components);
+            this.label1 = new System.Windows.Forms.Label();
+            this.timer = new System.Windows.Forms.Timer(this.components);
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewNewTest)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -276,12 +278,26 @@
             this.btnCheckDemo.UseVisualStyleBackColor = true;
             this.btnCheckDemo.Click += new System.EventHandler(this.btnCheckDemo_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(637, 27);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(41, 15);
+            this.label1.TabIndex = 10;
+            this.label1.Text = "label1";
+            // 
+            // timer
+            // 
+            this.timer.Tick += new System.EventHandler(this.timer_Tick);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(889, 606);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.btnCheckDemo);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.statusStrip1);
@@ -340,5 +356,7 @@
         private System.Windows.Forms.Button btnCheckDemo;
         private System.Windows.Forms.BindingSource bindingSourceNewTest;
         private System.Windows.Forms.BindingSource bindingSourceCompletedTest;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Timer timer;
     }
 }

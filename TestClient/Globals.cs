@@ -10,5 +10,7 @@ namespace TestClient
     public static class Globals
     {
         public static TcpClient client;
+        public static int userId;
+        public static string userToString;
     }
 }

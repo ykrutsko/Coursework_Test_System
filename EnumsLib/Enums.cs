@@ -33,14 +33,31 @@ namespace EnumsLib
     public enum TcpPackType
     {
         ClientAuthDataPack,
+        ServerAuthAnswerPack,
+
+        ClientUserIdRequestPack,
+        ServerUserIdAnswerPack,
+
+        ClientUserToStringRequestPack,
+        ServerUserToStringAnswerPack,
+
+        ClientUserTestsRequestPack,
+        ServerUserTestsAnswerPack,
+
+        ClientUserCompletedTestPack,
+
+        ClientConnectionStatusPack,
+        ServerConnectionStatusAnswerPack,
+
         ClientFormClosePack,
         ClientTestFormClosePack,
-        ClientUserTestsRequestPack,
-        ClientUserCompletedTestPack,
-        ClientConnectionStatusPack,
-        ServerAuthAnswerPack,
-        ServerUserTestsPack,
-        ServerConnectionStatusAnswerPack,
         ServerStopOrClosePack
+    }
+
+    public enum OpenTestFormMode 
+    { 
+        DemoCheck, 
+        DemoRadio, 
+        Real 
     }
 }

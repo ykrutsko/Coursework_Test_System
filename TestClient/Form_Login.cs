@@ -23,8 +23,6 @@ namespace TestClient
         public string Login { get; set; }
         public string Password { get; set; }
         bool isOnline = false;
-
-
         TcpPackType tcpPackType;
 
         public LoginForm()
@@ -70,11 +68,11 @@ namespace TestClient
             string[] LogPassStrArr = new string[] { Login, Password };
 
             // netPack
-            Byte[] byteNetPack = NetPack.CreateNetPack(TcpPackType.ClientAuthDataPack, LogPassStrArr);
+            Byte[] outgoingPack = DataPack.CreateDataPack(TcpPackType.ClientAuthDataPack, LogPassStrArr);
 
             // Write to NetStream
             NetworkStream stream = Globals.client.GetStream();
-            stream.Write(byteNetPack, 0, byteNetPack.Length);
+            stream.Write(outgoingPack, 0, outgoingPack.Length);
             stream.Flush();
 
             Task receiveTask = new Task(() =>
@@ -88,6 +86,8 @@ namespace TestClient
         {
             int sizeInt32 = sizeof(Int32);
             byte[] incomingPack = new byte[61440];
+            Byte[] outgoingPack = null;
+            int tcpPackSize = 0;
             while (true)
             {
                 try
@@ -95,19 +95,20 @@ namespace TestClient
                     NetworkStream stream = Globals.client.GetStream();
                     stream.Read(incomingPack, 0, incomingPack.Length);
                     tcpPackType = (TcpPackType)BitConverter.ToInt32(incomingPack, 0);
-                    int tcpPackSize = BitConverter.ToInt32(incomingPack, sizeInt32);
                     switch (tcpPackType)
                     {
                         case TcpPackType.ServerAuthAnswerPack:
+                            tcpPackSize = BitConverter.ToInt32(incomingPack, sizeInt32);
                             bool auth = (bool)BinObjConverter.ByteArrayToObject(incomingPack, sizeInt32 * 2, tcpPackSize);
                             if (auth)
                             {
                                 this.Invoke(new Action(() => this.lbMessage.ForeColor = Color.Green));
                                 this.Invoke(new Action(() => this.lbMessage.Text = "OK"));
                                 this.Invoke(new Action(() => this.lbMessage.Visible = true));
-                                Thread.Sleep(1000);
-                                this.Invoke(new Action(() => this.DialogResult = DialogResult.OK));
-                                return;
+
+                                outgoingPack = DataPack.CreateDataPack(TcpPackType.ClientUserIdRequestPack);
+                                stream.Write(outgoingPack, 0, outgoingPack.Length);
+                                stream.Flush();
                             }
                             else
                             {
@@ -115,6 +116,23 @@ namespace TestClient
                                 this.Invoke(new Action(() => this.lbMessage.Visible = true));
                             }
                             break;
+
+                        case TcpPackType.ServerUserIdAnswerPack:
+                            tcpPackSize = BitConverter.ToInt32(incomingPack, sizeInt32);
+                            Globals.userId = (int)BinObjConverter.ByteArrayToObject(incomingPack, sizeInt32 * 2, tcpPackSize);
+
+                            outgoingPack = DataPack.CreateDataPack(TcpPackType.ClientUserToStringRequestPack);
+                            stream.Write(outgoingPack, 0, outgoingPack.Length);
+                            stream.Flush();
+                            break;
+
+                        case TcpPackType.ServerUserToStringAnswerPack:
+                            tcpPackSize = BitConverter.ToInt32(incomingPack, sizeInt32);
+                            Globals.userToString = (string)BinObjConverter.ByteArrayToObject(incomingPack, sizeInt32 * 2, tcpPackSize);
+                            this.Invoke(new Action(() => this.DialogResult = DialogResult.OK));
+                            Thread.Sleep(500);
+                            return;
+
                         case TcpPackType.ServerStopOrClosePack:
                             isOnline = false;
                             this.Invoke(new Action(() => ServerStarted()));
@@ -142,9 +160,9 @@ namespace TestClient
 
         private void LoginForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (isOnline && this.DialogResult != DialogResult.OK)
+            if (isOnline && DialogResult != DialogResult.OK)
             {
-                Byte[] byteNetPack = NetPack.CreateNetPack(TcpPackType.ClientFormClosePack, null);
+                Byte[] byteNetPack = DataPack.CreateDataPack(TcpPackType.ClientFormClosePack, null);
                 NetworkStream stream = Globals.client.GetStream();
                 stream.Write(byteNetPack, 0, byteNetPack.Length);
                 stream.Flush();

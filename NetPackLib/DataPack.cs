@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace NetPackLib
 {
-    public static class NetPack
+    public class DataPack
     {
-        public static Byte[] CreateNetPack(TcpPackType tcpPackType, Object obj)
+        public static Byte[] CreateDataPack(TcpPackType tcpPackType, Object obj = null)
         {
-            List<byte> list = new List<byte>();
+            List<Byte> list = new List<Byte>();
             if (obj != null)
             {
                 Int32 type = Convert.ToInt32(tcpPackType);
