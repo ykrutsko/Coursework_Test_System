@@ -17,7 +17,6 @@ namespace DALTestingSystemDB
         public TestSystemContext(string conStr) : base(conStr)
         {
             //Configuration.ProxyCreationEnabled = false;
-            //Configuration.LazyLoadingEnabled = false;
         }
 
         static TestSystemContext()

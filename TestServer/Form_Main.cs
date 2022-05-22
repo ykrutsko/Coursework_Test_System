@@ -1656,8 +1656,8 @@ namespace TestServer
         private async void btnStartServer_Click(object sender, EventArgs e)
         {
             btnStartServer.Enabled = false;
+            //btnStopServer.Enabled = true;
             await StartServer();
-            btnStopServer.Enabled = true;
         }
 
         private async Task StartServer()
@@ -1665,9 +1665,15 @@ namespace TestServer
             cancellation = new CancellationTokenSource();
             server = new TcpListener(IPAddress.Any, 13000);
             server.Start();
+
+            this.Invoke(new Action(() =>
+            {
+                toolStripLabelStatus.ForeColor = Color.Green;
+                toolStripLabelStatus.Text = "ON";
+            }));
+
             UpdateUI("Server started at " + server.LocalEndpoint);
             UpdateUI("Server awaits incoming requests");
-            
             try
             {
                 while (true)

@@ -19,7 +19,7 @@ namespace TestClient
     public partial class MainForm : Form
     {
         TcpPackType tcpPackType;
-        List<UserTest> userTests  = new List<UserTest>();
+        List<UserTest> userTests = new List<UserTest>();
         bool isLoaded = false;
 
         public MainForm()
