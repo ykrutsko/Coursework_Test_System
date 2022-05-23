@@ -45,23 +45,23 @@
             this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lbUser = new System.Windows.Forms.Label();
             this.btnStart = new System.Windows.Forms.Button();
             this.btnRadioDemo = new System.Windows.Forms.Button();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnCheckDemo = new System.Windows.Forms.Button();
+            this.timer = new System.Windows.Forms.Timer(this.components);
+            this.btnRefresh = new System.Windows.Forms.Button();
+            this.lbWait = new System.Windows.Forms.Label();
             this.bindingSourceNewTest = new System.Windows.Forms.BindingSource(this.components);
             this.bindingSourceCompletedTest = new System.Windows.Forms.BindingSource(this.components);
-            this.label1 = new System.Windows.Forms.Label();
-            this.timer = new System.Windows.Forms.Timer(this.components);
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewNewTest)).BeginInit();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCompletedTest)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourceNewTest)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourceCompletedTest)).BeginInit();
             this.SuspendLayout();
@@ -105,6 +105,8 @@
             this.dataGridViewNewTest.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewNewTest.Size = new System.Drawing.Size(850, 165);
             this.dataGridViewNewTest.TabIndex = 0;
+            this.dataGridViewNewTest.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewNewTest_CellDoubleClick);
+            this.dataGridViewNewTest.SelectionChanged += new System.EventHandler(this.dataGridViewNewTest_SelectionChanged);
             // 
             // Column1
             // 
@@ -168,6 +170,7 @@
             this.Column7,
             this.Column8,
             this.Column9,
+            this.Column13,
             this.Column10,
             this.Column11});
             this.dataGridViewCompletedTest.Location = new System.Drawing.Point(6, 20);
@@ -190,14 +193,14 @@
             this.Column7.HeaderText = "Title";
             this.Column7.Name = "Column7";
             this.Column7.ReadOnly = true;
-            this.Column7.Width = 290;
+            this.Column7.Width = 260;
             // 
             // Column8
             // 
             this.Column8.HeaderText = "Max points";
             this.Column8.Name = "Column8";
             this.Column8.ReadOnly = true;
-            this.Column8.Width = 110;
+            this.Column8.Width = 90;
             // 
             // Column9
             // 
@@ -206,12 +209,19 @@
             this.Column9.ReadOnly = true;
             this.Column9.Width = 110;
             // 
+            // Column13
+            // 
+            this.Column13.HeaderText = "Scored %";
+            this.Column13.Name = "Column13";
+            this.Column13.ReadOnly = true;
+            this.Column13.Width = 90;
+            // 
             // Column10
             // 
             this.Column10.HeaderText = "Passed";
             this.Column10.Name = "Column10";
             this.Column10.ReadOnly = true;
-            this.Column10.Width = 110;
+            this.Column10.Width = 70;
             // 
             // Column11
             // 
@@ -232,12 +242,14 @@
             // 
             // btnStart
             // 
+            this.btnStart.Enabled = false;
             this.btnStart.Location = new System.Drawing.Point(787, 253);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(90, 27);
             this.btnStart.TabIndex = 4;
             this.btnStart.Text = "Start";
             this.btnStart.UseVisualStyleBackColor = true;
+            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
             // 
             // btnRadioDemo
             // 
@@ -258,16 +270,6 @@
             this.statusStrip1.TabIndex = 6;
             this.statusStrip1.Text = "statusStrip1";
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::TestClient.Properties.Resources.isconnect;
-            this.pictureBox1.Location = new System.Drawing.Point(836, 12);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(41, 41);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 7;
-            this.pictureBox1.TabStop = false;
-            // 
             // btnCheckDemo
             // 
             this.btnCheckDemo.Location = new System.Drawing.Point(243, 253);
@@ -278,18 +280,27 @@
             this.btnCheckDemo.UseVisualStyleBackColor = true;
             this.btnCheckDemo.Click += new System.EventHandler(this.btnCheckDemo_Click);
             // 
-            // label1
+            // btnRefresh
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(637, 27);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(41, 15);
-            this.label1.TabIndex = 10;
-            this.label1.Text = "label1";
+            this.btnRefresh.Enabled = false;
+            this.btnRefresh.Location = new System.Drawing.Point(787, 26);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(90, 27);
+            this.btnRefresh.TabIndex = 9;
+            this.btnRefresh.Text = "Refresh";
+            this.btnRefresh.UseVisualStyleBackColor = true;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
-            // timer
+            // lbWait
             // 
-            this.timer.Tick += new System.EventHandler(this.timer_Tick);
+            this.lbWait.AutoSize = true;
+            this.lbWait.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lbWait.ForeColor = System.Drawing.Color.Green;
+            this.lbWait.Location = new System.Drawing.Point(726, 32);
+            this.lbWait.Name = "lbWait";
+            this.lbWait.Size = new System.Drawing.Size(55, 17);
+            this.lbWait.TabIndex = 10;
+            this.lbWait.Text = "Wait...";
             // 
             // MainForm
             // 
@@ -297,9 +308,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(889, 606);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lbWait);
+            this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.btnCheckDemo);
-            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.btnRadioDemo);
             this.Controls.Add(this.btnStart);
@@ -321,7 +332,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewNewTest)).EndInit();
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCompletedTest)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourceNewTest)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSourceCompletedTest)).EndInit();
             this.ResumeLayout(false);
@@ -340,13 +350,6 @@
         private System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.Button btnRadioDemo;
         private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column9;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column10;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column11;
-        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
@@ -356,7 +359,15 @@
         private System.Windows.Forms.Button btnCheckDemo;
         private System.Windows.Forms.BindingSource bindingSourceNewTest;
         private System.Windows.Forms.BindingSource bindingSourceCompletedTest;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Timer timer;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column9;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column13;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column10;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column11;
+        private System.Windows.Forms.Button btnRefresh;
+        private System.Windows.Forms.Label lbWait;
     }
 }

@@ -32,26 +32,26 @@ namespace EnumsLib
 
     public enum TcpPackType
     {
-        ClientAuthDataPack,
-        ServerAuthAnswerPack,
+        ClientAuthReq,
+        ServerAuthAns,
 
-        ClientUserIdRequestPack,
-        ServerUserIdAnswerPack,
+        ClientUserIdReq,
+        ServerUserIdAns,
 
-        ClientUserToStringRequestPack,
-        ServerUserToStringAnswerPack,
+        ClientUserToStringReq,
+        ServerUserToStringAns,
 
-        ClientUserTestsRequestPack,
-        ServerUserTestsAnswerPack,
+        ClientUserTestsReq,
+        ServerUserTestsAns,
 
         ClientUserCompletedTestPack,
 
-        ClientConnectionStatusPack,
-        ServerConnectionStatusAnswerPack,
+        ClientConnectionStatusReq,
+        ServerConnectionStatusAns,
 
-        ClientFormClosePack,
-        ClientTestFormClosePack,
-        ServerStopOrClosePack
+        ClientFormCloseMsg,
+        ClientTestFormCloseMsg,
+        ServerStopOrCloseMsg
     }
 
     public enum OpenTestFormMode 

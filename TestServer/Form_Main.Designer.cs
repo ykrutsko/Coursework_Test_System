@@ -29,23 +29,23 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("General", 4, 4);
-            System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("Users", 1, 1);
-            System.Windows.Forms.TreeNode treeNode14 = new System.Windows.Forms.TreeNode("Groups", 2, 2);
-            System.Windows.Forms.TreeNode treeNode15 = new System.Windows.Forms.TreeNode("Users & Groups", 0, 0, new System.Windows.Forms.TreeNode[] {
-            treeNode13,
-            treeNode14});
-            System.Windows.Forms.TreeNode treeNode16 = new System.Windows.Forms.TreeNode("Assign tests to users", 10, 10);
-            System.Windows.Forms.TreeNode treeNode17 = new System.Windows.Forms.TreeNode("Review test results", 6, 6);
-            System.Windows.Forms.TreeNode treeNode18 = new System.Windows.Forms.TreeNode("Users & Tests", 5, 5, new System.Windows.Forms.TreeNode[] {
-            treeNode16,
-            treeNode17});
-            System.Windows.Forms.TreeNode treeNode19 = new System.Windows.Forms.TreeNode("Tests explorer", 7, 7);
-            System.Windows.Forms.TreeNode treeNode20 = new System.Windows.Forms.TreeNode("Load test", 8, 8);
-            System.Windows.Forms.TreeNode treeNode21 = new System.Windows.Forms.TreeNode("Tests", 9, 9, new System.Windows.Forms.TreeNode[] {
-            treeNode19,
-            treeNode20});
-            System.Windows.Forms.TreeNode treeNode22 = new System.Windows.Forms.TreeNode("Server", 11, 11);
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("General", 4, 4);
+            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Users", 1, 1);
+            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Groups", 2, 2);
+            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Users & Groups", 0, 0, new System.Windows.Forms.TreeNode[] {
+            treeNode2,
+            treeNode3});
+            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Assign tests to users", 10, 10);
+            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Review test results", 6, 6);
+            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Users & Tests", 5, 5, new System.Windows.Forms.TreeNode[] {
+            treeNode5,
+            treeNode6});
+            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Tests explorer", 7, 7);
+            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Load test", 8, 8);
+            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Tests", 9, 9, new System.Windows.Forms.TreeNode[] {
+            treeNode8,
+            treeNode9});
+            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("Server", 11, 11);
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
@@ -64,6 +64,9 @@
             this.toolStripButtonLoadTest = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButtonServer = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator14 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripLabelStatus = new System.Windows.Forms.ToolStripLabel();
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.panelGeneral = new System.Windows.Forms.Panel();
@@ -312,6 +315,7 @@
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.listBoxClientsOnline = new System.Windows.Forms.ListBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label30 = new System.Windows.Forms.Label();
             this.btnStopServer = new System.Windows.Forms.Button();
             this.btnStartServer = new System.Windows.Forms.Button();
             this.pictureBox11 = new System.Windows.Forms.PictureBox();
@@ -328,10 +332,6 @@
             this.bsReviewForm_Questions = new System.Windows.Forms.BindingSource(this.components);
             this.bsReviewForm_Answers = new System.Windows.Forms.BindingSource(this.components);
             this.bsReviewForm_UserTests = new System.Windows.Forms.BindingSource(this.components);
-            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
-            this.toolStripSeparator14 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripLabelStatus = new System.Windows.Forms.ToolStripLabel();
-            this.label30 = new System.Windows.Forms.Label();
             this.buffer = new System.Windows.Forms.Panel();
             this.toolStrip1.SuspendLayout();
             this.panelGeneral.SuspendLayout();
@@ -599,6 +599,28 @@
             this.toolStripButtonServer.ToolTipText = "Server";
             this.toolStripButtonServer.Click += new System.EventHandler(this.toolStripButtonMainForm_Click);
             // 
+            // toolStripSeparator14
+            // 
+            this.toolStripSeparator14.Margin = new System.Windows.Forms.Padding(0, 2, 2, 2);
+            this.toolStripSeparator14.Name = "toolStripSeparator14";
+            this.toolStripSeparator14.Size = new System.Drawing.Size(6, 23);
+            // 
+            // toolStripLabel1
+            // 
+            this.toolStripLabel1.Margin = new System.Windows.Forms.Padding(1);
+            this.toolStripLabel1.Name = "toolStripLabel1";
+            this.toolStripLabel1.Size = new System.Drawing.Size(73, 25);
+            this.toolStripLabel1.Text = "Server status";
+            // 
+            // toolStripLabelStatus
+            // 
+            this.toolStripLabelStatus.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.toolStripLabelStatus.ForeColor = System.Drawing.Color.Red;
+            this.toolStripLabelStatus.Margin = new System.Windows.Forms.Padding(1);
+            this.toolStripLabelStatus.Name = "toolStripLabelStatus";
+            this.toolStripLabelStatus.Size = new System.Drawing.Size(34, 25);
+            this.toolStripLabelStatus.Text = "OFF";
+            // 
             // treeView1
             // 
             this.treeView1.Dock = System.Windows.Forms.DockStyle.Left;
@@ -607,57 +629,57 @@
             this.treeView1.Location = new System.Drawing.Point(0, 31);
             this.treeView1.Margin = new System.Windows.Forms.Padding(3, 3, 10, 3);
             this.treeView1.Name = "treeView1";
-            treeNode12.Checked = true;
-            treeNode12.ImageIndex = 4;
-            treeNode12.Name = "NodeGeneral";
-            treeNode12.SelectedImageIndex = 4;
-            treeNode12.Text = "General";
-            treeNode13.ImageIndex = 1;
-            treeNode13.Name = "NodeUsers";
-            treeNode13.SelectedImageIndex = 1;
-            treeNode13.Text = "Users";
-            treeNode14.ImageIndex = 2;
-            treeNode14.Name = "NodeGroups";
-            treeNode14.SelectedImageIndex = 2;
-            treeNode14.Text = "Groups";
-            treeNode15.ImageIndex = 0;
-            treeNode15.Name = "NodeUsersAndGroups";
-            treeNode15.SelectedImageIndex = 0;
-            treeNode15.Text = "Users & Groups";
-            treeNode16.ImageIndex = 10;
-            treeNode16.Name = "NodeAssignTestsToUsers";
-            treeNode16.SelectedImageIndex = 10;
-            treeNode16.Text = "Assign tests to users";
-            treeNode17.ImageIndex = 6;
-            treeNode17.Name = "NodeReviewTestResults";
-            treeNode17.SelectedImageIndex = 6;
-            treeNode17.Text = "Review test results";
-            treeNode18.ImageIndex = 5;
-            treeNode18.Name = "NodeUsersAndTests";
-            treeNode18.SelectedImageIndex = 5;
-            treeNode18.Text = "Users & Tests";
-            treeNode19.ImageIndex = 7;
-            treeNode19.Name = "NodeTestsExplorer";
-            treeNode19.SelectedImageIndex = 7;
-            treeNode19.Text = "Tests explorer";
-            treeNode20.ImageIndex = 8;
-            treeNode20.Name = "NodeLoadTest";
-            treeNode20.SelectedImageIndex = 8;
-            treeNode20.Text = "Load test";
-            treeNode21.ImageIndex = 9;
-            treeNode21.Name = "NodeTests";
-            treeNode21.SelectedImageIndex = 9;
-            treeNode21.Text = "Tests";
-            treeNode22.ImageIndex = 11;
-            treeNode22.Name = "NodeServer";
-            treeNode22.SelectedImageIndex = 11;
-            treeNode22.Text = "Server";
+            treeNode1.Checked = true;
+            treeNode1.ImageIndex = 4;
+            treeNode1.Name = "NodeGeneral";
+            treeNode1.SelectedImageIndex = 4;
+            treeNode1.Text = "General";
+            treeNode2.ImageIndex = 1;
+            treeNode2.Name = "NodeUsers";
+            treeNode2.SelectedImageIndex = 1;
+            treeNode2.Text = "Users";
+            treeNode3.ImageIndex = 2;
+            treeNode3.Name = "NodeGroups";
+            treeNode3.SelectedImageIndex = 2;
+            treeNode3.Text = "Groups";
+            treeNode4.ImageIndex = 0;
+            treeNode4.Name = "NodeUsersAndGroups";
+            treeNode4.SelectedImageIndex = 0;
+            treeNode4.Text = "Users & Groups";
+            treeNode5.ImageIndex = 10;
+            treeNode5.Name = "NodeAssignTestsToUsers";
+            treeNode5.SelectedImageIndex = 10;
+            treeNode5.Text = "Assign tests to users";
+            treeNode6.ImageIndex = 6;
+            treeNode6.Name = "NodeReviewTestResults";
+            treeNode6.SelectedImageIndex = 6;
+            treeNode6.Text = "Review test results";
+            treeNode7.ImageIndex = 5;
+            treeNode7.Name = "NodeUsersAndTests";
+            treeNode7.SelectedImageIndex = 5;
+            treeNode7.Text = "Users & Tests";
+            treeNode8.ImageIndex = 7;
+            treeNode8.Name = "NodeTestsExplorer";
+            treeNode8.SelectedImageIndex = 7;
+            treeNode8.Text = "Tests explorer";
+            treeNode9.ImageIndex = 8;
+            treeNode9.Name = "NodeLoadTest";
+            treeNode9.SelectedImageIndex = 8;
+            treeNode9.Text = "Load test";
+            treeNode10.ImageIndex = 9;
+            treeNode10.Name = "NodeTests";
+            treeNode10.SelectedImageIndex = 9;
+            treeNode10.Text = "Tests";
+            treeNode11.ImageIndex = 11;
+            treeNode11.Name = "NodeServer";
+            treeNode11.SelectedImageIndex = 11;
+            treeNode11.Text = "Server";
             this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode12,
-            treeNode15,
-            treeNode18,
-            treeNode21,
-            treeNode22});
+            treeNode1,
+            treeNode4,
+            treeNode7,
+            treeNode10,
+            treeNode11});
             this.treeView1.SelectedImageIndex = 0;
             this.treeView1.Size = new System.Drawing.Size(213, 608);
             this.treeView1.TabIndex = 4;
@@ -815,9 +837,9 @@
             this.label43.AutoSize = true;
             this.label43.Location = new System.Drawing.Point(655, 145);
             this.label43.Name = "label43";
-            this.label43.Size = new System.Drawing.Size(80, 15);
+            this.label43.Size = new System.Drawing.Size(81, 15);
             this.label43.TabIndex = 42;
-            this.label43.Text = "Mix q-s count";
+            this.label43.Text = "Min q-s count";
             // 
             // tbGeneralMinQCount
             // 
@@ -2507,9 +2529,9 @@
             this.label61.AutoSize = true;
             this.label61.Location = new System.Drawing.Point(67, 145);
             this.label61.Name = "label61";
-            this.label61.Size = new System.Drawing.Size(80, 15);
+            this.label61.Size = new System.Drawing.Size(81, 15);
             this.label61.TabIndex = 56;
-            this.label61.Text = "Mix q-s count";
+            this.label61.Text = "Min q-s count";
             // 
             // tbTestsForm_Min
             // 
@@ -3213,7 +3235,7 @@
             this.groupBox4.Size = new System.Drawing.Size(262, 452);
             this.groupBox4.TabIndex = 26;
             this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Users online";
+            this.groupBox4.Text = "Connected users";
             // 
             // listBoxClientsOnline
             // 
@@ -3237,6 +3259,16 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Test server";
             // 
+            // label30
+            // 
+            this.label30.AutoSize = true;
+            this.label30.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label30.Location = new System.Drawing.Point(13, 56);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(237, 15);
+            this.label30.TabIndex = 2;
+            this.label30.Text = "Not be able to stop if there are active users";
+            // 
             // btnStopServer
             // 
             this.btnStopServer.Enabled = false;
@@ -3246,6 +3278,7 @@
             this.btnStopServer.TabIndex = 1;
             this.btnStopServer.Text = "Stop";
             this.btnStopServer.UseVisualStyleBackColor = true;
+            this.btnStopServer.Click += new System.EventHandler(this.btnStopServer_Click);
             // 
             // btnStartServer
             // 
@@ -3279,38 +3312,6 @@
             this.label14.Text = "Server";
             this.label14.UseMnemonic = false;
             // 
-            // toolStripLabel1
-            // 
-            this.toolStripLabel1.Margin = new System.Windows.Forms.Padding(1);
-            this.toolStripLabel1.Name = "toolStripLabel1";
-            this.toolStripLabel1.Size = new System.Drawing.Size(73, 25);
-            this.toolStripLabel1.Text = "Server status";
-            // 
-            // toolStripSeparator14
-            // 
-            this.toolStripSeparator14.Margin = new System.Windows.Forms.Padding(0, 2, 2, 2);
-            this.toolStripSeparator14.Name = "toolStripSeparator14";
-            this.toolStripSeparator14.Size = new System.Drawing.Size(6, 23);
-            // 
-            // toolStripLabelStatus
-            // 
-            this.toolStripLabelStatus.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            this.toolStripLabelStatus.ForeColor = System.Drawing.Color.Red;
-            this.toolStripLabelStatus.Margin = new System.Windows.Forms.Padding(1);
-            this.toolStripLabelStatus.Name = "toolStripLabelStatus";
-            this.toolStripLabelStatus.Size = new System.Drawing.Size(34, 25);
-            this.toolStripLabelStatus.Text = "OFF";
-            // 
-            // label30
-            // 
-            this.label30.AutoSize = true;
-            this.label30.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label30.Location = new System.Drawing.Point(13, 55);
-            this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(237, 15);
-            this.label30.TabIndex = 2;
-            this.label30.Text = "Not be able to stop if there are active users";
-            // 
             // buffer
             // 
             this.buffer.Dock = System.Windows.Forms.DockStyle.Left;
@@ -3324,15 +3325,15 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1261, 661);
-            this.Controls.Add(this.panelLoadTest);
-            this.Controls.Add(this.panelServer);
+            this.Controls.Add(this.panelAssignTestsToUsers);
+            this.Controls.Add(this.panelTests);
             this.Controls.Add(this.panelGeneral);
+            this.Controls.Add(this.panelServer);
+            this.Controls.Add(this.panelLoadTest);
             this.Controls.Add(this.panelTestsExplorer);
             this.Controls.Add(this.panelReviewTestResults);
-            this.Controls.Add(this.panelAssignTestsToUsers);
             this.Controls.Add(this.panelGroups);
             this.Controls.Add(this.panelUsers);
-            this.Controls.Add(this.panelTests);
             this.Controls.Add(this.panelUsersAndTests);
             this.Controls.Add(this.panelUsersAndGroups);
             this.Controls.Add(this.buffer);

@@ -68,7 +68,7 @@ namespace TestClient
             string[] LogPassStrArr = new string[] { Login, Password };
 
             // netPack
-            Byte[] outgoingPack = DataPack.CreateDataPack(TcpPackType.ClientAuthDataPack, LogPassStrArr);
+            Byte[] outgoingPack = DataPack.CreateDataPack(TcpPackType.ClientAuthReq, LogPassStrArr);
 
             // Write to NetStream
             NetworkStream stream = Globals.client.GetStream();
@@ -97,7 +97,7 @@ namespace TestClient
                     tcpPackType = (TcpPackType)BitConverter.ToInt32(incomingPack, 0);
                     switch (tcpPackType)
                     {
-                        case TcpPackType.ServerAuthAnswerPack:
+                        case TcpPackType.ServerAuthAns:
                             tcpPackSize = BitConverter.ToInt32(incomingPack, sizeInt32);
                             bool auth = (bool)BinObjConverter.ByteArrayToObject(incomingPack, sizeInt32 * 2, tcpPackSize);
                             if (auth)
@@ -106,7 +106,7 @@ namespace TestClient
                                 this.Invoke(new Action(() => this.lbMessage.Text = "OK"));
                                 this.Invoke(new Action(() => this.lbMessage.Visible = true));
 
-                                outgoingPack = DataPack.CreateDataPack(TcpPackType.ClientUserIdRequestPack);
+                                outgoingPack = DataPack.CreateDataPack(TcpPackType.ClientUserIdReq);
                                 stream.Write(outgoingPack, 0, outgoingPack.Length);
                                 stream.Flush();
                             }
@@ -117,23 +117,23 @@ namespace TestClient
                             }
                             break;
 
-                        case TcpPackType.ServerUserIdAnswerPack:
+                        case TcpPackType.ServerUserIdAns:
                             tcpPackSize = BitConverter.ToInt32(incomingPack, sizeInt32);
                             Globals.userId = (int)BinObjConverter.ByteArrayToObject(incomingPack, sizeInt32 * 2, tcpPackSize);
 
-                            outgoingPack = DataPack.CreateDataPack(TcpPackType.ClientUserToStringRequestPack);
+                            outgoingPack = DataPack.CreateDataPack(TcpPackType.ClientUserToStringReq);
                             stream.Write(outgoingPack, 0, outgoingPack.Length);
                             stream.Flush();
                             break;
 
-                        case TcpPackType.ServerUserToStringAnswerPack:
+                        case TcpPackType.ServerUserToStringAns:
                             tcpPackSize = BitConverter.ToInt32(incomingPack, sizeInt32);
                             Globals.userToString = (string)BinObjConverter.ByteArrayToObject(incomingPack, sizeInt32 * 2, tcpPackSize);
                             this.Invoke(new Action(() => this.DialogResult = DialogResult.OK));
                             Thread.Sleep(500);
                             return;
 
-                        case TcpPackType.ServerStopOrClosePack:
+                        case TcpPackType.ServerStopOrCloseMsg:
                             isOnline = false;
                             this.Invoke(new Action(() => ServerStarted()));
                             return;
@@ -162,7 +162,7 @@ namespace TestClient
         {
             if (isOnline && DialogResult != DialogResult.OK)
             {
-                Byte[] byteNetPack = DataPack.CreateDataPack(TcpPackType.ClientFormClosePack, null);
+                Byte[] byteNetPack = DataPack.CreateDataPack(TcpPackType.ClientFormCloseMsg, null);
                 NetworkStream stream = Globals.client.GetStream();
                 stream.Write(byteNetPack, 0, byteNetPack.Length);
                 stream.Flush();

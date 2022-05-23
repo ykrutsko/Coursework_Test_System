@@ -14,6 +14,7 @@ namespace TestClient
     public partial class TestForm : Form
     {
         OpenTestFormMode mode;
+        public VisualTest visualTest { get; set; }
         public TestForm()
         {
             InitializeComponent();
@@ -21,6 +22,13 @@ namespace TestClient
 
         public TestForm(OpenTestFormMode mode)
         {
+            this.mode = mode;
+            InitializeComponent();
+        }
+
+        public TestForm(OpenTestFormMode mode, VisualTest visualTest)
+        {
+            this.visualTest = visualTest;
             this.mode = mode;
             InitializeComponent();
         }
@@ -42,6 +50,11 @@ namespace TestClient
                 btnNext.Select();
                 return;
             }
+
+            flowPanelProgress.Visible = false;
+            groupBox2.Controls.Add(visualTest.FlowPanelProgress);
+            visualTest.FlowPanelProgress.Location = new Point(655, 20);
+
         }
 
         private int LinesInAnswer(string text)

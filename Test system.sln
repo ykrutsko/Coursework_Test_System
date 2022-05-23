@@ -25,6 +25,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnumsLib", "EnumsLib\EnumsL
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetPackLib", "NetPackLib\NetPackLib.csproj", "{06BA8CA1-E10D-41C8-A50F-1E82A4596BA8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetCloneLib", "NetCloneLib\NetCloneLib.csproj", "{35DFB72D-AB9F-46F6-AC1C-5A6E18ECBFB0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -75,6 +77,10 @@ Global
 		{06BA8CA1-E10D-41C8-A50F-1E82A4596BA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{06BA8CA1-E10D-41C8-A50F-1E82A4596BA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{06BA8CA1-E10D-41C8-A50F-1E82A4596BA8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35DFB72D-AB9F-46F6-AC1C-5A6E18ECBFB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35DFB72D-AB9F-46F6-AC1C-5A6E18ECBFB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35DFB72D-AB9F-46F6-AC1C-5A6E18ECBFB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35DFB72D-AB9F-46F6-AC1C-5A6E18ECBFB0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

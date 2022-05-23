@@ -49,6 +49,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Form_DontWorry.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_DontWorry.Designer.cs">
+      <DependentUpon>Form_DontWorry.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form_Login.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -70,6 +76,11 @@
     <Compile Include="Globals.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VisualQuestion.cs" />
+    <Compile Include="VisualTest.cs" />
+    <EmbeddedResource Include="Form_DontWorry.resx">
+      <DependentUpon>Form_DontWorry.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form_Login.resx">
       <DependentUpon>Form_Login.cs</DependentUpon>
     </EmbeddedResource>
@@ -130,6 +141,10 @@
       <Project>{43be69e3-18d7-432f-a525-87a8681697be}</Project>
       <Name>EnumsLib</Name>
     </ProjectReference>
+    <ProjectReference Include="..\NetCloneLib\NetCloneLib.csproj">
+      <Project>{35dfb72d-ab9f-46f6-ac1c-5a6e18ecbfb0}</Project>
+      <Name>NetCloneLib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\NetPackLib\NetPackLib.csproj">
       <Project>{06ba8ca1-e10d-41c8-a50f-1e82a4596ba8}</Project>
       <Name>NetPackLib</Name>
@@ -138,6 +153,9 @@
       <Project>{1a452544-32d7-48f6-abc4-1734f7a58d64}</Project>
       <Name>SHA512Lib</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dontworry.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

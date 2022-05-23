@@ -15,11 +15,6 @@ namespace NetPackLib
         public int PartCount { get; set; }
         public int PartNum { get; set; }
         public byte[] Buffer { get; set; }
-
-        public override string ToString()
-        {
-            return PartCount + " | " + PartNum + " | " + Buffer.Length.ToString();
-        }
     }
 
     public class DataPartCreate

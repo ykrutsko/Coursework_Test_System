@@ -16,6 +16,8 @@ namespace DALTestingSystemDB
                 Login = "Admin", 
                 Password = ("admin").GetSha512(),
                 Description = "SUPER administrator",
+                FirstName = String.Empty,
+                LastName = String.Empty,
                 IsAdmin = true, 
                 IsArchived = false,
                 RegisterDate = DateTime.Now };

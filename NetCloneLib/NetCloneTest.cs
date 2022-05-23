@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DALTestingSystemDB
+namespace NetCloneLib
 {
     [Serializable]
-    public class Test
+    public class NetCloneTest
     {
         public int Id { get; set; }
         public string Title { get; set; }
@@ -15,15 +15,11 @@ namespace DALTestingSystemDB
         public string Description { get; set; }
         public string Info { get; set; }
         public int PassPercent { get; set; }
-        [field: NonSerialized] public bool IsArchived { get; set; }
-        [field: NonSerialized] public DateTime LoadedDate { get; set; }
-        public virtual ICollection<UserTest> UserTests { get; set; }
-        public virtual ICollection<Question> Questions { get; set; }
+        public List<NetCloneQuestion> Questions { get; set; }
 
-        public Test()
+        public NetCloneTest()
         {
-            Questions = new List<Question>();
-            UserTests = new List<UserTest>();
+            Questions = new List<NetCloneQuestion>();
         }
 
         public override string ToString()

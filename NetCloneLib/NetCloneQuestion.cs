@@ -1,25 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace DALTestingSystemDB
+namespace NetCloneLib
 {
     [Serializable]
-    public class Question
+    public class NetCloneQuestion
     {
         public int Id { get; set; }
         public string QuestionText { get; set; }
         public string Img { get; set; }
         public int Points { get; set; }
-        public virtual Test Test { get; set; }
-        public virtual ICollection<Answer> Answers { get; set; }
+        public List<NetCloneAnswer> Answers { get; set; }
 
-        public Question()
+        public NetCloneQuestion()
         {
-            Answers = new List<Answer>();
+            Answers = new List<NetCloneAnswer>();
         }
-
         public override string ToString()
         {
             return QuestionText;

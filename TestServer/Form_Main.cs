@@ -22,6 +22,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using SHA512Lib;
 using EnumsLib;
 using NetPackLib;
+using NetCloneLib;
 
 namespace TestServer
 {
@@ -887,10 +888,29 @@ namespace TestServer
                     UserTest newUserTest = new UserTest()
                     {
                         IsTaked = false,
+                        IsPassed = false,
+                        PointsGrade = 0,
                         TakedDate = null,
                         User = user,
                         Test = newTest,
                     };
+
+                    List<UserAnswer> userAnswers = new List<UserAnswer>();
+                    foreach (var item in newTest.Questions)
+                    {
+                        foreach (var answer in item.Answers)
+                        {
+                            UserAnswer userAnswer = new UserAnswer()
+                            {
+                                UserTest = newUserTest,
+                                Answer = answer,
+                                IsChecked = false
+                            };
+                            userAnswers.Add(userAnswer);
+                        }
+                    }
+                    newUserTest.UserAnswers = userAnswers;
+
                     await Task.Run(() => Globals.repoUserTest.Add(newUserTest));
                 }
 
@@ -926,10 +946,29 @@ namespace TestServer
                 DALTestingSystemDB.Test newTest = assignNewTestForm.Test;
                 UserTest newUserTest = new UserTest() {
                     IsTaked = false,
+                    IsPassed = false,
+                    PointsGrade = 0,
                     TakedDate = null,
                     User = AssignTestsForm_currUser,
-                    Test = newTest,
+                    Test = newTest
                 };
+
+                List<UserAnswer> userAnswers = new List<UserAnswer>();
+                foreach (var item in newTest.Questions)
+                {
+                    foreach (var answer in item.Answers)
+                    {
+                        UserAnswer userAnswer = new UserAnswer()
+                        {
+                            UserTest = newUserTest,
+                            Answer = answer,
+                            IsChecked = false
+                        };
+                        userAnswers.Add(userAnswer);
+                    }
+                }
+                newUserTest.UserAnswers = userAnswers;
+
                 await Task.Run(() => Globals.repoUserTest.Add(newUserTest));
 
                 this.dgvAssignTestsForm_Tests.SelectionChanged -= new System.EventHandler(this.dgvAssignTestsForm_Tests_SelectionChanged);
@@ -1656,8 +1695,18 @@ namespace TestServer
         private async void btnStartServer_Click(object sender, EventArgs e)
         {
             btnStartServer.Enabled = false;
-            //btnStopServer.Enabled = true;
+            btnStopServer.Enabled = true;
             await StartServer();
+        }
+
+        private void btnStopServer_Click(object sender, EventArgs e)
+        {
+            server.Stop();
+            UpdateUI("Server Stopped");
+            btnStartServer.Enabled = true;
+            btnStopServer.Enabled = false;
+            toolStripLabelStatus.ForeColor = Color.Red;
+            toolStripLabelStatus.Text = "OFF";
         }
 
         private async Task StartServer()
@@ -1712,7 +1761,7 @@ namespace TestServer
                     tcpPackType = (TcpPackType)BitConverter.ToInt32(incomingPack, 0);
                     switch (tcpPackType)
                     {
-                        case TcpPackType.ClientAuthDataPack:
+                        case TcpPackType.ClientAuthReq:
                             tcpPackSize = BitConverter.ToInt32(incomingPack, sizeInt32);
                             string[] logPassStrArr = (string[])BinObjConverter.ByteArrayToObject(incomingPack, sizeInt32 * 2, tcpPackSize);
                             login = logPassStrArr[0];
@@ -1736,35 +1785,35 @@ namespace TestServer
                                 this.Invoke(new Action(() => UpdateUI("Client " + client.Client.RemoteEndPoint + " —  login " + login.ToUpper() + " authorization fail")));
                                 authorized = false;
                             }
-                            outgoingPack = DataPack.CreateDataPack(TcpPackType.ServerAuthAnswerPack, authorized);
+                            outgoingPack = DataPack.CreateDataPack(TcpPackType.ServerAuthAns, authorized);
                             stream.Write(outgoingPack, 0, outgoingPack.Length);
                             stream.Flush();
                             break;
 
-                        case TcpPackType.ClientUserIdRequestPack:
-                            outgoingPack = DataPack.CreateDataPack(TcpPackType.ServerUserIdAnswerPack, currUser.Id);
+                        case TcpPackType.ClientUserIdReq:
+                            outgoingPack = DataPack.CreateDataPack(TcpPackType.ServerUserIdAns, currUser.Id);
                             stream.Write(outgoingPack, 0, outgoingPack.Length);
                             stream.Flush();
                             break;
 
-                        case TcpPackType.ClientUserToStringRequestPack:
-                            outgoingPack = DataPack.CreateDataPack(TcpPackType.ServerUserToStringAnswerPack, currUser.ToString());
+                        case TcpPackType.ClientUserToStringReq:
+                            outgoingPack = DataPack.CreateDataPack(TcpPackType.ServerUserToStringAns, currUser.ToString());
                             stream.Write(outgoingPack, 0, outgoingPack.Length);
                             stream.Flush();
                             break;
 
-                        case TcpPackType.ClientUserTestsRequestPack:
-                            List<Byte[]> list = DataPartCreate.CreateDataParts(TcpPackType.ServerUserTestsAnswerPack, Globals.repoUserTest.FindAll(x => x.User.Id == currUser.Id));
+                        case TcpPackType.ClientUserTestsReq:
+                            List<Byte[]> list = DataPartCreate.CreateDataParts(TcpPackType.ServerUserTestsAns, Globals.repoUserTest.FindAll(x => x.User.Id == currUser.Id).UserTestCloneCreate());
                             this.Invoke(new Action(() => UpdateUI("Client " + client.Client.RemoteEndPoint + " —  login " + login.ToUpper() + " start transferring user tests")));
                             foreach (var item in list)
                             {
                                 stream.Write(item, 0, item.Length);
                                 stream.Flush();
-                                Thread.Sleep(200);
+                                Thread.Sleep(10);
                             }
                             this.Invoke(new Action(() => UpdateUI("Client " + client.Client.RemoteEndPoint + " —  login " + login.ToUpper() + " complete the transfer of user tests")));
                             break;
-                        case TcpPackType.ClientFormClosePack:
+                        case TcpPackType.ClientFormCloseMsg:
                             if (authorized)
                             {
                                 this.Invoke(new Action(() => UpdateUI("Client " + client.Client.RemoteEndPoint + " —  login " + login.ToUpper() + " disconnected")));
@@ -1780,6 +1829,7 @@ namespace TestServer
                 }
                 catch (Exception)
                 {
+                    MessageBox.Show("Error on server");
                     if(authorized)
                     {
                         this.Invoke(new Action(() => UpdateUI("Client " + client.Client.RemoteEndPoint + " —  login " + login.ToUpper() + " disconnected")));
@@ -1826,6 +1876,8 @@ namespace TestServer
         {
             this.Size = new Size(1277, 723);
         }
+
+
 
 
 
