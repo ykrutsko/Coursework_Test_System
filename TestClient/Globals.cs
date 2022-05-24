@@ -14,6 +14,6 @@ namespace TestClient
         public static int userId;
         public static string userToString;
         public static List<NetCloneUserTest> userTests = new List<NetCloneUserTest>();
-        public static NetCloneTest currTest;
+        public static NetCloneUserTest currUserTest;
     }
 }

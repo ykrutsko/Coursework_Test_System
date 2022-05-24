@@ -46,7 +46,7 @@ namespace TestClient
             {
                 try
                 {
-                    Globals.client = new TcpClient("127.0.0.1", 13000);
+                    Globals.client = new TcpClient("127.0.0.1", 5000);
                     isOnline = true;
                     this.Invoke(new Action(() => IsLogAndPassAndServer()));
                 }

@@ -11,7 +11,6 @@ namespace NetCloneLib
     {
         public int Id { get; set; }
         public string AnswerText { get; set; }
-        public int CountRight { get; set; }
 
         public override string ToString()
         {

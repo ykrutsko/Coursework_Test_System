@@ -1712,7 +1712,7 @@ namespace TestServer
         private async Task StartServer()
         {            
             cancellation = new CancellationTokenSource();
-            server = new TcpListener(IPAddress.Any, 13000);
+            server = new TcpListener(IPAddress.Any, 5000);
             server.Start();
 
             this.Invoke(new Action(() =>
@@ -1809,9 +1809,12 @@ namespace TestServer
                             {
                                 stream.Write(item, 0, item.Length);
                                 stream.Flush();
-                                Thread.Sleep(10);
+                                Thread.Sleep(1);
                             }
                             this.Invoke(new Action(() => UpdateUI("Client " + client.Client.RemoteEndPoint + " —  login " + login.ToUpper() + " complete the transfer of user tests")));
+                            break;
+                        case TcpPackType.ClientUserTestsReceivedMsg:
+                            this.Invoke(new Action(() => UpdateUI("Client " + client.Client.RemoteEndPoint + " —  login " + login.ToUpper() + " received tests — OK")));
                             break;
                         case TcpPackType.ClientFormCloseMsg:
                             if (authorized)

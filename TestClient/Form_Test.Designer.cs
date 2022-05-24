@@ -32,6 +32,7 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lbInfo = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.lbPoints = new System.Windows.Forms.Label();
             this.flowPanelProgress = new System.Windows.Forms.FlowLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -49,7 +50,6 @@
             this.btnNext = new System.Windows.Forms.Button();
             this.btnFinish = new System.Windows.Forms.Button();
             this.btnPrev = new System.Windows.Forms.Button();
-            this.lbPoints = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.flowPanelProgress.SuspendLayout();
@@ -91,6 +91,16 @@
             this.groupBox2.Size = new System.Drawing.Size(1110, 545);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
+            // 
+            // lbPoints
+            // 
+            this.lbPoints.AutoSize = true;
+            this.lbPoints.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.lbPoints.Location = new System.Drawing.Point(529, 44);
+            this.lbPoints.Name = "lbPoints";
+            this.lbPoints.Size = new System.Drawing.Size(76, 15);
+            this.lbPoints.TabIndex = 5;
+            this.lbPoints.Text = "20 point(s)";
             // 
             // flowPanelProgress
             // 
@@ -261,16 +271,6 @@
             this.btnPrev.Text = "<< Previous";
             this.btnPrev.UseVisualStyleBackColor = true;
             // 
-            // lbPoints
-            // 
-            this.lbPoints.AutoSize = true;
-            this.lbPoints.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.lbPoints.Location = new System.Drawing.Point(529, 44);
-            this.lbPoints.Name = "lbPoints";
-            this.lbPoints.Size = new System.Drawing.Size(76, 15);
-            this.lbPoints.TabIndex = 5;
-            this.lbPoints.Text = "20 point(s)";
-            // 
             // TestForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -292,6 +292,7 @@
             this.Name = "TestForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Form1";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.TestForm_FormClosing);
             this.Load += new System.EventHandler(this.TestForm_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);

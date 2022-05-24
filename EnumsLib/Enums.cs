@@ -51,6 +51,7 @@ namespace EnumsLib
 
         ClientFormCloseMsg,
         ClientTestFormCloseMsg,
+        ClientUserTestsReceivedMsg,
         ServerStopOrCloseMsg
     }
 

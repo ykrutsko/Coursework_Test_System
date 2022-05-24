@@ -46,6 +46,7 @@ namespace NetCloneLib
                             QuestionText = String.Copy(q.QuestionText),
                             Img = item.IsTaked ? String.Empty : String.Copy(q.Img),
                             Points = q.Points,
+                            CountRight = q.Answers.Where(x => x.IsRight == true).Count()
                         };
 
                         List<NetCloneAnswer> answers = new List<NetCloneAnswer>();
@@ -55,8 +56,7 @@ namespace NetCloneLib
                             NetCloneAnswer answer = (new NetCloneAnswer()
                             {
                                 Id = a.Id,
-                                AnswerText = String.Copy(a.AnswerText),
-                                CountRight = q.Answers.Where(x => x.IsRight == true).Count()
+                                AnswerText = String.Copy(a.AnswerText),                                
                             });
 
                             NetCloneUserAnswer userAnswer = new NetCloneUserAnswer()

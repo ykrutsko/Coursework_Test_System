@@ -5,11 +5,17 @@ namespace TestClient
 {
     public class VisualQuestion
     {
-        public int MyProperty { get; set; }
-        public FlowLayoutPanel flowPanelAnswer { get; set; }
-        public List<CheckBox> checkBoxes { get; set; }
-        public List<RadioButton> radioButtons { get; set; }
+        public int Id { get; set; }
+        public string QuestionText { get; set; }
+        public string Img { get; set; }
+        public int Points { get; set; }
+        public int CountRight { get; set; }
+        public GroupBox GroupBox { get; set; }
+        public List<VisualAnswer> VisualAnswersList { get; set; }
 
-
+        public VisualQuestion()
+        {
+            VisualAnswersList = new List<VisualAnswer>();
+        }
     }
 }

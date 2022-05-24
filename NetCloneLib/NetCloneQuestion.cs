@@ -13,6 +13,7 @@ namespace NetCloneLib
         public string QuestionText { get; set; }
         public string Img { get; set; }
         public int Points { get; set; }
+        public int CountRight { get; set; }
         public List<NetCloneAnswer> Answers { get; set; }
 
         public NetCloneQuestion()

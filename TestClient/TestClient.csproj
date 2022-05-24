@@ -76,6 +76,7 @@
     <Compile Include="Globals.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VisualAnswer.cs" />
     <Compile Include="VisualQuestion.cs" />
     <Compile Include="VisualTest.cs" />
     <EmbeddedResource Include="Form_DontWorry.resx">
@@ -152,6 +153,10 @@
     <ProjectReference Include="..\SHA512Lib\SHA512Lib.csproj">
       <Project>{1a452544-32d7-48f6-abc4-1734f7a58d64}</Project>
       <Name>SHA512Lib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TestLib\TestLib.csproj">
+      <Project>{a3259de6-e034-4fab-b938-ae08b485fc63}</Project>
+      <Name>TestLib</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

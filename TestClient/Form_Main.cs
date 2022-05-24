@@ -93,6 +93,9 @@ namespace TestClient
                                 this.Invoke(new Action(() => ButtonStartEnDis()));
                                 this.Invoke(new Action(() => ButtonRefreshEnDis()));
 
+                                Byte[] outgoingPack = DataPack.CreateDataPack(TcpPackType.ClientUserTestsReceivedMsg);
+                                stream.Write(outgoingPack, 0, outgoingPack.Length);                                
+
                                 if (firstTime)
                                     firstTime = false;
                             }
@@ -228,7 +231,7 @@ namespace TestClient
         {
             if(dataGridViewNewTest.Rows.Count > 0 && dataGridViewNewTest.SelectedRows.Count > 0)
             {
-                Globals.currTest = Globals.userTests.FirstOrDefault(x => x.Id == (int)dataGridViewNewTest.CurrentRow.Cells[6].Value).Test; 
+                Globals.currUserTest = Globals.userTests.FirstOrDefault(x => x.Id == (int)dataGridViewNewTest.CurrentRow.Cells[6].Value); 
             }
         }
 
@@ -246,7 +249,7 @@ namespace TestClient
 
         private void btnStart_Click(object sender, EventArgs e)
         {
-            VisualTest visualTest = new VisualTest(Globals.currTest);
+            VisualTest visualTest = new VisualTest(Globals.currUserTest.Test);
             TestForm testForm = new TestForm(OpenTestFormMode.Real, visualTest);
             if(testForm.ShowDialog() == DialogResult.OK)
             {

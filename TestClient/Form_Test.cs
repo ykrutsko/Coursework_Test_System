@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TestLib;
 
 namespace TestClient
 {
@@ -15,6 +16,7 @@ namespace TestClient
     {
         OpenTestFormMode mode;
         public VisualTest visualTest { get; set; }
+        GroupBox activeBox;
         public TestForm()
         {
             InitializeComponent();
@@ -23,17 +25,20 @@ namespace TestClient
         public TestForm(OpenTestFormMode mode)
         {
             this.mode = mode;
+            activeBox = groupBox2;
             InitializeComponent();
         }
 
         public TestForm(OpenTestFormMode mode, VisualTest visualTest)
         {
-            this.visualTest = visualTest;
             this.mode = mode;
+            this.visualTest = visualTest;
+            VisualQuestion currQuestion = visualTest.VisualQuestionsList[0];
             InitializeComponent();
         }
 
-        private void TestForm_Load(object sender, EventArgs e)
+        
+        private async void TestForm_Load(object sender, EventArgs e)
         {
             if(mode == OpenTestFormMode.DemoCheck)
             {
@@ -51,28 +56,41 @@ namespace TestClient
                 return;
             }
 
-            flowPanelProgress.Visible = false;
-            groupBox2.Controls.Add(visualTest.FlowPanelProgress);
-            visualTest.FlowPanelProgress.Location = new Point(655, 20);
+            await Task.Run(() => 
+            {
+                foreach (VisualQuestion question in visualTest.VisualQuestionsList)
+                    Invoke(new Action(() => this.Controls.Add(question.GroupBox)));
+            });
+            // real mode
+            lbInfo.Text = visualTest.Info;
+            SetQuestion(visualTest.VisualQuestionsList[0]);
+        }
+
+
+        private void SetQuestion(VisualQuestion q)
+        {
+            groupBox2.Visible = false;
+            q.GroupBox.Visible = true;
+            //if (activeBox == null)
+            //{
+            //    activeBox = q.GroupBox;
+            //}
+            //else
+            //{
+            //    activeBox.Visible = false;
+            //    activeBox = q.GroupBox;
+            //    activeBox.Visible = true;
+            //}
 
         }
 
-        private int LinesInAnswer(string text)
+        private void TestForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            TextBox tb = new TextBox();
-            tb.WordWrap = true;
-            tb.Multiline = true;
-            tb.Width = 490;
-            tb.Font = flowPanelDemo.Font;
-            tb.Text = text;
-
-            int count = tb.GetLineFromCharIndex(int.MaxValue) + 1;
-            if (tb.Lines.Length == 0)
-                --count;
-            foreach (string line in tb.Lines)
-                if (line == "")
-                    --count;
-            return count;
+            if (mode != OpenTestFormMode.Real)
+            {
+                flowPanelProgress.Visible = false;
+                flowPanelDemo.Visible = false;
+            }
         }
 
 
@@ -120,6 +138,26 @@ namespace TestClient
             "Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel, dolor.",
             "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad, illo possimus corrupti minus repellendus sed reprehenderit quis voluptatum nulla fuga? Est tenetur dolore labore maxime? Ratione placeat consectetur molestias obcaecati atque porro cum aperiam maiores!",
             };
+
+        private int LinesInAnswer(string text)
+        {
+            TextBox tb = new TextBox();
+            tb.WordWrap = true;
+            tb.Multiline = true;
+            tb.Width = 490;
+            tb.Font = flowPanelDemo.Font;
+            tb.Text = text;
+
+            int count = tb.GetLineFromCharIndex(int.MaxValue) + 1;
+            if (tb.Lines.Length == 0)
+                --count;
+            foreach (string line in tb.Lines)
+                if (line == "")
+                    --count;
+            return count;
+        }
         #endregion Demo
+
+
     }
 }
