@@ -15,11 +15,6 @@ namespace NetCloneLib
         public int Points { get; set; }
         public int CountRight { get; set; }
         public List<NetCloneAnswer> Answers { get; set; }
-
-        public NetCloneQuestion()
-        {
-            Answers = new List<NetCloneAnswer>();
-        }
         public override string ToString()
         {
             return QuestionText;

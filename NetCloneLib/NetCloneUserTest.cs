@@ -17,10 +17,5 @@ namespace NetCloneLib
         public bool IsPassed { get; set; }
         public DateTime? TakedDate { get; set; }
         public List<NetCloneUserAnswer> UserAnswers  { get; set; }
-
-        public NetCloneUserTest()
-        {
-            UserAnswers = new List<NetCloneUserAnswer>();
-        }
     }
 }

@@ -15,10 +15,19 @@ namespace NetCloneLib
             {
                 foreach (var item in list)
                 {
-                    NetCloneUserTest netCloneUserTest = new NetCloneUserTest();
-                    netCloneUserTest.Id = item.Id;
+                    //UserTest object
+                    NetCloneUserTest userTest = new NetCloneUserTest()
+                    {
+                        Id = item.Id,
+                        PointsGrade = item.PointsGrade,
+                        IsPassed = item.IsPassed,
+                        TakedDate = item.TakedDate,
+                        IsTaked = item.IsTaked,
+                        UserAnswers = new List<NetCloneUserAnswer>()
+                    };
+
                     //User
-                    netCloneUserTest.User = new NetCloneUser()
+                    userTest.User = new NetCloneUser()
                     {
                         Id = item.User.Id,
                         FirstName = String.Copy(item.User.FirstName),
@@ -27,17 +36,17 @@ namespace NetCloneLib
                     };
 
                     //Test - Question - Answer, userAnswer
-                    netCloneUserTest.Test = new NetCloneTest()
+                    userTest.Test = new NetCloneTest()
                     {
                         Id = item.Test.Id,
                         Title = String.Copy(item.Test.Title),
                         Author = String.Copy(item.Test.Author),
                         Description = String.Copy(item.Test.Description),
                         Info = String.Copy(item.Test.Info),
-                        PassPercent = item.Test.PassPercent
+                        PassPercent = item.Test.PassPercent, 
+                        Questions = new List<NetCloneQuestion>()
                     };
 
-                    List<NetCloneQuestion> questions = new List<NetCloneQuestion>();
                     foreach (var q in item.Test.Questions)
                     {
                         NetCloneQuestion question = new NetCloneQuestion()
@@ -46,11 +55,10 @@ namespace NetCloneLib
                             QuestionText = String.Copy(q.QuestionText),
                             Img = item.IsTaked ? String.Empty : String.Copy(q.Img),
                             Points = q.Points,
-                            CountRight = q.Answers.Where(x => x.IsRight == true).Count()
+                            CountRight = q.Answers.Where(x => x.IsRight == true).Count(),
+                            Answers = new List<NetCloneAnswer>()
                         };
 
-                        List<NetCloneAnswer> answers = new List<NetCloneAnswer>();
-                        List<NetCloneUserAnswer> userAnswers = new List<NetCloneUserAnswer>();
                         foreach (var a in q.Answers)
                         {
                             NetCloneAnswer answer = (new NetCloneAnswer()
@@ -58,6 +66,7 @@ namespace NetCloneLib
                                 Id = a.Id,
                                 AnswerText = String.Copy(a.AnswerText),                                
                             });
+                            question.Answers.Add(answer);
 
                             NetCloneUserAnswer userAnswer = new NetCloneUserAnswer()
                             {
@@ -65,21 +74,13 @@ namespace NetCloneLib
                                 IsChecked = item.UserAnswers.FirstOrDefault(x => x.Answer.Id == a.Id).IsChecked,
                                 Answer = answer
                             };
-                            answers.Add(answer);
-                            userAnswers.Add(userAnswer);
+                            userTest.UserAnswers.Add(userAnswer);
                         }
-                        questions.Add(question);
+                        userTest.Test.Questions.Add(question);
                     }
-                    netCloneUserTest.Test.Questions = questions;
-                    netCloneUserTest.PointsGrade = item.PointsGrade;
-                    netCloneUserTest.IsPassed = item.IsPassed;
-                    netCloneUserTest.TakedDate = item.TakedDate;
-                    netCloneUserTest.IsTaked = item.IsTaked;
-
-                    result.Add(netCloneUserTest);
+                    result.Add(userTest);
                 }
-            }           
-
+            }  
             return result;            
         }
     }

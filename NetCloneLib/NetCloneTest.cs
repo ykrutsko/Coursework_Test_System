@@ -17,11 +17,6 @@ namespace NetCloneLib
         public int PassPercent { get; set; }
         public List<NetCloneQuestion> Questions { get; set; }
 
-        public NetCloneTest()
-        {
-            Questions = new List<NetCloneQuestion>();
-        }
-
         public override string ToString()
         {
             return "[" + Id + "] " + Title + " (" + Author + ")";
