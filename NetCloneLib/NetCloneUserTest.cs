@@ -16,6 +16,5 @@ namespace NetCloneLib
         public int PointsGrade { get; set; }
         public bool IsPassed { get; set; }
         public DateTime? TakedDate { get; set; }
-        public List<NetCloneUserAnswer> UserAnswers  { get; set; }
     }
 }

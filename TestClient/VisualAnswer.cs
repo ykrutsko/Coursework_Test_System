@@ -7,6 +7,7 @@ namespace TestClient
     {
         public int Id { get; set; }
         public string AnswerText { get; set; }
-        public NetCloneLib.NetCloneUserAnswer userAnswer { get; set; }
+        public int IdUserAnswer { get; set; }
+        public bool IsChecked { get; set; }
     }
 }

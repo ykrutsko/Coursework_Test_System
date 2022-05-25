@@ -11,6 +11,8 @@ namespace NetCloneLib
     {
         public int Id { get; set; }
         public string AnswerText { get; set; }
+        public int IdUserAnswer { get; set; }
+        public bool IsChecked { get; set; }
 
         public override string ToString()
         {

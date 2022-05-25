@@ -12,9 +12,12 @@ namespace TestClient
     public class VisualTest
     {
         public string Info { get; set; }
+        public List<VisualQuestion> VisualQuestionsList { get; set; }
         public FlowLayoutPanel ProgressBarPanel { get; set; }
         public List<FlowLayoutPanel> ProgressBarList { get; set; }
-        public List<VisualQuestion> VisualQuestionsList { get; set; }
+        public VisualQuestion ActiveQuestion { get; set; }
+        public Button ButtonNext { get; set; }
+        public Button ButtonPrev { get; set; }
 
         public VisualTest(NetCloneLib.NetCloneTest test)
         {
@@ -22,13 +25,15 @@ namespace TestClient
             VisualQuestionsList = new List<VisualQuestion>();
             foreach (var q in Globals.currUserTest.Test.Questions)
             {
-                VisualQuestion visualQuestion = new VisualQuestion() 
+                VisualQuestion visualQuestion = new VisualQuestion()
                 {
                     Id = q.Id,
                     QuestionText = q.QuestionText,
                     Img = q.Img,
                     Points = q.Points,
-                    CountRight = q.CountRight
+                    CountRight = q.CountRight,
+                    GroupBox = new GroupBox(),
+                    VisualAnswersList = new List<VisualAnswer>()
                 };
 
                 foreach (var a in q.Answers)
@@ -37,8 +42,8 @@ namespace TestClient
                     {
                         Id = a.Id,
                         AnswerText = a.AnswerText,
-                        //userAnswer = Globals.currUserTest.UserAnswers[a.Id]
-                        userAnswer = Globals.currUserTest.UserAnswers.FirstOrDefault(x => x.Answer.Id == a.Id),
+                        IdUserAnswer = a.IdUserAnswer,
+                        IsChecked = a.IsChecked
                     };
                     visualQuestion.VisualAnswersList.Add(visualAnswer);
                 }
@@ -52,7 +57,7 @@ namespace TestClient
                 for (int j = VisualQuestionsList[i].VisualAnswersList.Count - 1; j >= 1; j--)
                 {
                     int z1 = rand.Next(j + 1);
-                    (VisualQuestionsList[i].VisualAnswersList[j], VisualQuestionsList[i].VisualAnswersList[z1]) 
+                    (VisualQuestionsList[i].VisualAnswersList[j], VisualQuestionsList[i].VisualAnswersList[z1])
                         = (VisualQuestionsList[i].VisualAnswersList[z1], VisualQuestionsList[i].VisualAnswersList[j]);
                 }
                 int z2 = rand.Next(i + 1);
@@ -61,48 +66,20 @@ namespace TestClient
 
             //Visual
             //----------------------------------------
-
-            // rogress bar
-            ProgressBarPanel = new FlowLayoutPanel();
-            ProgressBarList = new List<FlowLayoutPanel>();
-            ProgressBarPanel.Size = new System.Drawing.Size(449, 25);
-
-            int width = 0;
-            int count = 0;
-            foreach (var item in VisualQuestionsList)
-            {
-                FlowLayoutPanel button = new FlowLayoutPanel();
-                button.Margin = new Padding(2);
-                width = (ProgressBarPanel.Width - (ProgressBarPanel.Margin.Left + ProgressBarPanel.Margin.Right) * test.Questions.Count) / test.Questions.Count;
-                button.Width = width;
-                button.Height = ProgressBarPanel.Height - button.Margin.Top - button.Margin.Bottom;
-                button.Location = new System.Drawing.Point(count * (ProgressBarPanel.Margin.Left + ProgressBarPanel.Margin.Right + width) + ProgressBarPanel.Margin.Left, button.Margin.Top);
-                if (count == 0) button.BorderStyle = BorderStyle.FixedSingle;
-                button.BackColor = SystemColors.ControlLight;
-                button.Tag = item;
-                button.Click += new EventHandler(QuestionIndicatorClick);
-                ProgressBarList.Add(button);
-                ProgressBarPanel.Controls.Add(button);
-
-                count++;
-            }
-
-            // create visual panels
             foreach (var vq in VisualQuestionsList)
             {
                 //groupbox
-                GroupBox groupBox = new GroupBox();
-                groupBox.Location = new Point(12, 118);
-                groupBox.Size = new Size(1110, 545);
-                groupBox.Text = String.Empty;
-                vq.GroupBox = groupBox;
+                vq.GroupBox.Location = new Point(12, 118);
+                vq.GroupBox.Size = new Size(1110, 545);
+                vq.GroupBox.Text = String.Empty;
+                vq.GroupBox.Visible = false;
 
                 //picturebox
                 PictureBox pictureBox = new PictureBox();
                 pictureBox.Size = new Size(512, 512);
                 pictureBox.SizeMode = PictureBoxSizeMode.Zoom;
                 pictureBox.Image = vq.Img.Any() ? ImgConverter.Base64StringToBitmap(vq.Img) : null;
-                groupBox.Controls.Add(pictureBox);
+                vq.GroupBox.Controls.Add(pictureBox);
                 pictureBox.Location = new Point(6, 20);
 
                 //labels
@@ -110,14 +87,14 @@ namespace TestClient
                 labelQst.AutoSize = true;
                 labelQst.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
                 labelQst.Text = "Question #" + (VisualQuestionsList.IndexOf(vq) + 1).ToString();
-                groupBox.Controls.Add(labelQst);
+                vq.GroupBox.Controls.Add(labelQst);
                 labelQst.Location = new Point(524, 20);
 
                 Label labelPoints = new Label();
                 labelPoints.AutoSize = true;
                 labelPoints.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
                 labelPoints.Text = vq.Points.ToString() + " point(s)";
-                groupBox.Controls.Add(labelPoints);
+                vq.GroupBox.Controls.Add(labelPoints);
                 labelPoints.Location = new Point(529, 44);
 
                 Label labelQText = new Label();
@@ -126,7 +103,7 @@ namespace TestClient
                 labelQText.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
                 labelQText.Text = vq.QuestionText;
                 labelQText.Size = new Size(576, 90);
-                groupBox.Controls.Add(labelQText);
+                vq.GroupBox.Controls.Add(labelQText);
                 labelQText.Location = new Point(528, 68);
 
                 // answerflow panel
@@ -167,39 +144,174 @@ namespace TestClient
                         flowPanelAnswer.Controls.Add(cb);
                     }
                 }
-
-                groupBox.Controls.Add(flowPanelAnswer);
+                vq.GroupBox.Controls.Add(flowPanelAnswer);
                 flowPanelAnswer.Location = new Point(528, 161);
-                vq.GroupBox = groupBox;
+            }
 
+            //Buttons
+            ButtonPrev = new Button();
+            ButtonPrev.Location = new System.Drawing.Point(757, 669);
+            ButtonPrev.Name = "btnPrev";
+            ButtonPrev.Size = new System.Drawing.Size(90, 31);
+            ButtonPrev.TabIndex = 8;
+            ButtonPrev.Text = "<< Previous";
+            ButtonPrev.UseVisualStyleBackColor = true;
+            ButtonPrev.Click += new EventHandler(Previous);
 
+            ButtonNext = new Button();
+            ButtonNext.Location = new System.Drawing.Point(853, 669);
+            ButtonNext.Name = "btnNext";
+            ButtonNext.Size = new System.Drawing.Size(90, 31);
+            ButtonNext.TabIndex = 10;
+            ButtonNext.Text = "Next >>";
+            ButtonNext.UseVisualStyleBackColor = true;
+            ButtonNext.Click += new System.EventHandler(Next);
 
+            // ProgressBar
+            ProgressBarList = new List<FlowLayoutPanel>();
+            ProgressBarPanel = new FlowLayoutPanel();
+            ProgressBarPanel.Size = new System.Drawing.Size(449, 25);
+            ProgressBarPanel.Location = new Point(655, 20);
 
+            int count = 0;
+            foreach (var vq in VisualQuestionsList)
+            {
+                FlowLayoutPanel button = new FlowLayoutPanel();
+                button.Margin = new Padding(2);
+                int width = (ProgressBarPanel.Width - (ProgressBarPanel.Margin.Left + ProgressBarPanel.Margin.Right) * test.Questions.Count) / test.Questions.Count;
+                button.Width = width;
+                button.Height = ProgressBarPanel.Height - button.Margin.Top - button.Margin.Bottom;
+                button.Location = new Point(count * (ProgressBarPanel.Margin.Left + ProgressBarPanel.Margin.Right + width) + ProgressBarPanel.Margin.Left, button.Margin.Top);
+                button.BorderStyle = BorderStyle.None;
+                button.BackColor = SystemColors.ControlLight;
+                button.Cursor = Cursors.Hand;
+                button.Click += new EventHandler(QuestionIndicatorClick);
 
-                //progerssbar
-                FlowLayoutPanel flowPanelProgress = ProgressBarPanel;
-                groupBox.Controls.Add(flowPanelProgress);
-                flowPanelProgress.Location = new Point(655, 20);
+                ProgressBarList.Add(button);
+                ProgressBarPanel.Controls.Add(button);
+                button.Tag = count;
+                count++;
+            }
+
+            EnableDisableNextPrev(0);
+            ActiveQuestion = VisualQuestionsList[0];
+            ActiveQuestion.GroupBox.Controls.Add(ProgressBarPanel);
+            ProgressBarList[0].BorderStyle = BorderStyle.FixedSingle;
+            ActiveQuestion.GroupBox.Visible = true;
+        }
+
+        private void QuestionIndicatorClick(object sender, EventArgs e)
+        {
+            int pos = VisualQuestionsList.IndexOf(ActiveQuestion);
+            ProgressBarList[pos].BorderStyle = BorderStyle.None;
+
+            ActiveQuestion.GroupBox.Controls.Remove(ProgressBarPanel);
+            int newPos = (int)((sender as FlowLayoutPanel).Tag);
+            EnableDisableNextPrev(newPos);
+
+            ActiveQuestion.GroupBox.Visible = false;
+            ActiveQuestion = VisualQuestionsList[newPos];
+            ActiveQuestion.GroupBox.Controls.Add(ProgressBarPanel);
+            ProgressBarList[newPos].BorderStyle = BorderStyle.FixedSingle;
+            ActiveQuestion.GroupBox.Visible = true;
+        }
+
+        public void Next(object sender, EventArgs e)
+        {
+            int pos = VisualQuestionsList.IndexOf(ActiveQuestion);
+            ProgressBarList[pos].BorderStyle = BorderStyle.None;
+
+            ActiveQuestion.GroupBox.Controls.Remove(ProgressBarPanel);
+            int newPos = ++pos;
+            EnableDisableNextPrev(newPos);
+
+            ActiveQuestion.GroupBox.Visible = false;
+            ActiveQuestion = VisualQuestionsList[newPos];
+            ActiveQuestion.GroupBox.Controls.Add(ProgressBarPanel);
+            ProgressBarList[newPos].BorderStyle = BorderStyle.FixedSingle;
+            ActiveQuestion.GroupBox.Visible = true;
+        }
+
+        public void Previous(object sender, EventArgs e)
+        {
+            int pos = VisualQuestionsList.IndexOf(ActiveQuestion);
+            ProgressBarList[pos].BorderStyle = BorderStyle.None;
+
+            ActiveQuestion.GroupBox.Controls.Remove(ProgressBarPanel);
+            int newPos = --pos;
+            EnableDisableNextPrev(newPos);
+
+            ActiveQuestion.GroupBox.Visible = false;
+            ActiveQuestion = VisualQuestionsList[newPos];
+            ActiveQuestion.GroupBox.Controls.Add(ProgressBarPanel);
+            ProgressBarList[newPos].BorderStyle = BorderStyle.FixedSingle;
+            ActiveQuestion.GroupBox.Visible = true;
+        }
+
+        private void EnableDisableNextPrev(int pos)
+        {
+            if (VisualQuestionsList.Count < 2)
+            {
+                ButtonPrev.Enabled = ButtonNext.Enabled = false;
+                return;
+            }
+            else
+            {
+                if (pos == 0)
+                {
+                    ButtonPrev.Enabled = false;
+                    if (!ButtonNext.Enabled)
+                        ButtonNext.Enabled = true;
+                    ButtonNext.Select();
+                    return;
+                }
+                if (pos == VisualQuestionsList.Count - 1)
+                {
+                    ButtonNext.Enabled = false;
+                    if (!ButtonPrev.Enabled)
+                        ButtonPrev.Enabled = true;
+                    ButtonPrev.Select();
+                    return;
+                }
+                ButtonNext.Enabled = true;
+                ButtonPrev.Enabled = true;
             }
         }
 
         private void CheckBoxCheckChange(object sender, EventArgs e)
         {
             CheckBox checkBox = (CheckBox)sender;
-            //if(checkBox.Checked)
-            //    ((VisualAnswer)checkBox.Tag).IsChecked = true;
-            //else
-            //    ((VisualAnswer)checkBox.Tag).IsChecked = false;
+            if (checkBox.Checked)
+                (checkBox.Tag as VisualAnswer).IsChecked = true;
+            else
+                (checkBox.Tag as VisualAnswer).IsChecked = false;
 
+            int pos = VisualQuestionsList.IndexOf(ActiveQuestion);
+            bool isChecked = false;
+            foreach (var va in ActiveQuestion.VisualAnswersList)
+                isChecked = isChecked || va.IsChecked;
+            if (!isChecked)
+                ProgressBarList[pos].BackColor = System.Drawing.Color.SandyBrown;
+            else
+                ProgressBarList[pos].BackColor = System.Drawing.Color.DarkSeaGreen;
         }
 
         private void RadioCheckChange(object sender, EventArgs e)
         {
             RadioButton radioButton = (RadioButton)sender;
-            //if (radioButton.Checked)
-            //    ((VisualAnswer)radioButton.Tag).IsChecked = true;
-            //else
-            //    ((VisualAnswer)radioButton.Tag).IsChecked = false;
+            if (radioButton.Checked)
+                (radioButton.Tag as VisualAnswer).IsChecked = true;
+            else
+                (radioButton.Tag as VisualAnswer).IsChecked = false;
+
+            int pos = VisualQuestionsList.IndexOf(ActiveQuestion);
+            bool isChecked = false;
+            foreach (var va in ActiveQuestion.VisualAnswersList)
+                isChecked = isChecked || va.IsChecked;
+            if (!isChecked)
+                ProgressBarList[pos].BackColor = System.Drawing.Color.SandyBrown;
+            else
+                ProgressBarList[pos].BackColor = System.Drawing.Color.DarkSeaGreen;
         }
 
         private int LinesInAnswer(string text, FlowLayoutPanel panel)
@@ -218,12 +330,6 @@ namespace TestClient
                 if (line == "")
                     --count;
             return count;
-        }
-
-        private void QuestionIndicatorClick(object sender, EventArgs e)
-        {
-            FlowLayoutPanel flp = sender as FlowLayoutPanel;
-
         }
     }
 }

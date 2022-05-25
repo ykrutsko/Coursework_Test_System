@@ -23,7 +23,6 @@ namespace NetCloneLib
                         IsPassed = item.IsPassed,
                         TakedDate = item.TakedDate,
                         IsTaked = item.IsTaked,
-                        UserAnswers = new List<NetCloneUserAnswer>()
                     };
 
                     //User
@@ -64,17 +63,11 @@ namespace NetCloneLib
                             NetCloneAnswer answer = (new NetCloneAnswer()
                             {
                                 Id = a.Id,
-                                AnswerText = String.Copy(a.AnswerText),                                
+                                AnswerText = String.Copy(a.AnswerText),
+                                IdUserAnswer = item.UserAnswers.FirstOrDefault(x => x.Answer.Id == a.Id).Id,
+                                IsChecked = item.UserAnswers.FirstOrDefault(x => x.Answer.Id == a.Id).IsChecked
                             });
                             question.Answers.Add(answer);
-
-                            NetCloneUserAnswer userAnswer = new NetCloneUserAnswer()
-                            {
-                                Id = item.UserAnswers.FirstOrDefault(x => x.Answer.Id == a.Id).Id,
-                                IsChecked = item.UserAnswers.FirstOrDefault(x => x.Answer.Id == a.Id).IsChecked,
-                                Answer = answer
-                            };
-                            userTest.UserAnswers.Add(userAnswer);
                         }
                         userTest.Test.Questions.Add(question);
                     }

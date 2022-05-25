@@ -25,18 +25,17 @@ namespace TestClient
         public TestForm(OpenTestFormMode mode)
         {
             this.mode = mode;
-            activeBox = groupBox2;
             InitializeComponent();
+            activeBox = groupBox2;
+            activeBox.Visible = true;
         }
 
         public TestForm(OpenTestFormMode mode, VisualTest visualTest)
         {
             this.mode = mode;
             this.visualTest = visualTest;
-            VisualQuestion currQuestion = visualTest.VisualQuestionsList[0];
             InitializeComponent();
         }
-
         
         private async void TestForm_Load(object sender, EventArgs e)
         {
@@ -56,33 +55,18 @@ namespace TestClient
                 return;
             }
 
+            btnPrev.Visible = btnNext.Visible = false;
             await Task.Run(() => 
-            {
+            {                
+                Invoke(new Action(() => this.Controls.Add(visualTest.ButtonNext)));
+                Invoke(new Action(() => this.Controls.Add(visualTest.ButtonPrev)));
                 foreach (VisualQuestion question in visualTest.VisualQuestionsList)
                     Invoke(new Action(() => this.Controls.Add(question.GroupBox)));
             });
-            // real mode
+
             lbInfo.Text = visualTest.Info;
-            SetQuestion(visualTest.VisualQuestionsList[0]);
         }
 
-
-        private void SetQuestion(VisualQuestion q)
-        {
-            groupBox2.Visible = false;
-            q.GroupBox.Visible = true;
-            //if (activeBox == null)
-            //{
-            //    activeBox = q.GroupBox;
-            //}
-            //else
-            //{
-            //    activeBox.Visible = false;
-            //    activeBox = q.GroupBox;
-            //    activeBox.Visible = true;
-            //}
-
-        }
 
         private void TestForm_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -156,6 +140,9 @@ namespace TestClient
                     --count;
             return count;
         }
+
+
+
         #endregion Demo
 
 

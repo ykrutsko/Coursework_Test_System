@@ -46,7 +46,6 @@
     <Compile Include="NetCloneQuestion.cs" />
     <Compile Include="NetCloneTest.cs" />
     <Compile Include="NetCloneUser.cs" />
-    <Compile Include="NetCloneUserAnswer.cs" />
     <Compile Include="NetCloneUserTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
