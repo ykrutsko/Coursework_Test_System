@@ -315,6 +315,9 @@
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.listBoxClientsOnline = new System.Windows.Forms.ListBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label67 = new System.Windows.Forms.Label();
+            this.label32 = new System.Windows.Forms.Label();
+            this.numericUpDownTimeOut = new System.Windows.Forms.NumericUpDown();
             this.label30 = new System.Windows.Forms.Label();
             this.btnStopServer = new System.Windows.Forms.Button();
             this.btnStartServer = new System.Windows.Forms.Button();
@@ -380,6 +383,7 @@
             this.groupBox5.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTimeOut)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsLoadTestForm_Questions)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsLoadTestForm_Answers)).BeginInit();
@@ -609,8 +613,8 @@
             // 
             this.toolStripLabel1.Margin = new System.Windows.Forms.Padding(1);
             this.toolStripLabel1.Name = "toolStripLabel1";
-            this.toolStripLabel1.Size = new System.Drawing.Size(73, 25);
-            this.toolStripLabel1.Text = "Server status";
+            this.toolStripLabel1.Size = new System.Drawing.Size(80, 25);
+            this.toolStripLabel1.Text = "Server listener";
             // 
             // toolStripLabelStatus
             // 
@@ -1172,25 +1176,28 @@
             // 
             // tbUsersForm_FindByDescription
             // 
+            this.tbUsersForm_FindByDescription.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbUsersForm_FindByDescription.Location = new System.Drawing.Point(520, 570);
             this.tbUsersForm_FindByDescription.Name = "tbUsersForm_FindByDescription";
-            this.tbUsersForm_FindByDescription.Size = new System.Drawing.Size(280, 21);
+            this.tbUsersForm_FindByDescription.Size = new System.Drawing.Size(281, 21);
             this.tbUsersForm_FindByDescription.TabIndex = 65;
             this.tbUsersForm_FindByDescription.TextChanged += new System.EventHandler(this.tbUsersForm_Find_TextChanged);
             // 
             // tbUsersForm_FindByFirstName
             // 
+            this.tbUsersForm_FindByFirstName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbUsersForm_FindByFirstName.Location = new System.Drawing.Point(110, 570);
             this.tbUsersForm_FindByFirstName.Name = "tbUsersForm_FindByFirstName";
-            this.tbUsersForm_FindByFirstName.Size = new System.Drawing.Size(145, 21);
+            this.tbUsersForm_FindByFirstName.Size = new System.Drawing.Size(146, 21);
             this.tbUsersForm_FindByFirstName.TabIndex = 64;
             this.tbUsersForm_FindByFirstName.TextChanged += new System.EventHandler(this.tbUsersForm_Find_TextChanged);
             // 
             // tbUsersForm_FindById
             // 
+            this.tbUsersForm_FindById.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbUsersForm_FindById.Location = new System.Drawing.Point(60, 570);
             this.tbUsersForm_FindById.Name = "tbUsersForm_FindById";
-            this.tbUsersForm_FindById.Size = new System.Drawing.Size(50, 21);
+            this.tbUsersForm_FindById.Size = new System.Drawing.Size(51, 21);
             this.tbUsersForm_FindById.TabIndex = 63;
             this.tbUsersForm_FindById.TextChanged += new System.EventHandler(this.tbUsersForm_Find_TextChanged);
             // 
@@ -1215,17 +1222,19 @@
             // 
             // tbUsersForm_FindByLastName
             // 
+            this.tbUsersForm_FindByLastName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbUsersForm_FindByLastName.Location = new System.Drawing.Point(255, 570);
             this.tbUsersForm_FindByLastName.Name = "tbUsersForm_FindByLastName";
-            this.tbUsersForm_FindByLastName.Size = new System.Drawing.Size(145, 21);
+            this.tbUsersForm_FindByLastName.Size = new System.Drawing.Size(146, 21);
             this.tbUsersForm_FindByLastName.TabIndex = 59;
             this.tbUsersForm_FindByLastName.TextChanged += new System.EventHandler(this.tbUsersForm_Find_TextChanged);
             // 
             // tbUsersForm_FindByLogin
             // 
+            this.tbUsersForm_FindByLogin.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbUsersForm_FindByLogin.Location = new System.Drawing.Point(400, 570);
             this.tbUsersForm_FindByLogin.Name = "tbUsersForm_FindByLogin";
-            this.tbUsersForm_FindByLogin.Size = new System.Drawing.Size(120, 21);
+            this.tbUsersForm_FindByLogin.Size = new System.Drawing.Size(121, 21);
             this.tbUsersForm_FindByLogin.TabIndex = 58;
             this.tbUsersForm_FindByLogin.TextChanged += new System.EventHandler(this.tbUsersForm_Find_TextChanged);
             // 
@@ -1415,17 +1424,19 @@
             // 
             // tbGroupsForm_FindByName
             // 
+            this.tbGroupsForm_FindByName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbGroupsForm_FindByName.Location = new System.Drawing.Point(110, 570);
             this.tbGroupsForm_FindByName.Name = "tbGroupsForm_FindByName";
-            this.tbGroupsForm_FindByName.Size = new System.Drawing.Size(140, 21);
+            this.tbGroupsForm_FindByName.Size = new System.Drawing.Size(141, 21);
             this.tbGroupsForm_FindByName.TabIndex = 69;
             this.tbGroupsForm_FindByName.TextChanged += new System.EventHandler(this.tbGroupsForm_Find_TextChanged);
             // 
             // tbGroupsForm_FindById
             // 
+            this.tbGroupsForm_FindById.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbGroupsForm_FindById.Location = new System.Drawing.Point(60, 570);
             this.tbGroupsForm_FindById.Name = "tbGroupsForm_FindById";
-            this.tbGroupsForm_FindById.Size = new System.Drawing.Size(50, 21);
+            this.tbGroupsForm_FindById.Size = new System.Drawing.Size(51, 21);
             this.tbGroupsForm_FindById.TabIndex = 68;
             this.tbGroupsForm_FindById.TextChanged += new System.EventHandler(this.tbGroupsForm_Find_TextChanged);
             // 
@@ -1440,9 +1451,10 @@
             // 
             // tbGroupsForm_FindByDescription
             // 
+            this.tbGroupsForm_FindByDescription.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbGroupsForm_FindByDescription.Location = new System.Drawing.Point(250, 570);
             this.tbGroupsForm_FindByDescription.Name = "tbGroupsForm_FindByDescription";
-            this.tbGroupsForm_FindByDescription.Size = new System.Drawing.Size(190, 21);
+            this.tbGroupsForm_FindByDescription.Size = new System.Drawing.Size(191, 21);
             this.tbGroupsForm_FindByDescription.TabIndex = 66;
             this.tbGroupsForm_FindByDescription.TextChanged += new System.EventHandler(this.tbGroupsForm_Find_TextChanged);
             // 
@@ -1912,17 +1924,19 @@
             // 
             // tbAssignTestsForm_FindGroupByName
             // 
-            this.tbAssignTestsForm_FindGroupByName.Location = new System.Drawing.Point(655, 319);
+            this.tbAssignTestsForm_FindGroupByName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tbAssignTestsForm_FindGroupByName.Location = new System.Drawing.Point(660, 319);
             this.tbAssignTestsForm_FindGroupByName.Name = "tbAssignTestsForm_FindGroupByName";
-            this.tbAssignTestsForm_FindGroupByName.Size = new System.Drawing.Size(140, 21);
+            this.tbAssignTestsForm_FindGroupByName.Size = new System.Drawing.Size(141, 21);
             this.tbAssignTestsForm_FindGroupByName.TabIndex = 73;
             this.tbAssignTestsForm_FindGroupByName.TextChanged += new System.EventHandler(this.tbAssignTestsForm_FindGroup_TextChanged);
             // 
             // tbAssignTestsForm_FindGroupById
             // 
-            this.tbAssignTestsForm_FindGroupById.Location = new System.Drawing.Point(605, 319);
+            this.tbAssignTestsForm_FindGroupById.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tbAssignTestsForm_FindGroupById.Location = new System.Drawing.Point(610, 319);
             this.tbAssignTestsForm_FindGroupById.Name = "tbAssignTestsForm_FindGroupById";
-            this.tbAssignTestsForm_FindGroupById.Size = new System.Drawing.Size(50, 21);
+            this.tbAssignTestsForm_FindGroupById.Size = new System.Drawing.Size(51, 21);
             this.tbAssignTestsForm_FindGroupById.TabIndex = 72;
             this.tbAssignTestsForm_FindGroupById.TextChanged += new System.EventHandler(this.tbAssignTestsForm_FindGroup_TextChanged);
             // 
@@ -1937,25 +1951,28 @@
             // 
             // tbAssignTestsForm_FindGroupByDescription
             // 
-            this.tbAssignTestsForm_FindGroupByDescription.Location = new System.Drawing.Point(795, 319);
+            this.tbAssignTestsForm_FindGroupByDescription.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.tbAssignTestsForm_FindGroupByDescription.Location = new System.Drawing.Point(800, 319);
             this.tbAssignTestsForm_FindGroupByDescription.Name = "tbAssignTestsForm_FindGroupByDescription";
-            this.tbAssignTestsForm_FindGroupByDescription.Size = new System.Drawing.Size(200, 21);
+            this.tbAssignTestsForm_FindGroupByDescription.Size = new System.Drawing.Size(201, 21);
             this.tbAssignTestsForm_FindGroupByDescription.TabIndex = 70;
             this.tbAssignTestsForm_FindGroupByDescription.TextChanged += new System.EventHandler(this.tbAssignTestsForm_FindGroup_TextChanged);
             // 
             // tbAssignTestsForm_FindUserByFirstName
             // 
+            this.tbAssignTestsForm_FindUserByFirstName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbAssignTestsForm_FindUserByFirstName.Location = new System.Drawing.Point(110, 319);
             this.tbAssignTestsForm_FindUserByFirstName.Name = "tbAssignTestsForm_FindUserByFirstName";
-            this.tbAssignTestsForm_FindUserByFirstName.Size = new System.Drawing.Size(120, 21);
+            this.tbAssignTestsForm_FindUserByFirstName.Size = new System.Drawing.Size(121, 21);
             this.tbAssignTestsForm_FindUserByFirstName.TabIndex = 69;
             this.tbAssignTestsForm_FindUserByFirstName.TextChanged += new System.EventHandler(this.tbAssignTestsForm_FindUser_TextChanged);
             // 
             // tbAssignTestsForm_FindUserById
             // 
+            this.tbAssignTestsForm_FindUserById.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbAssignTestsForm_FindUserById.Location = new System.Drawing.Point(60, 319);
             this.tbAssignTestsForm_FindUserById.Name = "tbAssignTestsForm_FindUserById";
-            this.tbAssignTestsForm_FindUserById.Size = new System.Drawing.Size(50, 21);
+            this.tbAssignTestsForm_FindUserById.Size = new System.Drawing.Size(51, 21);
             this.tbAssignTestsForm_FindUserById.TabIndex = 68;
             this.tbAssignTestsForm_FindUserById.TextChanged += new System.EventHandler(this.tbAssignTestsForm_FindUser_TextChanged);
             // 
@@ -1970,17 +1987,19 @@
             // 
             // tbAssignTestsForm_FindUserByLastName
             // 
+            this.tbAssignTestsForm_FindUserByLastName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbAssignTestsForm_FindUserByLastName.Location = new System.Drawing.Point(230, 319);
             this.tbAssignTestsForm_FindUserByLastName.Name = "tbAssignTestsForm_FindUserByLastName";
-            this.tbAssignTestsForm_FindUserByLastName.Size = new System.Drawing.Size(120, 21);
+            this.tbAssignTestsForm_FindUserByLastName.Size = new System.Drawing.Size(121, 21);
             this.tbAssignTestsForm_FindUserByLastName.TabIndex = 66;
             this.tbAssignTestsForm_FindUserByLastName.TextChanged += new System.EventHandler(this.tbAssignTestsForm_FindUser_TextChanged);
             // 
             // tbAssignTestsForm_FindUserByLogin
             // 
+            this.tbAssignTestsForm_FindUserByLogin.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbAssignTestsForm_FindUserByLogin.Location = new System.Drawing.Point(350, 319);
             this.tbAssignTestsForm_FindUserByLogin.Name = "tbAssignTestsForm_FindUserByLogin";
-            this.tbAssignTestsForm_FindUserByLogin.Size = new System.Drawing.Size(100, 21);
+            this.tbAssignTestsForm_FindUserByLogin.Size = new System.Drawing.Size(101, 21);
             this.tbAssignTestsForm_FindUserByLogin.TabIndex = 65;
             this.tbAssignTestsForm_FindUserByLogin.TextChanged += new System.EventHandler(this.tbAssignTestsForm_FindUser_TextChanged);
             // 
@@ -2633,17 +2652,19 @@
             // 
             // tbTestsExplorerForm_FindByDescription
             // 
+            this.tbTestsExplorerForm_FindByDescription.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbTestsExplorerForm_FindByDescription.Location = new System.Drawing.Point(540, 569);
             this.tbTestsExplorerForm_FindByDescription.Name = "tbTestsExplorerForm_FindByDescription";
-            this.tbTestsExplorerForm_FindByDescription.Size = new System.Drawing.Size(260, 21);
+            this.tbTestsExplorerForm_FindByDescription.Size = new System.Drawing.Size(261, 21);
             this.tbTestsExplorerForm_FindByDescription.TabIndex = 75;
             this.tbTestsExplorerForm_FindByDescription.TextChanged += new System.EventHandler(this.tbTestsExplorerForm_Find_TextChanged);
             // 
             // tbTestsExplorerForm_FindByAuthor
             // 
+            this.tbTestsExplorerForm_FindByAuthor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbTestsExplorerForm_FindByAuthor.Location = new System.Drawing.Point(370, 569);
             this.tbTestsExplorerForm_FindByAuthor.Name = "tbTestsExplorerForm_FindByAuthor";
-            this.tbTestsExplorerForm_FindByAuthor.Size = new System.Drawing.Size(170, 21);
+            this.tbTestsExplorerForm_FindByAuthor.Size = new System.Drawing.Size(171, 21);
             this.tbTestsExplorerForm_FindByAuthor.TabIndex = 74;
             this.tbTestsExplorerForm_FindByAuthor.TextChanged += new System.EventHandler(this.tbTestsExplorerForm_Find_TextChanged);
             // 
@@ -2669,17 +2690,19 @@
             // tbTestsExplorerForm_FindById
             // 
             this.tbTestsExplorerForm_FindById.AccessibleDescription = "";
+            this.tbTestsExplorerForm_FindById.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbTestsExplorerForm_FindById.Location = new System.Drawing.Point(60, 569);
             this.tbTestsExplorerForm_FindById.Name = "tbTestsExplorerForm_FindById";
-            this.tbTestsExplorerForm_FindById.Size = new System.Drawing.Size(50, 21);
+            this.tbTestsExplorerForm_FindById.Size = new System.Drawing.Size(51, 21);
             this.tbTestsExplorerForm_FindById.TabIndex = 70;
             this.tbTestsExplorerForm_FindById.TextChanged += new System.EventHandler(this.tbTestsExplorerForm_Find_TextChanged);
             // 
             // tbTestsExplorerForm_FindByTitle
             // 
+            this.tbTestsExplorerForm_FindByTitle.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.tbTestsExplorerForm_FindByTitle.Location = new System.Drawing.Point(110, 569);
             this.tbTestsExplorerForm_FindByTitle.Name = "tbTestsExplorerForm_FindByTitle";
-            this.tbTestsExplorerForm_FindByTitle.Size = new System.Drawing.Size(260, 21);
+            this.tbTestsExplorerForm_FindByTitle.Size = new System.Drawing.Size(261, 21);
             this.tbTestsExplorerForm_FindByTitle.TabIndex = 69;
             this.tbTestsExplorerForm_FindByTitle.TextChanged += new System.EventHandler(this.tbTestsExplorerForm_Find_TextChanged);
             // 
@@ -3230,9 +3253,9 @@
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.listBoxClientsOnline);
-            this.groupBox4.Location = new System.Drawing.Point(19, 138);
+            this.groupBox4.Location = new System.Drawing.Point(19, 197);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(262, 452);
+            this.groupBox4.Size = new System.Drawing.Size(262, 393);
             this.groupBox4.TabIndex = 26;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Connected users";
@@ -3244,30 +3267,68 @@
             this.listBoxClientsOnline.ItemHeight = 15;
             this.listBoxClientsOnline.Location = new System.Drawing.Point(6, 20);
             this.listBoxClientsOnline.Name = "listBoxClientsOnline";
-            this.listBoxClientsOnline.Size = new System.Drawing.Size(250, 424);
+            this.listBoxClientsOnline.Size = new System.Drawing.Size(250, 364);
             this.listBoxClientsOnline.TabIndex = 24;
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.label67);
+            this.groupBox3.Controls.Add(this.label32);
+            this.groupBox3.Controls.Add(this.numericUpDownTimeOut);
             this.groupBox3.Controls.Add(this.label30);
             this.groupBox3.Controls.Add(this.btnStopServer);
             this.groupBox3.Controls.Add(this.btnStartServer);
             this.groupBox3.Location = new System.Drawing.Point(19, 49);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(262, 80);
+            this.groupBox3.Size = new System.Drawing.Size(262, 142);
             this.groupBox3.TabIndex = 25;
             this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Test server";
+            this.groupBox3.Text = "Server listener (accept new connections)";
+            // 
+            // label67
+            // 
+            this.label67.AutoSize = true;
+            this.label67.Location = new System.Drawing.Point(6, 70);
+            this.label67.Name = "label67";
+            this.label67.Size = new System.Drawing.Size(118, 15);
+            this.label67.TabIndex = 5;
+            this.label67.Text = "Timeout (0 — 10000)";
+            // 
+            // label32
+            // 
+            this.label32.AutoSize = true;
+            this.label32.Location = new System.Drawing.Point(232, 70);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(24, 15);
+            this.label32.TabIndex = 4;
+            this.label32.Text = "ms";
+            // 
+            // numericUpDownTimeOut
+            // 
+            this.numericUpDownTimeOut.Location = new System.Drawing.Point(129, 68);
+            this.numericUpDownTimeOut.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.numericUpDownTimeOut.Name = "numericUpDownTimeOut";
+            this.numericUpDownTimeOut.Size = new System.Drawing.Size(97, 21);
+            this.numericUpDownTimeOut.TabIndex = 3;
+            this.numericUpDownTimeOut.Value = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
             // 
             // label30
             // 
-            this.label30.AutoSize = true;
-            this.label30.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label30.Location = new System.Drawing.Point(13, 56);
+            this.label30.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label30.Location = new System.Drawing.Point(6, 101);
             this.label30.Name = "label30";
-            this.label30.Size = new System.Drawing.Size(237, 15);
+            this.label30.Size = new System.Drawing.Size(250, 30);
             this.label30.TabIndex = 2;
-            this.label30.Text = "Not be able to stop if there are active users";
+            this.label30.Text = "If there trouble getting large packages in the client side, try to increase timeo" +
+    "ut";
             // 
             // btnStopServer
             // 
@@ -3325,14 +3386,14 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1261, 661);
+            this.Controls.Add(this.panelServer);
+            this.Controls.Add(this.panelTestsExplorer);
             this.Controls.Add(this.panelAssignTestsToUsers);
+            this.Controls.Add(this.panelGroups);
             this.Controls.Add(this.panelTests);
             this.Controls.Add(this.panelGeneral);
-            this.Controls.Add(this.panelServer);
             this.Controls.Add(this.panelLoadTest);
-            this.Controls.Add(this.panelTestsExplorer);
             this.Controls.Add(this.panelReviewTestResults);
-            this.Controls.Add(this.panelGroups);
             this.Controls.Add(this.panelUsers);
             this.Controls.Add(this.panelUsersAndTests);
             this.Controls.Add(this.panelUsersAndGroups);
@@ -3347,6 +3408,7 @@
             this.MaximizeBox = false;
             this.Name = "MainForm";
             this.Text = "Test server";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
@@ -3417,6 +3479,7 @@
             this.groupBox4.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTimeOut)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsLoadTestForm_Questions)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsLoadTestForm_Answers)).EndInit();
@@ -3723,6 +3786,9 @@
         private System.Windows.Forms.ToolStripLabel toolStripLabelStatus;
         private System.Windows.Forms.Label label30;
         private System.Windows.Forms.Panel buffer;
+        private System.Windows.Forms.Label label67;
+        private System.Windows.Forms.Label label32;
+        private System.Windows.Forms.NumericUpDown numericUpDownTimeOut;
     }
 }
 

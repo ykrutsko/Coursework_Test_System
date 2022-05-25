@@ -145,6 +145,15 @@ namespace TestServer
             treeView1.SelectedNode = treeView1.Nodes.Find(nodeName, true)[0];
             treeView1.Focus();
         }
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if(clientsList.Any())
+            {
+                MessageBox.Show("Action is prohibited, there are connected clients", "Test server", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                e.Cancel = true;
+            }
+        }
         //----------------------------------------------------------------------------
         #endregion Main
 
@@ -1688,7 +1697,7 @@ namespace TestServer
         #region Server
         //-----------------------------------------------------------------------------
         TcpListener server;
-        //Dictionary<TcpClient, int> clientsList = new Dictionary<TcpClient, int>();
+        Dictionary<int, TcpClient> clientsList = new Dictionary<int, TcpClient>();
         CancellationTokenSource cancellation;
         TcpPackType tcpPackType;
 
@@ -1702,7 +1711,7 @@ namespace TestServer
         private void btnStopServer_Click(object sender, EventArgs e)
         {
             server.Stop();
-            UpdateUI("Server Stopped");
+            UpdateUI("Server listener STOPPED and no accept new connections");
             btnStartServer.Enabled = true;
             btnStopServer.Enabled = false;
             toolStripLabelStatus.ForeColor = Color.Red;
@@ -1721,8 +1730,8 @@ namespace TestServer
                 toolStripLabelStatus.Text = "ON";
             }));
 
-            UpdateUI("Server started at " + server.LocalEndpoint);
-            UpdateUI("Server awaits incoming requests");
+            UpdateUI("Server listener STARTED at " + server.LocalEndpoint);
+            UpdateUI("Server awaits incoming connections");
             try
             {
                 while (true)
@@ -1736,9 +1745,16 @@ namespace TestServer
                     receiveTask.Start();
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                UpdateUI("Server listener start" + $" — ERROR: {ex.Message}");
                 server.Stop();
+                UpdateUI("Server listener STOPPED and no accept new connections");
+                btnStartServer.Enabled = true;
+                btnStopServer.Enabled = false;
+                toolStripLabelStatus.ForeColor = Color.Red;
+                toolStripLabelStatus.Text = "OFF";
+                MessageBox.Show(ex.Message, "Test server", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -1766,26 +1782,36 @@ namespace TestServer
                             string[] logPassStrArr = (string[])BinObjConverter.ByteArrayToObject(incomingPack, sizeInt32 * 2, tcpPackSize);
                             login = logPassStrArr[0];
                             password = logPassStrArr[1];
-                            this.Invoke(new Action(() => UpdateUI("Client " + client.Client.RemoteEndPoint + " —  login " + login.ToUpper() + " authorization request")));
+                            this.Invoke(new Action(() => UpdateUI("Client " + client.Client.RemoteEndPoint + " — login " + login.ToUpper() + " authorization request")));
 
                             var usersList = await Task.Run(() => Globals.repoUser
                             .FindAll(x => x.Login.ToLower().Equals(login.ToLower())
                             && x.Password.Equals(password)));
 
+                            string answer = String.Empty;
                             if (usersList != null && usersList.Any())
                             {
                                 currUser = usersList.ToList().First() as DALTestingSystemDB.User;
-                                //clientsList.Add(client, currUser.Id);
-                                this.Invoke(new Action(() => listBoxClientsOnline.Items.Add(currUser.ToString())));
-                                this.Invoke(new Action(() => UpdateUI("Client " + client.Client.RemoteEndPoint + " —  login " + login.ToUpper() + " connected — user: " + currUser.ToString())));
-                                authorized = true;
+                                if(clientsList.ContainsKey(currUser.Id))
+                                {
+                                    this.Invoke(new Action(() => UpdateUI("Client " + client.Client.RemoteEndPoint + " — login " + login.ToUpper() + " attempted re-login — user: " + currUser.ToString())));
+                                    answer = "Attempted re-login";
+                                }
+                                else
+                                {
+                                    clientsList.Add(currUser.Id, client);
+                                    this.Invoke(new Action(() => listBoxClientsOnline.Items.Add(currUser.ToString())));
+                                    this.Invoke(new Action(() => UpdateUI("Client " + client.Client.RemoteEndPoint + " — login " + login.ToUpper() + " connected — user: " + currUser.ToString())));
+                                    authorized = true;
+                                    answer = "OK";
+                                }
                             }
                             else
                             {
-                                this.Invoke(new Action(() => UpdateUI("Client " + client.Client.RemoteEndPoint + " —  login " + login.ToUpper() + " authorization fail")));
-                                authorized = false;
+                                this.Invoke(new Action(() => UpdateUI("Client " + client.Client.RemoteEndPoint + " — login " + login.ToUpper() + " authorization fail")));
+                                answer = "Incorrect login or password";
                             }
-                            outgoingPack = DataPack.CreateDataPack(TcpPackType.ServerAuthAns, authorized);
+                            outgoingPack = DataPack.CreateDataPack(TcpPackType.ServerAuthAns, answer);
                             stream.Write(outgoingPack, 0, outgoingPack.Length);
                             stream.Flush();
                             break;
@@ -1804,24 +1830,24 @@ namespace TestServer
 
                         case TcpPackType.ClientUserTestsReq:
                             List<Byte[]> list = DataPartCreate.CreateDataParts(TcpPackType.ServerUserTestsAns, Globals.repoUserTest.FindAll(x => x.User.Id == currUser.Id).UserTestCloneCreate());
-                            this.Invoke(new Action(() => UpdateUI("Client " + client.Client.RemoteEndPoint + " —  login " + login.ToUpper() + " start transferring user tests")));
+                            this.Invoke(new Action(() => UpdateUI("Client " + client.Client.RemoteEndPoint + " — login " + login.ToUpper() + " start transferring user tests")));
                             foreach (var item in list)
                             {
                                 stream.Write(item, 0, item.Length);
                                 stream.Flush();
-                                Thread.Sleep(1);
+                                Thread.Sleep((int)numericUpDownTimeOut.Value);
                             }
-                            this.Invoke(new Action(() => UpdateUI("Client " + client.Client.RemoteEndPoint + " —  login " + login.ToUpper() + " complete the transfer of user tests")));
+                            this.Invoke(new Action(() => UpdateUI("Client " + client.Client.RemoteEndPoint + " — login " + login.ToUpper() + " complete the transfer of user tests")));
                             break;
                         case TcpPackType.ClientUserTestsReceivedMsg:
-                            this.Invoke(new Action(() => UpdateUI("Client " + client.Client.RemoteEndPoint + " —  login " + login.ToUpper() + " received tests — OK")));
+                            this.Invoke(new Action(() => UpdateUI("Client " + client.Client.RemoteEndPoint + " — login " + login.ToUpper() + " received tests — OK")));
                             break;
                         case TcpPackType.ClientFormCloseMsg:
                             if (authorized)
                             {
-                                this.Invoke(new Action(() => UpdateUI("Client " + client.Client.RemoteEndPoint + " —  login " + login.ToUpper() + " disconnected")));
+                                this.Invoke(new Action(() => UpdateUI("Client " + client.Client.RemoteEndPoint + " — login " + login.ToUpper() + " disconnected")));
                                 this.Invoke(new Action(() => listBoxClientsOnline.Items.Remove(currUser.ToString())));
-                                //clientsList.Remove(client);
+                                clientsList.Remove(currUser.Id);
                             }
                             else
                             {
@@ -1830,20 +1856,10 @@ namespace TestServer
                             return;
                     }
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    MessageBox.Show("Error on server");
-                    if(authorized)
-                    {
-                        this.Invoke(new Action(() => UpdateUI("Client " + client.Client.RemoteEndPoint + " —  login " + login.ToUpper() + " disconnected")));
-                        this.Invoke(new Action(() => listBoxClientsOnline.Items.Remove(currUser.ToString())));
-                        //clientsList.Remove(client);
-                    }
-                    else
-                    {
-                        this.Invoke(new Action(() => UpdateUI("Client " + client.Client.RemoteEndPoint + " — disconnected")));
-                    }
-                    return;
+                    this.Invoke(new Action(() => UpdateUI("Client " + client.Client.RemoteEndPoint + $" — ERROR: {ex.Message}")));
+                    MessageBox.Show(ex.Message, "Test server", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             } 
         }
@@ -1872,13 +1888,6 @@ namespace TestServer
         //-----------------------------------------------------------------------------
         #endregion Server
 
-
-
-
-        private void originalSizeToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            this.Size = new Size(1277, 723);
-        }
 
 
 

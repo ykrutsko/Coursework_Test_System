@@ -135,17 +135,19 @@
             // 
             // textBoxDescription
             // 
+            this.textBoxDescription.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBoxDescription.Location = new System.Drawing.Point(533, 278);
             this.textBoxDescription.Name = "textBoxDescription";
-            this.textBoxDescription.Size = new System.Drawing.Size(260, 21);
+            this.textBoxDescription.Size = new System.Drawing.Size(261, 21);
             this.textBoxDescription.TabIndex = 80;
             this.textBoxDescription.TextChanged += new System.EventHandler(this.textBox_TextChanged);
             // 
             // textBoxAuthor
             // 
+            this.textBoxAuthor.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBoxAuthor.Location = new System.Drawing.Point(363, 278);
             this.textBoxAuthor.Name = "textBoxAuthor";
-            this.textBoxAuthor.Size = new System.Drawing.Size(170, 21);
+            this.textBoxAuthor.Size = new System.Drawing.Size(171, 21);
             this.textBoxAuthor.TabIndex = 79;
             this.textBoxAuthor.TextChanged += new System.EventHandler(this.textBox_TextChanged);
             // 
@@ -161,17 +163,19 @@
             // textBoxId
             // 
             this.textBoxId.AccessibleDescription = "";
+            this.textBoxId.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBoxId.Location = new System.Drawing.Point(53, 278);
             this.textBoxId.Name = "textBoxId";
-            this.textBoxId.Size = new System.Drawing.Size(50, 21);
+            this.textBoxId.Size = new System.Drawing.Size(51, 21);
             this.textBoxId.TabIndex = 77;
             this.textBoxId.TextChanged += new System.EventHandler(this.textBox_TextChanged);
             // 
             // textBoxTitle
             // 
+            this.textBoxTitle.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBoxTitle.Location = new System.Drawing.Point(103, 278);
             this.textBoxTitle.Name = "textBoxTitle";
-            this.textBoxTitle.Size = new System.Drawing.Size(260, 21);
+            this.textBoxTitle.Size = new System.Drawing.Size(261, 21);
             this.textBoxTitle.TabIndex = 76;
             this.textBoxTitle.TextChanged += new System.EventHandler(this.textBox_TextChanged);
             // 

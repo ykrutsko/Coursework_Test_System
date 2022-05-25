@@ -54,9 +54,10 @@
             // 
             // textBoxId
             // 
+            this.textBoxId.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBoxId.Location = new System.Drawing.Point(53, 278);
             this.textBoxId.Name = "textBoxId";
-            this.textBoxId.Size = new System.Drawing.Size(50, 21);
+            this.textBoxId.Size = new System.Drawing.Size(51, 21);
             this.textBoxId.TabIndex = 8;
             this.textBoxId.TextChanged += new System.EventHandler(this.textBox_TextChanged);
             // 
@@ -97,25 +98,28 @@
             // 
             // textBoxFirstName
             // 
+            this.textBoxFirstName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBoxFirstName.Location = new System.Drawing.Point(103, 278);
             this.textBoxFirstName.Name = "textBoxFirstName";
-            this.textBoxFirstName.Size = new System.Drawing.Size(120, 21);
+            this.textBoxFirstName.Size = new System.Drawing.Size(121, 21);
             this.textBoxFirstName.TabIndex = 10;
             this.textBoxFirstName.TextChanged += new System.EventHandler(this.textBox_TextChanged);
             // 
             // textBoxLastName
             // 
+            this.textBoxLastName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBoxLastName.Location = new System.Drawing.Point(223, 278);
             this.textBoxLastName.Name = "textBoxLastName";
-            this.textBoxLastName.Size = new System.Drawing.Size(120, 21);
+            this.textBoxLastName.Size = new System.Drawing.Size(121, 21);
             this.textBoxLastName.TabIndex = 11;
             this.textBoxLastName.TextChanged += new System.EventHandler(this.textBox_TextChanged);
             // 
             // textBoxLogin
             // 
+            this.textBoxLogin.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBoxLogin.Location = new System.Drawing.Point(343, 278);
             this.textBoxLogin.Name = "textBoxLogin";
-            this.textBoxLogin.Size = new System.Drawing.Size(110, 21);
+            this.textBoxLogin.Size = new System.Drawing.Size(111, 21);
             this.textBoxLogin.TabIndex = 12;
             this.textBoxLogin.TextChanged += new System.EventHandler(this.textBox_TextChanged);
             // 

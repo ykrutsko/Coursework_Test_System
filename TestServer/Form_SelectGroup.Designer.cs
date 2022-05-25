@@ -82,17 +82,19 @@
             // 
             // textBoxName
             // 
+            this.textBoxName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBoxName.Location = new System.Drawing.Point(104, 278);
             this.textBoxName.Name = "textBoxName";
-            this.textBoxName.Size = new System.Drawing.Size(140, 21);
+            this.textBoxName.Size = new System.Drawing.Size(141, 21);
             this.textBoxName.TabIndex = 77;
             this.textBoxName.TextChanged += new System.EventHandler(this.textBox_TextChanged);
             // 
             // textBoxId
             // 
+            this.textBoxId.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBoxId.Location = new System.Drawing.Point(54, 278);
             this.textBoxId.Name = "textBoxId";
-            this.textBoxId.Size = new System.Drawing.Size(50, 21);
+            this.textBoxId.Size = new System.Drawing.Size(51, 21);
             this.textBoxId.TabIndex = 76;
             this.textBoxId.TextChanged += new System.EventHandler(this.textBox_TextChanged);
             // 
@@ -107,9 +109,10 @@
             // 
             // textBoxDescription
             // 
+            this.textBoxDescription.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.textBoxDescription.Location = new System.Drawing.Point(244, 278);
             this.textBoxDescription.Name = "textBoxDescription";
-            this.textBoxDescription.Size = new System.Drawing.Size(190, 21);
+            this.textBoxDescription.Size = new System.Drawing.Size(191, 21);
             this.textBoxDescription.TabIndex = 74;
             this.textBoxDescription.TextChanged += new System.EventHandler(this.textBox_TextChanged);
             // 

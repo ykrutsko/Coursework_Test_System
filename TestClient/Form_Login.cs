@@ -49,6 +49,12 @@ namespace TestClient
                     Globals.client = new TcpClient("127.0.0.1", 5000);
                     isOnline = true;
                     this.Invoke(new Action(() => IsLogAndPassAndServer()));
+
+                    Task receiveTask = new Task(() =>
+                    {
+                        ClientReceive();
+                    });
+                    receiveTask.Start();
                 }
                 catch (Exception)
                 {
@@ -58,7 +64,6 @@ namespace TestClient
                 }
             }
         }
-
 
         private void btnOK_Click(object sender, EventArgs e)
         {       
@@ -74,12 +79,6 @@ namespace TestClient
             NetworkStream stream = Globals.client.GetStream();
             stream.Write(outgoingPack, 0, outgoingPack.Length);
             stream.Flush();
-
-            Task receiveTask = new Task(() =>
-            {
-                ClientReceive();
-            });
-            receiveTask.Start();
         }
 
         private void ClientReceive()
@@ -99,20 +98,20 @@ namespace TestClient
                     {
                         case TcpPackType.ServerAuthAns:
                             tcpPackSize = BitConverter.ToInt32(incomingPack, sizeInt32);
-                            bool auth = (bool)BinObjConverter.ByteArrayToObject(incomingPack, sizeInt32 * 2, tcpPackSize);
-                            if (auth)
+                            string answer = (string)BinObjConverter.ByteArrayToObject(incomingPack, sizeInt32 * 2, tcpPackSize);
+
+                            if (answer == "OK")
                             {
                                 this.Invoke(new Action(() => this.lbMessage.ForeColor = Color.Green));
                                 this.Invoke(new Action(() => this.lbMessage.Text = "OK"));
                                 this.Invoke(new Action(() => this.lbMessage.Visible = true));
-
                                 outgoingPack = DataPack.CreateDataPack(TcpPackType.ClientUserIdReq);
                                 stream.Write(outgoingPack, 0, outgoingPack.Length);
                                 stream.Flush();
                             }
                             else
                             {
-                                this.Invoke(new Action(() => this.lbMessage.Text = "Authorization fail"));
+                                this.Invoke(new Action(() => this.lbMessage.Text = answer));
                                 this.Invoke(new Action(() => this.lbMessage.Visible = true));
                             }
                             break;
