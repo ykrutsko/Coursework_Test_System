@@ -18,9 +18,11 @@ namespace TestClient
         public VisualQuestion ActiveQuestion { get; set; }
         public Button ButtonNext { get; set; }
         public Button ButtonPrev { get; set; }
+        public NetCloneLib.NetCloneTest Test { get; set; }
 
         public VisualTest(NetCloneLib.NetCloneTest test)
         {
+            Test = test;
             Info = test.Info;
             VisualQuestionsList = new List<VisualQuestion>();
             foreach (var q in Globals.currUserTest.Test.Questions)
@@ -330,6 +332,11 @@ namespace TestClient
                 if (line == "")
                     --count;
             return count;
+        }
+
+        public override string ToString()
+        {
+            return Test.Title;
         }
     }
 }

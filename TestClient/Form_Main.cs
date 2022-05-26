@@ -12,6 +12,7 @@ using System.IO;
 using System.Linq;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -64,11 +65,6 @@ namespace TestClient
                     switch (tcpPackType)
                     {
                         case TcpPackType.ServerUserTestsAns:
-                            //if (isLoaded)
-                            //{
-                            //    isLoaded = false;
-                            //    this.Invoke(new Action(() =>ButtonStartEnDis()));
-                            //}
                             tcpPackSize = BitConverter.ToInt32(incomingPack, sizeInt32);
                             DataPart dataPart = (DataPart)BinObjConverter.ByteArrayToObject(incomingPack, sizeInt32 * 2, tcpPackSize);
                             if(!dataParts.Any() || dataParts[0].Id == dataPart.Id)
@@ -157,11 +153,11 @@ namespace TestClient
             var list = Globals.userTests
                 .Where(x => x.IsTaked)
                 .Select(y => new {
-                    Id = y.Test.Id,
+                    Id = y.Id,
                     Title = y.Test.Title,
                     MaxPoints = y.Test.Questions.Select(z => z.Points).Sum(),
                     ScoredPoints = y.PointsGrade,
-                    ScoredPercent = y.Test.Questions.Select(z => z.Points).Sum() != 0 ? (decimal)((y.PointsGrade / y.Test.Questions.Select(z => z.Points).Sum()) * 100) : 0,
+                    ScoredPercent = y.Test.Questions.Select(z => z.Points).Sum() != 0 ? (((double)y.PointsGrade / y.Test.Questions.Select(z => z.Points).Sum()) * 100).ToString("#.##") : "0",
                     Passed = y.IsPassed,
                     CompletedDate = y.TakedDate == null ? string.Empty : y.TakedDate.ToString()
                 }).ToList();
@@ -199,7 +195,7 @@ namespace TestClient
             testForm.ShowDialog();
         }
 
-        private async void btnRefresh_Click(object sender, EventArgs e)
+        private async void RefreshData(bool delay = false)
         {
             isLoaded = false;
             ButtonStartEnDis();
@@ -207,14 +203,21 @@ namespace TestClient
             bindingSourceNewTest.Clear();
             bindingSourceCompletedTest.Clear();
             lbWait.Visible = true;
-
             await Task.Run(() =>
             {
+                if (delay)
+                    Thread.Sleep(1000);
+
                 Byte[] outgoingPack = DataPack.CreateDataPack(TcpPackType.ClientUserTestsReq);
                 NetworkStream stream = Globals.client.GetStream();
                 stream.Write(outgoingPack, 0, outgoingPack.Length);
                 stream.Flush();
             });
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            RefreshData();
         }
 
         private void ButtonStartEnDis()
@@ -251,16 +254,36 @@ namespace TestClient
         {
             VisualTest visualTest = new VisualTest(Globals.currUserTest.Test);
             TestForm testForm = new TestForm(OpenTestFormMode.Real, visualTest);
-            if(testForm.ShowDialog() == DialogResult.OK)
+            DontWorryForm dontWorryForm = new DontWorryForm();
+            if(dontWorryForm.ShowDialog() == DialogResult.OK)
             {
-
+                if (testForm.ShowDialog() == DialogResult.OK)
+                {
+                    CompletedTest completedTest = new CompletedTest()
+                    {
+                        IdUserTest = Globals.currUserTest.Id,
+                        TakedDate = DateTime.Now,
+                        UserAnwersList = new List<NetCloneAnswer>()
+                    };
+                    foreach (var vq in visualTest.VisualQuestionsList)
+                    {
+                        foreach (var va in vq.VisualAnswersList)
+                        {
+                            NetCloneAnswer netCloneAnswer = new NetCloneAnswer()
+                            {
+                                Id = va.Id,
+                                IdUserAnswer = va.IdUserAnswer,
+                                IsChecked = va.IsChecked
+                            };
+                            completedTest.UserAnwersList.Add(netCloneAnswer);
+                        }
+                    }
+                    NetworkStream stream = Globals.client.GetStream();
+                    Byte[] outgoingPack = DataPack.CreateDataPack(TcpPackType.ClientCompletedTestPack, completedTest);
+                    stream.Write(outgoingPack, 0, outgoingPack.Length);
+                    RefreshData(true);
+                }
             }
-
-            //DontWorryForm dontWorryForm = new DontWorryForm();
-            //if(dontWorryForm.ShowDialog() == DialogResult.OK)
-            //{
-                
-            //}
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)

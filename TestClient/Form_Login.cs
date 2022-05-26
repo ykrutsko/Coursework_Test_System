@@ -58,6 +58,7 @@ namespace TestClient
                 }
                 catch (Exception)
                 {
+                    isOnline = false;   
                     this.Invoke(new Action(() => this.lbMessage.Text = "Server Not Started"));
                     this.Invoke(new Action(() => this.lbMessage.Visible = true));
                     Thread.Sleep(2000);
@@ -78,7 +79,6 @@ namespace TestClient
             // Write to NetStream
             NetworkStream stream = Globals.client.GetStream();
             stream.Write(outgoingPack, 0, outgoingPack.Length);
-            stream.Flush();
         }
 
         private void ClientReceive()
@@ -107,7 +107,6 @@ namespace TestClient
                                 this.Invoke(new Action(() => this.lbMessage.Visible = true));
                                 outgoingPack = DataPack.CreateDataPack(TcpPackType.ClientUserIdReq);
                                 stream.Write(outgoingPack, 0, outgoingPack.Length);
-                                stream.Flush();
                             }
                             else
                             {
@@ -122,14 +121,13 @@ namespace TestClient
 
                             outgoingPack = DataPack.CreateDataPack(TcpPackType.ClientUserToStringReq);
                             stream.Write(outgoingPack, 0, outgoingPack.Length);
-                            stream.Flush();
                             break;
 
                         case TcpPackType.ServerUserToStringAns:
                             tcpPackSize = BitConverter.ToInt32(incomingPack, sizeInt32);
                             Globals.userToString = (string)BinObjConverter.ByteArrayToObject(incomingPack, sizeInt32 * 2, tcpPackSize);
                             this.Invoke(new Action(() => this.DialogResult = DialogResult.OK));
-                            Thread.Sleep(500);
+                            Thread.Sleep(1000);
                             return;
 
                         case TcpPackType.ServerStopOrCloseMsg:
@@ -164,7 +162,6 @@ namespace TestClient
                 Byte[] byteNetPack = DataPack.CreateDataPack(TcpPackType.ClientFormCloseMsg, null);
                 NetworkStream stream = Globals.client.GetStream();
                 stream.Write(byteNetPack, 0, byteNetPack.Length);
-                stream.Flush();
                 stream.Close();
                 Globals.client.Close();
             }

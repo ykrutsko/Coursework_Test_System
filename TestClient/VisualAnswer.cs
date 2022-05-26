@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace TestClient
 {
+    [Serializable]
     public class VisualAnswer
     {
         public int Id { get; set; }

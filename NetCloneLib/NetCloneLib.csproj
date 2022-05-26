@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="NetClone.cs" />
     <Compile Include="NetCloneAnswer.cs" />
+    <Compile Include="CompletedTest.cs" />
     <Compile Include="NetCloneQuestion.cs" />
     <Compile Include="NetCloneTest.cs" />
     <Compile Include="NetCloneUser.cs" />

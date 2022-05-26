@@ -145,15 +145,6 @@ namespace TestServer
             treeView1.SelectedNode = treeView1.Nodes.Find(nodeName, true)[0];
             treeView1.Focus();
         }
-
-        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if(clientsList.Any())
-            {
-                MessageBox.Show("Action is prohibited, there are connected clients", "Test server", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                e.Cancel = true;
-            }
-        }
         //----------------------------------------------------------------------------
         #endregion Main
 
@@ -181,10 +172,10 @@ namespace TestServer
                 this.Invoke(new Action(() => tbGeneralFailed.Text = userTest.Where(x => x.IsTaked && !x.IsPassed).Count().ToString()));
                 int sumTestPoints = userTest.Where(x => x.IsTaked).SelectMany(x => x.Test.Questions).Select(z => z.Points).Sum();
                 int sumUserPoints = (int)userTest.Where(x => x.IsTaked).Select(y => y.PointsGrade).Sum();
-                decimal avg = sumTestPoints == 0? 0 : (decimal)(((double)sumUserPoints / sumTestPoints) * 100);
-                this.Invoke(new Action(() => tbGeneralAVG.Text = avg.ToString()));
-                decimal avgPassed = takedCount == 0 ? 0 : (decimal)(((double)passedCount / takedCount) * 100);
-                this.Invoke(new Action(() => tbGeneralAvgPassed.Text = avgPassed.ToString()));
+                double avg = sumTestPoints == 0? 0 : ((double)sumUserPoints / sumTestPoints) * 100;
+                this.Invoke(new Action(() => tbGeneralAVG.Text = avg.ToString("#.##")));
+                double avgPassed = takedCount == 0 ? 0 : ((double)passedCount / takedCount) * 100;
+                this.Invoke(new Action(() => tbGeneralAvgPassed.Text = avgPassed.ToString("#.##")));
 
                 var tests = Globals.repoTest.GetAll();
                 this.Invoke(new Action(() => tbGeneralCountTests.Text = tests.Count().ToString()));
@@ -723,10 +714,10 @@ namespace TestServer
                 this.Invoke(new Action(() => tbUsersAndTestsForm_Failed.Text = userTest.Where(x => x.IsTaked && !x.IsPassed).Count().ToString()));
                 int sumTestPoints = userTest.Where(x => x.IsTaked).SelectMany(x => x.Test.Questions).Select(z => z.Points).Sum();
                 int sumUserPoints = (int)userTest.Where(x => x.IsTaked).Select(y => y.PointsGrade).Sum();
-                decimal avg = sumTestPoints == 0 ? 0 : (decimal)(((double)sumUserPoints / sumTestPoints) * 100);
-                this.Invoke(new Action(() => tbUsersAndTestsForm_AVG.Text = avg.ToString()));
-                decimal avgPassed = takedCount == 0 ? 0 : (decimal)(((double)passedCount / takedCount) * 100);
-                this.Invoke(new Action(() => tbUsersAndTestsForm_AvgPassed.Text = avgPassed.ToString()));
+                double avg = sumTestPoints == 0 ? 0 : ((double)sumUserPoints / sumTestPoints) * 100;
+                this.Invoke(new Action(() => tbUsersAndTestsForm_AVG.Text = avg.ToString("#.##")));
+                double avgPassed = takedCount == 0 ? 0 : ((double)passedCount / takedCount) * 100;
+                this.Invoke(new Action(() => tbUsersAndTestsForm_AvgPassed.Text = avgPassed.ToString("#.##")));
             });
         }
         //----------------------------------------------------------------------------
@@ -1697,7 +1688,8 @@ namespace TestServer
         #region Server
         //-----------------------------------------------------------------------------
         TcpListener server;
-        Dictionary<int, TcpClient> clientsList = new Dictionary<int, TcpClient>();
+        Dictionary<int, TcpClient> authorizedСlientsList = new Dictionary<int, TcpClient>();
+        List<TcpClient> onlineClientsList = new List<TcpClient>();
         CancellationTokenSource cancellation;
         TcpPackType tcpPackType;
 
@@ -1710,12 +1702,16 @@ namespace TestServer
 
         private void btnStopServer_Click(object sender, EventArgs e)
         {
-            server.Stop();
-            UpdateUI("Server listener STOPPED and no accept new connections");
-            btnStartServer.Enabled = true;
-            btnStopServer.Enabled = false;
-            toolStripLabelStatus.ForeColor = Color.Red;
-            toolStripLabelStatus.Text = "OFF";
+            try
+            {
+                server.Stop();
+                UpdateUI("Server listener STOPPED accept new connections");
+                btnStartServer.Enabled = true;
+                btnStopServer.Enabled = false;
+                toolStripLabelStatus.ForeColor = Color.Red;
+                toolStripLabelStatus.Text = "OFF";
+            }
+            catch (SocketException) { }
         }
 
         private async Task StartServer()
@@ -1738,6 +1734,7 @@ namespace TestServer
                 {
                     TcpClient client = await server.AcceptTcpClientAsync();
                     UpdateUI("Client " + client.Client.RemoteEndPoint + " — online");
+                    onlineClientsList.Add(client);
                     Task receiveTask = new Task(() =>
                     {
                         ServerReceive(client);
@@ -1747,17 +1744,9 @@ namespace TestServer
             }
             catch (Exception ex)
             {
-                UpdateUI("Server listener start" + $" — ERROR: {ex.Message}");
                 server.Stop();
-                UpdateUI("Server listener STOPPED and no accept new connections");
-                btnStartServer.Enabled = true;
-                btnStopServer.Enabled = false;
-                toolStripLabelStatus.ForeColor = Color.Red;
-                toolStripLabelStatus.Text = "OFF";
-                MessageBox.Show(ex.Message, "Test server", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
         private async void ServerReceive(TcpClient client)
         {
             int sizeInt32 = sizeof(Int32);
@@ -1792,14 +1781,14 @@ namespace TestServer
                             if (usersList != null && usersList.Any())
                             {
                                 currUser = usersList.ToList().First() as DALTestingSystemDB.User;
-                                if(clientsList.ContainsKey(currUser.Id))
+                                if(authorizedСlientsList.ContainsKey(currUser.Id))
                                 {
                                     this.Invoke(new Action(() => UpdateUI("Client " + client.Client.RemoteEndPoint + " — login " + login.ToUpper() + " attempted re-login — user: " + currUser.ToString())));
                                     answer = "Attempted re-login";
                                 }
                                 else
                                 {
-                                    clientsList.Add(currUser.Id, client);
+                                    authorizedСlientsList.Add(currUser.Id, client);
                                     this.Invoke(new Action(() => listBoxClientsOnline.Items.Add(currUser.ToString())));
                                     this.Invoke(new Action(() => UpdateUI("Client " + client.Client.RemoteEndPoint + " — login " + login.ToUpper() + " connected — user: " + currUser.ToString())));
                                     authorized = true;
@@ -1842,17 +1831,59 @@ namespace TestServer
                         case TcpPackType.ClientUserTestsReceivedMsg:
                             this.Invoke(new Action(() => UpdateUI("Client " + client.Client.RemoteEndPoint + " — login " + login.ToUpper() + " received tests — OK")));
                             break;
+
+                        case TcpPackType.ClientCompletedTestPack:
+                            tcpPackSize = BitConverter.ToInt32(incomingPack, sizeInt32);
+                            CompletedTest completedTest = (CompletedTest)BinObjConverter.ByteArrayToObject(incomingPack, sizeInt32 * 2, tcpPackSize);
+                            UserTest userTest = Globals.repoUserTest.FindById(completedTest.IdUserTest);
+                            this.Invoke(new Action(() => UpdateUI("Client " + client.Client.RemoteEndPoint + " — login " + login.ToUpper() + " completed test")));
+                            if (userTest != null)
+                            {
+                                userTest.TakedDate = completedTest.TakedDate;
+                                userTest.IsTaked = true;
+                                foreach (var item in userTest.UserAnswers)
+                                {
+                                    item.IsChecked = completedTest.UserAnwersList.FirstOrDefault(x => x.IdUserAnswer == item.Id).IsChecked;
+                                }
+                            }
+
+                            int gotInPoints = 0;
+                            foreach (var q in userTest.Test.Questions)
+                            {
+                                var result = q.Answers.Join(userTest.UserAnswers,
+                                    x => x.Id,
+                                    y => y.Answer.Id,
+                                    (x, y) => new { Id = x.Id, IsRight = x.IsRight, Answer = y.IsChecked });
+
+                                //Correct
+                                bool res = true;
+                                foreach (var r in result)
+                                {
+                                    res = res && (r.IsRight == r.Answer);
+                                }
+                                if (res)
+                                {
+                                    gotInPoints += q.Points;
+                                }
+                            }
+                            userTest.PointsGrade = gotInPoints;
+                            userTest.IsPassed = (((double)gotInPoints / userTest.Test.Questions.Select(x => x.Points).Sum()) * 100) >= userTest.Test.PassPercent ? true : false;
+                            Globals.repoUserTest.Update(userTest);
+                            this.Invoke(new Action(() => UpdateUI("Client " + client.Client.RemoteEndPoint + " — login " + login.ToUpper() + " testing result: " + (userTest.IsPassed ? "PASS" : "FAIL"))));
+                            break;
+
                         case TcpPackType.ClientFormCloseMsg:
                             if (authorized)
                             {
-                                this.Invoke(new Action(() => UpdateUI("Client " + client.Client.RemoteEndPoint + " — login " + login.ToUpper() + " disconnected")));
+                                authorizedСlientsList.Remove(currUser.Id);
                                 this.Invoke(new Action(() => listBoxClientsOnline.Items.Remove(currUser.ToString())));
-                                clientsList.Remove(currUser.Id);
+                                this.Invoke(new Action(() => UpdateUI("Client " + client.Client.RemoteEndPoint + " — login " + login.ToUpper() + " disconnected")));
                             }
                             else
                             {
                                 this.Invoke(new Action(() => UpdateUI("Client " + client.Client.RemoteEndPoint + " — disconnected")));
                             }
+                            onlineClientsList.Remove(client);
                             return;
                     }
                 }
@@ -1869,9 +1900,33 @@ namespace TestServer
             tbServerHistory.AppendText(">> " + m + Environment.NewLine);
         }
 
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (authorizedСlientsList.Any())
+            {
+                MessageBox.Show("Action is prohibited, there are connected clients", "Test server", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                e.Cancel = true;
+            }
+            else
+            {
+                foreach (var item in onlineClientsList)
+                {
+                    try
+                    {
+                        NetworkStream stream = item.GetStream();
+                        byte[] outgoingPack = DataPack.CreateDataPack(TcpPackType.ServerStopOrCloseMsg);
+                        stream.Write(outgoingPack, 0, outgoingPack.Length);
+                    }
+                    catch { }
+                }
+            }
+        }
 
 
-        
+
+
+
+
 
 
 

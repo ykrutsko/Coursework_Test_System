@@ -44,7 +44,7 @@ namespace EnumsLib
         ClientUserTestsReq,
         ServerUserTestsAns,
 
-        ClientUserCompletedTestPack,
+        ClientCompletedTestPack,
 
         ClientConnectionStatusReq,
         ServerConnectionStatusAns,

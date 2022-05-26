@@ -16,6 +16,7 @@ namespace TestClient
     {
         OpenTestFormMode mode;
         public VisualTest visualTest { get; set; }
+
         GroupBox activeBox;
         public TestForm()
         {
@@ -55,7 +56,8 @@ namespace TestClient
                 return;
             }
 
-            btnPrev.Visible = btnNext.Visible = false;
+            this.Text = visualTest.ToString();
+            groupBox2.Visible = btnPrev.Visible = btnNext.Visible = false;
             await Task.Run(() => 
             {                
                 Invoke(new Action(() => this.Controls.Add(visualTest.ButtonNext)));
@@ -67,16 +69,17 @@ namespace TestClient
             lbInfo.Text = visualTest.Info;
         }
 
-
         private void TestForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (mode != OpenTestFormMode.Real)
+            if (mode == OpenTestFormMode.Real)
             {
-                flowPanelProgress.Visible = false;
-                flowPanelDemo.Visible = false;
+                var dialog = MessageBox.Show("Are you sure you want to finish?", visualTest.ToString(), MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                if (dialog != DialogResult.OK)
+                {
+                    e.Cancel = true;
+                }
             }
         }
-
 
         #region Demo
         private void GenerateDemoRadio()
@@ -143,8 +146,7 @@ namespace TestClient
 
 
 
+
         #endregion Demo
-
-
     }
 }
