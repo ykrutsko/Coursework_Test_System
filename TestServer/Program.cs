@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -18,6 +19,15 @@ namespace TestServer
         [STAThread]
         static void Main()
         {
+            bool createNew;
+            Mutex mutex = new Mutex(false, "TestServerMutex", out createNew);
+            if (!createNew)
+            {
+                MessageBox.Show("TEST SERVER instance is already running!", "Test server", MessageBoxButtons.OK,MessageBoxIcon.Information);
+                Application.Exit();
+                return;
+            }
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             
