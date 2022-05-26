@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Configuration;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,7 +20,7 @@ namespace TestServer
     {
         public string Login { get; set; }
         public string Password { get; set; }
-
+        bool IsConnectToDB = false;
         List<User> users;
 
         public LoginForm()
@@ -38,12 +39,15 @@ namespace TestServer
 
             await Task.Run(() =>
             {
-                Globals.work = new GenericUnitOfWork(new TestSystemContext(ConfigurationManager.ConnectionStrings["conStr"].ConnectionString));
+                var database = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TestSystemDB.mdf");
+                var conString = $"Data Source = (LocalDB)\\MSSQLLocalDB;AttachDbFilename={database};Integrated Security = True; Connect Timeout = 30";
+                Globals.work = new GenericUnitOfWork(new TestSystemContext(conString));
                 Globals.repoUser = Globals.work.Repository<User>();
                 users = Globals.repoUser.FindAll(x => x.IsAdmin).ToList();
             });
             pictureBox.Image = Resources.isconnect;
-            btnOK.Enabled = true;
+            IsConnectToDB = true;
+            EnDisButtonOk();
         }
 
         private void btnOK_Click(object sender, EventArgs e)
@@ -69,6 +73,16 @@ namespace TestServer
             }
 
             this.DialogResult = DialogResult.OK;
+        }
+
+        private void TextBox_TextChange(object sender, EventArgs e)
+        {
+            EnDisButtonOk();
+        }
+
+        private void EnDisButtonOk()
+        {
+            btnOK.Enabled = tbLog.Text.Any() && tbPass.Text.Any() && IsConnectToDB;
         }
     }
 }

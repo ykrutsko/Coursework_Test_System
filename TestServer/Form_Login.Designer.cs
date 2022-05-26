@@ -54,11 +54,13 @@
             // 
             resources.ApplyResources(this.tbLog, "tbLog");
             this.tbLog.Name = "tbLog";
+            this.tbLog.TextChanged += new System.EventHandler(this.TextBox_TextChange);
             // 
             // tbPass
             // 
             resources.ApplyResources(this.tbPass, "tbPass");
             this.tbPass.Name = "tbPass";
+            this.tbPass.TextChanged += new System.EventHandler(this.TextBox_TextChange);
             // 
             // btnOK
             // 
