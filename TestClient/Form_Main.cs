@@ -155,7 +155,7 @@ namespace TestClient
                     Title = y.Test.Title,
                     MaxPoints = y.Test.Questions.Select(z => z.Points).Sum(),
                     ScoredPoints = y.PointsGrade,
-                    ScoredPercent = y.Test.Questions.Select(z => z.Points).Sum() != 0 ? Math.Round((((double)y.PointsGrade / y.Test.Questions.Select(z => z.Points).Sum()) * 100),2) : 0,
+                    ScoredPercent = y.Test.Questions.Select(z => z.Points).Sum() != 0 ? (((double)y.PointsGrade / y.Test.Questions.Select(z => z.Points).Sum()) * 100).ToString("F") : "0",
                     Passed = y.IsPassed,
                     CompletedDate = y.TakedDate == null ? string.Empty : y.TakedDate.ToString()
                 }).ToList();

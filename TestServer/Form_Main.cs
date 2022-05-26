@@ -173,9 +173,9 @@ namespace TestServer
                 int sumTestPoints = userTest.Where(x => x.IsTaked).SelectMany(x => x.Test.Questions).Select(z => z.Points).Sum();
                 int sumUserPoints = (int)userTest.Where(x => x.IsTaked).Select(y => y.PointsGrade).Sum();
                 double avg = sumTestPoints == 0? 0 : ((double)sumUserPoints / sumTestPoints) * 100;
-                this.Invoke(new Action(() => tbGeneralAVG.Text = avg.ToString("#.##")));
+                this.Invoke(new Action(() => tbGeneralAVG.Text = avg.ToString("F")));
                 double avgPassed = takedCount == 0 ? 0 : ((double)passedCount / takedCount) * 100;
-                this.Invoke(new Action(() => tbGeneralAvgPassed.Text = avgPassed.ToString("#.##")));
+                this.Invoke(new Action(() => tbGeneralAvgPassed.Text = avgPassed.ToString("F")));
 
                 var tests = Globals.repoTest.GetAll();
                 this.Invoke(new Action(() => tbGeneralCountTests.Text = tests.Count().ToString()));
@@ -715,9 +715,9 @@ namespace TestServer
                 int sumTestPoints = userTest.Where(x => x.IsTaked).SelectMany(x => x.Test.Questions).Select(z => z.Points).Sum();
                 int sumUserPoints = (int)userTest.Where(x => x.IsTaked).Select(y => y.PointsGrade).Sum();
                 double avg = sumTestPoints == 0 ? 0 : ((double)sumUserPoints / sumTestPoints) * 100;
-                this.Invoke(new Action(() => tbUsersAndTestsForm_AVG.Text = avg.ToString("#.##")));
+                this.Invoke(new Action(() => tbUsersAndTestsForm_AVG.Text = avg.ToString("F")));
                 double avgPassed = takedCount == 0 ? 0 : ((double)passedCount / takedCount) * 100;
-                this.Invoke(new Action(() => tbUsersAndTestsForm_AvgPassed.Text = avgPassed.ToString("#.##")));
+                this.Invoke(new Action(() => tbUsersAndTestsForm_AvgPassed.Text = avgPassed.ToString("F")));
             });
         }
         //----------------------------------------------------------------------------

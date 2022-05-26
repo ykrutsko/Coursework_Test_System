@@ -74,7 +74,7 @@ namespace TestServer
             tbWrong.Text = (UserTest.Test.Questions.Count() - correct).ToString();
             tbGotPoints.Text = gotInPoints.ToString();
             decimal gotInPercent = (decimal)(((double)gotInPoints / max) * 100);
-            tbGotInPercent.Text = gotInPercent.ToString("#.##");
+            tbGotInPercent.Text = gotInPercent.ToString("F");
 
             if(gotInPercent >= (decimal)UserTest.Test.PassPercent)
             {
