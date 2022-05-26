@@ -26,7 +26,6 @@ namespace RepositoryLib
             context.Dispose();
         }
 
-        //Посилання на всі репозиторії бази даних
         public Dictionary<Type, object> repositories = new Dictionary<Type, object>();
 
         public IGenericRepository<T> Repository<T>() where T : class
@@ -35,11 +34,9 @@ namespace RepositoryLib
             {
                 return repositories[typeof(T)] as IGenericRepository<T>;
             }
-
             IGenericRepository<T> repo = new EFGenericRepository<T>(context);
             repositories.Add(typeof(T), repo);
             return repo;
         }
-
     }
 }

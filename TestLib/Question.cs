@@ -15,7 +15,7 @@ namespace TestLib
         [XmlIgnore]
         public Guid guid;
         public string QuestionText { get; set; }
-        public int Points { get; set; }     // ваговий коефіцієнт
+        public int Points { get; set; }
         public string Img { get; set; }
         public List<Answer> Answers { get; set; }
 

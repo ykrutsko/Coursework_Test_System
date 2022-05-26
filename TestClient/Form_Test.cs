@@ -149,10 +149,6 @@ namespace TestClient
                     --count;
             return count;
         }
-
-
-
-
         #endregion Demo
     }
 }

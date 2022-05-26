@@ -20,7 +20,6 @@ namespace TestServer
         public User User { get; set; }
         OpenMode openMode;
 
-
         public UsersAddEditForm(OpenMode mode)
         {
             this.openMode = mode;

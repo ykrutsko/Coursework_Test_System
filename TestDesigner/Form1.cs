@@ -465,7 +465,6 @@ namespace TestDesigner
             pictureForm.MaximizeBox = false;
             pictureForm.MinimizeBox = false;
             pictureForm.ShowDialog();
-
         }
 
         // Change cursor on picture box

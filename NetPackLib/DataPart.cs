@@ -20,7 +20,6 @@ namespace NetPackLib
     public class DataPartCreate
     {
         List<DataPart> dataParts = new List<DataPart>();
-
         public static List<Byte[]> CreateDataParts(TcpPackType tcpPackType, Object obj = null)
         {
             List<Byte[]> list = new List<Byte[]>();
@@ -43,7 +42,6 @@ namespace NetPackLib
                 DataPart dataPart = new DataPart() { Id = GenerateId(), PartCount = 1, PartNum = 0, Buffer = null };
                 list.Add(DataPack.CreateDataPack(tcpPackType, dataPart));
             }
-
             return list;
         }
 

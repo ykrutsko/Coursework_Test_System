@@ -101,7 +101,7 @@ namespace TestClient
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message, "Test server", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(ex.Message, "Test client", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }

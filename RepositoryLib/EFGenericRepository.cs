@@ -16,6 +16,7 @@ namespace RepositoryLib
             this.context = context;
             dbSet = context.Set<TEntity>();
         }
+
         public void Add(TEntity item)
         {
             dbSet.Add(item);

@@ -16,7 +16,6 @@ namespace NetPackLib
             if (obj != null)
             {
                 Int32 type = Convert.ToInt32(tcpPackType);
-
                 Byte[] objByteArr = BinObjConverter.ObjectToByteArray(obj);
                 Int32 size = Convert.ToInt32(objByteArr.Length);
 

@@ -19,7 +19,6 @@ namespace TestServer
         public DALTestingSystemDB.Group Group { get; set; }
         OpenMode openMode;
 
-
         public GroupsAddEditForm(OpenMode mode)
         {
             this.openMode = mode;

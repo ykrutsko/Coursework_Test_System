@@ -105,7 +105,6 @@ namespace TestDesigner
                 else
                 {
                     currAnswer = null;
-
                     toolStripButtonAddByCopy.Enabled = false;
                     toolStripButtonEdit.Enabled = false;
                     toolStripButtonDelete.Enabled = false;

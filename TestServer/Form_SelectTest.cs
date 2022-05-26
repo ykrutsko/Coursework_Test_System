@@ -17,6 +17,7 @@ namespace TestServer
         OpenMode openMode;
         public DALTestingSystemDB.Test Test  { get; set; }
         public List<DALTestingSystemDB.Test> Tests { get; set; }
+
         public SelectTestForm(List<DALTestingSystemDB.Test> tests, OpenMode mode)
         {
             openMode = mode;
@@ -91,6 +92,5 @@ namespace TestServer
             if (row != null)
                 dataGridView.CurrentCell = dataGridView.Rows[row.Index].Cells[0];
         }
-
     }
 }

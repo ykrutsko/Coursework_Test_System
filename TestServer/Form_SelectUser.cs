@@ -18,6 +18,7 @@ namespace TestServer
         OpenMode openMode;
         public User User { get; set; }
         public List<User> Users { get; set; }
+
         public SelectUserForm(List<User> users, OpenMode mode)
         {
             openMode = mode;

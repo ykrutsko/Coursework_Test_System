@@ -336,6 +336,8 @@
             this.bsReviewForm_Answers = new System.Windows.Forms.BindingSource(this.components);
             this.bsReviewForm_UserTests = new System.Windows.Forms.BindingSource(this.components);
             this.buffer = new System.Windows.Forms.Panel();
+            this.toolStripButtonRemoveAssignedTestRefresh = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator15 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStrip1.SuspendLayout();
             this.panelGeneral.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -1914,10 +1916,11 @@
             this.panelAssignTestsToUsers.Controls.Add(this.toolStrip8);
             this.panelAssignTestsToUsers.Controls.Add(this.dgvAssignTestsForm_Groups);
             this.panelAssignTestsToUsers.Controls.Add(this.label20);
-            this.panelAssignTestsToUsers.Location = new System.Drawing.Point(492, 327);
+            this.panelAssignTestsToUsers.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelAssignTestsToUsers.Location = new System.Drawing.Point(218, 31);
             this.panelAssignTestsToUsers.Margin = new System.Windows.Forms.Padding(6, 3, 3, 3);
             this.panelAssignTestsToUsers.Name = "panelAssignTestsToUsers";
-            this.panelAssignTestsToUsers.Size = new System.Drawing.Size(200, 100);
+            this.panelAssignTestsToUsers.Size = new System.Drawing.Size(1043, 608);
             this.panelAssignTestsToUsers.TabIndex = 14;
             this.panelAssignTestsToUsers.Visible = false;
             this.panelAssignTestsToUsers.VisibleChanged += new System.EventHandler(this.panelAssignTestsToUsers_VisibleChanged);
@@ -2018,9 +2021,9 @@
             this.label27.AutoSize = true;
             this.label27.Location = new System.Drawing.Point(16, 367);
             this.label27.Name = "label27";
-            this.label27.Size = new System.Drawing.Size(160, 15);
+            this.label27.Size = new System.Drawing.Size(162, 15);
             this.label27.TabIndex = 49;
-            this.label27.Text = "Assign tests to selected user";
+            this.label27.Text = "Assign tests to selected User";
             // 
             // toolStrip9
             // 
@@ -2114,18 +2117,18 @@
             this.label28.AutoSize = true;
             this.label28.Location = new System.Drawing.Point(18, 50);
             this.label28.Name = "label28";
-            this.label28.Size = new System.Drawing.Size(39, 15);
+            this.label28.Size = new System.Drawing.Size(70, 15);
             this.label28.TabIndex = 44;
-            this.label28.Text = "Users";
+            this.label28.Text = "Select User";
             // 
             // label29
             // 
             this.label29.AutoSize = true;
             this.label29.Location = new System.Drawing.Point(566, 50);
             this.label29.Name = "label29";
-            this.label29.Size = new System.Drawing.Size(47, 15);
+            this.label29.Size = new System.Drawing.Size(78, 15);
             this.label29.TabIndex = 43;
-            this.label29.Text = "Groups";
+            this.label29.Text = "Select Group";
             // 
             // dgvAssignTestsForm_Users
             // 
@@ -2186,14 +2189,16 @@
             this.toolStrip8.Dock = System.Windows.Forms.DockStyle.None;
             this.toolStrip8.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip8.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripButtonRemoveAssignedTestRefresh,
+            this.toolStripSeparator10,
             this.toolStripButtonAssignNewTestForUser,
             this.toolStripButtonAssignNewTestByCopyForUser,
-            this.toolStripSeparator10,
+            this.toolStripSeparator15,
             this.toolStripButtonRemoveAssignedTestForUser});
-            this.toolStrip8.Location = new System.Drawing.Point(936, 357);
+            this.toolStrip8.Location = new System.Drawing.Point(904, 357);
             this.toolStrip8.Name = "toolStrip8";
             this.toolStrip8.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.toolStrip8.Size = new System.Drawing.Size(83, 27);
+            this.toolStrip8.Size = new System.Drawing.Size(146, 27);
             this.toolStrip8.TabIndex = 41;
             this.toolStrip8.Text = "toolStrip8";
             // 
@@ -3381,6 +3386,24 @@
             this.buffer.Size = new System.Drawing.Size(5, 608);
             this.buffer.TabIndex = 25;
             // 
+            // toolStripButtonRemoveAssignedTestRefresh
+            // 
+            this.toolStripButtonRemoveAssignedTestRefresh.AutoSize = false;
+            this.toolStripButtonRemoveAssignedTestRefresh.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonRemoveAssignedTestRefresh.Image = global::TestServer.Properties.Resources.refresh;
+            this.toolStripButtonRemoveAssignedTestRefresh.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonRemoveAssignedTestRefresh.Name = "toolStripButtonRemoveAssignedTestRefresh";
+            this.toolStripButtonRemoveAssignedTestRefresh.Padding = new System.Windows.Forms.Padding(2);
+            this.toolStripButtonRemoveAssignedTestRefresh.Size = new System.Drawing.Size(24, 24);
+            this.toolStripButtonRemoveAssignedTestRefresh.ToolTipText = "Refresh list";
+            this.toolStripButtonRemoveAssignedTestRefresh.Click += new System.EventHandler(this.toolStripButtonRemoveAssignedTestRefresh_Click);
+            // 
+            // toolStripSeparator15
+            // 
+            this.toolStripSeparator15.Margin = new System.Windows.Forms.Padding(0, 0, 2, 0);
+            this.toolStripSeparator15.Name = "toolStripSeparator15";
+            this.toolStripSeparator15.Size = new System.Drawing.Size(6, 27);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -3789,6 +3812,8 @@
         private System.Windows.Forms.Label label67;
         private System.Windows.Forms.Label label32;
         private System.Windows.Forms.NumericUpDown numericUpDownTimeOut;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator15;
+        private System.Windows.Forms.ToolStripButton toolStripButtonRemoveAssignedTestRefresh;
     }
 }
 

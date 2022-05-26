@@ -22,13 +22,11 @@ namespace BinObjConverterLib
             }
         }
 
-        //public static Object ByteArrayToObject(byte[] arrBytes)
         public static Object ByteArrayToObject(byte[] arrBytes, int offset, int count)
         {
             using(MemoryStream ms = new MemoryStream())
             {
                 BinaryFormatter bf = new BinaryFormatter();
-                //memStream.Write(arrBytes, 0, arrBytes.Length);
                 ms.Write(arrBytes, offset, count);
                 ms.Seek(0, SeekOrigin.Begin);
                 Object obj = (Object)bf.Deserialize(ms);

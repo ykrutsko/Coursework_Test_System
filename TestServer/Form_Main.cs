@@ -181,7 +181,7 @@ namespace TestServer
                 this.Invoke(new Action(() => tbGeneralCountTests.Text = tests.Count().ToString()));
                 this.Invoke(new Action(() => tbGeneralMaxQCount.Text = tests.Select(x => x.Questions.Count()).Any() ? tests.Select(x => x.Questions.Count()).Max().ToString() : "0"));
                 this.Invoke(new Action(() => tbGeneralMinQCount.Text = tests.Select(x => x.Questions.Count()).Any() ? tests.Select(x => x.Questions.Count()).Min().ToString() : "0"));
-                this.Invoke(new Action(() => tbGeneralAvgQCount.Text = tests.Select(x => x.Questions.Count()).Any() ? tests.Select(x => x.Questions.Count()).Average().ToString() : "0"));
+                this.Invoke(new Action(() => tbGeneralAvgQCount.Text = tests.Select(x => x.Questions.Count()).Any() ? tests.Select(x => x.Questions.Count()).Average().ToString("F") : "0"));
             });
         }
         //----------------------------------------------------------------------------
@@ -864,6 +864,16 @@ namespace TestServer
             dgvAssignTestsForm_Tests_WhenRowGetSelect();
         }
 
+        private async void toolStripButtonRemoveAssignedTestRefresh_Click(object sender, EventArgs e)
+        {
+            this.dgvAssignTestsForm_Tests.SelectionChanged -= new System.EventHandler(this.dgvAssignTestsForm_Tests_SelectionChanged);
+            {
+                bsAssignTestsForm_Tests.DataSource = await Task.Run(() => Globals.repoUser.FindById(AssignTestsForm_currUser.Id).UserTests.Where(y => !y.IsTaked).Select(z => z.Test).ToList());
+                dgvAssignTestsForm_Tests_WhenRowGetSelect();
+            }
+            this.dgvAssignTestsForm_Tests.SelectionChanged += new System.EventHandler(this.dgvAssignTestsForm_Tests_SelectionChanged);
+        }
+
         private async void toolStripButtonAssignNewTestForGroup_Click(object sender, EventArgs e)
         {
             var testsForGroup = await Task.Run(() => Globals.repoTest.GetAll().ToList());
@@ -1325,7 +1335,7 @@ namespace TestServer
                 this.Invoke(new Action(() => tbTestsForm_Count.Text = tests.Count().ToString()));
                 this.Invoke(new Action(() => tbTestsForm_Max.Text = tests.Select(x => x.Questions.Count()).Any() ? tests.Select(x => x.Questions.Count()).Max().ToString() : "0"));
                 this.Invoke(new Action(() => tbTestsForm_Min.Text = tests.Select(x => x.Questions.Count()).Any() ? tests.Select(x => x.Questions.Count()).Min().ToString() : "0"));
-                this.Invoke(new Action(() => tbTestsForm_AVG.Text = tests.Select(x => x.Questions.Count()).Any() ? tests.Select(x => x.Questions.Count()).Average().ToString() : "0"));
+                this.Invoke(new Action(() => tbTestsForm_AVG.Text = tests.Select(x => x.Questions.Count()).Any() ? tests.Select(x => x.Questions.Count()).Average().ToString("F") : "0"));
             });
         }
         //----------------------------------------------------------------------------

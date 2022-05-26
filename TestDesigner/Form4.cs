@@ -17,6 +17,7 @@ namespace TestDesigner
         {
             InitializeComponent();
         }
+
         public PictureForm(Bitmap bitmap)
         {
             this.bitmap = bitmap;
