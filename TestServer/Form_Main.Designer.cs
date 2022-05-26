@@ -3386,9 +3386,9 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1261, 661);
+            this.Controls.Add(this.panelAssignTestsToUsers);
             this.Controls.Add(this.panelServer);
             this.Controls.Add(this.panelTestsExplorer);
-            this.Controls.Add(this.panelAssignTestsToUsers);
             this.Controls.Add(this.panelGroups);
             this.Controls.Add(this.panelTests);
             this.Controls.Add(this.panelGeneral);

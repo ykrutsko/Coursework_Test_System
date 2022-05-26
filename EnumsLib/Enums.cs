@@ -49,8 +49,8 @@ namespace EnumsLib
         ClientConnectionStatusReq,
         ServerConnectionStatusAns,
 
+        ClientStartTestMsg,
         ClientFormCloseMsg,
-        ClientTestFormCloseMsg,
         ClientUserTestsReceivedMsg,
         ServerStopOrCloseMsg
     }

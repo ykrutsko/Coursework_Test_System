@@ -32,12 +32,18 @@ namespace TestClient
             tbPass.Text = "admin";
         }
 
-        private async void LoginForm_Load(object sender, EventArgs e)
+        private void LoginForm_Load(object sender, EventArgs e)
         {
-            await Task.Run(() => ServerStarted());
-            lbMessage.Visible = false;
-            pictureBox.Image = Resources.isconnect;
-            tbLog.Select();
+            LetStart();
+        }
+
+        private void LetStart()
+        {
+            isOnline = false;
+            IsLogAndPassAndServer();
+            Task IsServerOnlineTask = new Task(() => ServerStarted());
+            Task receiveTask = IsServerOnlineTask.ContinueWith(x => ClientReceive());
+            IsServerOnlineTask.Start();
         }
 
         private void ServerStarted()
@@ -47,19 +53,21 @@ namespace TestClient
                 try
                 {
                     Globals.client = new TcpClient("127.0.0.1", 5000);
+                    this.Invoke(new Action(() => 
+                    {
+                        lbMessage.Visible = false;
+                        pictureBox.Image = Resources.isconnect;
+                        tbLog.Select();
+                    }));
                     isOnline = true;
                     this.Invoke(new Action(() => IsLogAndPassAndServer()));
-
-                    Task receiveTask = new Task(() =>
-                    {
-                        ClientReceive();
-                    });
-                    receiveTask.Start();
+                    break;
                 }
                 catch (Exception)
                 {
-                    isOnline = false;   
-                    this.Invoke(new Action(() => this.lbMessage.Text = "Server Not Started"));
+                    isOnline = false;
+                    this.Invoke(new Action(() => this.pictureBox.Image = Resources.noconnect));
+                    this.Invoke(new Action(() => this.lbMessage.Text = "Server NOT started"));
                     this.Invoke(new Action(() => this.lbMessage.Visible = true));
                     Thread.Sleep(2000);
                 }
@@ -67,18 +75,22 @@ namespace TestClient
         }
 
         private void btnOK_Click(object sender, EventArgs e)
-        {       
-            // string
+        {
             Login = tbLog.Text;
             Password = tbPass.Text.GetSha512();
             string[] LogPassStrArr = new string[] { Login, Password };
-
-            // netPack
             Byte[] outgoingPack = DataPack.CreateDataPack(TcpPackType.ClientAuthReq, LogPassStrArr);
-
-            // Write to NetStream
-            NetworkStream stream = Globals.client.GetStream();
-            stream.Write(outgoingPack, 0, outgoingPack.Length);
+            try
+            {
+                NetworkStream stream = Globals.client.GetStream();
+                stream.Write(outgoingPack, 0, outgoingPack.Length);
+            }
+            catch
+            {
+                Globals.client.Close();
+                LetStart();
+                return;
+            }
         }
 
         private void ClientReceive()
@@ -131,15 +143,14 @@ namespace TestClient
                             return;
 
                         case TcpPackType.ServerStopOrCloseMsg:
-                            isOnline = false;
-                            this.Invoke(new Action(() => ServerStarted()));
+                            Globals.client.Close();
+                            LetStart();
                             return;
                     }
                 }
                 catch
                 {
-                    isOnline = false;
-                    this.Invoke(new Action(() => ServerStarted()));
+                    LetStart();
                     return;
                 }
             }

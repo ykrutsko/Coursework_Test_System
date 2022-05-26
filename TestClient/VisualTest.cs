@@ -130,7 +130,8 @@ namespace TestClient
                         rb.Text = va.AnswerText;
                         rb.Tag = va;
                         rb.CheckedChanged += new EventHandler(RadioCheckChange);
-                        rb.Size = new Size(flowPanelAnswer.Width - 50, va.AnswerText.Length < 77 ? 30 : LinesInAnswer(va.AnswerText, flowPanelAnswer) * 21);
+                        int lines = LinesInAnswer(va.AnswerText, flowPanelAnswer);
+                        rb.Size = new Size(flowPanelAnswer.Width - 50, lines == 1 ? 30 : lines * 21);
                         flowPanelAnswer.Controls.Add(rb);
                     }
                 }
@@ -142,7 +143,8 @@ namespace TestClient
                         cb.Text = va.AnswerText;
                         cb.Tag = va;
                         cb.CheckedChanged += new EventHandler(CheckBoxCheckChange);
-                        cb.Size = new Size(flowPanelAnswer.Width - 50, va.AnswerText.Length < 77 ? 30 : LinesInAnswer(va.AnswerText, flowPanelAnswer) * 21);
+                        int lines = LinesInAnswer(va.AnswerText, flowPanelAnswer);
+                        cb.Size = new Size(flowPanelAnswer.Width - 50, lines == 1 ? 30 : lines * 21);
                         flowPanelAnswer.Controls.Add(cb);
                     }
                 }
@@ -319,10 +321,10 @@ namespace TestClient
         private int LinesInAnswer(string text, FlowLayoutPanel panel)
         {
             TextBox tb = new TextBox();
+            tb.Font = panel.Font;
             tb.WordWrap = true;
             tb.Multiline = true;
-            tb.Width = 490;
-            tb.Font = panel.Font;
+            tb.Width = 496;
             tb.Text = text;
 
             int count = tb.GetLineFromCharIndex(int.MaxValue) + 1;

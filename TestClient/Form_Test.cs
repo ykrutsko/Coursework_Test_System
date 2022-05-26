@@ -78,6 +78,10 @@ namespace TestClient
                 {
                     e.Cancel = true;
                 }
+                else
+                {
+                    this.DialogResult = DialogResult.OK;
+                }
             }
         }
 
@@ -95,7 +99,8 @@ namespace TestClient
             {
                 RadioButton rb = new RadioButton();
                 rb.Text = item;
-                rb.Size = new Size(flowPanelDemo.Width - 50, item.Length < 77 ? 30 : LinesInAnswer(item.ToString()) * 21);
+                int lines = LinesInAnswer(item.ToString());
+                rb.Size = new Size(flowPanelDemo.Width - 50, lines == 1 ? 30 : lines * 21);
                 flowPanelDemo.Controls.Add(rb);
             }
         }
@@ -113,7 +118,8 @@ namespace TestClient
             {
                 CheckBox cb = new CheckBox();
                 cb.Text = item;
-                cb.Size = new Size(flowPanelDemo.Width - 50, item.Length < 77 ? 30 : LinesInAnswer(item.ToString()) * 21);
+                int lines = LinesInAnswer(item.ToString());
+                cb.Size = new Size(flowPanelDemo.Width - 50, lines == 1 ? 30 : lines * 21);
                 flowPanelDemo.Controls.Add(cb);
             }
         }
@@ -131,7 +137,7 @@ namespace TestClient
             TextBox tb = new TextBox();
             tb.WordWrap = true;
             tb.Multiline = true;
-            tb.Width = 490;
+            tb.Width = 496;
             tb.Font = flowPanelDemo.Font;
             tb.Text = text;
 

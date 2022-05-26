@@ -1006,14 +1006,15 @@ namespace TestServer
 
         private async void toolStripButtonRemoveAssignedTestForUser_Click(object sender, EventArgs e)
         {
-            UserTest deletableUserTest = Globals.repoUserTest.FindAll(
+            UserTest deletableUserTest = null;
+            await Task.Run(() => deletableUserTest = Globals.repoUserTest.FindAll(
                 x => x.User.Id == AssignTestsForm_currUser.Id 
                 && x.Test.Id == AssignTestsForm_currTest.Id 
                 && !x.IsTaked)
-                .LastOrDefault();
+                .LastOrDefault());
 
             if(deletableUserTest == null)
-                MessageBox.Show("This Test is already in progress!", "Test server", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("This test is either in progress or completed!", "Test server", MessageBoxButtons.OK, MessageBoxIcon.Information);
             else
                 await Task.Run(() => Globals.repoUserTest.Remove(deletableUserTest));
 
@@ -1697,7 +1698,11 @@ namespace TestServer
         {
             btnStartServer.Enabled = false;
             btnStopServer.Enabled = true;
-            await StartServer();
+            try
+            {
+                await StartServer();
+            }
+            catch { }
         }
 
         private void btnStopServer_Click(object sender, EventArgs e)
@@ -1742,11 +1747,12 @@ namespace TestServer
                     receiveTask.Start();
                 }
             }
-            catch (Exception ex)
+            catch (SocketException)
             {
                 server.Stop();
             }
         }
+
         private async void ServerReceive(TcpClient client)
         {
             int sizeInt32 = sizeof(Int32);
@@ -1754,6 +1760,7 @@ namespace TestServer
             Byte[] outgoingPack = null;
             int tcpPackSize = 0;
             DALTestingSystemDB.User currUser = null;
+            UserTest currUserTest = null;
             string login = string.Empty;
             string password = string.Empty;
             bool authorized = false;
@@ -1819,38 +1826,48 @@ namespace TestServer
 
                         case TcpPackType.ClientUserTestsReq:
                             List<Byte[]> list = DataPartCreate.CreateDataParts(TcpPackType.ServerUserTestsAns, Globals.repoUserTest.FindAll(x => x.User.Id == currUser.Id).UserTestCloneCreate());
-                            this.Invoke(new Action(() => UpdateUI("Client " + client.Client.RemoteEndPoint + " — login " + login.ToUpper() + " start transferring user tests")));
+                            this.Invoke(new Action(() => UpdateUI("Client " + client.Client.RemoteEndPoint + " — login " + login.ToUpper() + " — server start transferring user tests")));
                             foreach (var item in list)
                             {
                                 stream.Write(item, 0, item.Length);
                                 stream.Flush();
                                 Thread.Sleep((int)numericUpDownTimeOut.Value);
                             }
-                            this.Invoke(new Action(() => UpdateUI("Client " + client.Client.RemoteEndPoint + " — login " + login.ToUpper() + " complete the transfer of user tests")));
+                            this.Invoke(new Action(() => UpdateUI("Client " + client.Client.RemoteEndPoint + " — login " + login.ToUpper() + " — server complete the transfer of user tests")));
                             break;
+
                         case TcpPackType.ClientUserTestsReceivedMsg:
                             this.Invoke(new Action(() => UpdateUI("Client " + client.Client.RemoteEndPoint + " — login " + login.ToUpper() + " received tests — OK")));
+                            break;
+
+                        case TcpPackType.ClientStartTestMsg:
+                            tcpPackSize = BitConverter.ToInt32(incomingPack, sizeInt32);
+                            Int32 IdStartedTest = (Int32)BinObjConverter.ByteArrayToObject(incomingPack, sizeInt32 * 2, tcpPackSize);
+                            currUserTest = Globals.repoUserTest.FindById(IdStartedTest);
+                            currUserTest.IsTaked = true;
+                            Globals.repoUserTest.Update(currUserTest);
+                            this.Invoke(new Action(() => UpdateUI("Client " + client.Client.RemoteEndPoint + " — login " + login.ToUpper() + " started test")));
                             break;
 
                         case TcpPackType.ClientCompletedTestPack:
                             tcpPackSize = BitConverter.ToInt32(incomingPack, sizeInt32);
                             CompletedTest completedTest = (CompletedTest)BinObjConverter.ByteArrayToObject(incomingPack, sizeInt32 * 2, tcpPackSize);
-                            UserTest userTest = Globals.repoUserTest.FindById(completedTest.IdUserTest);
+                            currUserTest = Globals.repoUserTest.FindById(completedTest.IdUserTest);
                             this.Invoke(new Action(() => UpdateUI("Client " + client.Client.RemoteEndPoint + " — login " + login.ToUpper() + " completed test")));
-                            if (userTest != null)
+                            if (currUserTest != null)
                             {
-                                userTest.TakedDate = completedTest.TakedDate;
-                                userTest.IsTaked = true;
-                                foreach (var item in userTest.UserAnswers)
+                                currUserTest.TakedDate = completedTest.TakedDate;
+                                currUserTest.IsTaked = true;
+                                foreach (var item in currUserTest.UserAnswers)
                                 {
                                     item.IsChecked = completedTest.UserAnwersList.FirstOrDefault(x => x.IdUserAnswer == item.Id).IsChecked;
                                 }
                             }
 
                             int gotInPoints = 0;
-                            foreach (var q in userTest.Test.Questions)
+                            foreach (var q in currUserTest.Test.Questions)
                             {
-                                var result = q.Answers.Join(userTest.UserAnswers,
+                                var result = q.Answers.Join(currUserTest.UserAnswers,
                                     x => x.Id,
                                     y => y.Answer.Id,
                                     (x, y) => new { Id = x.Id, IsRight = x.IsRight, Answer = y.IsChecked });
@@ -1866,10 +1883,10 @@ namespace TestServer
                                     gotInPoints += q.Points;
                                 }
                             }
-                            userTest.PointsGrade = gotInPoints;
-                            userTest.IsPassed = (((double)gotInPoints / userTest.Test.Questions.Select(x => x.Points).Sum()) * 100) >= userTest.Test.PassPercent ? true : false;
-                            Globals.repoUserTest.Update(userTest);
-                            this.Invoke(new Action(() => UpdateUI("Client " + client.Client.RemoteEndPoint + " — login " + login.ToUpper() + " testing result: " + (userTest.IsPassed ? "PASS" : "FAIL"))));
+                            currUserTest.PointsGrade = gotInPoints;
+                            currUserTest.IsPassed = (((double)gotInPoints / currUserTest.Test.Questions.Select(x => x.Points).Sum()) * 100) >= currUserTest.Test.PassPercent ? true : false;
+                            Globals.repoUserTest.Update(currUserTest);
+                            this.Invoke(new Action(() => UpdateUI("Client " + client.Client.RemoteEndPoint + " — login " + login.ToUpper() + " testing result: " + (currUserTest.IsPassed ? "PASS" : "FAIL"))));
                             break;
 
                         case TcpPackType.ClientFormCloseMsg:
@@ -1887,11 +1904,7 @@ namespace TestServer
                             return;
                     }
                 }
-                catch (Exception ex)
-                {
-                    this.Invoke(new Action(() => UpdateUI("Client " + client.Client.RemoteEndPoint + $" — ERROR: {ex.Message}")));
-                    MessageBox.Show(ex.Message, "Test server", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                catch { }
             } 
         }
 
@@ -1904,7 +1917,7 @@ namespace TestServer
         {
             if (authorizedСlientsList.Any())
             {
-                MessageBox.Show("Action is prohibited, there are connected clients", "Test server", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Action is prohibited, there are connected clients!", "Test server", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 e.Cancel = true;
             }
             else
@@ -1921,35 +1934,7 @@ namespace TestServer
                 }
             }
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         //-----------------------------------------------------------------------------
         #endregion Server
-
-
-
-
-
-
-        //dgvGroupsForm_Groups.Columns[0].Width = (int)(dgvGroupsForm_Groups.Width * 0.1);
-        // last - dgvGrd.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-
     }
 }

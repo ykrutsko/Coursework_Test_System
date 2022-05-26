@@ -101,9 +101,7 @@ namespace TestClient
                 }
                 catch (Exception ex)
                 {
-                    this.Invoke(new Action(() => MessageBox.Show("sdsd")));
-                    //this.Invoke(new Action(() => ServerStarted()));
-                    //return;
+                    MessageBox.Show(ex.Message, "Test server", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -113,7 +111,7 @@ namespace TestClient
             var list = Globals.userTests
                 .Where(x => !x.IsTaked)
                 .Select(z => new {
-                    Id = z.Test.Id,
+                    Id = z.Id,
                     Title = z.Test.Title,
                     Info = z.Test.Info,
                     Questions = z.Test.Questions.Count,
@@ -168,12 +166,12 @@ namespace TestClient
                 bindingSourceCompletedTest.DataSource = list;
                 dataGridViewCompletedTest.DataSource = bindingSourceCompletedTest;
                 dataGridViewCompletedTest.Columns[0].Width = 50;
-                dataGridViewCompletedTest.Columns[1].Width = 260;
+                dataGridViewCompletedTest.Columns[1].Width = 255;
                 dataGridViewCompletedTest.Columns[2].Width = 90;
                 dataGridViewCompletedTest.Columns[3].Width = 110;
                 dataGridViewCompletedTest.Columns[4].Width = 90;
                 dataGridViewCompletedTest.Columns[5].Width = 70;
-                dataGridViewCompletedTest.Columns[6].Width = 120;
+                dataGridViewCompletedTest.Columns[6].Width = 125;
                 dataGridViewCompletedTest.Columns[2].HeaderText = "Max points";
                 dataGridViewCompletedTest.Columns[3].HeaderText = "Scored points";
                 dataGridViewCompletedTest.Columns[4].HeaderText = "Scored %";
@@ -258,6 +256,9 @@ namespace TestClient
             DontWorryForm dontWorryForm = new DontWorryForm();
             if(dontWorryForm.ShowDialog() == DialogResult.OK)
             {
+                NetworkStream stream = Globals.client.GetStream();
+                Byte[] outgoingPack = DataPack.CreateDataPack(TcpPackType.ClientStartTestMsg, (Int32)Globals.currUserTest.Id);
+                stream.Write(outgoingPack, 0, outgoingPack.Length);
                 if (testForm.ShowDialog() == DialogResult.OK)
                 {
                     CompletedTest completedTest = new CompletedTest()
@@ -279,8 +280,8 @@ namespace TestClient
                             completedTest.UserAnwersList.Add(netCloneAnswer);
                         }
                     }
-                    NetworkStream stream = Globals.client.GetStream();
-                    Byte[] outgoingPack = DataPack.CreateDataPack(TcpPackType.ClientCompletedTestPack, completedTest);
+                    stream = Globals.client.GetStream();
+                    outgoingPack = DataPack.CreateDataPack(TcpPackType.ClientCompletedTestPack, completedTest);
                     stream.Write(outgoingPack, 0, outgoingPack.Length);
                     RefreshData(true);
                 }
