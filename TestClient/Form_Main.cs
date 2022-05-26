@@ -166,12 +166,12 @@ namespace TestClient
                 bindingSourceCompletedTest.DataSource = list;
                 dataGridViewCompletedTest.DataSource = bindingSourceCompletedTest;
                 dataGridViewCompletedTest.Columns[0].Width = 50;
-                dataGridViewCompletedTest.Columns[1].Width = 255;
+                dataGridViewCompletedTest.Columns[1].Width = 250;
                 dataGridViewCompletedTest.Columns[2].Width = 90;
                 dataGridViewCompletedTest.Columns[3].Width = 110;
                 dataGridViewCompletedTest.Columns[4].Width = 90;
                 dataGridViewCompletedTest.Columns[5].Width = 70;
-                dataGridViewCompletedTest.Columns[6].Width = 125;
+                dataGridViewCompletedTest.Columns[6].Width = 130;
                 dataGridViewCompletedTest.Columns[2].HeaderText = "Max points";
                 dataGridViewCompletedTest.Columns[3].HeaderText = "Scored points";
                 dataGridViewCompletedTest.Columns[4].HeaderText = "Scored %";

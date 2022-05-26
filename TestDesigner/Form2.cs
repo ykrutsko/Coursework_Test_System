@@ -30,7 +30,6 @@ namespace TestDesigner
             this.mode = mode;
             CurrQuestion = new Question();
             CurrQuestion.Answers = new List<Answer>();
-            FormSettings();
             InitializeComponent();
         }
 
@@ -39,23 +38,11 @@ namespace TestDesigner
         {
             this.mode = mode;
             CurrQuestion = question;
-            FormSettings();
             InitializeComponent();
-        }
-
-        //Form settings
-        void FormSettings()
-        {
-            this.StartPosition = FormStartPosition.CenterParent;
-            this.FormBorderStyle = FormBorderStyle.FixedSingle;
-            this.MaximizeBox = false;
         }
 
         private void ModifyForm_Load(object sender, EventArgs e)
         {
-            this.StartPosition = FormStartPosition.CenterParent;
-            this.FormBorderStyle = FormBorderStyle.FixedSingle;
-            this.MaximizeBox = false;
             FillForm();
         }
 
@@ -82,7 +69,7 @@ namespace TestDesigner
             dataGridViewAnswers.DataSource = bindingSourceAnswers;
             dataGridViewAnswers.Columns.Clear();
             bindingSourceAnswers.DataSource = CurrQuestion.Answers;
-            dataGridViewAnswers.Columns[0].Width = 290;
+            dataGridViewAnswers.Columns[0].Width = 297;
             dataGridViewAnswers.Columns[0].HeaderText = "Answer";
             dataGridViewAnswers.Columns[1].Width = 90;
             dataGridViewAnswers.Columns[1].HeaderText = "Is right";

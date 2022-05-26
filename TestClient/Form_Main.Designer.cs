@@ -41,13 +41,6 @@
             this.Column6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dataGridViewCompletedTest = new System.Windows.Forms.DataGridView();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lbUser = new System.Windows.Forms.Label();
             this.btnStart = new System.Windows.Forms.Button();
             this.btnRadioDemo = new System.Windows.Forms.Button();
@@ -58,6 +51,13 @@
             this.lbWait = new System.Windows.Forms.Label();
             this.bindingSourceNewTest = new System.Windows.Forms.BindingSource(this.components);
             this.bindingSourceCompletedTest = new System.Windows.Forms.BindingSource(this.components);
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewNewTest)).BeginInit();
             this.groupBox2.SuspendLayout();
@@ -181,55 +181,6 @@
             this.dataGridViewCompletedTest.Size = new System.Drawing.Size(850, 244);
             this.dataGridViewCompletedTest.TabIndex = 1;
             // 
-            // Column3
-            // 
-            this.Column3.HeaderText = "Id";
-            this.Column3.Name = "Column3";
-            this.Column3.ReadOnly = true;
-            this.Column3.Width = 50;
-            // 
-            // Column7
-            // 
-            this.Column7.HeaderText = "Title";
-            this.Column7.Name = "Column7";
-            this.Column7.ReadOnly = true;
-            this.Column7.Width = 260;
-            // 
-            // Column8
-            // 
-            this.Column8.HeaderText = "Max points";
-            this.Column8.Name = "Column8";
-            this.Column8.ReadOnly = true;
-            this.Column8.Width = 90;
-            // 
-            // Column9
-            // 
-            this.Column9.HeaderText = "Scored points";
-            this.Column9.Name = "Column9";
-            this.Column9.ReadOnly = true;
-            this.Column9.Width = 110;
-            // 
-            // Column13
-            // 
-            this.Column13.HeaderText = "Scored %";
-            this.Column13.Name = "Column13";
-            this.Column13.ReadOnly = true;
-            this.Column13.Width = 90;
-            // 
-            // Column10
-            // 
-            this.Column10.HeaderText = "Passed";
-            this.Column10.Name = "Column10";
-            this.Column10.ReadOnly = true;
-            this.Column10.Width = 70;
-            // 
-            // Column11
-            // 
-            this.Column11.HeaderText = "Completed date";
-            this.Column11.Name = "Column11";
-            this.Column11.ReadOnly = true;
-            this.Column11.Width = 120;
-            // 
             // lbUser
             // 
             this.lbUser.AutoSize = true;
@@ -302,6 +253,55 @@
             this.lbWait.TabIndex = 10;
             this.lbWait.Text = "Wait...";
             // 
+            // Column3
+            // 
+            this.Column3.HeaderText = "Id";
+            this.Column3.Name = "Column3";
+            this.Column3.ReadOnly = true;
+            this.Column3.Width = 50;
+            // 
+            // Column7
+            // 
+            this.Column7.HeaderText = "Title";
+            this.Column7.Name = "Column7";
+            this.Column7.ReadOnly = true;
+            this.Column7.Width = 250;
+            // 
+            // Column8
+            // 
+            this.Column8.HeaderText = "Max points";
+            this.Column8.Name = "Column8";
+            this.Column8.ReadOnly = true;
+            this.Column8.Width = 90;
+            // 
+            // Column9
+            // 
+            this.Column9.HeaderText = "Scored points";
+            this.Column9.Name = "Column9";
+            this.Column9.ReadOnly = true;
+            this.Column9.Width = 110;
+            // 
+            // Column13
+            // 
+            this.Column13.HeaderText = "Scored %";
+            this.Column13.Name = "Column13";
+            this.Column13.ReadOnly = true;
+            this.Column13.Width = 90;
+            // 
+            // Column10
+            // 
+            this.Column10.HeaderText = "Passed";
+            this.Column10.Name = "Column10";
+            this.Column10.ReadOnly = true;
+            this.Column10.Width = 70;
+            // 
+            // Column11
+            // 
+            this.Column11.HeaderText = "Completed date";
+            this.Column11.Name = "Column11";
+            this.Column11.ReadOnly = true;
+            this.Column11.Width = 130;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -360,6 +360,8 @@
         private System.Windows.Forms.BindingSource bindingSourceNewTest;
         private System.Windows.Forms.BindingSource bindingSourceCompletedTest;
         private System.Windows.Forms.Timer timer;
+        private System.Windows.Forms.Button btnRefresh;
+        private System.Windows.Forms.Label lbWait;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column7;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column8;
@@ -367,7 +369,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column13;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column10;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column11;
-        private System.Windows.Forms.Button btnRefresh;
-        private System.Windows.Forms.Label lbWait;
     }
 }

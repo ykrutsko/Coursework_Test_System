@@ -46,11 +46,11 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButtonEdit = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripButtonDelete = new System.Windows.Forms.ToolStripButton();
-            this.bindingSourceAnswers = new System.Windows.Forms.BindingSource(this.components);
             this.toolStripButtonUp = new System.Windows.Forms.ToolStripButton();
             this.toolStripButtonDown = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripButtonDelete = new System.Windows.Forms.ToolStripButton();
+            this.bindingSourceAnswers = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewAnswers)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownPoints)).BeginInit();
@@ -171,6 +171,7 @@
             // toolStrip1
             // 
             this.toolStrip1.Dock = System.Windows.Forms.DockStyle.None;
+            this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripButtonAdd,
             this.toolStripButtonAddByCopy,
@@ -184,89 +185,101 @@
             this.toolStrip1.Location = new System.Drawing.Point(376, 129);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.toolStrip1.Size = new System.Drawing.Size(199, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(165, 27);
             this.toolStrip1.TabIndex = 29;
             this.toolStrip1.Text = "toolStrip1";
             // 
             // toolStripButtonAdd
             // 
+            this.toolStripButtonAdd.AutoSize = false;
             this.toolStripButtonAdd.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.toolStripButtonAdd.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonAdd.Image")));
             this.toolStripButtonAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonAdd.Name = "toolStripButtonAdd";
-            this.toolStripButtonAdd.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonAdd.Padding = new System.Windows.Forms.Padding(2);
+            this.toolStripButtonAdd.Size = new System.Drawing.Size(24, 24);
             this.toolStripButtonAdd.ToolTipText = "Add answer";
             this.toolStripButtonAdd.Click += new System.EventHandler(this.toolStripButtonAdd_Click);
             // 
             // toolStripButtonAddByCopy
             // 
+            this.toolStripButtonAddByCopy.AutoSize = false;
             this.toolStripButtonAddByCopy.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.toolStripButtonAddByCopy.Enabled = false;
             this.toolStripButtonAddByCopy.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonAddByCopy.Image")));
             this.toolStripButtonAddByCopy.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonAddByCopy.Name = "toolStripButtonAddByCopy";
-            this.toolStripButtonAddByCopy.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonAddByCopy.Padding = new System.Windows.Forms.Padding(2);
+            this.toolStripButtonAddByCopy.Size = new System.Drawing.Size(24, 24);
             this.toolStripButtonAddByCopy.ToolTipText = "Add answer by copy";
             this.toolStripButtonAddByCopy.Click += new System.EventHandler(this.toolStripButtonAddByCopy_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 27);
             // 
             // toolStripButtonEdit
             // 
+            this.toolStripButtonEdit.AutoSize = false;
             this.toolStripButtonEdit.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.toolStripButtonEdit.Enabled = false;
             this.toolStripButtonEdit.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonEdit.Image")));
             this.toolStripButtonEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonEdit.Name = "toolStripButtonEdit";
-            this.toolStripButtonEdit.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonEdit.Padding = new System.Windows.Forms.Padding(2);
+            this.toolStripButtonEdit.Size = new System.Drawing.Size(24, 24);
             this.toolStripButtonEdit.ToolTipText = "Edit answer";
             this.toolStripButtonEdit.Click += new System.EventHandler(this.toolStripButtonEdit_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
-            // 
-            // toolStripButtonDelete
-            // 
-            this.toolStripButtonDelete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButtonDelete.Enabled = false;
-            this.toolStripButtonDelete.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonDelete.Image")));
-            this.toolStripButtonDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButtonDelete.Name = "toolStripButtonDelete";
-            this.toolStripButtonDelete.Size = new System.Drawing.Size(23, 22);
-            this.toolStripButtonDelete.ToolTipText = "Delete answer";
-            this.toolStripButtonDelete.Click += new System.EventHandler(this.toolStripButtonDelete_Click);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 27);
             // 
             // toolStripButtonUp
             // 
+            this.toolStripButtonUp.AutoSize = false;
             this.toolStripButtonUp.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.toolStripButtonUp.Enabled = false;
             this.toolStripButtonUp.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonUp.Image")));
             this.toolStripButtonUp.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonUp.Name = "toolStripButtonUp";
-            this.toolStripButtonUp.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonUp.Padding = new System.Windows.Forms.Padding(2);
+            this.toolStripButtonUp.Size = new System.Drawing.Size(24, 24);
             this.toolStripButtonUp.ToolTipText = "Move answer Up";
             this.toolStripButtonUp.Click += new System.EventHandler(this.toolStripButtonUp_Click);
             // 
             // toolStripButtonDown
             // 
+            this.toolStripButtonDown.AutoSize = false;
             this.toolStripButtonDown.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.toolStripButtonDown.Enabled = false;
             this.toolStripButtonDown.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonDown.Image")));
             this.toolStripButtonDown.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonDown.Name = "toolStripButtonDown";
-            this.toolStripButtonDown.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonDown.Padding = new System.Windows.Forms.Padding(2);
+            this.toolStripButtonDown.Size = new System.Drawing.Size(24, 24);
             this.toolStripButtonDown.ToolTipText = "Move answer Down";
             this.toolStripButtonDown.Click += new System.EventHandler(this.toolStripButtonDown_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 27);
+            // 
+            // toolStripButtonDelete
+            // 
+            this.toolStripButtonDelete.AutoSize = false;
+            this.toolStripButtonDelete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButtonDelete.Enabled = false;
+            this.toolStripButtonDelete.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonDelete.Image")));
+            this.toolStripButtonDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButtonDelete.Name = "toolStripButtonDelete";
+            this.toolStripButtonDelete.Padding = new System.Windows.Forms.Padding(2);
+            this.toolStripButtonDelete.Size = new System.Drawing.Size(24, 24);
+            this.toolStripButtonDelete.ToolTipText = "Delete answer";
+            this.toolStripButtonDelete.Click += new System.EventHandler(this.toolStripButtonDelete_Click);
             // 
             // QuestionForm
             // 
@@ -286,7 +299,9 @@
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.MaximizeBox = false;
             this.Name = "QuestionForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "TEST editor [Add mode]";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.QuestionForm_FormClosing);
             this.Load += new System.EventHandler(this.ModifyForm_Load);

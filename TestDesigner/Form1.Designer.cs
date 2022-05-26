@@ -287,6 +287,7 @@
             // toolStrip2
             // 
             this.toolStrip2.Dock = System.Windows.Forms.DockStyle.None;
+            this.toolStrip2.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripButtonAdd,
             this.toolStripButtonAddByCopy,
@@ -298,31 +299,36 @@
             this.toolStripSeparator4,
             this.toolStripButtonDelete});
             this.toolStrip2.Location = new System.Drawing.Point(16, 21);
+            this.toolStrip2.Margin = new System.Windows.Forms.Padding(2);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.toolStrip2.Size = new System.Drawing.Size(168, 25);
+            this.toolStrip2.Size = new System.Drawing.Size(165, 27);
             this.toolStrip2.TabIndex = 30;
             this.toolStrip2.Text = "toolStrip2";
             // 
             // toolStripButtonAdd
             // 
+            this.toolStripButtonAdd.AutoSize = false;
             this.toolStripButtonAdd.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.toolStripButtonAdd.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonAdd.Image")));
             this.toolStripButtonAdd.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonAdd.Name = "toolStripButtonAdd";
-            this.toolStripButtonAdd.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonAdd.Padding = new System.Windows.Forms.Padding(2);
+            this.toolStripButtonAdd.Size = new System.Drawing.Size(24, 24);
             this.toolStripButtonAdd.Text = "Add question";
             this.toolStripButtonAdd.ToolTipText = "Add question";
             this.toolStripButtonAdd.Click += new System.EventHandler(this.toolStripButtonAdd_Click);
             // 
             // toolStripButtonAddByCopy
             // 
+            this.toolStripButtonAddByCopy.AutoSize = false;
             this.toolStripButtonAddByCopy.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.toolStripButtonAddByCopy.Enabled = false;
             this.toolStripButtonAddByCopy.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonAddByCopy.Image")));
             this.toolStripButtonAddByCopy.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonAddByCopy.Name = "toolStripButtonAddByCopy";
-            this.toolStripButtonAddByCopy.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonAddByCopy.Padding = new System.Windows.Forms.Padding(2);
+            this.toolStripButtonAddByCopy.Size = new System.Drawing.Size(24, 24);
             this.toolStripButtonAddByCopy.Text = "toolStripButton1";
             this.toolStripButtonAddByCopy.ToolTipText = "Add question by copy";
             this.toolStripButtonAddByCopy.Click += new System.EventHandler(this.toolStripButtonAddByCopy_Click);
@@ -330,16 +336,18 @@
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 27);
             // 
             // toolStripButtonEdit
             // 
+            this.toolStripButtonEdit.AutoSize = false;
             this.toolStripButtonEdit.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.toolStripButtonEdit.Enabled = false;
             this.toolStripButtonEdit.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonEdit.Image")));
             this.toolStripButtonEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonEdit.Name = "toolStripButtonEdit";
-            this.toolStripButtonEdit.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonEdit.Padding = new System.Windows.Forms.Padding(2);
+            this.toolStripButtonEdit.Size = new System.Drawing.Size(24, 24);
             this.toolStripButtonEdit.Text = "Edit question";
             this.toolStripButtonEdit.ToolTipText = "Edit question";
             this.toolStripButtonEdit.Click += new System.EventHandler(this.toolStripButtonEdit_Click);
@@ -347,44 +355,50 @@
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 27);
             // 
             // toolStripButtonUp
             // 
+            this.toolStripButtonUp.AutoSize = false;
             this.toolStripButtonUp.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.toolStripButtonUp.Enabled = false;
             this.toolStripButtonUp.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonUp.Image")));
             this.toolStripButtonUp.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonUp.Name = "toolStripButtonUp";
-            this.toolStripButtonUp.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonUp.Padding = new System.Windows.Forms.Padding(2);
+            this.toolStripButtonUp.Size = new System.Drawing.Size(24, 24);
             this.toolStripButtonUp.Text = "toolStripButton1";
             this.toolStripButtonUp.ToolTipText = "Move question Up";
             this.toolStripButtonUp.Click += new System.EventHandler(this.toolStripButtonUp_Click);
             // 
             // toolStripButtonDown
             // 
+            this.toolStripButtonDown.AutoSize = false;
             this.toolStripButtonDown.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.toolStripButtonDown.Enabled = false;
             this.toolStripButtonDown.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonDown.Image")));
             this.toolStripButtonDown.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonDown.Name = "toolStripButtonDown";
-            this.toolStripButtonDown.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonDown.Padding = new System.Windows.Forms.Padding(2);
+            this.toolStripButtonDown.Size = new System.Drawing.Size(24, 24);
             this.toolStripButtonDown.ToolTipText = "Move question Down";
             this.toolStripButtonDown.Click += new System.EventHandler(this.toolStripButtonDown_Click);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 27);
             // 
             // toolStripButtonDelete
             // 
+            this.toolStripButtonDelete.AutoSize = false;
             this.toolStripButtonDelete.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.toolStripButtonDelete.Enabled = false;
             this.toolStripButtonDelete.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButtonDelete.Image")));
             this.toolStripButtonDelete.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButtonDelete.Name = "toolStripButtonDelete";
-            this.toolStripButtonDelete.Size = new System.Drawing.Size(23, 22);
+            this.toolStripButtonDelete.Padding = new System.Windows.Forms.Padding(2);
+            this.toolStripButtonDelete.Size = new System.Drawing.Size(24, 24);
             this.toolStripButtonDelete.Text = "Delete question";
             this.toolStripButtonDelete.ToolTipText = "Delete question";
             this.toolStripButtonDelete.Click += new System.EventHandler(this.toolStripButtonDelete_Click);

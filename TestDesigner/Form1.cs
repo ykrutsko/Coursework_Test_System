@@ -106,7 +106,7 @@ namespace TestDesigner
             dataGridViewAnswers.Columns.Clear();
             dataGridViewAnswers.Columns.Add("Answer", "Answer");
             dataGridViewAnswers.Columns.Add("Right", "Is right");
-            dataGridViewAnswers.Columns[0].Width = 290;
+            dataGridViewAnswers.Columns[0].Width = 297;
             dataGridViewAnswers.Columns[1].Width = 90;
         }
 
@@ -142,7 +142,7 @@ namespace TestDesigner
                     dataGridViewQuestions.Columns.Clear();
                     bindingSourceQuestions.DataSource = null;
                     bindingSourceQuestions.DataSource = currTest.Questions;
-                    dataGridViewQuestions.Columns[0].Width = 500;
+                    dataGridViewQuestions.Columns[0].Width = 507;
                     dataGridViewQuestions.Columns[0].HeaderText = "Question";
                     dataGridViewQuestions.Columns[1].Width = 90;
                     dataGridViewQuestions.Columns[1].HeaderText = "Point";
@@ -197,7 +197,7 @@ namespace TestDesigner
             }
             dataGridViewAnswers.Columns.Clear();
             bindingSourceAnswers.DataSource = currQuestion.Answers;
-            dataGridViewAnswers.Columns[0].Width = 290;
+            dataGridViewAnswers.Columns[0].Width = 297;
             dataGridViewAnswers.Columns[0].HeaderText = "Answer";
             dataGridViewAnswers.Columns[1].Width = 90;
             dataGridViewAnswers.Columns[1].HeaderText = "Is right";
@@ -258,7 +258,6 @@ namespace TestDesigner
 
             // Gui
             FillMainForm();
-
             return true;
         }
 
@@ -328,7 +327,6 @@ namespace TestDesigner
             string second = currFilePath == string.Empty? "Untitled" : Path.GetFileNameWithoutExtension(currFilePath);
             string third = " - Test designer";
             this.Text = new StringBuilder(first + second + third).ToString();
-            this.Refresh();
         }
 
         void WindowFuterText()
@@ -353,11 +351,11 @@ namespace TestDesigner
 
         private void tbTitle_TextChanged(object sender, EventArgs e)
         {
-            //if(!IsFileMode)
-            //{
-            //    IsTestChanged = true;
-            //    WindowTitleText();
-            //}
+            if (!IsFileMode)
+            {
+                IsTestChanged = true;
+                WindowTitleText();
+            }
         }
 
         //Modify questions
