@@ -824,6 +824,7 @@ namespace TestServer
                 .UserTests.Where(y => !y.IsTaked)
                 .Select(z => z.Test)
                 .ToList());
+            Thread.Sleep(1);
         }
 
         private void dgvAssignTestsForm_Groups_WhenRowGetSelect()
