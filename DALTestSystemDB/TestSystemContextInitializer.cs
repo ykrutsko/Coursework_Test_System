@@ -25,7 +25,7 @@ namespace DALTestingSystemDB
             User student = new User()
             {
                 Login = "Student",
-                Password = ("1234567").GetSha512(),
+                Password = ("123").GetSha512(),
                 Description = "Student of the Year 2022 Award",
                 FirstName = "Dolores",
                 LastName = "Woodward",

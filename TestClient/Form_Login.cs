@@ -29,7 +29,7 @@ namespace TestClient
         {
             InitializeComponent();
             tbLog.Text = "Student";
-            tbPass.Text = "1234567";
+            tbPass.Text = "123";
         }
 
         private void LoginForm_Load(object sender, EventArgs e)
