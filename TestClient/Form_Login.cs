@@ -28,8 +28,8 @@ namespace TestClient
         public LoginForm()
         {
             InitializeComponent();
-            tbLog.Text = "admin";
-            tbPass.Text = "admin";
+            tbLog.Text = "Student";
+            tbPass.Text = "1234567";
         }
 
         private void LoginForm_Load(object sender, EventArgs e)

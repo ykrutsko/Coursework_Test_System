@@ -26,7 +26,7 @@ namespace TestServer
         public LoginForm()
         {
             InitializeComponent();
-            tbLog.Text = "admin";
+            tbLog.Text = "Admin";
             tbPass.Text = "admin";
         }
 

@@ -12,7 +12,7 @@ namespace DALTestingSystemDB
     {
         protected override void Seed(TestSystemContext context)
         {
-            User user = new User() { 
+            User admin = new User() { 
                 Login = "Admin", 
                 Password = ("admin").GetSha512(),
                 Description = "SUPER administrator",
@@ -22,22 +22,36 @@ namespace DALTestingSystemDB
                 IsArchived = false,
                 RegisterDate = DateTime.Now };
 
-            Group group = new Group() { 
+            User student = new User()
+            {
+                Login = "Student",
+                Password = ("1234567").GetSha512(),
+                Description = "Student of the Year 2022 Award",
+                FirstName = "Dolores",
+                LastName = "Woodward",
+                IsAdmin = false,
+                IsArchived = false,
+                RegisterDate = DateTime.Now
+            };
+
+            Group admins = new Group() { 
                 Name = "Administrators",
                 Description = "Default administrators group",
                 IsAdminGroup = true };
 
-            Group group1 = new Group()
+            Group students = new Group()
             {
-                Name = "Teachers",
-                Description = "Math teachers",
+                Name = "Students",
+                Description = "Students 2022",
                 IsAdminGroup = false
             };
 
-            context.Users.Add(user);
-            context.Groups.Add(group);
-            context.Groups.Add(group1);
-            group.Users.Add(user);
+            context.Users.Add(admin);
+            context.Groups.Add(admins);
+            context.Users.Add(student);
+            context.Groups.Add(students);
+            admins.Users.Add(admin);
+            students.Users.Add(student);
 
             context.SaveChanges();
         }
