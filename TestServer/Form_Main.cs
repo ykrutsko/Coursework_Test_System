@@ -996,11 +996,31 @@ namespace TestServer
             UserTest newUserTest = new UserTest()
             {
                 IsTaked = false,
+                IsPassed = false,
+                PointsGrade = 0,
                 TakedDate = null,
                 User = AssignTestsForm_currUser,
                 Test = AssignTestsForm_currTest,
             };
+
+            List<UserAnswer> userAnswers = new List<UserAnswer>();
+            foreach (var item in newUserTest.Test.Questions)
+            {
+                foreach (var answer in item.Answers)
+                {
+                    UserAnswer userAnswer = new UserAnswer()
+                    {
+                        UserTest = newUserTest,
+                        Answer = answer,
+                        IsChecked = false
+                    };
+                    userAnswers.Add(userAnswer);
+                }
+            }
+            newUserTest.UserAnswers = userAnswers;
+
             await Task.Run(() => Globals.repoUserTest.Add(newUserTest));
+
             this.dgvAssignTestsForm_Tests.SelectionChanged -= new System.EventHandler(this.dgvAssignTestsForm_Tests_SelectionChanged);
             {
                 var userTestslist = await Task.Run(() => Globals.repoUser.FindById(AssignTestsForm_currUser.Id).UserTests.Where(y => !y.IsTaked).Select(z => z.Test).ToList());
