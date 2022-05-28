@@ -74,9 +74,10 @@ namespace TestClient
                             {
                                 dataParts = dataParts.OrderBy(d => d.PartNum).ToList();
 
-                                byte[] data = dataParts[0].Buffer;
-                                for (int i = 1; i < dataParts.Count; i++)
-                                    data = data.Concat(dataParts[i].Buffer).ToArray();
+                                List<Byte> listByte = new List<Byte>();
+                                foreach (DataPart part in dataParts)
+                                    listByte.AddRange(part.Buffer);
+                                byte[] data = listByte.ToArray();
 
                                 Globals.userTests = (List<NetCloneUserTest>)BinObjConverter.ByteArrayToObject(data, 0, data.Length);
                                 dataParts.Clear();
