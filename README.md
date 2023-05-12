@@ -1,4 +1,4 @@
-# CourseWork_Test_System
+# Testing_System
 Application "Testing system"	(05.2022)
 ------------------------------------------------------------ 
 Network system for taking tests, such as students or pupils.
